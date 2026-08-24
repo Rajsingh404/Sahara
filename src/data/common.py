@@ -20,8 +20,18 @@ def download_file(url: str, destination: Path, dry_run: bool = False) -> bool:
         return False
     destination.parent.mkdir(parents=True, exist_ok=True)
     temporary = destination.with_suffix(destination.suffix + ".part")
-    print(f"DOWNLOAD {url}")
-    urllib.request.urlretrieve(url, temporary)
+    offset = temporary.stat().st_size if temporary.exists() else 0
+    request = urllib.request.Request(url)
+    if offset:
+        request.add_header("Range", f"bytes={offset}-")
+        print(f"RESUME {destination.name} at {offset:,} bytes")
+    else:
+        print(f"DOWNLOAD {url}")
+    with urllib.request.urlopen(request) as response:
+        # Servers that ignore Range must not have their full response appended.
+        mode = "ab" if offset and response.status == 206 else "wb"
+        with temporary.open(mode) as handle:
+            shutil.copyfileobj(response, handle)
     temporary.replace(destination)
     return True
 
