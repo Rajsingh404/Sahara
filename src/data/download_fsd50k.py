@@ -82,7 +82,17 @@ def run(dry_run: bool = False) -> dict[str, int]:
     for item in files:
         name = item["key"]
         if any(token in name.lower() for token in ("audio", "ground_truth", "metadata")):
-            download_file(item["links"]["self"], root / name, dry_run)
+            destination = root / name
+            # A terminated process can leave a shorter file under its final name.
+            # Restore it to the resumable `.part` path after validating against
+            # Zenodo's published byte count.
+            if (not dry_run and destination.exists() and
+                    destination.stat().st_size < item["size"]):
+                partial = destination.with_suffix(destination.suffix + ".part")
+                if not partial.exists():
+                    print(f"INCOMPLETE {name}; resuming from {destination.stat().st_size:,} bytes")
+                    destination.replace(partial)
+            download_file(item["links"]["self"], destination, dry_run)
     _extract_archives(root, dry_run)
     return coverage_report(root)
 
