@@ -35,10 +35,13 @@ def _extract_archives(root: Path, dry_run: bool) -> None:
         # Split archives are joined with zip(1), preserving the original parts.
         split_parts = list(root.glob(archive.stem + ".z*"))
         combined = archive.with_name(archive.stem + ".combined.zip")
-        if split_parts and not combined.exists():
+        if split_parts and (not combined.exists() or combined.stat().st_size == 0):
             if dry_run:
                 print(f"DRY RUN reassemble: {archive.name} -> {combined.name}")
             elif shutil.which("zip"):
+                if combined.exists():
+                    # A prior interrupted zip(1) invocation leaves an empty output.
+                    combined.unlink()
                 subprocess.run(["zip", "-s", "0", str(archive), "--out", str(combined)], check=True)
         source = combined if combined.exists() else archive
         marker = root / (source.name + ".extracted")
