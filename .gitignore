@@ -12,9 +12,41 @@ models/logs/*
 !models/logs/.gitkeep
 
 .venv/
+venv/
 __pycache__/
 *.pyc
 .DS_Store
+
+# Secrets and credentials
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# Audio files (defense in depth — datasets stay local / on Google Drive)
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.m4a
+
+# Model checkpoints and large training artefacts
+models/exported/*
+!models/exported/.gitkeep
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.onnx
+*.tflite
+
+# Large archives and downloads
+*.tar
+*.tar.gz
+*.zip
+datasets/
 
 # Android
 android/**/build/
