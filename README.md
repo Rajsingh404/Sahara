@@ -43,7 +43,9 @@ python src/data/manifest_builder.py
 python src/preprocessing/build_features_cache.py
 
 # Train and evaluate the classifier head
-python src/training/train.py --augment
+# Optional raw-waveform augmentation is generated during cache construction:
+# python src/preprocessing/build_features_cache.py --force --augment
+python src/training/train.py --batch-size 32 --epochs 30 --learning-rate 0.001
 python src/evaluation/confusion_matrix.py
 
 # Run correctness tests
