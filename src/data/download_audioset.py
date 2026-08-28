@@ -8,18 +8,15 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+import shutil
+
 from src.config import RAW_DATA_DIR, SOUND_CLASSES
 from src.data.common import download_file, write_rows
+from src.data.label_map import AUDISET_DISPLAY_NAMES, audioset_mids_for_class
 
 CSV_BASE = "https://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv"
 CSV_FILES = ("class_labels_indices.csv", "balanced_train_segments.csv", "eval_segments.csv", "unbalanced_train_segments.csv")
-# Names are resolved against class_labels_indices.csv, so this remains resilient to ID changes.
-TARGET_LABEL_NAMES = {
-    "smoke_alarm": {"Smoke detector, smoke alarm"}, "doorbell": {"Doorbell"},
-    "siren": {"Siren"}, "knocking": {"Knock"}, "dog_bark": {"Bark", "Dog"},
-    "baby_cry": {"Baby cry, infant cry"}, "glass_break": {"Glass", "Breaking"},
-    "appliance_beep": {"Beep, bleep", "Microwave oven", "Alarm clock"},
-}
+MIN_FREE_GB = 100
 
 
 def _read_segments(path: Path):
@@ -36,12 +33,20 @@ def _read_segments(path: Path):
             yield {str(key).strip(): (value or "").strip() for key, value in row.items()}
 
 
+def _check_disk_space() -> None:
+    usage = shutil.disk_usage(RAW_DATA_DIR)
+    free_gb = usage.free / (1024**3)
+    print(f"Free disk space: {free_gb:.1f} GiB")
+    if free_gb < MIN_FREE_GB:
+        print(f"WARNING: less than {MIN_FREE_GB} GiB free — AudioSet download may fail.")
+
+
 def _target_mids(labels_path: Path) -> dict[str, set[str]]:
-    found = {name: set() for name in SOUND_CLASSES}
+    found = {name: set(audioset_mids_for_class(name)) for name in SOUND_CLASSES}
     with labels_path.open(encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
             display = row["display_name"]
-            for target, names in TARGET_LABEL_NAMES.items():
+            for target, names in AUDISET_DISPLAY_NAMES.items():
                 if display in names:
                     found[target].add(row["mid"])
     return found
@@ -55,6 +60,7 @@ def _load_manifest(path: Path) -> dict[str, str]:
 
 
 def run(limit_per_class: int | None = None, retry_failed: bool = False, dry_run: bool = False) -> dict[str, int]:
+    _check_disk_space()
     root = RAW_DATA_DIR / "audioset"
     csv_root = root / "metadata"
     for filename in CSV_FILES:
@@ -96,7 +102,16 @@ def run(limit_per_class: int | None = None, retry_failed: bool = False, dry_run:
                     continue
                 output = root / target / f"{video_id}_{start.replace('.', '_')}_{end.replace('.', '_')}.wav"
                 output.parent.mkdir(parents=True, exist_ok=True)
-                command = [sys.executable, "-m", "yt_dlp", f"https://www.youtube.com/watch?v={video_id}", "--download-sections", f"*{start}-{end}", "-x", "--audio-format", "wav", "--postprocessor-args", "ffmpeg:-ac 1 -ar 16000", "-o", str(output.with_suffix(".%(ext)s")), "--no-playlist", "--quiet"]
+                command = [
+                    sys.executable, "-m", "yt_dlp",
+                    f"https://www.youtube.com/watch?v={video_id}",
+                    "--download-sections", f"*{start}-{end}",
+                    "-x", "--audio-format", "wav",
+                    "--postprocessor-args", "ffmpeg:-ac 1 -ar 16000",
+                    "-o", str(output.with_suffix(".%(ext)s")),
+                    "--no-playlist", "--quiet", "--no-warnings",
+                    "--retries", "3",
+                ]
                 try:
                     result = subprocess.run(command, capture_output=True, text=True)
                     error = result.stderr[-500:]

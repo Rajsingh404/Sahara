@@ -1,0 +1,835 @@
+filepath,label,source_dataset,duration_sec,recording_id
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/47142.wav,glass_break,fsd50k,0.0,fsd50k:47142
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/341405.wav,glass_break,fsd50k,0.0,fsd50k:341405
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/341410.wav,glass_break,fsd50k,0.0,fsd50k:341410
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/341414.wav,glass_break,fsd50k,0.0,fsd50k:341414
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/341415.wav,glass_break,fsd50k,0.0,fsd50k:341415
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/341420.wav,glass_break,fsd50k,0.0,fsd50k:341420
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/14362.wav,glass_break,fsd50k,0.0,fsd50k:14362
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/162865.wav,glass_break,fsd50k,0.0,fsd50k:162865
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/188518.wav,glass_break,fsd50k,0.0,fsd50k:188518
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/321643.wav,glass_break,fsd50k,0.0,fsd50k:321643
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/331913.wav,glass_break,fsd50k,0.0,fsd50k:331913
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/245910.wav,glass_break,fsd50k,0.0,fsd50k:245910
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/265403.wav,glass_break,fsd50k,0.0,fsd50k:265403
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/377046.wav,glass_break,fsd50k,0.0,fsd50k:377046
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/434464.wav,glass_break,fsd50k,0.0,fsd50k:434464
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/378161.wav,glass_break,fsd50k,0.0,fsd50k:378161
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/274751.wav,glass_break,fsd50k,0.0,fsd50k:274751
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/319808.wav,glass_break,fsd50k,0.0,fsd50k:319808
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/380273.wav,glass_break,fsd50k,0.0,fsd50k:380273
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/30164.wav,glass_break,fsd50k,0.0,fsd50k:30164
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/62944.wav,glass_break,fsd50k,0.0,fsd50k:62944
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/135699.wav,glass_break,fsd50k,0.0,fsd50k:135699
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/36392.wav,glass_break,fsd50k,0.0,fsd50k:36392
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390717.wav,glass_break,fsd50k,0.0,fsd50k:390717
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89871.wav,glass_break,fsd50k,0.0,fsd50k:89871
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/94800.wav,glass_break,fsd50k,0.0,fsd50k:94800
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/242262.wav,glass_break,fsd50k,0.0,fsd50k:242262
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89876.wav,glass_break,fsd50k,0.0,fsd50k:89876
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/366188.wav,glass_break,fsd50k,0.0,fsd50k:366188
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/255619.wav,glass_break,fsd50k,0.0,fsd50k:255619
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/174749.wav,glass_break,fsd50k,0.0,fsd50k:174749
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/408225.wav,glass_break,fsd50k,0.0,fsd50k:408225
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/255650.wav,glass_break,fsd50k,0.0,fsd50k:255650
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/47804.wav,glass_break,fsd50k,0.0,fsd50k:47804
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/186049.wav,glass_break,fsd50k,0.0,fsd50k:186049
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89805.wav,glass_break,fsd50k,0.0,fsd50k:89805
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/242384.wav,glass_break,fsd50k,0.0,fsd50k:242384
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/242389.wav,glass_break,fsd50k,0.0,fsd50k:242389
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89813.wav,glass_break,fsd50k,0.0,fsd50k:89813
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89815.wav,glass_break,fsd50k,0.0,fsd50k:89815
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/393965.wav,glass_break,fsd50k,0.0,fsd50k:393965
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/242443.wav,glass_break,fsd50k,0.0,fsd50k:242443
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/242453.wav,glass_break,fsd50k,0.0,fsd50k:242453
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/242454.wav,glass_break,fsd50k,0.0,fsd50k:242454
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88862.wav,glass_break,fsd50k,0.0,fsd50k:88862
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/242462.wav,glass_break,fsd50k,0.0,fsd50k:242462
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89884.wav,glass_break,fsd50k,0.0,fsd50k:89884
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88870.wav,glass_break,fsd50k,0.0,fsd50k:88870
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88871.wav,glass_break,fsd50k,0.0,fsd50k:88871
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88872.wav,glass_break,fsd50k,0.0,fsd50k:88872
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89911.wav,glass_break,fsd50k,0.0,fsd50k:89911
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89912.wav,glass_break,fsd50k,0.0,fsd50k:89912
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88952.wav,glass_break,fsd50k,0.0,fsd50k:88952
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89910.wav,glass_break,fsd50k,0.0,fsd50k:89910
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88975.wav,glass_break,fsd50k,0.0,fsd50k:88975
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/235496.wav,glass_break,fsd50k,0.0,fsd50k:235496
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/9206.wav,glass_break,fsd50k,0.0,fsd50k:9206
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/179234.wav,glass_break,fsd50k,0.0,fsd50k:179234
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/179249.wav,glass_break,fsd50k,0.0,fsd50k:179249
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/387177.wav,glass_break,fsd50k,0.0,fsd50k:387177
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/93299.wav,glass_break,fsd50k,0.0,fsd50k:93299
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/124030.wav,glass_break,fsd50k,0.0,fsd50k:124030
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/379015.wav,glass_break,fsd50k,0.0,fsd50k:379015
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/145562.wav,glass_break,fsd50k,0.0,fsd50k:145562
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/213162.wav,glass_break,fsd50k,0.0,fsd50k:213162
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/213163.wav,glass_break,fsd50k,0.0,fsd50k:213163
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/344271.wav,glass_break,fsd50k,0.0,fsd50k:344271
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/216284.wav,glass_break,fsd50k,0.0,fsd50k:216284
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/71947.wav,glass_break,fsd50k,0.0,fsd50k:71947
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/204122.wav,glass_break,fsd50k,0.0,fsd50k:204122
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/204134.wav,glass_break,fsd50k,0.0,fsd50k:204134
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/65902.wav,glass_break,fsd50k,0.0,fsd50k:65902
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/371093.wav,glass_break,fsd50k,0.0,fsd50k:371093
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/378285.wav,glass_break,fsd50k,0.0,fsd50k:378285
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/158142.wav,glass_break,fsd50k,0.0,fsd50k:158142
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/126465.wav,glass_break,fsd50k,0.0,fsd50k:126465
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/173576.wav,glass_break,fsd50k,0.0,fsd50k:173576
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390708.wav,glass_break,fsd50k,0.0,fsd50k:390708
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390709.wav,glass_break,fsd50k,0.0,fsd50k:390709
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390719.wav,glass_break,fsd50k,0.0,fsd50k:390719
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390725.wav,glass_break,fsd50k,0.0,fsd50k:390725
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390726.wav,glass_break,fsd50k,0.0,fsd50k:390726
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390727.wav,glass_break,fsd50k,0.0,fsd50k:390727
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390729.wav,glass_break,fsd50k,0.0,fsd50k:390729
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/203369.wav,glass_break,fsd50k,0.0,fsd50k:203369
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/203380.wav,glass_break,fsd50k,0.0,fsd50k:203380
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/408218.wav,glass_break,fsd50k,0.0,fsd50k:408218
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/389793.wav,glass_break,fsd50k,0.0,fsd50k:389793
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/216748.wav,glass_break,fsd50k,0.0,fsd50k:216748
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/219837.wav,glass_break,fsd50k,0.0,fsd50k:219837
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/219844.wav,glass_break,fsd50k,0.0,fsd50k:219844
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/219846.wav,glass_break,fsd50k,0.0,fsd50k:219846
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/368331.wav,glass_break,fsd50k,0.0,fsd50k:368331
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/368335.wav,glass_break,fsd50k,0.0,fsd50k:368335
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/368337.wav,glass_break,fsd50k,0.0,fsd50k:368337
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/84702.wav,glass_break,fsd50k,0.0,fsd50k:84702
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88809.wav,glass_break,fsd50k,0.0,fsd50k:88809
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89894.wav,glass_break,fsd50k,0.0,fsd50k:89894
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88920.wav,glass_break,fsd50k,0.0,fsd50k:88920
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/68449.wav,glass_break,fsd50k,0.0,fsd50k:68449
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/92019.wav,glass_break,fsd50k,0.0,fsd50k:92019
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/204692.wav,glass_break,fsd50k,0.0,fsd50k:204692
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/42900.wav,glass_break,fsd50k,0.0,fsd50k:42900
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/42904.wav,glass_break,fsd50k,0.0,fsd50k:42904
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/42903.wav,glass_break,fsd50k,0.0,fsd50k:42903
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/47012.wav,glass_break,fsd50k,0.0,fsd50k:47012
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/348106.wav,glass_break,fsd50k,0.0,fsd50k:348106
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/204777.wav,glass_break,fsd50k,0.0,fsd50k:204777
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/216001.wav,glass_break,fsd50k,0.0,fsd50k:216001
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/210581.wav,glass_break,fsd50k,0.0,fsd50k:210581
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/379184.wav,glass_break,fsd50k,0.0,fsd50k:379184
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/74754.wav,glass_break,fsd50k,0.0,fsd50k:74754
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/60467.wav,glass_break,fsd50k,0.0,fsd50k:60467
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/60471.wav,glass_break,fsd50k,0.0,fsd50k:60471
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/214187.wav,glass_break,fsd50k,0.0,fsd50k:214187
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/214188.wav,glass_break,fsd50k,0.0,fsd50k:214188
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/214189.wav,glass_break,fsd50k,0.0,fsd50k:214189
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/214190.wav,glass_break,fsd50k,0.0,fsd50k:214190
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/322404.wav,glass_break,fsd50k,0.0,fsd50k:322404
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/95741.wav,glass_break,fsd50k,0.0,fsd50k:95741
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/176227.wav,glass_break,fsd50k,0.0,fsd50k:176227
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/414224.wav,glass_break,fsd50k,0.0,fsd50k:414224
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/85549.wav,glass_break,fsd50k,0.0,fsd50k:85549
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/94788.wav,glass_break,fsd50k,0.0,fsd50k:94788
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/178282.wav,glass_break,fsd50k,0.0,fsd50k:178282
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/336521.wav,glass_break,fsd50k,0.0,fsd50k:336521
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/339643.wav,glass_break,fsd50k,0.0,fsd50k:339643
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/339645.wav,glass_break,fsd50k,0.0,fsd50k:339645
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/339646.wav,glass_break,fsd50k,0.0,fsd50k:339646
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/339655.wav,glass_break,fsd50k,0.0,fsd50k:339655
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/94405.wav,glass_break,fsd50k,0.0,fsd50k:94405
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/208664.wav,glass_break,fsd50k,0.0,fsd50k:208664
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/339647.wav,glass_break,fsd50k,0.0,fsd50k:339647
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/379189.wav,glass_break,fsd50k,0.0,fsd50k:379189
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/250695.wav,glass_break,fsd50k,0.0,fsd50k:250695
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/250696.wav,glass_break,fsd50k,0.0,fsd50k:250696
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/378848.wav,glass_break,fsd50k,0.0,fsd50k:378848
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/203172.wav,glass_break,fsd50k,0.0,fsd50k:203172
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/94683.wav,glass_break,fsd50k,0.0,fsd50k:94683
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/94688.wav,glass_break,fsd50k,0.0,fsd50k:94688
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89588.wav,glass_break,fsd50k,0.0,fsd50k:89588
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/355336.wav,glass_break,fsd50k,0.0,fsd50k:355336
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/67041.wav,glass_break,fsd50k,0.0,fsd50k:67041
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/321283.wav,glass_break,fsd50k,0.0,fsd50k:321283
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/353105.wav,glass_break,fsd50k,0.0,fsd50k:353105
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/86047.wav,glass_break,fsd50k,0.0,fsd50k:86047
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/186692.wav,glass_break,fsd50k,0.0,fsd50k:186692
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/277530.wav,glass_break,fsd50k,0.0,fsd50k:277530
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/17146.wav,glass_break,fsd50k,0.0,fsd50k:17146
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/98650.wav,glass_break,fsd50k,0.0,fsd50k:98650
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/17118.wav,glass_break,fsd50k,0.0,fsd50k:17118
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/320167.wav,glass_break,fsd50k,0.0,fsd50k:320167
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/386906.wav,glass_break,fsd50k,0.0,fsd50k:386906
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/177959.wav,glass_break,fsd50k,0.0,fsd50k:177959
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/978.wav,glass_break,fsd50k,0.0,fsd50k:978
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/186767.wav,glass_break,fsd50k,0.0,fsd50k:186767
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/182896.wav,glass_break,fsd50k,0.0,fsd50k:182896
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/98055.wav,glass_break,fsd50k,0.0,fsd50k:98055
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/98378.wav,glass_break,fsd50k,0.0,fsd50k:98378
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/34202.wav,glass_break,fsd50k,0.0,fsd50k:34202
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/77533.wav,glass_break,fsd50k,0.0,fsd50k:77533
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/367448.wav,glass_break,fsd50k,0.0,fsd50k:367448
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/427788.wav,glass_break,fsd50k,0.0,fsd50k:427788
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/51734.wav,glass_break,fsd50k,0.0,fsd50k:51734
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/163419.wav,glass_break,fsd50k,0.0,fsd50k:163419
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/423005.wav,glass_break,fsd50k,0.0,fsd50k:423005
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/393140.wav,glass_break,fsd50k,0.0,fsd50k:393140
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/118799.wav,glass_break,fsd50k,0.0,fsd50k:118799
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/48235.wav,glass_break,fsd50k,0.0,fsd50k:48235
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/331965.wav,glass_break,fsd50k,0.0,fsd50k:331965
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/118796.wav,glass_break,fsd50k,0.0,fsd50k:118796
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/214356.wav,glass_break,fsd50k,0.0,fsd50k:214356
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/404398.wav,glass_break,fsd50k,0.0,fsd50k:404398
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/139768.wav,glass_break,fsd50k,0.0,fsd50k:139768
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/409825.wav,glass_break,fsd50k,0.0,fsd50k:409825
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/233067.wav,glass_break,fsd50k,0.0,fsd50k:233067
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/407565.wav,glass_break,fsd50k,0.0,fsd50k:407565
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/138961.wav,glass_break,fsd50k,0.0,fsd50k:138961
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/235602.wav,glass_break,fsd50k,0.0,fsd50k:235602
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/376463.wav,glass_break,fsd50k,0.0,fsd50k:376463
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/96927.wav,glass_break,fsd50k,0.0,fsd50k:96927
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/101246.wav,glass_break,fsd50k,0.0,fsd50k:101246
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/136469.wav,glass_break,fsd50k,0.0,fsd50k:136469
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/219307.wav,glass_break,fsd50k,0.0,fsd50k:219307
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/198385.wav,glass_break,fsd50k,0.0,fsd50k:198385
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/glass_break/1OJ3grdpoD0_160_000_170_000.wav,glass_break,audioset,19.9935,audioset:1OJ3grdpoD0
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/glass_break/24NB0Ap7J8g_0_000_9_000.wav,glass_break,audioset,8.0135,audioset:24NB0Ap7J8g
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/glass_break/0maiaspDy5k_110_000_120_000.wav,glass_break,audioset,19.9935,audioset:0maiaspDy5k
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/glass_break/2je_d-3I0OY_60_000_70_000.wav,glass_break,audioset,19.9935,audioset:2je
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/427039.wav,appliance_beep,fsd50k,0.0,fsd50k:427039
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/68657.wav,appliance_beep,fsd50k,0.0,fsd50k:68657
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/322129.wav,appliance_beep,fsd50k,0.0,fsd50k:322129
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/179861.wav,appliance_beep,fsd50k,0.0,fsd50k:179861
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/179865.wav,appliance_beep,fsd50k,0.0,fsd50k:179865
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/254678.wav,appliance_beep,fsd50k,0.0,fsd50k:254678
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/212186.wav,appliance_beep,fsd50k,0.0,fsd50k:212186
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/175842.wav,appliance_beep,fsd50k,0.0,fsd50k:175842
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/175849.wav,appliance_beep,fsd50k,0.0,fsd50k:175849
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/174840.wav,appliance_beep,fsd50k,0.0,fsd50k:174840
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/170243.wav,appliance_beep,fsd50k,0.0,fsd50k:170243
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/49974.wav,appliance_beep,fsd50k,0.0,fsd50k:49974
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/381774.wav,appliance_beep,fsd50k,0.0,fsd50k:381774
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/239030.wav,appliance_beep,fsd50k,0.0,fsd50k:239030
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/178115.wav,appliance_beep,fsd50k,0.0,fsd50k:178115
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/73168.wav,appliance_beep,fsd50k,0.0,fsd50k:73168
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/175845.wav,appliance_beep,fsd50k,0.0,fsd50k:175845
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/162443.wav,appliance_beep,fsd50k,0.0,fsd50k:162443
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/138468.wav,appliance_beep,fsd50k,0.0,fsd50k:138468
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/159750.wav,appliance_beep,fsd50k,0.0,fsd50k:159750
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/421017.wav,appliance_beep,fsd50k,0.0,fsd50k:421017
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/181601.wav,appliance_beep,fsd50k,0.0,fsd50k:181601
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/393667.wav,appliance_beep,fsd50k,0.0,fsd50k:393667
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/403474.wav,appliance_beep,fsd50k,0.0,fsd50k:403474
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/104476.wav,appliance_beep,fsd50k,0.0,fsd50k:104476
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/67616.wav,appliance_beep,fsd50k,0.0,fsd50k:67616
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/69663.wav,appliance_beep,fsd50k,0.0,fsd50k:69663
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/100462.wav,appliance_beep,fsd50k,0.0,fsd50k:100462
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/219244.wav,appliance_beep,fsd50k,0.0,fsd50k:219244
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/321676.wav,appliance_beep,fsd50k,0.0,fsd50k:321676
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/321678.wav,appliance_beep,fsd50k,0.0,fsd50k:321678
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/321684.wav,appliance_beep,fsd50k,0.0,fsd50k:321684
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/125102.wav,appliance_beep,fsd50k,0.0,fsd50k:125102
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/428221.wav,appliance_beep,fsd50k,0.0,fsd50k:428221
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/325894.wav,appliance_beep,fsd50k,0.0,fsd50k:325894
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/327970.wav,appliance_beep,fsd50k,0.0,fsd50k:327970
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/106831.wav,appliance_beep,fsd50k,0.0,fsd50k:106831
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/26963.wav,appliance_beep,fsd50k,0.0,fsd50k:26963
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/22876.wav,appliance_beep,fsd50k,0.0,fsd50k:22876
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/348551.wav,appliance_beep,fsd50k,0.0,fsd50k:348551
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/381382.wav,appliance_beep,fsd50k,0.0,fsd50k:381382
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/25032.wav,appliance_beep,fsd50k,0.0,fsd50k:25032
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/387537.wav,appliance_beep,fsd50k,0.0,fsd50k:387537
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/266848.wav,appliance_beep,fsd50k,0.0,fsd50k:266848
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/35437.wav,appliance_beep,fsd50k,0.0,fsd50k:35437
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/389775.wav,appliance_beep,fsd50k,0.0,fsd50k:389775
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/98973.wav,appliance_beep,fsd50k,0.0,fsd50k:98973
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/404161.wav,appliance_beep,fsd50k,0.0,fsd50k:404161
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/33497.wav,appliance_beep,fsd50k,0.0,fsd50k:33497
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/340750.wav,appliance_beep,fsd50k,0.0,fsd50k:340750
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/203540.wav,appliance_beep,fsd50k,0.0,fsd50k:203540
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/238390.wav,appliance_beep,fsd50k,0.0,fsd50k:238390
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/9077.wav,appliance_beep,fsd50k,0.0,fsd50k:9077
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/207751.wav,appliance_beep,fsd50k,0.0,fsd50k:207751
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/418705.wav,appliance_beep,fsd50k,0.0,fsd50k:418705
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/33723.wav,appliance_beep,fsd50k,0.0,fsd50k:33723
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/33732.wav,appliance_beep,fsd50k,0.0,fsd50k:33732
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/33739.wav,appliance_beep,fsd50k,0.0,fsd50k:33739
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/324586.wav,appliance_beep,fsd50k,0.0,fsd50k:324586
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/58388.wav,appliance_beep,fsd50k,0.0,fsd50k:58388
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/117793.wav,appliance_beep,fsd50k,0.0,fsd50k:117793
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390278.wav,appliance_beep,fsd50k,0.0,fsd50k:390278
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/156831.wav,appliance_beep,fsd50k,0.0,fsd50k:156831
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/400583.wav,appliance_beep,fsd50k,0.0,fsd50k:400583
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/34005.wav,appliance_beep,fsd50k,0.0,fsd50k:34005
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/255193.wav,appliance_beep,fsd50k,0.0,fsd50k:255193
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/423141.wav,appliance_beep,fsd50k,0.0,fsd50k:423141
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/154894.wav,appliance_beep,fsd50k,0.0,fsd50k:154894
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/245028.wav,appliance_beep,fsd50k,0.0,fsd50k:245028
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/249150.wav,appliance_beep,fsd50k,0.0,fsd50k:249150
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/372087.wav,appliance_beep,fsd50k,0.0,fsd50k:372087
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/253313.wav,appliance_beep,fsd50k,0.0,fsd50k:253313
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/253315.wav,appliance_beep,fsd50k,0.0,fsd50k:253315
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/316843.wav,appliance_beep,fsd50k,0.0,fsd50k:316843
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/93643.wav,appliance_beep,fsd50k,0.0,fsd50k:93643
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/251341.wav,appliance_beep,fsd50k,0.0,fsd50k:251341
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/171496.wav,appliance_beep,fsd50k,0.0,fsd50k:171496
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/81432.wav,appliance_beep,fsd50k,0.0,fsd50k:81432
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/110133.wav,appliance_beep,fsd50k,0.0,fsd50k:110133
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/126559.wav,appliance_beep,fsd50k,0.0,fsd50k:126559
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/341621.wav,appliance_beep,fsd50k,0.0,fsd50k:341621
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/204424.wav,appliance_beep,fsd50k,0.0,fsd50k:204424
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/382614.wav,appliance_beep,fsd50k,0.0,fsd50k:382614
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/24233.wav,appliance_beep,fsd50k,0.0,fsd50k:24233
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/407240.wav,appliance_beep,fsd50k,0.0,fsd50k:407240
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/34524.wav,appliance_beep,fsd50k,0.0,fsd50k:34524
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/202474.wav,appliance_beep,fsd50k,0.0,fsd50k:202474
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/401132.wav,appliance_beep,fsd50k,0.0,fsd50k:401132
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/192343.wav,appliance_beep,fsd50k,0.0,fsd50k:192343
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/368471.wav,appliance_beep,fsd50k,0.0,fsd50k:368471
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/407394.wav,appliance_beep,fsd50k,0.0,fsd50k:407394
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/178032.wav,appliance_beep,fsd50k,0.0,fsd50k:178032
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/434055.wav,appliance_beep,fsd50k,0.0,fsd50k:434055
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/221087.wav,appliance_beep,fsd50k,0.0,fsd50k:221087
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/69552.wav,appliance_beep,fsd50k,0.0,fsd50k:69552
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/368563.wav,appliance_beep,fsd50k,0.0,fsd50k:368563
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/202676.wav,appliance_beep,fsd50k,0.0,fsd50k:202676
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/403430.wav,appliance_beep,fsd50k,0.0,fsd50k:403430
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/350642.wav,appliance_beep,fsd50k,0.0,fsd50k:350642
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/392742.wav,appliance_beep,fsd50k,0.0,fsd50k:392742
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/209698.wav,appliance_beep,fsd50k,0.0,fsd50k:209698
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/138272.wav,appliance_beep,fsd50k,0.0,fsd50k:138272
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/168123.wav,appliance_beep,fsd50k,0.0,fsd50k:168123
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/234524.wav,appliance_beep,fsd50k,0.0,fsd50k:234524
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/351539.wav,appliance_beep,fsd50k,0.0,fsd50k:351539
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/117563.wav,appliance_beep,fsd50k,0.0,fsd50k:117563
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/117564.wav,appliance_beep,fsd50k,0.0,fsd50k:117564
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/246390.wav,appliance_beep,fsd50k,0.0,fsd50k:246390
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/167547.wav,appliance_beep,fsd50k,0.0,fsd50k:167547
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/167548.wav,appliance_beep,fsd50k,0.0,fsd50k:167548
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/352667.wav,appliance_beep,fsd50k,0.0,fsd50k:352667
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/201946.wav,appliance_beep,fsd50k,0.0,fsd50k:201946
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/178137.wav,appliance_beep,fsd50k,0.0,fsd50k:178137
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/203941.wav,appliance_beep,fsd50k,0.0,fsd50k:203941
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/196378.wav,appliance_beep,fsd50k,0.0,fsd50k:196378
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/196380.wav,appliance_beep,fsd50k,0.0,fsd50k:196380
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/21986.wav,appliance_beep,fsd50k,0.0,fsd50k:21986
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/324275.wav,appliance_beep,fsd50k,0.0,fsd50k:324275
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/377126.wav,appliance_beep,fsd50k,0.0,fsd50k:377126
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/243607.wav,appliance_beep,fsd50k,0.0,fsd50k:243607
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/250096.wav,appliance_beep,fsd50k,0.0,fsd50k:250096
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/100634.wav,appliance_beep,fsd50k,0.0,fsd50k:100634
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/364805.wav,appliance_beep,fsd50k,0.0,fsd50k:364805
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/323129.wav,appliance_beep,fsd50k,0.0,fsd50k:323129
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/328827.wav,appliance_beep,fsd50k,0.0,fsd50k:328827
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/383623.wav,appliance_beep,fsd50k,0.0,fsd50k:383623
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/383628.wav,appliance_beep,fsd50k,0.0,fsd50k:383628
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/156125.wav,appliance_beep,fsd50k,0.0,fsd50k:156125
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/360842.wav,appliance_beep,fsd50k,0.0,fsd50k:360842
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/144224.wav,appliance_beep,fsd50k,0.0,fsd50k:144224
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/264153.wav,appliance_beep,fsd50k,0.0,fsd50k:264153
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/275072.wav,appliance_beep,fsd50k,0.0,fsd50k:275072
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/275070.wav,appliance_beep,fsd50k,0.0,fsd50k:275070
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/196370.wav,appliance_beep,fsd50k,0.0,fsd50k:196370
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/196373.wav,appliance_beep,fsd50k,0.0,fsd50k:196373
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/196374.wav,appliance_beep,fsd50k,0.0,fsd50k:196374
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/268076.wav,appliance_beep,fsd50k,0.0,fsd50k:268076
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/106803.wav,appliance_beep,fsd50k,0.0,fsd50k:106803
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/242494.wav,appliance_beep,fsd50k,0.0,fsd50k:242494
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/399205.wav,appliance_beep,fsd50k,0.0,fsd50k:399205
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/411521.wav,appliance_beep,fsd50k,0.0,fsd50k:411521
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/21985.wav,appliance_beep,fsd50k,0.0,fsd50k:21985
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/391215.wav,appliance_beep,fsd50k,0.0,fsd50k:391215
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/90189.wav,appliance_beep,fsd50k,0.0,fsd50k:90189
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/90190.wav,appliance_beep,fsd50k,0.0,fsd50k:90190
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/90191.wav,appliance_beep,fsd50k,0.0,fsd50k:90191
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/90193.wav,appliance_beep,fsd50k,0.0,fsd50k:90193
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/360528.wav,appliance_beep,fsd50k,0.0,fsd50k:360528
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/250050.wav,appliance_beep,fsd50k,0.0,fsd50k:250050
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/162022.wav,appliance_beep,fsd50k,0.0,fsd50k:162022
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/188693.wav,appliance_beep,fsd50k,0.0,fsd50k:188693
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/414008.wav,appliance_beep,fsd50k,0.0,fsd50k:414008
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/188828.wav,appliance_beep,fsd50k,0.0,fsd50k:188828
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/80345.wav,appliance_beep,fsd50k,0.0,fsd50k:80345
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/389604.wav,appliance_beep,fsd50k,0.0,fsd50k:389604
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/125420.wav,appliance_beep,fsd50k,0.0,fsd50k:125420
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/328188.wav,appliance_beep,fsd50k,0.0,fsd50k:328188
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/170573.wav,appliance_beep,fsd50k,0.0,fsd50k:170573
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/178817.wav,appliance_beep,fsd50k,0.0,fsd50k:178817
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/98950.wav,appliance_beep,fsd50k,0.0,fsd50k:98950
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/45720.wav,appliance_beep,fsd50k,0.0,fsd50k:45720
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/66210.wav,appliance_beep,fsd50k,0.0,fsd50k:66210
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/66289.wav,appliance_beep,fsd50k,0.0,fsd50k:66289
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/66293.wav,appliance_beep,fsd50k,0.0,fsd50k:66293
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/66301.wav,appliance_beep,fsd50k,0.0,fsd50k:66301
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/179012.wav,appliance_beep,fsd50k,0.0,fsd50k:179012
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/95114.wav,appliance_beep,fsd50k,0.0,fsd50k:95114
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/7056.wav,appliance_beep,fsd50k,0.0,fsd50k:7056
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/273344.wav,appliance_beep,fsd50k,0.0,fsd50k:273344
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390136.wav,appliance_beep,fsd50k,0.0,fsd50k:390136
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/17405.wav,appliance_beep,fsd50k,0.0,fsd50k:17405
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/177209.wav,appliance_beep,fsd50k,0.0,fsd50k:177209
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/31802.wav,appliance_beep,fsd50k,0.0,fsd50k:31802
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/326730.wav,appliance_beep,fsd50k,0.0,fsd50k:326730
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/324693.wav,appliance_beep,fsd50k,0.0,fsd50k:324693
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/117922.wav,appliance_beep,fsd50k,0.0,fsd50k:117922
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/9393.wav,appliance_beep,fsd50k,0.0,fsd50k:9393
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/369842.wav,appliance_beep,fsd50k,0.0,fsd50k:369842
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/351543.wav,appliance_beep,fsd50k,0.0,fsd50k:351543
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/345421.wav,appliance_beep,fsd50k,0.0,fsd50k:345421
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/30085.wav,appliance_beep,fsd50k,0.0,fsd50k:30085
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/32217.wav,appliance_beep,fsd50k,0.0,fsd50k:32217
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/97786.wav,appliance_beep,fsd50k,0.0,fsd50k:97786
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/87574.wav,appliance_beep,fsd50k,0.0,fsd50k:87574
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/185887.wav,appliance_beep,fsd50k,0.0,fsd50k:185887
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/212531.wav,appliance_beep,fsd50k,0.0,fsd50k:212531
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/71255.wav,appliance_beep,fsd50k,0.0,fsd50k:71255
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/249511.wav,appliance_beep,fsd50k,0.0,fsd50k:249511
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/134863.wav,appliance_beep,fsd50k,0.0,fsd50k:134863
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/253713.wav,appliance_beep,fsd50k,0.0,fsd50k:253713
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/274289.wav,appliance_beep,fsd50k,0.0,fsd50k:274289
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/92066.wav,appliance_beep,fsd50k,0.0,fsd50k:92066
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/411581.wav,appliance_beep,fsd50k,0.0,fsd50k:411581
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/223183.wav,appliance_beep,fsd50k,0.0,fsd50k:223183
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/69585.wav,appliance_beep,fsd50k,0.0,fsd50k:69585
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/169958.wav,appliance_beep,fsd50k,0.0,fsd50k:169958
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/352234.wav,appliance_beep,fsd50k,0.0,fsd50k:352234
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/110570.wav,appliance_beep,fsd50k,0.0,fsd50k:110570
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/391976.wav,appliance_beep,fsd50k,0.0,fsd50k:391976
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/391980.wav,appliance_beep,fsd50k,0.0,fsd50k:391980
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/111124.wav,appliance_beep,fsd50k,0.0,fsd50k:111124
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/111125.wav,appliance_beep,fsd50k,0.0,fsd50k:111125
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/267321.wav,appliance_beep,fsd50k,0.0,fsd50k:267321
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/94264.wav,appliance_beep,fsd50k,0.0,fsd50k:94264
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/34879.wav,appliance_beep,fsd50k,0.0,fsd50k:34879
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/71786.wav,appliance_beep,fsd50k,0.0,fsd50k:71786
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/86137.wav,appliance_beep,fsd50k,0.0,fsd50k:86137
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/268525.wav,appliance_beep,fsd50k,0.0,fsd50k:268525
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/397603.wav,appliance_beep,fsd50k,0.0,fsd50k:397603
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/144231.wav,appliance_beep,fsd50k,0.0,fsd50k:144231
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/232837.wav,appliance_beep,fsd50k,0.0,fsd50k:232837
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/215956.wav,appliance_beep,fsd50k,0.0,fsd50k:215956
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/253336.wav,appliance_beep,fsd50k,0.0,fsd50k:253336
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/422819.wav,appliance_beep,fsd50k,0.0,fsd50k:422819
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/72623.wav,appliance_beep,fsd50k,0.0,fsd50k:72623
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/325701.wav,appliance_beep,fsd50k,0.0,fsd50k:325701
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/350283.wav,appliance_beep,fsd50k,0.0,fsd50k:350283
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/317533.wav,appliance_beep,fsd50k,0.0,fsd50k:317533
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/94868.wav,appliance_beep,fsd50k,0.0,fsd50k:94868
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/190647.wav,appliance_beep,fsd50k,0.0,fsd50k:190647
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/198844.wav,appliance_beep,fsd50k,0.0,fsd50k:198844
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/170848.wav,appliance_beep,fsd50k,0.0,fsd50k:170848
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/394655.wav,appliance_beep,fsd50k,0.0,fsd50k:394655
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/100265.wav,appliance_beep,fsd50k,0.0,fsd50k:100265
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/117120.wav,appliance_beep,fsd50k,0.0,fsd50k:117120
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/70936.wav,appliance_beep,fsd50k,0.0,fsd50k:70936
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/70052.wav,appliance_beep,fsd50k,0.0,fsd50k:70052
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/135717.wav,appliance_beep,fsd50k,0.0,fsd50k:135717
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/218843.wav,appliance_beep,fsd50k,0.0,fsd50k:218843
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/180174.wav,appliance_beep,fsd50k,0.0,fsd50k:180174
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/94194.wav,appliance_beep,fsd50k,0.0,fsd50k:94194
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/78958.wav,appliance_beep,fsd50k,0.0,fsd50k:78958
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/136522.wav,appliance_beep,fsd50k,0.0,fsd50k:136522
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/121346.wav,appliance_beep,fsd50k,0.0,fsd50k:121346
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/104420.wav,appliance_beep,fsd50k,0.0,fsd50k:104420
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/99565.wav,appliance_beep,fsd50k,0.0,fsd50k:99565
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/339988.wav,appliance_beep,fsd50k,0.0,fsd50k:339988
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/85300.wav,appliance_beep,fsd50k,0.0,fsd50k:85300
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/330956.wav,appliance_beep,fsd50k,0.0,fsd50k:330956
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/351257.wav,appliance_beep,fsd50k,0.0,fsd50k:351257
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/277033.wav,appliance_beep,fsd50k,0.0,fsd50k:277033
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/155717.wav,appliance_beep,fsd50k,0.0,fsd50k:155717
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/64073.wav,appliance_beep,fsd50k,0.0,fsd50k:64073
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/405590.wav,appliance_beep,fsd50k,0.0,fsd50k:405590
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/376926.wav,appliance_beep,fsd50k,0.0,fsd50k:376926
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/219246.wav,appliance_beep,fsd50k,0.0,fsd50k:219246
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/209523.wav,appliance_beep,fsd50k,0.0,fsd50k:209523
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/323238.wav,appliance_beep,fsd50k,0.0,fsd50k:323238
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/201899.wav,appliance_beep,fsd50k,0.0,fsd50k:201899
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/245940.wav,appliance_beep,fsd50k,0.0,fsd50k:245940
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/398004.wav,appliance_beep,fsd50k,0.0,fsd50k:398004
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/234697.wav,appliance_beep,fsd50k,0.0,fsd50k:234697
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/178898.wav,appliance_beep,fsd50k,0.0,fsd50k:178898
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/88787.wav,appliance_beep,fsd50k,0.0,fsd50k:88787
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/14577.wav,appliance_beep,fsd50k,0.0,fsd50k:14577
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/329978.wav,appliance_beep,fsd50k,0.0,fsd50k:329978
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/117518.wav,appliance_beep,fsd50k,0.0,fsd50k:117518
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/26385.wav,appliance_beep,fsd50k,0.0,fsd50k:26385
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/54047.wav,appliance_beep,fsd50k,0.0,fsd50k:54047
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/337754.wav,appliance_beep,fsd50k,0.0,fsd50k:337754
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/333659.wav,appliance_beep,fsd50k,0.0,fsd50k:333659
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/181597.wav,appliance_beep,fsd50k,0.0,fsd50k:181597
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/104803.wav,appliance_beep,fsd50k,0.0,fsd50k:104803
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/361333.wav,appliance_beep,fsd50k,0.0,fsd50k:361333
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/88445.wav,appliance_beep,fsd50k,0.0,fsd50k:88445
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/189327.wav,appliance_beep,fsd50k,0.0,fsd50k:189327
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/411030.wav,appliance_beep,fsd50k,0.0,fsd50k:411030
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/257001.wav,appliance_beep,fsd50k,0.0,fsd50k:257001
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/249835.wav,appliance_beep,fsd50k,0.0,fsd50k:249835
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/367744.wav,appliance_beep,fsd50k,0.0,fsd50k:367744
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/112860.wav,appliance_beep,fsd50k,0.0,fsd50k:112860
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/98948.wav,appliance_beep,fsd50k,0.0,fsd50k:98948
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/74501.wav,appliance_beep,fsd50k,0.0,fsd50k:74501
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/420661.wav,appliance_beep,fsd50k,0.0,fsd50k:420661
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/351284.wav,appliance_beep,fsd50k,0.0,fsd50k:351284
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/171324.wav,appliance_beep,fsd50k,0.0,fsd50k:171324
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/123306.wav,appliance_beep,fsd50k,0.0,fsd50k:123306
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/345807.wav,appliance_beep,fsd50k,0.0,fsd50k:345807
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/14575.wav,appliance_beep,fsd50k,0.0,fsd50k:14575
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/190953.wav,appliance_beep,fsd50k,0.0,fsd50k:190953
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/399315.wav,appliance_beep,fsd50k,0.0,fsd50k:399315
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/132602.wav,appliance_beep,fsd50k,0.0,fsd50k:132602
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/233473.wav,appliance_beep,fsd50k,0.0,fsd50k:233473
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/189764.wav,appliance_beep,fsd50k,0.0,fsd50k:189764
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/189765.wav,appliance_beep,fsd50k,0.0,fsd50k:189765
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/118101.wav,appliance_beep,fsd50k,0.0,fsd50k:118101
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/89946.wav,appliance_beep,fsd50k,0.0,fsd50k:89946
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/423626.wav,appliance_beep,fsd50k,0.0,fsd50k:423626
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/210270.wav,appliance_beep,fsd50k,0.0,fsd50k:210270
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/185056.wav,appliance_beep,fsd50k,0.0,fsd50k:185056
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/415298.wav,appliance_beep,fsd50k,0.0,fsd50k:415298
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/120493.wav,appliance_beep,fsd50k,0.0,fsd50k:120493
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/399092.wav,appliance_beep,fsd50k,0.0,fsd50k:399092
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/406240.wav,appliance_beep,fsd50k,0.0,fsd50k:406240
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/168029.wav,appliance_beep,fsd50k,0.0,fsd50k:168029
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/393333.wav,appliance_beep,fsd50k,0.0,fsd50k:393333
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/220716.wav,appliance_beep,fsd50k,0.0,fsd50k:220716
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/423103.wav,appliance_beep,fsd50k,0.0,fsd50k:423103
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/187600.wav,appliance_beep,fsd50k,0.0,fsd50k:187600
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/383779.wav,appliance_beep,fsd50k,0.0,fsd50k:383779
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/367447.wav,appliance_beep,fsd50k,0.0,fsd50k:367447
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/248256.wav,appliance_beep,fsd50k,0.0,fsd50k:248256
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/235558.wav,appliance_beep,fsd50k,0.0,fsd50k:235558
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/218839.wav,appliance_beep,fsd50k,0.0,fsd50k:218839
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/128867.wav,appliance_beep,fsd50k,0.0,fsd50k:128867
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/235551.wav,appliance_beep,fsd50k,0.0,fsd50k:235551
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/94214.wav,appliance_beep,fsd50k,0.0,fsd50k:94214
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/209487.wav,appliance_beep,fsd50k,0.0,fsd50k:209487
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/appliance_beep/21hoAaR-W_c_160_000_170_000.wav,appliance_beep,audioset,19.9935,audioset:21hoAaR-W
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/appliance_beep/2FcwRYfUBLM_50_000_60_000.wav,appliance_beep,audioset,19.9935,audioset:2FcwRYfUBLM
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/appliance_beep/1Pe-XrXSg64_80_000_90_000.wav,appliance_beep,audioset,19.9935,audioset:1Pe-XrXSg64
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/appliance_beep/4M7jykYpnNU_0_000_10_000.wav,appliance_beep,audioset,10.0135,audioset:4M7jykYpnNU
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/appliance_beep/3ZzEYwxiWZY_10_000_20_000.wav,appliance_beep,audioset,19.9935,audioset:3ZzEYwxiWZY
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/159750.wav,siren,fsd50k,0.0,fsd50k:159750
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88121.wav,siren,fsd50k,0.0,fsd50k:88121
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89682.wav,siren,fsd50k,0.0,fsd50k:89682
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/65152.wav,siren,fsd50k,0.0,fsd50k:65152
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/156868.wav,siren,fsd50k,0.0,fsd50k:156868
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/62878.wav,siren,fsd50k,0.0,fsd50k:62878
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/393665.wav,siren,fsd50k,0.0,fsd50k:393665
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/46092.wav,siren,fsd50k,0.0,fsd50k:46092
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/372251.wav,siren,fsd50k,0.0,fsd50k:372251
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/262278.wav,siren,fsd50k,0.0,fsd50k:262278
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/410825.wav,siren,fsd50k,0.0,fsd50k:410825
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/67358.wav,siren,fsd50k,0.0,fsd50k:67358
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/273750.wav,siren,fsd50k,0.0,fsd50k:273750
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/324579.wav,siren,fsd50k,0.0,fsd50k:324579
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/117121.wav,siren,fsd50k,0.0,fsd50k:117121
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/71299.wav,siren,fsd50k,0.0,fsd50k:71299
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/392881.wav,siren,fsd50k,0.0,fsd50k:392881
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/133473.wav,siren,fsd50k,0.0,fsd50k:133473
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/361333.wav,siren,fsd50k,0.0,fsd50k:361333
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/27785.wav,siren,fsd50k,0.0,fsd50k:27785
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/389518.wav,siren,fsd50k,0.0,fsd50k:389518
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/siren/2oT1tf8FRoU_260_000_270_000.wav,siren,audioset,19.9935,audioset:2oT1tf8FRoU
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/siren/-4RWqM0UCCY_0_000_10_000.wav,siren,audioset,10.0078125,audioset:-4RWqM0UCCY
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/23750.wav,dog_bark,fsd50k,0.0,fsd50k:23750
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236132.wav,dog_bark,fsd50k,0.0,fsd50k:236132
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236209.wav,dog_bark,fsd50k,0.0,fsd50k:236209
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/108631.wav,dog_bark,fsd50k,0.0,fsd50k:108631
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/333914.wav,dog_bark,fsd50k,0.0,fsd50k:333914
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/194754.wav,dog_bark,fsd50k,0.0,fsd50k:194754
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/147672.wav,dog_bark,fsd50k,0.0,fsd50k:147672
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/254192.wav,dog_bark,fsd50k,0.0,fsd50k:254192
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/29936.wav,dog_bark,fsd50k,0.0,fsd50k:29936
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/160093.wav,dog_bark,fsd50k,0.0,fsd50k:160093
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/162148.wav,dog_bark,fsd50k,0.0,fsd50k:162148
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/235913.wav,dog_bark,fsd50k,0.0,fsd50k:235913
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/164311.wav,dog_bark,fsd50k,0.0,fsd50k:164311
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236016.wav,dog_bark,fsd50k,0.0,fsd50k:236016
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236018.wav,dog_bark,fsd50k,0.0,fsd50k:236018
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236019.wav,dog_bark,fsd50k,0.0,fsd50k:236019
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236028.wav,dog_bark,fsd50k,0.0,fsd50k:236028
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236037.wav,dog_bark,fsd50k,0.0,fsd50k:236037
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236039.wav,dog_bark,fsd50k,0.0,fsd50k:236039
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236059.wav,dog_bark,fsd50k,0.0,fsd50k:236059
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236055.wav,dog_bark,fsd50k,0.0,fsd50k:236055
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/234030.wav,dog_bark,fsd50k,0.0,fsd50k:234030
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236095.wav,dog_bark,fsd50k,0.0,fsd50k:236095
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236111.wav,dog_bark,fsd50k,0.0,fsd50k:236111
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236116.wav,dog_bark,fsd50k,0.0,fsd50k:236116
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236117.wav,dog_bark,fsd50k,0.0,fsd50k:236117
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/211548.wav,dog_bark,fsd50k,0.0,fsd50k:211548
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236127.wav,dog_bark,fsd50k,0.0,fsd50k:236127
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/420447.wav,dog_bark,fsd50k,0.0,fsd50k:420447
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236136.wav,dog_bark,fsd50k,0.0,fsd50k:236136
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236131.wav,dog_bark,fsd50k,0.0,fsd50k:236131
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236166.wav,dog_bark,fsd50k,0.0,fsd50k:236166
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390805.wav,dog_bark,fsd50k,0.0,fsd50k:390805
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236174.wav,dog_bark,fsd50k,0.0,fsd50k:236174
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236176.wav,dog_bark,fsd50k,0.0,fsd50k:236176
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236179.wav,dog_bark,fsd50k,0.0,fsd50k:236179
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236189.wav,dog_bark,fsd50k,0.0,fsd50k:236189
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/85661.wav,dog_bark,fsd50k,0.0,fsd50k:85661
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236197.wav,dog_bark,fsd50k,0.0,fsd50k:236197
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236205.wav,dog_bark,fsd50k,0.0,fsd50k:236205
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236226.wav,dog_bark,fsd50k,0.0,fsd50k:236226
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236228.wav,dog_bark,fsd50k,0.0,fsd50k:236228
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236233.wav,dog_bark,fsd50k,0.0,fsd50k:236233
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236239.wav,dog_bark,fsd50k,0.0,fsd50k:236239
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236240.wav,dog_bark,fsd50k,0.0,fsd50k:236240
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236241.wav,dog_bark,fsd50k,0.0,fsd50k:236241
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236249.wav,dog_bark,fsd50k,0.0,fsd50k:236249
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/242403.wav,dog_bark,fsd50k,0.0,fsd50k:242403
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/220904.wav,dog_bark,fsd50k,0.0,fsd50k:220904
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236270.wav,dog_bark,fsd50k,0.0,fsd50k:236270
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236272.wav,dog_bark,fsd50k,0.0,fsd50k:236272
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236280.wav,dog_bark,fsd50k,0.0,fsd50k:236280
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/404233.wav,dog_bark,fsd50k,0.0,fsd50k:404233
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/372523.wav,dog_bark,fsd50k,0.0,fsd50k:372523
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/372526.wav,dog_bark,fsd50k,0.0,fsd50k:372526
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/372530.wav,dog_bark,fsd50k,0.0,fsd50k:372530
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/325469.wav,dog_bark,fsd50k,0.0,fsd50k:325469
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/325470.wav,dog_bark,fsd50k,0.0,fsd50k:325470
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/413544.wav,dog_bark,fsd50k,0.0,fsd50k:413544
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/268019.wav,dog_bark,fsd50k,0.0,fsd50k:268019
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/97193.wav,dog_bark,fsd50k,0.0,fsd50k:97193
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/410555.wav,dog_bark,fsd50k,0.0,fsd50k:410555
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/178118.wav,dog_bark,fsd50k,0.0,fsd50k:178118
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/266603.wav,dog_bark,fsd50k,0.0,fsd50k:266603
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/167487.wav,dog_bark,fsd50k,0.0,fsd50k:167487
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/328087.wav,dog_bark,fsd50k,0.0,fsd50k:328087
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/131199.wav,dog_bark,fsd50k,0.0,fsd50k:131199
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/62335.wav,dog_bark,fsd50k,0.0,fsd50k:62335
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/425904.wav,dog_bark,fsd50k,0.0,fsd50k:425904
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/115536.wav,dog_bark,fsd50k,0.0,fsd50k:115536
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/74723.wav,dog_bark,fsd50k,0.0,fsd50k:74723
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/379170.wav,dog_bark,fsd50k,0.0,fsd50k:379170
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/361544.wav,dog_bark,fsd50k,0.0,fsd50k:361544
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/403207.wav,dog_bark,fsd50k,0.0,fsd50k:403207
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/38272.wav,dog_bark,fsd50k,0.0,fsd50k:38272
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/32318.wav,dog_bark,fsd50k,0.0,fsd50k:32318
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/429260.wav,dog_bark,fsd50k,0.0,fsd50k:429260
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/17414.wav,dog_bark,fsd50k,0.0,fsd50k:17414
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/179386.wav,dog_bark,fsd50k,0.0,fsd50k:179386
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/29596.wav,dog_bark,fsd50k,0.0,fsd50k:29596
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/dog_bark/0rhb_K228gA_30_000_40_000.wav,dog_bark,audioset,10.008,audioset:0rhb
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/dog_bark/0kdRxEiEGIs_190_000_200_000.wav,dog_bark,audioset,19.9935,audioset:0kdRxEiEGIs
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/dog_bark/-Ry1YNVPPCM_9_000_19_000.wav,dog_bark,audioset,18.6893125,audioset:-Ry1YNVPPCM
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/69181.wav,doorbell,fsd50k,0.0,fsd50k:69181
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/361564.wav,doorbell,fsd50k,0.0,fsd50k:361564
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/203942.wav,doorbell,fsd50k,0.0,fsd50k:203942
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/275629.wav,doorbell,fsd50k,0.0,fsd50k:275629
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/192761.wav,doorbell,fsd50k,0.0,fsd50k:192761
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/187306.wav,doorbell,fsd50k,0.0,fsd50k:187306
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/29726.wav,doorbell,fsd50k,0.0,fsd50k:29726
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/77892.wav,doorbell,fsd50k,0.0,fsd50k:77892
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/41629.wav,doorbell,fsd50k,0.0,fsd50k:41629
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/203948.wav,doorbell,fsd50k,0.0,fsd50k:203948
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/370919.wav,doorbell,fsd50k,0.0,fsd50k:370919
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/196371.wav,doorbell,fsd50k,0.0,fsd50k:196371
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/335224.wav,doorbell,fsd50k,0.0,fsd50k:335224
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/415164.wav,doorbell,fsd50k,0.0,fsd50k:415164
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/249303.wav,doorbell,fsd50k,0.0,fsd50k:249303
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/417608.wav,doorbell,fsd50k,0.0,fsd50k:417608
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/330400.wav,doorbell,fsd50k,0.0,fsd50k:330400
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/403213.wav,doorbell,fsd50k,0.0,fsd50k:403213
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/57771.wav,doorbell,fsd50k,0.0,fsd50k:57771
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/399092.wav,doorbell,fsd50k,0.0,fsd50k:399092
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/69385.wav,doorbell,fsd50k,0.0,fsd50k:69385
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/53268.wav,doorbell,fsd50k,0.0,fsd50k:53268
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/393333.wav,doorbell,fsd50k,0.0,fsd50k:393333
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/doorbell/Add11iatg0Y_50_000_60_000.wav,doorbell,audioset,19.9935,audioset:Add11iatg0Y
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/doorbell/6WJitOS-RHw_110_000_120_000.wav,doorbell,audioset,19.9935,audioset:6WJitOS-RHw
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/360481.wav,knocking,fsd50k,0.0,fsd50k:360481
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/211497.wav,knocking,fsd50k,0.0,fsd50k:211497
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/211501.wav,knocking,fsd50k,0.0,fsd50k:211501
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/211503.wav,knocking,fsd50k,0.0,fsd50k:211503
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/144943.wav,knocking,fsd50k,0.0,fsd50k:144943
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/389798.wav,knocking,fsd50k,0.0,fsd50k:389798
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/32298.wav,knocking,fsd50k,0.0,fsd50k:32298
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/370899.wav,knocking,fsd50k,0.0,fsd50k:370899
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/412376.wav,knocking,fsd50k,0.0,fsd50k:412376
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/370916.wav,knocking,fsd50k,0.0,fsd50k:370916
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/422639.wav,knocking,fsd50k,0.0,fsd50k:422639
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/182024.wav,knocking,fsd50k,0.0,fsd50k:182024
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/178991.wav,knocking,fsd50k,0.0,fsd50k:178991
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/329018.wav,knocking,fsd50k,0.0,fsd50k:329018
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/218981.wav,knocking,fsd50k,0.0,fsd50k:218981
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/114041.wav,knocking,fsd50k,0.0,fsd50k:114041
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/371661.wav,knocking,fsd50k,0.0,fsd50k:371661
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/148951.wav,knocking,fsd50k,0.0,fsd50k:148951
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/113138.wav,knocking,fsd50k,0.0,fsd50k:113138
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/190024.wav,knocking,fsd50k,0.0,fsd50k:190024
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/349289.wav,knocking,fsd50k,0.0,fsd50k:349289
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/349291.wav,knocking,fsd50k,0.0,fsd50k:349291
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193827.wav,knocking,fsd50k,0.0,fsd50k:193827
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193848.wav,knocking,fsd50k,0.0,fsd50k:193848
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193865.wav,knocking,fsd50k,0.0,fsd50k:193865
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193867.wav,knocking,fsd50k,0.0,fsd50k:193867
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/197866.wav,knocking,fsd50k,0.0,fsd50k:197866
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/349295.wav,knocking,fsd50k,0.0,fsd50k:349295
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/349303.wav,knocking,fsd50k,0.0,fsd50k:349303
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/412856.wav,knocking,fsd50k,0.0,fsd50k:412856
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/414942.wav,knocking,fsd50k,0.0,fsd50k:414942
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193833.wav,knocking,fsd50k,0.0,fsd50k:193833
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193835.wav,knocking,fsd50k,0.0,fsd50k:193835
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193842.wav,knocking,fsd50k,0.0,fsd50k:193842
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193849.wav,knocking,fsd50k,0.0,fsd50k:193849
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193850.wav,knocking,fsd50k,0.0,fsd50k:193850
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193871.wav,knocking,fsd50k,0.0,fsd50k:193871
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/32297.wav,knocking,fsd50k,0.0,fsd50k:32297
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/223017.wav,knocking,fsd50k,0.0,fsd50k:223017
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/265003.wav,knocking,fsd50k,0.0,fsd50k:265003
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/241644.wav,knocking,fsd50k,0.0,fsd50k:241644
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/338299.wav,knocking,fsd50k,0.0,fsd50k:338299
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/420735.wav,knocking,fsd50k,0.0,fsd50k:420735
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/238287.wav,knocking,fsd50k,0.0,fsd50k:238287
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/67304.wav,knocking,fsd50k,0.0,fsd50k:67304
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/154378.wav,knocking,fsd50k,0.0,fsd50k:154378
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/329924.wav,knocking,fsd50k,0.0,fsd50k:329924
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/174640.wav,knocking,fsd50k,0.0,fsd50k:174640
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/199882.wav,knocking,fsd50k,0.0,fsd50k:199882
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/372232.wav,knocking,fsd50k,0.0,fsd50k:372232
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/135428.wav,knocking,fsd50k,0.0,fsd50k:135428
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/429964.wav,knocking,fsd50k,0.0,fsd50k:429964
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/395095.wav,knocking,fsd50k,0.0,fsd50k:395095
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/352673.wav,knocking,fsd50k,0.0,fsd50k:352673
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/knocking/1y7lQSNaMjw_60_000_70_000.wav,knocking,audioset,19.9935,audioset:1y7lQSNaMjw
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/knocking/2EVcnKR39PI_30_000_40_000.wav,knocking,audioset,10.008,audioset:2EVcnKR39PI
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/knocking/-lUCohWH9xg_29_000_39_000.wav,knocking,audioset,18.5948125,audioset:-lUCohWH9xg
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/knocking/0w1DJl3BCrY_470_000_480_000.wav,knocking,audioset,19.9935,audioset:0w1DJl3BCrY
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/knocking/-M_5w6KKfgQ_0_000_10_000.wav,knocking,audioset,10.0135,audioset:-M
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/smoke_alarm/02rLonMSO9k_60_000_70_000.wav,smoke_alarm,audioset,19.9935,audioset:02rLonMSO9k
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/smoke_alarm/EqSluSsMXE0_30_000_40_000.wav,smoke_alarm,audioset,19.9935,audioset:EqSluSsMXE0
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/smoke_alarm/04JKX_vlePE_90_000_100_000.wav,smoke_alarm,audioset,19.9935,audioset:04JKX
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/baby_cry/YUhIbX0xn_E_30_000_40_000.wav,baby_cry,audioset,19.9935,audioset:YUhIbX0xn
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/baby_cry/6XOsBs2rZRg_30_000_40_000.wav,baby_cry,audioset,19.9935,audioset:6XOsBs2rZRg
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/audioset/baby_cry/HVv0jG7J0to_490_000_500_000.wav,baby_cry,audioset,10.0185,audioset:HVv0jG7J0to
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/Y0v87UfMga5U_30.000_40.000.wav,background,desed,10.0,desed:weak:Y0v87UfMga5U_30.000_40.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/Y-6p32k2WUCs_0.000_10.000.wav,background,desed,10.0,desed:weak:Y-6p32k2WUCs_0.000_10.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/Y1RNq7dbRpWU_16.000_26.000.wav,background,desed,9.425850340136055,desed:weak:Y1RNq7dbRpWU_16.000_26.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/Y17tk_fp4eJ0_50.000_60.000.wav,background,desed,10.0,desed:weak:Y17tk_fp4eJ0_50.000_60.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/Y_CZzm6jUxbo_30.000_40.000.wav,background,desed,10.0,desed:weak:Y_CZzm6jUxbo_30.000_40.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/YYaTkV4qCqQc_19.000_29.000.wav,background,desed,9.862403628117914,desed:weak:YYaTkV4qCqQc_19.000_29.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/YfjcfhE22AVQ_540.000_550.000.wav,background,desed,10.0,desed:weak:YfjcfhE22AVQ_540.000_550.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/Y0i31R7PS-GA_20.000_30.000.wav,background,desed,9.675124716553288,desed:weak:Y0i31R7PS-GA_20.000_30.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/YI3kPmcHvMrg_30.000_40.000.wav,background,desed,10.0,desed:weak:YI3kPmcHvMrg_30.000_40.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/Y0G-Qx3Gv01s_0.000_8.000.wav,background,desed,7.63936507936508,desed:weak:Y0G-Qx3Gv01s_0.000_8.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/Y0lUFEAnnET8_30.000_40.000.wav,background,desed,10.0,desed:weak:Y0lUFEAnnET8_30.000_40.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/YYTdVeMwwYkY_11.000_21.000.wav,background,desed,9.967619047619047,desed:weak:YYTdVeMwwYkY_11.000_21.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/Y0Sq8ge7D4wU_3.000_13.000.wav,background,desed,9.84063492063492,desed:weak:Y0Sq8ge7D4wU_3.000_13.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/Y_YoIeZgxdAI_0.000_10.000.wav,background,desed,10.0,desed:weak:Y_YoIeZgxdAI_0.000_10.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/Y1VQZAJgvzWI_30.000_40.000.wav,background,desed,10.0,desed:weak:Y1VQZAJgvzWI_30.000_40.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/YLgf99OrWOVM_420.000_430.000.wav,background,desed,10.0,desed:weak:YLgf99OrWOVM_420.000_430.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/weak/Y0lV5Fln3nYA_390.000_400.000.wav,background,desed,10.0,desed:weak:Y0lV5Fln3nYA_390.000_400.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/unlabel_in_domain/Y116C4_1OP5I_50.000_60.000.wav,background,desed,10.0,desed:unlabel_in_domain:Y116C4_1OP5I_50.000_60.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/unlabel_in_domain/YIrg5t8Lw-i8_290.000_300.000.wav,background,desed,10.0,desed:unlabel_in_domain:YIrg5t8Lw-i8_290.000_300.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/unlabel_in_domain/Y0GnvsN_8_Sk_3.000_13.000.wav,background,desed,9.283356009070294,desed:unlabel_in_domain:Y0GnvsN_8_Sk_3.000_13.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/unlabel_in_domain/YBbF93ghqvpM_30.000_40.000.wav,background,desed,10.0,desed:unlabel_in_domain:YBbF93ghqvpM_30.000_40.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/unlabel_in_domain/Y4MwTY38cFvw_30.000_40.000.wav,background,desed,10.0,desed:unlabel_in_domain:Y4MwTY38cFvw_30.000_40.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/unlabel_in_domain/YFquQPp49-Xw_170.000_180.000.wav,background,desed,10.0,desed:unlabel_in_domain:YFquQPp49-Xw_170.000_180.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/unlabel_in_domain/YBY5ERX3XT70_150.000_160.000.wav,background,desed,10.0,desed:unlabel_in_domain:YBY5ERX3XT70_150.000_160.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/unlabel_in_domain/Y0BtHd6dvm78_24.000_34.000.wav,background,desed,9.95920634920635,desed:unlabel_in_domain:Y0BtHd6dvm78_24.000_34.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/unlabel_in_domain/YBtW3hWhaxWo_30.000_40.000.wav,background,desed,10.0,desed:unlabel_in_domain:YBtW3hWhaxWo_30.000_40.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/train/unlabel_in_domain/Ygb06C61Rr4w_120.000_130.000.wav,background,desed,10.0,desed:unlabel_in_domain:Ygb06C61Rr4w_120.000_130.000
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/lcGGi9YQzEQ_45_55.wav,background,desed,10.0,desed:public:lcGGi9YQzEQ_45_55
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/_Nn6I3eEt9g_17_27.wav,background,desed,10.0,desed:public:_Nn6I3eEt9g_17_27
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/Pxlh9XrZsok_0_10.wav,background,desed,10.0,desed:public:Pxlh9XrZsok_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/8ORBpGTScPQ_0_10.wav,background,desed,10.0,desed:public:8ORBpGTScPQ_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/hW4ocGjsuhg_292_302.wav,background,desed,10.0,desed:public:hW4ocGjsuhg_292_302
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/jWCzR87yUC8_0_10.wav,background,desed,10.0,desed:public:jWCzR87yUC8_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/zFB78vEUjBE_0_10.wav,background,desed,10.0,desed:public:zFB78vEUjBE_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/gHuQbIVXyag_12_22.wav,background,desed,10.0,desed:public:gHuQbIVXyag_12_22
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/E5FKAyY7rjI_0_10.wav,background,desed,10.0,desed:public:E5FKAyY7rjI_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/bltqad8qBzA_305_315.wav,background,desed,10.0,desed:public:bltqad8qBzA_305_315
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/croKDPQZ2F8_23_33.wav,background,desed,10.0,desed:public:croKDPQZ2F8_23_33
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/G5wlhYFdlxw_508_518.wav,background,desed,10.0,desed:public:G5wlhYFdlxw_508_518
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/P_uDeuNLFQ4_330_340.wav,background,desed,10.0,desed:public:P_uDeuNLFQ4_330_340
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/842HgZcd2e8_102_112.wav,background,desed,10.0,desed:public:842HgZcd2e8_102_112
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/oedC1FTmNGw_48_58.wav,background,desed,10.0,desed:public:oedC1FTmNGw_48_58
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/Tp2YNgJBYHI_125_135.wav,background,desed,10.0,desed:public:Tp2YNgJBYHI_125_135
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/G_gXG6mIBwI_0_10.wav,background,desed,10.0,desed:public:G_gXG6mIBwI_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/Ns7LAwk7YWs_790_800.wav,background,desed,10.0,desed:public:Ns7LAwk7YWs_790_800
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/HpRvSpsed7w_222_232.wav,background,desed,10.0,desed:public:HpRvSpsed7w_222_232
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/3XGni7aHhr4_360_370.wav,background,desed,10.0,desed:public:3XGni7aHhr4_360_370
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/SRYDsLbMZY4_195_205.wav,background,desed,10.0,desed:public:SRYDsLbMZY4_195_205
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/FfsQLg2JaEo_85_95.wav,background,desed,10.0,desed:public:FfsQLg2JaEo_85_95
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/VkWwVGOS1X4_0_10.wav,background,desed,10.0,desed:public:VkWwVGOS1X4_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/pHxRz9hGypc_288_298.wav,background,desed,10.0,desed:public:pHxRz9hGypc_288_298
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/SytvyeqzeqY_700_710.wav,background,desed,10.0,desed:public:SytvyeqzeqY_700_710
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/MB1Vmz4xasM_12_22.wav,background,desed,10.0,desed:public:MB1Vmz4xasM_12_22
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/-vVpo679xac_4_14.wav,background,desed,10.0,desed:public:-vVpo679xac_4_14
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/92ZU3IcYEIE_270_280.wav,background,desed,10.0,desed:public:92ZU3IcYEIE_270_280
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/uqAKikMO6Fo_40_50.wav,background,desed,10.0,desed:public:uqAKikMO6Fo_40_50
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/B5gInnQnoLk_423_433.wav,background,desed,10.0,desed:public:B5gInnQnoLk_423_433
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/B4gnwvuWaZ4_40_50.wav,background,desed,10.0,desed:public:B4gnwvuWaZ4_40_50
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/qiRyt8PvTZs_2_12.wav,background,desed,10.0,desed:public:qiRyt8PvTZs_2_12
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/lv14REvqCxY_422_432.wav,background,desed,10.0,desed:public:lv14REvqCxY_422_432
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/X6fzg9s0VD8_10_20.wav,background,desed,10.0,desed:public:X6fzg9s0VD8_10_20
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/qYheBspHDuQ_18_28.wav,background,desed,10.0,desed:public:qYheBspHDuQ_18_28
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/g10lA7bbS2s_0_10.wav,background,desed,10.0,desed:public:g10lA7bbS2s_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/_H7dUtmIVSc_257_267.wav,background,desed,10.0,desed:public:_H7dUtmIVSc_257_267
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/cKgGzyBosrA_14_24.wav,background,desed,10.0,desed:public:cKgGzyBosrA_14_24
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/J1TPeGMCAYw_1312_1322.wav,background,desed,10.0,desed:public:J1TPeGMCAYw_1312_1322
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/t8QP9mcBULY_540_550.wav,background,desed,10.0,desed:public:t8QP9mcBULY_540_550
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/ejgqXyfTMic_0_10.wav,background,desed,10.0,desed:public:ejgqXyfTMic_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/Y5PYnkpkAZQ_0_10.wav,background,desed,10.0,desed:public:Y5PYnkpkAZQ_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/HIvc75xlPdw_5_15.wav,background,desed,10.0,desed:public:HIvc75xlPdw_5_15
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/R13dyHEg1bM_400_410.wav,background,desed,10.0,desed:public:R13dyHEg1bM_400_410
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/p33b4XR8cO8_0_10.wav,background,desed,10.0,desed:public:p33b4XR8cO8_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/4xhzacM1PSA_32_42.wav,background,desed,10.0,desed:public:4xhzacM1PSA_32_42
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/1Q75gU6FXIw_190_200.wav,background,desed,10.0,desed:public:1Q75gU6FXIw_190_200
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/O0rsix08f50_0_10.wav,background,desed,10.0,desed:public:O0rsix08f50_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/BTC4nw4Mg5c_9_19.wav,background,desed,10.0,desed:public:BTC4nw4Mg5c_9_19
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/b3fGGBCgGTM_0_10.wav,background,desed,10.0,desed:public:b3fGGBCgGTM_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/tIbMQmPBBlU_29_39.wav,background,desed,10.0,desed:public:tIbMQmPBBlU_29_39
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/z3U0udLH974_0_10.wav,background,desed,10.0,desed:public:z3U0udLH974_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/6sjz04nF7jQ_9_19.wav,background,desed,10.0,desed:public:6sjz04nF7jQ_9_19
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/bI2PP0iHa9s_641_651.wav,background,desed,10.0,desed:public:bI2PP0iHa9s_641_651
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/b8xOvC2KnOU_438_448.wav,background,desed,10.0,desed:public:b8xOvC2KnOU_438_448
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/64zwMCsqdeM_106_116.wav,background,desed,10.0,desed:public:64zwMCsqdeM_106_116
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/Nz-IhS2NT4k_7_17.wav,background,desed,10.0,desed:public:Nz-IhS2NT4k_7_17
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/qoctnXzSYnk_0_7.wav,background,desed,7.0,desed:public:qoctnXzSYnk_0_7
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/4KcGV2CMCRo_75_85.wav,background,desed,10.0,desed:public:4KcGV2CMCRo_75_85
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/udvgswbGqyE_0_10.wav,background,desed,10.0,desed:public:udvgswbGqyE_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/Sd3a4n-41cA_20_30.wav,background,desed,10.0,desed:public:Sd3a4n-41cA_20_30
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/D4S8gsjX0KQ_400_410.wav,background,desed,10.0,desed:public:D4S8gsjX0KQ_400_410
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/QVzRDG3pkE8_23_33.wav,background,desed,10.0,desed:public:QVzRDG3pkE8_23_33
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/jGyZ1IcmZn8_19_29.wav,background,desed,10.0,desed:public:jGyZ1IcmZn8_19_29
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/9xcpJJiNtX4_1470_1480.wav,background,desed,10.0,desed:public:9xcpJJiNtX4_1470_1480
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/CZX4OfrejSU_118_128.wav,background,desed,10.0,desed:public:CZX4OfrejSU_118_128
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/ea8HGPkBy40_455_465.wav,background,desed,10.0,desed:public:ea8HGPkBy40_455_465
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/e8jhGkgHG44_0_10.wav,background,desed,10.0,desed:public:e8jhGkgHG44_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/tWSiJKKZhNc_1070_1080.wav,background,desed,10.0,desed:public:tWSiJKKZhNc_1070_1080
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/WP8aI1IXNCQ_0_5.wav,background,desed,4.174512471655329,desed:public:WP8aI1IXNCQ_0_5
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/xsuC1pxCDr4_275_285.wav,background,desed,10.0,desed:public:xsuC1pxCDr4_275_285
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/y06xeitDfcs_0_10.wav,background,desed,10.0,desed:public:y06xeitDfcs_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/jbstZWZDQvU_0_10.wav,background,desed,10.0,desed:public:jbstZWZDQvU_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/CMqILvK7m0M_0_10.wav,background,desed,10.0,desed:public:CMqILvK7m0M_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/Ro2eFC33MnY_22_32.wav,background,desed,10.0,desed:public:Ro2eFC33MnY_22_32
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/ogdlN42LL-o_287_297.wav,background,desed,10.0,desed:public:ogdlN42LL-o_287_297
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/jsP5oinHnMs_81_91.wav,background,desed,10.0,desed:public:jsP5oinHnMs_81_91
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/fQGv7ZJEd3g_117_127.wav,background,desed,10.0,desed:public:fQGv7ZJEd3g_117_127
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/Ghfu0VBN1zY_0_10.wav,background,desed,10.0,desed:public:Ghfu0VBN1zY_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/ly1dAtX0_uU_50_60.wav,background,desed,10.0,desed:public:ly1dAtX0_uU_50_60
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/8RObHsG-C1M_0_10.wav,background,desed,10.0,desed:public:8RObHsG-C1M_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/J0CeoQ_BqSw_0_10.wav,background,desed,10.0,desed:public:J0CeoQ_BqSw_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/OPNy0wF5Yc4_297_307.wav,background,desed,10.0,desed:public:OPNy0wF5Yc4_297_307
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/PeNwCvGYEtg_130_140.wav,background,desed,10.0,desed:public:PeNwCvGYEtg_130_140
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/ySdXyt_XR9Y_210_220.wav,background,desed,10.0,desed:public:ySdXyt_XR9Y_210_220
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/tOFElZgkMeo_2_12.wav,background,desed,10.0,desed:public:tOFElZgkMeo_2_12
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/aUf48Qu6TaE_1_11.wav,background,desed,10.0,desed:public:aUf48Qu6TaE_1_11
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/y20jn1ziJtE_25_35.wav,background,desed,10.0,desed:public:y20jn1ziJtE_25_35
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/R85OVJX6fAo_9_19.wav,background,desed,10.0,desed:public:R85OVJX6fAo_9_19
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/3ssQMGnK118_364_374.wav,background,desed,10.0,desed:public:3ssQMGnK118_364_374
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/Df7veBP0Wu4_28_38.wav,background,desed,10.0,desed:public:Df7veBP0Wu4_28_38
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/K5NIxYokRv4_4_14.wav,background,desed,10.0,desed:public:K5NIxYokRv4_4_14
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/LU0ZWTmamKI_118_128.wav,background,desed,10.0,desed:public:LU0ZWTmamKI_118_128
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/fy78k_pwDzc_2_12.wav,background,desed,10.0,desed:public:fy78k_pwDzc_2_12
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/w_cy-aa4JGo_182_192.wav,background,desed,10.0,desed:public:w_cy-aa4JGo_182_192
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/Wa2bJ45eazw_5_15.wav,background,desed,10.0,desed:public:Wa2bJ45eazw_5_15
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/4fyWleU80yY_366_376.wav,background,desed,10.0,desed:public:4fyWleU80yY_366_376
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/kEiFeL7Qytg_90_100.wav,background,desed,10.0,desed:public:kEiFeL7Qytg_90_100
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/RVBXpQz_vQg_0_10.wav,background,desed,10.0,desed:public:RVBXpQz_vQg_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/DaPDBXyAwtc_315_325.wav,background,desed,10.0,desed:public:DaPDBXyAwtc_315_325
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/koJve7Bst98_0_10.wav,background,desed,10.0,desed:public:koJve7Bst98_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/W60T03W7gsw_150_160.wav,background,desed,10.0,desed:public:W60T03W7gsw_150_160
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/E19MFHRAJB8_516_526.wav,background,desed,10.0,desed:public:E19MFHRAJB8_516_526
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/KkyFhpZOikA_0_10.wav,background,desed,10.0,desed:public:KkyFhpZOikA_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/0qo-ZXw2k-4_21_31.wav,background,desed,10.0,desed:public:0qo-ZXw2k-4_21_31
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/r_CUAdmKG7Q_24_34.wav,background,desed,10.0,desed:public:r_CUAdmKG7Q_24_34
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/pUt70ybOg10_0_10.wav,background,desed,10.0,desed:public:pUt70ybOg10_0_10
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/eval/public/DVIjBBhCn5Q_210_220.wav,background,desed,10.0,desed:public:DVIjBBhCn5Q_210_220
+/Users/rajsingh/Documents/ChatGPT/sahara/data/raw/desed/real/audio/validation/validation/Y3AzacBprTzU_60.000_70.000.wav,background,desed,10.0,desed:validation:Y3AzacBprTzU_60.000_70.000

@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import shutil
 import subprocess
 import zipfile
@@ -12,6 +13,12 @@ from urllib.request import urlopen
 
 from src.config import RAW_DATA_DIR, SOUND_CLASSES
 from src.data.common import count_audio_files, download_file
+
+# Default Google Drive sync path (override with SAHARA_FSD50K_GDRIVE or --gdrive-path).
+DEFAULT_GDRIVE_FSD50K = Path.home() / (
+    "Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K"
+)
+FSD50K_ITEMS = ("FSD50K.dev_audio", "FSD50K.eval_audio", "FSD50K.ground_truth", "FSD50K.metadata")
 
 ZENODO_RECORD = "https://zenodo.org/api/records/4060432"
 FSD_LABELS = {
@@ -73,7 +80,38 @@ def coverage_report(root: Path) -> dict[str, int]:
     return counts
 
 
-def run(dry_run: bool = False) -> dict[str, int]:
+def link_from_gdrive(gdrive_path: Path | None = None, dry_run: bool = False) -> bool:
+    """Symlink extracted FSD50K folders from a local Google Drive sync into data/raw/fsd50k/."""
+    source = Path(os.environ.get("SAHARA_FSD50K_GDRIVE", gdrive_path or DEFAULT_GDRIVE_FSD50K))
+    dest = RAW_DATA_DIR / "fsd50k"
+    if not source.exists():
+        print(f"Google Drive FSD50K not found at {source}")
+        return False
+    dest.mkdir(parents=True, exist_ok=True)
+    linked = 0
+    for item in FSD50K_ITEMS:
+        src_item = source / item
+        if not src_item.exists():
+            print(f"SKIP missing: {src_item}")
+            continue
+        dest_item = dest / item
+        if dry_run:
+            print(f"DRY RUN link {src_item} -> {dest_item}")
+        else:
+            if dest_item.is_symlink() or dest_item.exists():
+                dest_item.unlink(missing_ok=True)
+            dest_item.symlink_to(src_item, target_is_directory=True)
+            print(f"LINKED {dest_item.name} -> {src_item}")
+        linked += 1
+    return linked >= 3
+
+
+def run(dry_run: bool = False, gdrive_path: Path | None = None, use_gdrive: bool = False) -> dict[str, int]:
+    if use_gdrive or (DEFAULT_GDRIVE_FSD50K / "FSD50K.ground_truth").exists():
+        if link_from_gdrive(gdrive_path, dry_run):
+            root = RAW_DATA_DIR / "fsd50k"
+            if (root / "FSD50K.ground_truth").exists() or (root / "FSD50K.ground_truth").is_symlink():
+                return coverage_report(root)
     root = RAW_DATA_DIR / "fsd50k"
     root.mkdir(parents=True, exist_ok=True)
     files = _record_files(dry_run)
