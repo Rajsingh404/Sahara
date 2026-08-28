@@ -64,6 +64,7 @@ def get_raw_dir(dataset: str) -> Path:
     return RAW_DATA_DIR / dataset
 
 SAMPLE_RATE = 16_000
+YAMNET_EMBEDDING_DIM = 1_024
 SOUND_CLASSES = [
     "smoke_alarm", "doorbell", "siren", "knocking", "dog_bark", "baby_cry",
     "glass_break", "appliance_beep",

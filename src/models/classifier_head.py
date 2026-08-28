@@ -5,10 +5,10 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 
-from src.config import SOUND_CLASSES
+from src.config import SOUND_CLASSES, YAMNET_EMBEDDING_DIM
 
 
-def build_classifier_head(input_dim: int = 1024, num_classes: int | None = None) -> keras.Model:
+def build_classifier_head(input_dim: int = YAMNET_EMBEDDING_DIM, num_classes: int | None = None) -> keras.Model:
     num_classes = num_classes or len(SOUND_CLASSES)
     inputs = keras.Input(shape=(input_dim,), name="embedding")
     x = layers.Dense(256, activation="relu")(inputs)

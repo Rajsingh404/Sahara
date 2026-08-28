@@ -1,10 +1,10 @@
 # SAHARA Dataset Card
 
 **Project**: SAHARA — Safety-Aware Hearing Assistance with Real-time Alerts  
-**Version**: Phase 2-3 (baseline pipeline complete — AudioSet only; FSD50K pending local sync)  
+**Version**: Phase 2-3 (baseline pipeline complete; cached FSD50K embeddings available)  
 **Last updated**: 2026-08-28  
 **Task**: Multi-label 8-class safety-critical sound detection for Deaf/Hard-of-Hearing users  
-**Model architecture**: Frozen YAMNet backbone + trainable dense classifier head → TFLite INT8 on-device
+**Model architecture**: Frozen YAMNet backbone + trainable dense classifier head. TFLite export is a next-phase task.
 
 ---
 
@@ -31,10 +31,10 @@
 
 - **Source**: [Fonseca et al., 2021](https://arxiv.org/abs/2010.00475) — Freesound Dataset 50K
 - **License**: Varies per clip (Creative Commons); see FSD50K.metadata for per-file licenses
-- **Location**: `data/raw/fsd50k/` (Google Drive FUSE mount)
-- **Status**: Ground-truth CSVs accessible and cached at `data/interim/fsd50k_ground_truth/`. Audio files are Google Drive stubs (not locally synced) — librosa reads block indefinitely on unsynced stubs. **Action required: enable "Make available offline" in Google Drive for the `FSD50K.dev_audio/` and `FSD50K.eval_audio/` folders, then re-run `src/preprocessing/build_features_cache.py`.**
+- **Location**: raw audio is not retained locally after caching; reproducible source download is implemented in `src/data/download_fsd50k.py`.
+- **Status**: Ground-truth-derived manifest rows and cached YAMNet embeddings are available locally. Re-download the source audio only if rebuilding the embedding cache from scratch.
 - **Manifest rows matched**: 4,494 clips across 8 target classes (from ground-truth CSVs)
-- **Embeddings extracted**: 0 (blocked on Drive sync)
+- **Embeddings extracted**: 4,494 target-class FSD50K clips
 
 ### AudioSet
 
@@ -94,11 +94,11 @@
 | `baby_cry` | 20 | 0 | 0 | **20** | ⚠ LOW — FSD50K has no `Baby_cry_infant_cry` label in dev/eval; AudioSet only |
 | `glass_break` | 21 | 0 | 1241 | **1262** | FSD50K pending sync |
 | `appliance_beep` | 20 | 0 | 2068 | **2088** | FSD50K pending sync |
-| `background` | 0 | 884 | 0 | **884** | DESED real soundscapes |
+| `background` | 0 | 905 | 0 | **905** | DESED real soundscapes |
 | **Total target** | **161** | — | **4494** | **4655** | 161 embedded; 4494 blocked on Drive sync |
 
-**Manifest totals**: full=5,539 · train=3,877 · val=831 · test=831  
-**Embeddings extracted (this run)**: 171 clips (161 AudioSet + 10 previously cached FSD50K) · train=117 · val=27 · test=27
+**Manifest totals**: full=5,560 · train=3,892 · val=834 · test=834  
+**Embeddings extracted**: 4,655 target clips (4,494 FSD50K + 161 AudioSet) · train=3,259 · val=698 · test=698. Background rows are retained in the manifest but excluded from this 8-class baseline.
 
 ---
 
@@ -108,10 +108,10 @@ All data is unified into `data/metadata/`:
 
 | File | Rows (header+1) | Description |
 |---|---|---|
-| `full_manifest.csv` | 5,539 | All clips from all sources (`filepath, label, source_dataset, duration_sec, recording_id`) |
-| `train_manifest.csv` | 3,877 | 70% stratified by class + recording session |
-| `val_manifest.csv` | 831 | 15% — held-out for early stopping |
-| `test_manifest.csv` | 831 | 15% — held-out for final evaluation |
+| `full_manifest.csv` | 5,560 | All clips from all sources (`filepath, label, source_dataset, duration_sec, recording_id`) |
+| `train_manifest.csv` | 3,892 | 70% stratified by class + recording session |
+| `val_manifest.csv` | 834 | 15% — held-out for early stopping |
+| `test_manifest.csv` | 834 | 15% — held-out for final evaluation |
 
 **Split strategy**: Stratified by class label, split at recording-session level (`recording_id`) to prevent data leakage from the same session across train/val/test.
 
@@ -119,35 +119,32 @@ All data is unified into `data/metadata/`:
 
 ## Baseline Training Results (2026-08-28)
 
-**Training data**: 117 clips (AudioSet only — FSD50K stubs excluded)  
-**Validation data**: 27 clips · **Test data**: 27 clips
+**Training data**: 3,259 target clips (FSD50K + AudioSet)  
+**Validation data**: 698 clips · **Test data**: 698 clips
 
 ### Training
 
 | Metric | Train | Val |
 |---|---|---|
-| Loss (best epoch / early stop) | 0.2640 (ep 6) | 0.2640 (ep 6) |
-| Loss (final epoch 15) | 0.1997 | 0.3532 |
-| Accuracy (final) | 0.7436 | 0.7037 |
+| Loss / accuracy | See reproducible training logs | See reproducible training logs |
 
-Early stopping triggered at epoch 15 (patience=5, best weights from epoch 6 restored).  
-Optimizer: Adam lr=1e-3 · Loss: binary_crossentropy · Architecture: Dense(256)→Drop(0.3)→Dense(128)→Drop(0.3)→Dense(8, sigmoid)
+Optimizer: Adam lr=1e-3 · Loss: binary_crossentropy · Architecture: Dense(256)→Drop(0.3)→Dense(128)→Drop(0.3)→Dense(8, sigmoid). The persisted checkpoint was re-evaluated on 2026-08-29.
 
-### Evaluation (test set, 27 clips, threshold=0.5)
+### Evaluation (test set, 698 clips, threshold=0.5)
 
 | Class | Precision | Recall | F1 | AP |
 |---|---|---|---|---|
-| `smoke_alarm` | 1.000 | 0.667 | 0.800 | **1.000** |
-| `doorbell` | 0.000 | 0.000 | 0.000 | 0.817 |
-| `siren` | 1.000 | 0.500 | 0.667 | **1.000** |
-| `knocking` | 0.000 | 0.000 | 0.000 | 0.062 |
-| `dog_bark` | 0.000 | 0.000 | 0.000 | 0.357 |
-| `baby_cry` | 1.000 | 0.333 | 0.500 | **1.000** |
-| `glass_break` | 0.000 | 0.000 | 0.000 | 0.540 |
-| `appliance_beep` | 0.000 | 0.000 | 0.000 | 0.167 |
-| **Macro avg** | 0.375 | 0.187 | 0.246 | **mAP = 0.618** |
+| `smoke_alarm` | 0.045 | 0.333 | 0.080 | 0.100 |
+| `doorbell` | 0.667 | 0.421 | 0.516 | 0.439 |
+| `siren` | 0.039 | 0.667 | 0.074 | 0.059 |
+| `knocking` | 0.470 | 0.810 | 0.595 | 0.574 |
+| `dog_bark` | 1.000 | 0.714 | 0.833 | 0.942 |
+| `baby_cry` | 0.667 | 0.667 | 0.667 | 0.669 |
+| `glass_break` | 0.797 | 0.516 | 0.626 | 0.655 |
+| `appliance_beep` | 1.000 | 0.003 | 0.006 | 0.671 |
+| **Macro avg** | **0.586** | **0.516** | **0.425** | **mAP = 0.514** |
 
-> Note: Threshold-based precision/recall is unreliable at n=27 test clips. The AP (area under precision-recall curve) is the honest per-class signal. mAP=0.618 on 27 clips is a strong indicator that YAMNet embeddings are genuinely discriminative for our classes — smoke_alarm, siren, and baby_cry are perfectly separable. Knocking and appliance_beep will improve significantly with the full FSD50K dataset.
+> Note: This is a real but imbalanced baseline. In particular, smoke_alarm and baby_cry each have only 20 clips, and appliance_beep has extremely low thresholded recall despite decent AP. Do not use these numbers as final deployment performance; tune thresholds and expand underrepresented classes in the next phase.
 
 **Confusion matrix**: `docs/confusion_matrix.png`
 
@@ -155,14 +152,13 @@ Optimizer: Adam lr=1e-3 · Loss: binary_crossentropy · Architecture: Dense(256)
 
 ## Known Gaps
 
-### 1. FSD50K Audio — Google Drive Stubs Not Locally Synced
-- **Status**: All 4,494 target-class FSD50K audio files are Google Drive stubs (`xattr com.google.drivefs.item-id#S`). The `build_features_cache.py` script correctly detects and skips them to avoid blocking reads.
-- **Impact**: Baseline trained on 171 clips (AudioSet) instead of the intended 4,655. This is a data availability issue, not a pipeline bug.
-- **Resolution**: In Google Drive for Desktop, right-click `FSD50K.dev_audio/` and `FSD50K.eval_audio/` → "Make available offline". Once synced, re-run `python src/preprocessing/build_features_cache.py` — the per-clip cache means already-processed files are skipped, so only new files are computed.
+### 1. Raw FSD50K Audio Is Not Retained Locally
+- **Status**: The 4,494 FSD50K target clips were embedded and the raw files were subsequently removed to conserve disk space.
+- **Impact**: Current training/evaluation artifacts are reproducible from cached embeddings, but rebuilding them from raw audio requires re-running the FSD50K downloader.
 
 ### 2. smoke_alarm and baby_cry — Not in FSD50K
 - **Status**: Confirmed: `Smoke_detector_smoke_alarm` and `Baby_cry_infant_cry` do not appear in FSD50K dev or eval CSVs. These classes have only 20 clips each (AudioSet).
-- **Action**: Pull additional clips from AudioSet unbalanced set via `python src/data/download.py --dataset audioset` (no `--limit-per-class`).
+- **Action**: Pull additional clips from AudioSet unbalanced set via `python src/data/download.py --dataset audioset` (no `--limit-per-class`) and add field recordings.
 
 ### 3. Indian Ambient Dataset — Not Yet Recorded
 - **Status**: Phase 4 — blocked on field recording sessions
