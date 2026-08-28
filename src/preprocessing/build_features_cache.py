@@ -12,7 +12,14 @@ import numpy as np
 from tqdm import tqdm
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from src.config import METADATA_DIR, PROCESSED_DATA_DIR, SOUND_CLASSES
+from src.config import (
+    AUGMENTATION_ENABLED,
+    AUGMENTATION_VARIANTS_PER_CLIP,
+    METADATA_DIR,
+    PROCESSED_DATA_DIR,
+    SOUND_CLASSES,
+)
+from src.preprocessing.augmentation import SaharaAugmenter
 from src.preprocessing.audio_utils import load_audio
 from src.preprocessing.features import embedding_cache_path, extract_yamnet_embedding_cached
 
@@ -26,6 +33,13 @@ def _label_to_index(label: str) -> int:
     if label in SOUND_CLASSES:
         return SOUND_CLASSES.index(label)
     return -1  # background / unknown
+
+
+def _multihot(labels: np.ndarray) -> np.ndarray:
+    out = np.zeros((len(labels), len(SOUND_CLASSES)), dtype=np.float32)
+    valid = np.where(labels >= 0)[0]
+    out[valid, labels[valid]] = 1.0
+    return out
 
 
 def _is_local_file(filepath: str) -> bool:
@@ -68,6 +82,8 @@ def build_cache(
     manifest_path: Path | None = None,
     splits: tuple[str, ...] = ("train", "val", "test"),
     io_workers: int = 4,
+    force: bool = False,
+    augment: bool = AUGMENTATION_ENABLED,
 ) -> None:
     manifest_path = manifest_path or METADATA_DIR / "full_manifest.csv"
     rows = _load_manifest(manifest_path)
@@ -80,6 +96,18 @@ def build_cache(
 
     # Only cache target-class clips for baseline training.
     target_rows = [row for row in rows if row["label"] in SOUND_CLASSES]
+
+    # If all three public .npy split caches align with their target manifest
+    # rows, no audio or Hub work is required on a normal rerun.
+    if not force and not augment:
+        complete = True
+        for split in splits:
+            expected = sum(1 for row in _load_manifest(METADATA_DIR / f"{split}_manifest.csv") if row["label"] in SOUND_CLASSES)
+            path = PROCESSED_DATA_DIR / f"{split}_embeddings.npy"
+            complete &= path.exists() and np.load(path, mmap_mode="r").shape[0] == expected
+        if complete:
+            print("Feature cache is complete for all splits; use --force to rebuild.")
+            return
 
     # Split into already-cached and needs-loading — skip the FUSE read for cached clips.
     cached_rows = [r for r in target_rows if embedding_cache_path(r["filepath"]).exists()]
@@ -161,6 +189,33 @@ def build_cache(
             y=y[indices],
             filepaths=[filepaths[i] for i in indices],
         )
+        # Stable, simple artifacts for external consumers and future TFLite
+        # experiments.  Labels are explicitly multi-hot over SOUND_CLASSES.
+        np.save(PROCESSED_DATA_DIR / f"{split_name}_embeddings.npy", X[indices])
+        np.save(PROCESSED_DATA_DIR / f"{split_name}_labels.npy", _multihot(y[indices]))
+
+    # Optional raw-waveform variants are training-only and get their own
+    # embeddings; default remains off for reproducible baseline caching.
+    if augment:
+        background_paths = [r["filepath"] for r in rows if r["label"] not in SOUND_CLASSES]
+        augmenter = SaharaAugmenter(background_paths or None)
+        train_rows = [r for r in split_map.get("train", []) if r["label"] in SOUND_CLASSES]
+        extra_x, extra_y = [], []
+        for row in tqdm(train_rows, desc="Augmented train embeddings", unit="clip"):
+            waveform = load_audio(row["filepath"])
+            if waveform is None:
+                continue
+            for _ in range(AUGMENTATION_VARIANTS_PER_CLIP):
+                extra_x.append(extract_yamnet_embedding_cached(row["filepath"] + ":aug", augmenter.augment(waveform)))
+                extra_y.append(_label_to_index(row["label"]))
+        if extra_x:
+            path = PROCESSED_DATA_DIR / "embeddings_train.npz"
+            original = np.load(path)
+            aug_x = np.vstack([original["X"], np.stack(extra_x)])
+            aug_y = np.concatenate([original["y"], np.asarray(extra_y, dtype=np.int32)])
+            np.savez_compressed(path, X=aug_x, y=aug_y)
+            np.save(PROCESSED_DATA_DIR / "train_embeddings.npy", aug_x)
+            np.save(PROCESSED_DATA_DIR / "train_labels.npy", _multihot(aug_y))
 
     elapsed = time.time() - start
     print(f"\nCached {len(embeddings)} embeddings in {elapsed:.1f}s (skipped {skipped})")
@@ -176,8 +231,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, default=METADATA_DIR / "full_manifest.csv")
     parser.add_argument("--io-workers", type=int, default=4, help="Parallel threads for audio I/O (default: 4)")
+    parser.add_argument("--force", action="store_true", help="Rebuild split cache arrays even when complete.")
+    parser.add_argument("--augment", action="store_true", help="Create raw-waveform augmented variants for train only.")
     args = parser.parse_args()
-    build_cache(args.manifest, io_workers=args.io_workers)
+    build_cache(args.manifest, io_workers=args.io_workers, force=args.force, augment=args.augment)
 
 
 if __name__ == "__main__":

@@ -19,7 +19,7 @@ from src.config import (
     SOUND_CLASSES,
 )
 from src.models.classifier_head import build_classifier_head
-from src.preprocessing.augmentation import augment_embedding_batch
+from src.training.losses import weighted_binary_crossentropy
 
 
 def _to_multihot(y: np.ndarray, num_classes: int) -> np.ndarray:
@@ -31,6 +31,11 @@ def _to_multihot(y: np.ndarray, num_classes: int) -> np.ndarray:
 
 
 def _load_split(name: str) -> tuple[np.ndarray, np.ndarray]:
+    npy_x = PROCESSED_DATA_DIR / f"{name}_embeddings.npy"
+    npy_y = PROCESSED_DATA_DIR / f"{name}_labels.npy"
+    if npy_x.exists() and npy_y.exists():
+        X, y = np.load(npy_x), np.load(npy_y)
+        return X, y
     path = PROCESSED_DATA_DIR / f"embeddings_{name}.npz"
     if not path.exists():
         raise FileNotFoundError(f"Missing {path} — run build_features_cache.py first")
@@ -38,7 +43,11 @@ def _load_split(name: str) -> tuple[np.ndarray, np.ndarray]:
     return data["X"], data["y"]
 
 
-def train(use_augmentation: bool = False) -> dict:
+def train(
+    batch_size: int = BATCH_SIZE,
+    epochs: int = EPOCHS,
+    learning_rate: float = LEARNING_RATE,
+) -> dict:
     tf.random.set_seed(RANDOM_SEED)
     np.random.seed(RANDOM_SEED)
 
@@ -46,19 +55,13 @@ def train(use_augmentation: bool = False) -> dict:
     X_val, y_val = _load_split("val")
     num_classes = len(SOUND_CLASSES)
 
-    y_train_oh = _to_multihot(y_train, num_classes)
-    y_val_oh = _to_multihot(y_val, num_classes)
-
-    if use_augmentation:
-        rng = np.random.default_rng(RANDOM_SEED)
-        X_aug = augment_embedding_batch(X_train, rng=rng)
-        X_train = np.concatenate([X_train, X_aug], axis=0)
-        y_train_oh = np.concatenate([y_train_oh, y_train_oh], axis=0)
+    y_train_oh = y_train if y_train.ndim == 2 else _to_multihot(y_train, num_classes)
+    y_val_oh = y_val if y_val.ndim == 2 else _to_multihot(y_val, num_classes)
 
     model = build_classifier_head()
     model.compile(
-        optimizer=tf.keras.optimizers.Adam(LEARNING_RATE),
-        loss="binary_crossentropy",
+        optimizer=tf.keras.optimizers.Adam(learning_rate),
+        loss=weighted_binary_crossentropy,
         metrics=["accuracy"],
     )
 
@@ -70,7 +73,7 @@ def train(use_augmentation: bool = False) -> dict:
     callbacks = [
         tf.keras.callbacks.EarlyStopping(patience=5, restore_best_weights=True, monitor="val_loss"),
         tf.keras.callbacks.ModelCheckpoint(
-            ckpt_dir / "best_classifier.keras",
+            ckpt_dir / "best_model.keras",
             save_best_only=True,
             monitor="val_loss",
         ),
@@ -81,8 +84,8 @@ def train(use_augmentation: bool = False) -> dict:
         X_train,
         y_train_oh,
         validation_data=(X_val, y_val_oh),
-        epochs=EPOCHS,
-        batch_size=BATCH_SIZE,
+        epochs=epochs,
+        batch_size=batch_size,
         callbacks=callbacks,
         verbose=1,
     )
@@ -106,9 +109,11 @@ def train(use_augmentation: bool = False) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--augment", action="store_true", help="Apply embedding-space augmentation")
+    parser.add_argument("--batch-size", type=int, default=BATCH_SIZE)
+    parser.add_argument("--epochs", type=int, default=EPOCHS)
+    parser.add_argument("--learning-rate", type=float, default=LEARNING_RATE)
     args = parser.parse_args()
-    train(use_augmentation=args.augment)
+    train(args.batch_size, args.epochs, args.learning_rate)
 
 
 if __name__ == "__main__":

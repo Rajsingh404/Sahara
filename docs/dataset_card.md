@@ -120,31 +120,32 @@ All data is unified into `data/metadata/`:
 ## Baseline Training Results (2026-08-28)
 
 **Training data**: 3,259 target clips (FSD50K + AudioSet)  
-**Validation data**: 698 clips · **Test data**: 698 clips
+**Validation data**: 698 clips · **Test data**: 698 clips  
+**Augmentation**: Disabled for this reproducible baseline. The raw-waveform augmenter is available through `build_features_cache.py --augment` for future training experiments.
 
 ### Training
 
 | Metric | Train | Val |
 |---|---|---|
-| Loss / accuracy | See reproducible training logs | See reproducible training logs |
+| Loss / accuracy (final epoch) | 0.3261 / 0.7969 | 0.2263 / 0.8095 |
 
-Optimizer: Adam lr=1e-3 · Loss: binary_crossentropy · Architecture: Dense(256)→Drop(0.3)→Dense(128)→Drop(0.3)→Dense(8, sigmoid). The persisted checkpoint was re-evaluated on 2026-08-29.
+Optimizer: Adam lr=1e-3 · Loss: cost-sensitive weighted binary crossentropy · Architecture: Dense(256)→Drop(0.3)→Dense(128)→Drop(0.3)→Dense(8, sigmoid). Early stopping completed after 9 epochs; the best checkpoint was re-evaluated on 2026-08-29.
 
 ### Evaluation (test set, 698 clips, threshold=0.5)
 
 | Class | Precision | Recall | F1 | AP |
 |---|---|---|---|---|
-| `smoke_alarm` | 0.045 | 0.333 | 0.080 | 0.100 |
-| `doorbell` | 0.667 | 0.421 | 0.516 | 0.439 |
-| `siren` | 0.039 | 0.667 | 0.074 | 0.059 |
-| `knocking` | 0.470 | 0.810 | 0.595 | 0.574 |
-| `dog_bark` | 1.000 | 0.714 | 0.833 | 0.942 |
-| `baby_cry` | 0.667 | 0.667 | 0.667 | 0.669 |
-| `glass_break` | 0.797 | 0.516 | 0.626 | 0.655 |
-| `appliance_beep` | 1.000 | 0.003 | 0.006 | 0.671 |
-| **Macro avg** | **0.586** | **0.516** | **0.425** | **mAP = 0.514** |
+| `smoke_alarm` | 0.000 | 0.000 | 0.000 | 0.090 |
+| `doorbell` | 0.682 | 0.395 | 0.500 | 0.632 |
+| `siren` | 0.333 | 0.333 | 0.333 | 0.250 |
+| `knocking` | 0.826 | 0.655 | 0.731 | 0.751 |
+| `dog_bark` | 1.000 | 0.893 | 0.943 | 0.956 |
+| `baby_cry` | 0.000 | 0.000 | 0.000 | 0.669 |
+| `glass_break` | 0.881 | 0.895 | 0.888 | 0.937 |
+| `appliance_beep` | 0.860 | 0.790 | 0.824 | 0.923 |
+| **Macro avg** | **0.573** | **0.495** | **0.527** | **mAP = 0.651** |
 
-> Note: This is a real but imbalanced baseline. In particular, smoke_alarm and baby_cry each have only 20 clips, and appliance_beep has extremely low thresholded recall despite decent AP. Do not use these numbers as final deployment performance; tune thresholds and expand underrepresented classes in the next phase.
+> Note: This is a real but imbalanced baseline. Smoke alarm and baby cry each have only 20 clips; both have zero thresholded recall despite the safety weighting. Do not use these numbers as final deployment performance; tune thresholds and expand underrepresented classes in the next phase.
 
 **Confusion matrix**: `docs/confusion_matrix.png`
 

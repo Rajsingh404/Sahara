@@ -50,3 +50,23 @@ def print_metrics(metrics: dict) -> None:
         print(f"{name}\t{values['precision']:.3f}\t{values['recall']:.3f}\t{values['f1']:.3f}\t{values['ap']:.3f}")
     m = metrics["macro"]
     print(f"\nMacro avg: precision={m['precision']:.3f} recall={m['recall']:.3f} F1={m['f1']:.3f} mAP={m['mAP']:.3f}")
+
+
+def write_evaluation_report(metrics: dict, output_path) -> None:
+    """Persist the exact printed metrics for review and reproducibility."""
+    lines = [
+        "# SAHARA Baseline Evaluation", "",
+        "Metrics use per-class one-vs-rest decisions at a 0.5 threshold. "
+        "mAP uses the prediction scores and is less threshold-sensitive.", "",
+        "| Class | Precision | Recall | F1 | AP |", "|---|---:|---:|---:|---:|",
+    ]
+    for name in SOUND_CLASSES:
+        values = metrics["per_class"].get(name, {"precision": 0, "recall": 0, "f1": 0, "ap": 0})
+        lines.append(f"| {name} | {values['precision']:.3f} | {values['recall']:.3f} | {values['f1']:.3f} | {values['ap']:.3f} |")
+    macro = metrics["macro"]
+    lines.extend([
+        f"| **Macro average** | **{macro['precision']:.3f}** | **{macro['recall']:.3f}** | **{macro['f1']:.3f}** | **{macro['mAP']:.3f}** |",
+        "", "## Error analysis", "",
+        "The baseline remains sensitive to class imbalance. The small smoke-alarm and baby-cry subsets and acoustic overlap among alarm/beep-like events make thresholded recall unstable. Indian-context recordings and threshold calibration are deliberately deferred to the next phase.",
+    ])
+    output_path.write_text("\n".join(lines) + "\n", encoding="utf-8")

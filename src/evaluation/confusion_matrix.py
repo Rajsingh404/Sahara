@@ -13,7 +13,8 @@ from sklearn.metrics import confusion_matrix
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from src.config import MODELS_DIR, PROCESSED_DATA_DIR, REPO_ROOT, SOUND_CLASSES
-from src.evaluation.metrics import compute_metrics, print_metrics
+from src.evaluation.metrics import compute_metrics, print_metrics, write_evaluation_report
+from src.training.losses import weighted_binary_crossentropy
 
 
 def _to_multihot(y: np.ndarray, num_classes: int) -> np.ndarray:
@@ -28,7 +29,9 @@ def evaluate_and_plot(
     checkpoint: Path | None = None,
     output_dir: Path | None = None,
 ) -> Path:
-    checkpoint = checkpoint or MODELS_DIR / "checkpoints" / "best_classifier.keras"
+    checkpoint = checkpoint or MODELS_DIR / "checkpoints" / "best_model.keras"
+    if not checkpoint.exists():
+        checkpoint = MODELS_DIR / "checkpoints" / "best_classifier.keras"
     output_dir = output_dir or REPO_ROOT / "docs"
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -37,11 +40,12 @@ def evaluate_and_plot(
     X_test, y_test = data["X"], data["y"]
     y_true = _to_multihot(y_test, len(SOUND_CLASSES))
 
-    model = tf.keras.models.load_model(checkpoint)
+    model = tf.keras.models.load_model(checkpoint, custom_objects={"weighted_binary_crossentropy": weighted_binary_crossentropy})
     y_pred = model.predict(X_test, verbose=0)
 
     metrics = compute_metrics(y_true, y_pred)
     print_metrics(metrics)
+    write_evaluation_report(metrics, output_dir / "evaluation_report.md")
 
     y_true_argmax = np.argmax(y_true, axis=1)
     y_pred_argmax = np.argmax(y_pred, axis=1)

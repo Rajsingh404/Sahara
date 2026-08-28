@@ -2,14 +2,30 @@
 from __future__ import annotations
 
 import logging
+import csv
 from pathlib import Path
 
 import librosa
 import numpy as np
 
-from src.config import SAMPLE_RATE
+from src.config import METADATA_DIR, SAMPLE_RATE
 
 logger = logging.getLogger(__name__)
+
+
+def _log_load_failure(path: Path, error: Exception) -> None:
+    """Append a batch-safe, inspectable record without raising another error."""
+    try:
+        METADATA_DIR.mkdir(parents=True, exist_ok=True)
+        failure_log = METADATA_DIR / "load_failures.csv"
+        needs_header = not failure_log.exists() or failure_log.stat().st_size == 0
+        with failure_log.open("a", newline="", encoding="utf-8") as handle:
+            writer = csv.writer(handle)
+            if needs_header:
+                writer.writerow(["filepath", "error"])
+            writer.writerow([str(path), str(error)])
+    except OSError:
+        logger.exception("Could not write audio load failure log")
 
 
 def load_audio(filepath: str | Path, target_sr: int = SAMPLE_RATE) -> np.ndarray | None:
@@ -26,6 +42,7 @@ def load_audio(filepath: str | Path, target_sr: int = SAMPLE_RATE) -> np.ndarray
         return waveform.astype(np.float32)
     except Exception as exc:  # noqa: BLE001 — corrupt files must not crash the pipeline
         logger.warning("Failed to load %s: %s", path, exc)
+        _log_load_failure(path, exc)
         return None
 
 
@@ -48,3 +65,8 @@ def get_duration_sec(filepath: str | Path, target_sr: int = SAMPLE_RATE) -> floa
         return float(librosa.get_duration(path=path, sr=target_sr))
     except Exception:
         return 0.0
+
+
+def get_duration(filepath: str | Path, target_sr: int = SAMPLE_RATE) -> float:
+    """Compatibility-friendly public duration helper used by manifests."""
+    return get_duration_sec(filepath, target_sr)

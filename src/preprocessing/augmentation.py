@@ -44,6 +44,16 @@ def augment_waveform(
     return augmented.astype(np.float32)
 
 
+class SaharaAugmenter:
+    """Raw-waveform augmenter; background mixing is optional and manifest-fed."""
+
+    def __init__(self, background_noise_paths: list[str] | None = None, probability: float = 0.5):
+        self.pipeline = build_augmentation_pipeline(background_noise_paths, p=probability)
+
+    def augment(self, waveform: np.ndarray, sr: int = SAMPLE_RATE) -> np.ndarray:
+        return augment_waveform(waveform, pipeline=self.pipeline, sample_rate=sr)
+
+
 def augment_embedding_batch(
     embeddings: np.ndarray,
     noise_std: float = 0.01,

@@ -76,3 +76,21 @@ LEARNING_RATE = 1e-3
 VALIDATION_SPLIT = 0.15
 TEST_SPLIT = 0.15
 RANDOM_SEED = 42
+
+# Raw-waveform augmentation is deliberately opt-in: validation and test clips
+# are never augmented, and baseline cache generation remains deterministic.
+AUGMENTATION_ENABLED = False
+AUGMENTATION_VARIANTS_PER_CLIP = 1
+
+# Asymmetric safety costs for the eight classifier outputs.  These weights are
+# used only by the optional cost-sensitive BCE during training.
+POSITIVE_CLASS_WEIGHTS = {
+    "smoke_alarm": 3.0,
+    "doorbell": 1.0,
+    "siren": 3.0,
+    "knocking": 1.0,
+    "dog_bark": 1.0,
+    "baby_cry": 1.5,
+    "glass_break": 3.0,
+    "appliance_beep": 1.5,
+}

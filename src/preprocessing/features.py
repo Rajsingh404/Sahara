@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import csv
 from pathlib import Path
 
 import librosa
@@ -63,3 +64,30 @@ def extract_yamnet_embedding_cached(filepath: str, waveform: np.ndarray) -> np.n
     cache.parent.mkdir(parents=True, exist_ok=True)
     np.save(cache, embedding)
     return embedding
+
+
+def _self_test_file() -> Path | None:
+    from src.config import METADATA_DIR
+    manifest = METADATA_DIR / "full_manifest.csv"
+    if not manifest.exists():
+        return None
+    with manifest.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            path = Path(row["filepath"])
+            if path.is_file():
+                return path
+    return None
+
+
+if __name__ == "__main__":
+    from src.preprocessing.audio_utils import load_audio
+
+    path = _self_test_file()
+    if path is None:
+        raise SystemExit("No readable manifest audio file found for self-test.")
+    audio = load_audio(path)
+    if audio is None:
+        raise SystemExit(f"Could not load self-test audio: {path}")
+    print(f"file: {path}")
+    print(f"log-mel: {extract_logmel(audio).shape}")
+    print(f"YAMNet embedding: {extract_yamnet_embedding(audio).shape}")
