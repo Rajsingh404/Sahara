@@ -45,21 +45,30 @@ def get_raw_dir(dataset: str) -> Path:
       2. data/raw/<dataset>               (local / repo default).
 
     Dataset name mapping (Drive uses Title-Case; local uses lower_snake):
-        fsd50k       → FSD50K
-        audioset     → AudioSet
-        desed        → DESED
-        indian_ambient → Indian_Ambient
+        fsd50k          → FSD50K
+        audioset        → AudioSet
+        desed           → DESED
+        indian_ambient  → Indian_Ambient
+        inoise          → iNoise
+        inoise_chunks   → iNoise_chunks
+        synthetic_mixed → SyntheticMixed
     """
     _drive_name_map = {
         "fsd50k": "FSD50K",
         "audioset": "AudioSet",
         "desed": "DESED",
         "indian_ambient": "Indian_Ambient",
+        "inoise": "iNoise",
+        "inoise_chunks": "iNoise_chunks",
+        "synthetic_mixed": "SyntheticMixed",
     }
     if DRIVE_DATASETS_DIR is not None:
         drive_name = _drive_name_map.get(dataset, dataset)
         drive_path = DRIVE_DATASETS_DIR / drive_name
         if drive_path.exists() and any(drive_path.iterdir()):
+            return drive_path
+        # Return Drive path as default for drive-resident new datasets if DRIVE_DATASETS_DIR is configured
+        if dataset in {"inoise", "inoise_chunks", "synthetic_mixed"}:
             return drive_path
     return RAW_DATA_DIR / dataset
 
@@ -69,6 +78,12 @@ SOUND_CLASSES = [
     "smoke_alarm", "doorbell", "siren", "knocking", "dog_bark", "baby_cry",
     "glass_break", "appliance_beep",
 ]
+
+# Synthetic mixing and iNoise chunking configuration
+SYNTHETIC_MIXES_PER_TARGET = 3
+SYNTHETIC_SNR_MIN_DB = -5.0
+SYNTHETIC_SNR_MAX_DB = 10.0
+INOISE_CHUNK_DURATION_SEC = 5.0
 
 BATCH_SIZE = 32
 EPOCHS = 30
@@ -94,3 +109,16 @@ POSITIVE_CLASS_WEIGHTS = {
     "glass_break": 3.0,
     "appliance_beep": 1.5,
 }
+
+# Deployment calibration and streaming inference defaults. Values are tuned on
+# validation data by threshold_search.py; the precision floor protects against
+# high-cost false positives for safety-critical events.
+SAFETY_CRITICAL_CLASSES = ("smoke_alarm", "siren", "glass_break")
+SAFETY_PRECISION_FLOOR = 0.70
+FALSE_ALARM_RATE_LIMIT = 0.10
+THRESHOLD_GRID_START = 0.10
+THRESHOLD_GRID_END = 0.90
+THRESHOLD_GRID_STEP = 0.05
+VAD_ENERGY_THRESHOLD = 1e-4
+INFERENCE_WINDOW_SEC = 1.0
+INFERENCE_HOP_SEC = 0.5

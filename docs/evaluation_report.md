@@ -4,15 +4,15 @@ Metrics use per-class one-vs-rest decisions at a 0.5 threshold. mAP uses the pre
 
 | Class | Precision | Recall | F1 | AP |
 |---|---:|---:|---:|---:|
-| smoke_alarm | 0.000 | 0.000 | 0.000 | 0.090 |
-| doorbell | 0.682 | 0.395 | 0.500 | 0.632 |
-| siren | 0.333 | 0.333 | 0.333 | 0.250 |
-| knocking | 0.826 | 0.655 | 0.731 | 0.751 |
-| dog_bark | 1.000 | 0.893 | 0.943 | 0.956 |
-| baby_cry | 0.000 | 0.000 | 0.000 | 0.669 |
-| glass_break | 0.881 | 0.895 | 0.888 | 0.937 |
-| appliance_beep | 0.860 | 0.790 | 0.824 | 0.923 |
-| **Macro average** | **0.573** | **0.495** | **0.527** | **0.651** |
+| smoke_alarm | 0.500 | 1.000 | 0.667 | 0.917 |
+| doorbell | 1.000 | 0.143 | 0.250 | 0.663 |
+| siren | 0.600 | 1.000 | 0.750 | 1.000 |
+| knocking | 1.000 | 0.600 | 0.750 | 0.863 |
+| dog_bark | 1.000 | 0.333 | 0.500 | 0.806 |
+| baby_cry | 1.000 | 0.333 | 0.500 | 1.000 |
+| glass_break | 0.429 | 0.429 | 0.429 | 0.662 |
+| appliance_beep | 0.000 | 0.000 | 0.000 | 0.354 |
+| **Macro average** | **0.691** | **0.480** | **0.481** | **0.783** |
 
 ## Error analysis
 

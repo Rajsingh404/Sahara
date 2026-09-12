@@ -26,14 +26,11 @@ from src.preprocessing.audio_utils import get_duration_sec
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
-MANIFEST_FIELDS = ["filepath", "label", "source_dataset", "duration_sec", "recording_id"]
+MANIFEST_FIELDS = ["filepath", "label", "source_dataset", "source_type", "duration_sec", "recording_id"]
 AUDIO_SUFFIXES = {".wav", ".flac", ".mp3", ".ogg", ".m4a"}
 
-# Filesystem prefixes that are known to be slow (FUSE mounts, network drives).
-_SLOW_FS_PREFIXES = ("/Volumes/", "/Users/", "/proc/")
 
-
-def _is_cloud_mount(path: Path) -> bool:
+def _is_cloud_mount(path: Path) -> float:
     """Heuristic: return True if path is under a Google Drive / CloudStorage FUSE mount."""
     s = str(path.resolve())
     return "CloudStorage" in s or "GoogleDrive" in s or "/Volumes/" in s
@@ -68,6 +65,10 @@ def _recording_id(source: str, filepath: Path, extra: str = "") -> str:
         return f"indian_ambient:{extra or stem}"
     if source == "desed":
         return f"desed:{filepath.parent.name}:{stem}"
+    if source == "inoise":
+        return f"inoise:{filepath.parent.name}:{stem}"
+    if source == "synthetic_mixed":
+        return f"synthetic_mixed:{stem}"
     return f"{source}:{stem}"
 
 
@@ -285,11 +286,78 @@ def _scan_indian_ambient(root: Path) -> list[dict]:
     return rows
 
 
+def _scan_inoise(root: Path) -> list[dict]:
+    rows: list[dict] = []
+    if not root.exists() or not any(root.rglob("*")):
+        logger.info("inoise: skipped — not yet downloaded")
+        return rows
+
+    for filepath in root.rglob("*"):
+        if filepath.suffix.lower() not in AUDIO_SUFFIXES:
+            continue
+        rows.append(
+            {
+                "filepath": str(filepath.resolve()),
+                "label": BACKGROUND_LABEL,
+                "source_dataset": "inoise",
+                "source_type": "real",
+                "duration_sec": _duration_best_effort(filepath),
+                "recording_id": _recording_id("inoise", filepath),
+            }
+        )
+    logger.info("inoise: %d manifest rows", len(rows))
+    return rows
+
+
+def _scan_synthetic_mixed(root: Path) -> list[dict]:
+    rows: list[dict] = []
+    meta_path = root / "synthetic_metadata.csv"
+    if meta_path.exists():
+        with meta_path.open(newline="", encoding="utf-8") as handle:
+            for r in csv.DictReader(handle):
+                rel_p = r.get("relative_filepath") or f"{r['label']}/{r['filename']}"
+                filepath = root / rel_p
+                rows.append(
+                    {
+                        "filepath": str(filepath.resolve()),
+                        "label": r["label"],
+                        "source_dataset": "synthetic_mixed",
+                        "source_type": "synthetic_mixed",
+                        "duration_sec": _duration_best_effort(filepath),
+                        "recording_id": _recording_id("synthetic_mixed", filepath),
+                    }
+                )
+    elif root.exists():
+        for filepath in root.rglob("*"):
+            if filepath.suffix.lower() not in AUDIO_SUFFIXES or filepath.name == "synthetic_metadata.csv":
+                continue
+            label = filepath.parent.name
+            if label not in SOUND_CLASSES and label != BACKGROUND_LABEL:
+                continue
+            rows.append(
+                {
+                    "filepath": str(filepath.resolve()),
+                    "label": label,
+                    "source_dataset": "synthetic_mixed",
+                    "source_type": "synthetic_mixed",
+                    "duration_sec": _duration_best_effort(filepath),
+                    "recording_id": _recording_id("synthetic_mixed", filepath),
+                }
+            )
+    if not rows:
+        logger.info("synthetic_mixed: skipped — not yet generated")
+    else:
+        logger.info("synthetic_mixed: %d manifest rows", len(rows))
+    return rows
+
+
 SCANNERS = {
     "fsd50k": _scan_fsd50k,
     "audioset": _scan_audioset,
     "desed": _scan_desed,
     "indian_ambient": _scan_indian_ambient,
+    "inoise": _scan_inoise,
+    "synthetic_mixed": _scan_synthetic_mixed,
 }
 
 
@@ -302,10 +370,15 @@ def build_manifest(raw_dir: Path | None = None) -> list[dict]:
     that ad-hoc folders don't cause silent failures.
     """
     rows: list[dict] = []
-    # Always scan the four known datasets via get_raw_dir (Drive-aware).
+    # Always scan the six known datasets via get_raw_dir (Drive-aware).
     for name, scanner in SCANNERS.items():
         dataset_dir = get_raw_dir(name)
         rows.extend(scanner(dataset_dir))
+
+    for row in rows:
+        if "source_type" not in row:
+            row["source_type"] = "synthetic_mixed" if row.get("source_dataset") == "synthetic_mixed" else "real"
+
     # Also scan any extra subdirs under raw_dir that aren't in SCANNERS
     # (future datasets, one-off folders, etc.) — log them as skipped.
     scan_root = raw_dir or RAW_DATA_DIR
@@ -348,6 +421,9 @@ def _stratified_split(rows: list[dict], train_frac: float, val_frac: float, seed
 
 def write_manifest(path: Path, rows: list[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    for r in rows:
+        if "source_type" not in r:
+            r["source_type"] = "synthetic_mixed" if r.get("source_dataset") == "synthetic_mixed" else "real"
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=MANIFEST_FIELDS)
         writer.writeheader()

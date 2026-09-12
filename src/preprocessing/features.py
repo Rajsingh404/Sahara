@@ -8,7 +8,10 @@ from pathlib import Path
 
 import librosa
 import numpy as np
-import tensorflow_hub as hub
+try:
+    import tensorflow_hub as hub
+except ImportError:
+    hub = None
 
 from src.config import PROCESSED_DATA_DIR, SAMPLE_RATE
 
@@ -21,6 +24,8 @@ _yamnet_model = None
 def _get_yamnet():
     global _yamnet_model
     if _yamnet_model is None:
+        if hub is None:
+            raise ImportError("tensorflow_hub is required to load YAMNet")
         logger.info("Loading YAMNet from TF-Hub …")
         _yamnet_model = hub.load(YAMNET_URL)
     return _yamnet_model

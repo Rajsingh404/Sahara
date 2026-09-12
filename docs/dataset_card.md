@@ -53,9 +53,25 @@
 - **Status**: ~884–904 clips (background negatives); some upstream URLs fail to resolve — logged and skipped
 - **Role**: Background/negative soundscape audio in manifests; not used for training embeddings in current baseline (target-class-only training)
 
+### iNoise (Indian Noise Database)
+
+- **Source**: [Kopparapu, Sheikh, Thanneeru, IEEE DataPort](https://ieee-dataport.org/documents/inoise-indian-noise-database) (DOI: 10.21227/w3xm-jn45)
+- **License**: IEEE DataPort Open Access
+- **Location**: `$SAHARA_DRIVE_DATASETS/iNoise/` (raw) and `$SAHARA_DRIVE_DATASETS/iNoise_chunks/` (5s chunks) — **Drive-resident**
+- **Categories**: Outdoor (Autorickshaw, Bus, Highway, Railway Station, Street) and Indoor (Airport, Cafeteria, Home, Train, Workplace)
+- **Role**: Background/negative ambient noise (mapped to `background` label, `source_type: real`)
+
+### Synthetic Mixed Audio (`synthetic_mixed`)
+
+- **Source**: Additive mixing pipeline (`src/preprocessing/synthetic_mixing.py`) combining target clips (FSD50K/AudioSet) with background chunks (iNoise/DESED) at randomized SNR (-5 dB to 10 dB).
+- **Location**: `$SAHARA_DRIVE_DATASETS/SyntheticMixed/` with companion `$SAHARA_DRIVE_DATASETS/SyntheticMixed/synthetic_metadata.csv` — **Drive-resident**
+- **Role**: Data augmentation and background robustness tuning for the 8 target classes.
+- **Academic Honesty Notice**: Every synthetic clip carries `source_type: synthetic_mixed` in manifests to ensure real and synthetic data are never silently conflated.
+- **Important Distinction**: `synthetic_mixed` and `iNoise` data do **NOT** substitute for the still-pending Indian ambient field recordings (target-class-in-Indian-context) or the personalization dev-set — both remain required, separate next steps.
+
 ### Indian Ambient (Phase 4 — NOT YET RECORDED)
 
-- **Status**: Placeholder — real recordings will be added in Phase 4
+- **Status**: Placeholder — real field recordings will be added in Phase 4
 - **Location when ready**: `data/raw/indian_ambient/`
 - **Hot-swap**: Re-running `src/data/manifest_builder.py` with NO code changes automatically incorporates this data once present. **Validated 2026-08-28 — test passed.**
 - **Expected structure**:
