@@ -1,201 +1,114 @@
 #!/usr/bin/env python3
-"""
-SAHARA Phase 2-3 End-to-End Pipeline Runner
-============================================
-Executes: manifest_builder → build_features_cache → train → evaluate
-Handles the indian_ambient hot-swap validation test.
+"""SAHARA ML pipeline, one command: data -> synthetic -> features -> train -> eval -> export -> report.
 
-Run from repo root:
-    python scripts/run_full_pipeline.py [--augment] [--skip-audioset-download]
+Run from the repo root with the venv active and SAHARA_DRIVE_DATASETS set (FSD50K on Drive):
+
+    python scripts/run_full_pipeline.py                     # everything
+    python scripts/run_full_pipeline.py --from train        # reuse data and features
+    python scripts/run_full_pipeline.py --to features       # data + features only
+    python scripts/run_full_pipeline.py --sync-assets       # also copy the final models into app/assets/
+
+Steps (each is an existing module, run as a subprocess and stopped on the first failure):
+  data       organise team recordings (from Drive, if present), ESC-50, manifests
+  synthetic  train-only mixes, manifests again (to add them), synthetic test set
+  features   per-hop YAMNet cache -> window arrays (and the clip-mean arrays for comparison)
+  train      runs a (real only), b (+synthetic), c (team fine-tune of a and of b); select on validation
+  eval       thresholds on validation; test metrics (public / Indian / synthetic); false alarms per hour
+  export     FP32 + INT8 head, validation against Keras, YAMNet TFLite
+  report     docs/evaluation_report.md from the run files
+Downloads (AudioSet, FSD50K, DESED, iNoise) are separate: see src/data/download*.py.
 """
 from __future__ import annotations
 
 import argparse
-import shutil
+import os
 import subprocess
 import sys
-import time
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 VENV_PYTHON = REPO / ".venv" / "bin" / "python"
 PYTHON = str(VENV_PYTHON) if VENV_PYTHON.exists() else sys.executable
+STEPS = ("data", "synthetic", "features", "train", "eval", "export", "report")
+RECIPE = ["--learning-rate", "3e-4", "--batch-size", "128", "--epochs", "40", "--patience", "8"]
+FINETUNE = ["--learning-rate", "1e-4", "--batch-size", "64", "--epochs", "20", "--patience", "5"]
 
 
-def run(cmd: list[str], desc: str, cwd: Path = REPO) -> int:
-    print(f"\n{'='*60}")
-    print(f"  {desc}")
-    print(f"{'='*60}")
-    result = subprocess.run(cmd, cwd=cwd)
-    if result.returncode != 0:
-        print(f"  ⚠ '{desc}' exited with code {result.returncode}")
-    return result.returncode
+def sh(*args: str, desc: str) -> None:
+    print(f"\n=== {desc}\n$ {' '.join(args)}", flush=True)
+    if subprocess.run([PYTHON, *args], cwd=REPO).returncode != 0:
+        sys.exit(f"Step failed: {desc}")
 
 
-def step_manifest():
-    run([PYTHON, "-m", "src.data.manifest_builder"], "Step 1: Build manifests")
+def newest_run(name: str) -> str:
+    runs = sorted((REPO / "models" / "logs").glob(f"*_{name}"))
+    if not runs:
+        sys.exit(f"No run named *_{name}")
+    return str(runs[-1])
 
 
-def step_features():
-    run([PYTHON, "-m", "src.preprocessing.build_features_cache"], "Step 2: Extract YAMNet embeddings")
+def step_data() -> None:
+    drive = os.environ.get("SAHARA_DRIVE_DATASETS")
+    team = Path(drive) / "Indian_Ambient" if drive else None
+    if team and team.is_dir():
+        sh("scripts/organise_recordings.py", "--source", str(team), "--dest", "data/raw", desc="Organise team recordings")
+    if (REPO / "data/interim/ESC-50-master.zip").exists() or not (REPO / "data/raw/esc50/meta/esc50.csv").exists():
+        sh("-m", "src.data.download_esc50", desc="ESC-50")
+    sh("src/data/manifest_builder.py", desc="Manifests (real data)")
 
 
-def step_train(augment: bool = False):
-    cmd = [PYTHON, "-m", "src.training.train"]
-    if augment:
-        cmd.append("--augment")
-    run(cmd, "Step 3: Train classifier head")
+def step_synthetic() -> None:
+    sh("src/preprocessing/synthetic_mixing.py", "--split", "train", desc="Synthetic mixes (train only)")
+    sh("src/data/manifest_builder.py", desc="Manifests (with synthetic)")
+    sh("src/preprocessing/synthetic_mixing.py", "--split", "test", desc="Synthetic test set (reported separately)")
 
 
-def step_evaluate():
-    run([PYTHON, "-m", "src.evaluation.confusion_matrix"], "Step 4: Evaluate + confusion matrix")
+def step_features() -> None:
+    sh("src/preprocessing/build_features_cache.py", "--io-workers", "6", desc="YAMNet hop cache + window arrays")
+    sh("src/preprocessing/build_features_cache.py", "--mode", "clip_mean", desc="Clip-mean arrays (comparison)")
 
 
-def step_indian_ambient_hotswap_test():
-    """
-    Create dummy files in indian_ambient/, re-run manifest, confirm they appear,
-    then delete them and confirm the pipeline handles an empty folder gracefully.
-    """
-    print(f"\n{'='*60}")
-    print("  Step 5: indian_ambient hot-swap design validation")
-    print(f"{'='*60}")
-
-    ia_root = REPO / "data" / "raw" / "indian_ambient"
-    tc_dir = ia_root / "target_classes"
-    bg_dir = ia_root / "background"
-    meta_path = ia_root / "metadata.csv"
-
-    # Back up existing metadata if present.
-    meta_backup = None
-    if meta_path.exists():
-        meta_backup = meta_path.with_suffix(".csv.bak")
-        shutil.copy2(meta_path, meta_backup)
-        print(f"  Backed up existing metadata.csv → {meta_backup.name}")
-
-    # Create dummy WAV files (silent, 1s, 16kHz mono).
-    import wave
-    def _make_silent_wav(path: Path, duration_sec: float = 1.0, sr: int = 16000):
-        path.parent.mkdir(parents=True, exist_ok=True)
-        n_frames = int(duration_sec * sr)
-        with wave.open(str(path), "w") as wf:
-            wf.setnchannels(1)
-            wf.setsampwidth(2)
-            wf.setframerate(sr)
-            wf.writeframes(b"\x00\x00" * n_frames)
-
-    dummy_target = tc_dir / "_test_smoke_alarm.wav"
-    dummy_bg = bg_dir / "_test_background.wav"
-    _make_silent_wav(dummy_target)
-    _make_silent_wav(dummy_bg)
-    print(f"  Created: {dummy_target.relative_to(REPO)}")
-    print(f"  Created: {dummy_bg.relative_to(REPO)}")
-
-    # Write a minimal metadata.csv.
-    import csv
-    fields = ["filename", "class", "is_background", "location_type",
-              "recording_device", "distance_m", "timestamp", "notes"]
-    rows = [
-        {
-            "filename": "_test_smoke_alarm.wav", "class": "smoke_alarm",
-            "is_background": "false", "location_type": "test_room",
-            "recording_device": "test_device", "distance_m": "1.0",
-            "timestamp": "2026-08-28T00:00:00", "notes": "hotswap validation dummy",
-        },
-        {
-            "filename": "_test_background.wav", "class": "background",
-            "is_background": "true", "location_type": "test_room",
-            "recording_device": "test_device", "distance_m": "0.0",
-            "timestamp": "2026-08-28T00:00:00", "notes": "hotswap validation dummy",
-        },
-    ]
-    with meta_path.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fields)
-        writer.writeheader()
-        writer.writerows(rows)
-    print(f"  Written: {meta_path.relative_to(REPO)} (2 rows)")
-
-    print("\n  --- Re-running manifest builder WITH dummy files ---")
-    result = subprocess.run(
-        [PYTHON, "-m", "src.data.manifest_builder"],
-        cwd=REPO, capture_output=True, text=True,
-    )
-    output = result.stdout + result.stderr
-
-    # Check that indian_ambient rows appear.
-    manifest_path = REPO / "data" / "metadata" / "full_manifest.csv"
-    ia_count = 0
-    if manifest_path.exists():
-        with manifest_path.open(newline="", encoding="utf-8") as f:
-            for row in csv.DictReader(f):
-                if row.get("source_dataset") == "indian_ambient":
-                    ia_count += 1
-
-    if ia_count >= 2:
-        print(f"  ✅ HOT-SWAP TEST PASSED: {ia_count} indian_ambient rows in manifest")
-    else:
-        print(f"  ❌ HOT-SWAP TEST FAILED: only {ia_count} indian_ambient rows found")
-        print("  --- Manifest builder output ---")
-        print(output)
-
-    # Clean up dummy files.
-    dummy_target.unlink(missing_ok=True)
-    dummy_bg.unlink(missing_ok=True)
-    meta_path.unlink(missing_ok=True)
-    print("  Removed dummy files and metadata.csv")
-
-    # Restore backup if it existed, else leave metadata absent.
-    if meta_backup and meta_backup.exists():
-        shutil.move(str(meta_backup), str(meta_path))
-        print("  Restored backup metadata.csv")
-
-    print("\n  --- Re-running manifest builder WITHOUT indian_ambient (empty folder) ---")
-    result2 = subprocess.run(
-        [PYTHON, "-m", "src.data.manifest_builder"],
-        cwd=REPO, capture_output=True, text=True,
-    )
-    output2 = result2.stdout + result2.stderr
-    if "indian_ambient: skipped" in output2:
-        print("  ✅ EMPTY FOLDER TEST PASSED: 'indian_ambient: skipped' logged correctly")
-    else:
-        print("  ⚠  Expected 'indian_ambient: skipped' in output — checking manifest instead:")
-    ia_count2 = 0
-    if manifest_path.exists():
-        with manifest_path.open(newline="", encoding="utf-8") as f:
-            for row in csv.DictReader(f):
-                if row.get("source_dataset") == "indian_ambient":
-                    ia_count2 += 1
-    if ia_count2 == 0:
-        print("  ✅ EMPTY FOLDER TEST PASSED: 0 indian_ambient rows in manifest after cleanup")
-    else:
-        print(f"  ❌ EMPTY FOLDER TEST FAILED: {ia_count2} rows remain after cleanup")
-    print("\n  Manifest output (empty-folder run):")
-    print(output2[:2000])
+def step_train() -> None:
+    sh("src/training/train.py", "--name", "a_baseline", "--no-synthetic", *RECIPE, desc="Run a: real data")
+    sh("src/training/train.py", "--name", "b_synthetic", *RECIPE, desc="Run b: + synthetic")
+    sh("src/training/train.py", "--name", "c_finetune_team_from_a", "--no-synthetic",
+       "--finetune-from", newest_run("a_baseline"), *FINETUNE, desc="Run c: team fine-tune of a")
+    sh("src/training/train.py", "--name", "c_finetune_team_from_b",
+       "--finetune-from", newest_run("b_synthetic"), *FINETUNE, desc="Run c: team fine-tune of b")
+    sh("src/training/train.py", "--name", "z_clipmean", "--features-dir", "data/processed/clip_mean", "--no-synthetic",
+       *RECIPE, desc="Comparison: old clip-mean features")
+    sh("scripts/compare_runs.py", desc="Select a run on validation")
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--augment", action="store_true", help="Enable embedding-space augmentation during training")
-    parser.add_argument("--skip-audioset-download", action="store_true", help="Skip AudioSet download (use existing clips)")
-    parser.add_argument("--hotswap-only", action="store_true", help="Only run the indian_ambient hot-swap test")
+def step_eval() -> None:
+    sh("src/evaluation/threshold_search.py", desc="Thresholds (validation)")
+    sh("src/evaluation/evaluate.py", desc="Test metrics")
+    sh("src/evaluation/false_alarm_eval.py", desc="False alarms per hour")
+
+
+def step_export(sync_assets: bool) -> None:
+    sh("src/export/quantize.py", desc="FP32 + INT8 head")
+    sh("src/export/validate_tflite.py", desc="Validate TFLite heads")
+    if not (REPO / "models/exported/yamnet.tflite").exists():
+        sh("app/tool/export_yamnet_tflite.py", desc="YAMNet TFLite")
+    if sync_assets:
+        sh("app/tool/sync_assets.py", "--yamnet", "models/exported/yamnet.tflite", desc="Copy models into app/assets")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--from", dest="start", choices=STEPS, default=STEPS[0])
+    parser.add_argument("--to", dest="end", choices=STEPS, default=STEPS[-1])
+    parser.add_argument("--sync-assets", action="store_true", help="Copy the exported models into app/assets/.")
     args = parser.parse_args()
-
-    start = time.time()
-    sys.path.insert(0, str(REPO))
-
-    if args.hotswap_only:
-        step_indian_ambient_hotswap_test()
-        return
-
-    step_manifest()
-    step_features()
-    step_train(args.augment)
-    step_evaluate()
-    step_indian_ambient_hotswap_test()
-
-    elapsed = time.time() - start
-    print(f"\n{'='*60}")
-    print(f"  Full pipeline completed in {elapsed/60:.1f} minutes")
-    print(f"{'='*60}")
+    for step in STEPS[STEPS.index(args.start): STEPS.index(args.end) + 1]:
+        if step == "export":
+            step_export(args.sync_assets)
+        elif step == "report":
+            sh("scripts/write_evaluation_report.py", desc="Evaluation report")
+        else:
+            globals()[f"step_{step}"]()
+    print("\nPipeline finished.")
 
 
 if __name__ == "__main__":

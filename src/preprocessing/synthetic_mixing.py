@@ -194,6 +194,13 @@ def generate_synthetic_dataset(
             writer.writeheader()
             writer.writerows(metadata_rows)
         logger.info("Saved synthetic metadata (%d rows) to %s", len(metadata_rows), meta_csv_path)
+        # Mixes from an earlier plan (other beds / clips) are no longer listed: delete them.
+        keep = {output_dir / r["relative_filepath"] for r in metadata_rows}
+        stale = [f for f in output_dir.rglob("syn_*.wav") if f not in keep]
+        for f in stale:
+            f.unlink()
+        if stale:
+            logger.info("Removed %d stale mixes", len(stale))
     logger.info("Synthetic dataset: %d mixes from %d target clips", len(metadata_rows), len(target_rows))
     return len(metadata_rows)
 
