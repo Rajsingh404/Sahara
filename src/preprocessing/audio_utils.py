@@ -28,8 +28,12 @@ def _log_load_failure(path: Path, error: Exception) -> None:
         logger.exception("Could not write audio load failure log")
 
 
-def load_audio(filepath: str | Path, target_sr: int = SAMPLE_RATE) -> np.ndarray | None:
-    """Load audio, resample to mono 16 kHz, peak-normalize. Returns None on failure."""
+def load_audio(filepath: str | Path, target_sr: int = SAMPLE_RATE, peak_normalize: bool = True) -> np.ndarray | None:
+    """Load audio, resample to mono 16 kHz, optionally peak-normalize. Returns None on failure.
+
+    The feature cache uses ``peak_normalize=False``: the phone feeds YAMNet raw microphone
+    levels, so training audio keeps its natural level too.
+    """
     path = Path(filepath)
     try:
         waveform, _ = librosa.load(path, sr=target_sr, mono=True)
@@ -37,7 +41,7 @@ def load_audio(filepath: str | Path, target_sr: int = SAMPLE_RATE) -> np.ndarray
             logger.warning("Empty audio: %s", path)
             return None
         peak = np.max(np.abs(waveform))
-        if peak > 0:
+        if peak_normalize and peak > 0:
             waveform = waveform / peak
         return waveform.astype(np.float32)
     except Exception as exc:  # noqa: BLE001 — corrupt files must not crash the pipeline

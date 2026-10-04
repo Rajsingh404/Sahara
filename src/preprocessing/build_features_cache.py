@@ -1,10 +1,29 @@
-"""Build cached YAMNet embedding arrays from the full manifest."""
+"""Build the YAMNet feature cache and the per-split training arrays.
+
+Stage 1 (cache): every clip in the manifest (targets, background, synthetic; all splits) is
+loaded at its natural level (no peak normalisation, like the phone's raw microphone PCM) and
+embedded hop by hop exactly as the phone does (features.extract_hop_embeddings). One
+``data/processed/hop_cache/<key>.npz`` per clip; reruns only embed new clips.
+
+Stage 2 (arrays), per split, from the cache:
+- ``--mode window`` (default): device window vectors with event-window selection
+  (windowing.clip_examples). Written to data/processed/:
+  ``{split}_embeddings.npy`` [n, 1024], ``{split}_labels.npy`` [n, 8] multi-hot,
+  ``{split}_windows_meta.npz`` (filepath, source_dataset, source_type, recording_id, hop_index).
+- ``--mode clip_mean``: the old one-vector-per-clip mean, for comparison, written to
+  data/processed/clip_mean/ with the same file names.
+
+``--augment`` adds AUGMENTATION_VARIANTS_PER_CLIP raw-waveform variants of each real train
+target clip (train only; validation and test are never augmented).
+"""
 from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 import time
+from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -17,11 +36,15 @@ from src.config import (
     AUGMENTATION_VARIANTS_PER_CLIP,
     METADATA_DIR,
     PROCESSED_DATA_DIR,
+    RANDOM_SEED,
     SOUND_CLASSES,
 )
-from src.preprocessing.augmentation import SaharaAugmenter
 from src.preprocessing.audio_utils import load_audio
-from src.preprocessing.features import embedding_cache_path, extract_yamnet_embedding_cached
+from src.preprocessing.features import extract_hop_embeddings, hop_cache_path, load_hop_cache, save_hop_cache
+from src.preprocessing.windowing import clip_examples, clip_mean_example
+
+SPLITS = ("train", "val", "test")
+META_FIELDS = ("filepath", "source_dataset", "source_type", "recording_id")
 
 
 def _load_manifest(path: Path) -> list[dict]:
@@ -29,212 +52,134 @@ def _load_manifest(path: Path) -> list[dict]:
         return list(csv.DictReader(handle))
 
 
-def _label_to_index(label: str) -> int:
-    if label in SOUND_CLASSES:
-        return SOUND_CLASSES.index(label)
-    return -1  # background / unknown
+def _clips(rows: list[dict]) -> dict[str, dict]:
+    """One entry per audio file: its target labels (empty = background) and metadata."""
+    clips: dict[str, dict] = {}
+    for row in rows:
+        clip = clips.setdefault(row["filepath"], {**{k: row[k] for k in META_FIELDS}, "labels": set()})
+        if row["label"] in SOUND_CLASSES:
+            clip["labels"].add(row["label"])
+    return clips
 
 
-def _multihot(labels: np.ndarray) -> np.ndarray:
-    out = np.zeros((len(labels), len(SOUND_CLASSES)), dtype=np.float32)
-    valid = np.where(labels >= 0)[0]
-    out[valid, labels[valid]] = 1.0
-    return out
+def _augment_variants(clips: dict[str, dict]) -> list[tuple[str, str]]:
+    return [(fp, f"aug{i}") for fp, c in clips.items() if c["labels"] and c["source_type"] != "synthetic_mixed"
+            for i in range(AUGMENTATION_VARIANTS_PER_CLIP)]
 
 
-def _is_local_file(filepath: str) -> bool:
-    """Return True if the file is safe to read without blocking indefinitely.
+def build_hop_cache(jobs: list[tuple[str, str]], io_workers: int = 4, background_paths: list[str] | None = None) -> int:
+    """Embed every (filepath, variant) job whose cache file is missing. Returns the failure count."""
+    todo = [(fp, v) for fp, v in jobs if not hop_cache_path(fp, v).exists()]
+    print(f"Hop cache: {len(jobs) - len(todo)} cached, {len(todo)} to embed")
+    if not todo:
+        return 0
+    augmenter = None
+    if any(v for _, v in todo):
+        from src.preprocessing.augmentation import SaharaAugmenter
 
-    Behaviour by path type:
+        augmenter = SaharaAugmenter(background_paths or None)
 
-    * **Google Drive CloudStorage path** (``~/Library/CloudStorage/GoogleDrive-*``):
-      These use the modern Google Drive for Desktop native integration and
-      stream reliably on-demand.  Always allowed — streaming is the intent.
+    def load(job: tuple[str, str]):
+        fp, variant = job
+        wave = load_audio(fp, peak_normalize=False)
+        if wave is not None and variant:
+            wave = augmenter.augment(wave)
+        return job, wave
 
-    * **Local disk** (no Drive xattr): always True.
+    failed = 0
+    with ThreadPoolExecutor(max_workers=io_workers) as pool, tqdm(total=len(todo), unit="clip") as bar:
+        # Audio I/O in threads (Drive streaming is the bottleneck); YAMNet on this thread.
+        for job, wave in pool.map(load, todo):
+            bar.update(1)
+            if wave is None or wave.size == 0:
+                failed += 1
+                continue
+            save_hop_cache(hop_cache_path(*job), extract_hop_embeddings(wave))
+    return failed
 
-    * **Old FUSE-mounted Drive paths** (data/raw/fsd50k/ pointing to a
-      Drive FUSE mount that is NOT under CloudStorage): these previously
-      blocked indefinitely on cold reads.  We gate those via xattr check.
-    """
-    import subprocess
-    # CloudStorage = modern Drive for Desktop streaming — allow unconditionally.
-    if "CloudStorage" in filepath and "GoogleDrive" in filepath:
-        return True
-    # For other paths, check for Drive stub xattr to catch stale FUSE mounts.
-    try:
-        result = subprocess.run(
-            ["xattr", "-l", filepath],
-            capture_output=True, timeout=2,
-        )
-        # Use raw bytes to avoid UTF-8 decode errors on binary xattr values.
-        xattrs = result.stdout
-        has_stub = b"drivefs.item-id#S" in xattrs
-        has_local = b"drivefs.item-id#PS" in xattrs
-        if has_stub and not has_local:
-            return False
-        return True
-    except Exception:
-        return True
+
+def assemble_split(clips: dict[str, dict], mode: str, variants: dict[str, list[str]] | None = None):
+    xs, ys, meta = [], [], defaultdict(list)
+    missing = 0
+    for fp, clip in clips.items():
+        for variant in [""] + (variants or {}).get(fp, []):
+            path = hop_cache_path(fp, variant)
+            if not path.exists():
+                missing += 1
+                continue
+            hops = load_hop_cache(path)
+            if mode == "clip_mean":
+                x, y = clip_mean_example(hops, clip["labels"])
+                hop_index = np.full(1, -1, dtype=np.int32)
+            else:
+                x, y, hop_index = clip_examples(hops, clip["labels"])
+            if len(x) == 0:
+                continue
+            xs.append(x)
+            ys.append(y)
+            for key in META_FIELDS:
+                meta[key].extend([clip[key]] * len(x))
+            meta["hop_index"].extend(hop_index.tolist())
+            meta["variant"].extend([variant] * len(x))
+    X = np.concatenate(xs).astype(np.float32) if xs else np.zeros((0, 1024), np.float32)
+    Y = np.concatenate(ys).astype(np.float32) if ys else np.zeros((0, len(SOUND_CLASSES)), np.float32)
+    return X, Y, {k: np.asarray(v) for k, v in meta.items()}, missing
 
 
 def build_cache(
     manifest_path: Path | None = None,
-    splits: tuple[str, ...] = ("train", "val", "test"),
+    splits: tuple[str, ...] = SPLITS,
     io_workers: int = 4,
     force: bool = False,
     augment: bool = AUGMENTATION_ENABLED,
-) -> None:
-    manifest_path = manifest_path or METADATA_DIR / "full_manifest.csv"
-    rows = _load_manifest(manifest_path)
-    if not rows:
-        print("No rows in manifest — nothing to cache.")
-        return
-
+    mode: str = "window",
+) -> dict:
     start = time.time()
-    PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    np.random.seed(RANDOM_SEED)
+    split_clips = {s: _clips(_load_manifest(METADATA_DIR / f"{s}_manifest.csv")) for s in splits}
+    all_clips = {fp: c for clips in split_clips.values() for fp, c in clips.items()}
+    if not all_clips:
+        print("No rows in the split manifests — run manifest_builder.py first.")
+        return {}
 
-    # Only cache target-class clips for baseline training.
-    target_rows = [row for row in rows if row["label"] in SOUND_CLASSES]
+    jobs = [(fp, "") for fp in all_clips]
+    aug_variants: dict[str, list[str]] = defaultdict(list)
+    if augment and "train" in split_clips:
+        for fp, v in _augment_variants(split_clips["train"]):
+            jobs.append((fp, v))
+            aug_variants[fp].append(v)
+    beds = [fp for fp, c in split_clips.get("train", {}).items() if not c["labels"] and c["source_type"] != "synthetic_mixed"]
+    failed = build_hop_cache(jobs, io_workers, beds)
 
-    # If all three public .npy split caches align with their target manifest
-    # rows, no audio or Hub work is required on a normal rerun.
-    if not force and not augment:
-        complete = True
-        for split in splits:
-            expected = sum(1 for row in _load_manifest(METADATA_DIR / f"{split}_manifest.csv") if row["label"] in SOUND_CLASSES)
-            path = PROCESSED_DATA_DIR / f"{split}_embeddings.npy"
-            complete &= path.exists() and np.load(path, mmap_mode="r").shape[0] == expected
-        if complete:
-            print("Feature cache is complete for all splits; use --force to rebuild.")
-            return
-
-    # Split into already-cached and needs-loading — skip the FUSE read for cached clips.
-    cached_rows = [r for r in target_rows if embedding_cache_path(r["filepath"]).exists()]
-    uncached_rows = [r for r in target_rows if not embedding_cache_path(r["filepath"]).exists()]
-
-    # Filter uncached rows to only locally-available files (skip Google Drive stubs).
-    # A Google Drive File Stream stub has xattr com.google.drivefs.item-id#S (not #PS).
-    # Reading a stub triggers a cloud fetch which may hang — we skip those here.
-    locally_available = []
-    stub_skipped = 0
-    for r in uncached_rows:
-        if _is_local_file(r["filepath"]):
-            locally_available.append(r)
-        else:
-            stub_skipped += 1
-    if stub_skipped:
-        print(f"  Skipped {stub_skipped} Google Drive stubs (not locally synced) — re-run after Drive syncs them.")
-    uncached_rows = locally_available
-
-    print(f"  {len(cached_rows)} embeddings already cached, {len(uncached_rows)} to load from disk.")
-
-    embeddings: list[np.ndarray] = []
-    labels: list[int] = []
-    filepaths: list[str] = []
-    skipped = 0
-
-    # --- Fast path: load already-cached embeddings directly (no audio I/O) ---
-    for row in tqdm(cached_rows, desc="Loading cached embeddings", unit="clip"):
-        cache = embedding_cache_path(row["filepath"])
-        emb = np.load(cache)
-        embeddings.append(emb)
-        labels.append(_label_to_index(row["label"]))
-        filepaths.append(row["filepath"])
-
-    # --- Slow path: batched parallel audio I/O → serial YAMNet inference ---
-    # Process uncached clips in batches: load a batch of audio files in parallel
-    # (threads help on FUSE/network mounts where I/O is the bottleneck), then
-    # run YAMNet inference serially on the main thread (YAMNet is not thread-safe).
-    if uncached_rows:
-        batch_size = max(io_workers * 2, 16)
-
-        def _load_one(row: dict) -> tuple[dict, np.ndarray | None]:
-            return row, load_audio(row["filepath"])
-
-        with tqdm(total=len(uncached_rows), desc="YAMNet embeddings (new)", unit="clip") as pbar:
-            for batch_start in range(0, len(uncached_rows), batch_size):
-                batch = uncached_rows[batch_start : batch_start + batch_size]
-                with ThreadPoolExecutor(max_workers=io_workers) as pool:
-                    loaded = list(pool.map(_load_one, batch))
-                for row, waveform in loaded:
-                    pbar.update(1)
-                    if waveform is None:
-                        skipped += 1
-                        continue
-                    emb = extract_yamnet_embedding_cached(row["filepath"], waveform)
-                    embeddings.append(emb)
-                    labels.append(_label_to_index(row["label"]))
-                    filepaths.append(row["filepath"])
-
-    if not embeddings:
-        print(f"No embeddings extracted ({skipped} skipped).")
-        return
-
-    X = np.stack(embeddings)
-    y = np.array(labels, dtype=np.int32)
-    np.savez_compressed(PROCESSED_DATA_DIR / "embeddings_full.npz", X=X, y=y, filepaths=filepaths)
-
-    split_map = {name: _load_manifest(METADATA_DIR / f"{name}_manifest.csv") for name in splits}
-    filepath_set = {row["filepath"] for row in target_rows}
-    idx_by_path = {fp: i for i, fp in enumerate(filepaths)}
-
-    for split_name, split_rows in split_map.items():
-        indices = [idx_by_path[row["filepath"]] for row in split_rows if row["filepath"] in idx_by_path]
-        if not indices:
-            continue
-        np.savez_compressed(
-            PROCESSED_DATA_DIR / f"embeddings_{split_name}.npz",
-            X=X[indices],
-            y=y[indices],
-            filepaths=[filepaths[i] for i in indices],
-        )
-        # Stable, simple artifacts for external consumers and future TFLite
-        # experiments.  Labels are explicitly multi-hot over SOUND_CLASSES.
-        np.save(PROCESSED_DATA_DIR / f"{split_name}_embeddings.npy", X[indices])
-        np.save(PROCESSED_DATA_DIR / f"{split_name}_labels.npy", _multihot(y[indices]))
-
-    # Optional raw-waveform variants are training-only and get their own
-    # embeddings; default remains off for reproducible baseline caching.
-    if augment:
-        background_paths = [r["filepath"] for r in rows if r["label"] not in SOUND_CLASSES]
-        augmenter = SaharaAugmenter(background_paths or None)
-        train_rows = [r for r in split_map.get("train", []) if r["label"] in SOUND_CLASSES]
-        extra_x, extra_y = [], []
-        for row in tqdm(train_rows, desc="Augmented train embeddings", unit="clip"):
-            waveform = load_audio(row["filepath"])
-            if waveform is None:
-                continue
-            for _ in range(AUGMENTATION_VARIANTS_PER_CLIP):
-                extra_x.append(extract_yamnet_embedding_cached(row["filepath"] + ":aug", augmenter.augment(waveform)))
-                extra_y.append(_label_to_index(row["label"]))
-        if extra_x:
-            path = PROCESSED_DATA_DIR / "embeddings_train.npz"
-            original = np.load(path)
-            aug_x = np.vstack([original["X"], np.stack(extra_x)])
-            aug_y = np.concatenate([original["y"], np.asarray(extra_y, dtype=np.int32)])
-            np.savez_compressed(path, X=aug_x, y=aug_y)
-            np.save(PROCESSED_DATA_DIR / "train_embeddings.npy", aug_x)
-            np.save(PROCESSED_DATA_DIR / "train_labels.npy", _multihot(aug_y))
-
-    elapsed = time.time() - start
-    print(f"\nCached {len(embeddings)} embeddings in {elapsed:.1f}s (skipped {skipped})")
-    print(f"X shape: {X.shape}  y shape: {y.shape}")
-    for split_name in splits:
-        split_path = PROCESSED_DATA_DIR / f"embeddings_{split_name}.npz"
-        if split_path.exists():
-            data = np.load(split_path)
-            print(f"  {split_name}: X={data['X'].shape} y={data['y'].shape}")
+    out_dir = PROCESSED_DATA_DIR if mode == "window" else PROCESSED_DATA_DIR / mode
+    out_dir.mkdir(parents=True, exist_ok=True)
+    summary: dict = {"mode": mode, "augment": augment, "failed_to_load": failed, "splits": {}}
+    for split, clips in split_clips.items():
+        X, Y, meta, missing = assemble_split(clips, mode, aug_variants if split == "train" else None)
+        np.save(out_dir / f"{split}_embeddings.npy", X)
+        np.save(out_dir / f"{split}_labels.npy", Y)
+        np.savez(out_dir / f"{split}_windows_meta.npz", **meta)
+        positives = {c: int(Y[:, i].sum()) for i, c in enumerate(SOUND_CLASSES)}
+        background = int((Y.sum(axis=1) == 0).sum())
+        by_type = dict(Counter(meta.get("source_type", np.array([])).tolist()))
+        summary["splits"][split] = {"clips": len(clips), "windows": len(X), "background_windows": background,
+                                    "positive_windows": positives, "windows_by_source_type": by_type,
+                                    "clips_missing_from_cache": missing}
+        print(f"{split}: {len(clips)} clips -> {len(X)} windows ({background} background) {positives}")
+    summary["seconds"] = round(time.time() - start, 1)
+    (out_dir / "features_summary.json").write_text(json.dumps(summary, indent=2))
+    return summary
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--manifest", type=Path, default=METADATA_DIR / "full_manifest.csv")
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--manifest", type=Path, default=None, help="Unused; split manifests are read directly.")
     parser.add_argument("--io-workers", type=int, default=4, help="Parallel threads for audio I/O (default: 4)")
-    parser.add_argument("--force", action="store_true", help="Rebuild split cache arrays even when complete.")
-    parser.add_argument("--augment", action="store_true", help="Create raw-waveform augmented variants for train only.")
+    parser.add_argument("--force", action="store_true", help="Kept for compatibility; the arrays are always rebuilt.")
+    parser.add_argument("--augment", action="store_true", help="Add raw-waveform variants of train target clips.")
+    parser.add_argument("--mode", choices=("window", "clip_mean"), default="window")
     args = parser.parse_args()
-    build_cache(args.manifest, io_workers=args.io_workers, force=args.force, augment=args.augment)
+    build_cache(io_workers=args.io_workers, force=args.force, augment=args.augment, mode=args.mode)
 
 
 if __name__ == "__main__":

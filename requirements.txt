@@ -95,3 +95,5 @@ Werkzeug==3.1.8
 wrapt==2.3.0
 yt-dlp==2026.8.19
 setuptools==80.9.0
+pyarrow==25.0.1
+huggingface_hub==2.1.1

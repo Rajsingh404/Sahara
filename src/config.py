@@ -129,3 +129,17 @@ THRESHOLD_GRID_STEP = 0.05
 VAD_ENERGY_THRESHOLD = 1e-4
 INFERENCE_WINDOW_SEC = 1.0
 INFERENCE_HOP_SEC = 0.5
+
+# What the phone computes (mirrors app/.../core/ModelConfig.kt; change both together).
+WINDOW_SAMPLES = int(INFERENCE_WINDOW_SEC * SAMPLE_RATE)  # 16,000-sample ring buffer
+HOP_SAMPLES = int(INFERENCE_HOP_SEC * SAMPLE_RATE)  # inference every 8,000 samples
+YAMNET_PATCH_SAMPLES = 15_600  # newest 0.975 s of the buffer = one YAMNet patch
+EMBEDDING_POOL = 2  # head input = mean of the last 2 non-silent hop embeddings
+
+# Event-window selection for weakly labelled target clips (windowing.py). A clip is labelled
+# as a whole, but the event may fill only part of it, so only the windows most likely to hold
+# the event are kept as positives; the rest of a target clip is dropped (not used as background).
+EVENT_TOPK_FRACTION = 0.3  # keep up to this share of a clip's windows ...
+EVENT_TOPK_MAX = 8  # ... but never more than this many per clip and class
+EVENT_MIN_RELATIVE_SCORE = 0.25  # and only windows scoring >= 25 % of the clip's best window
+EVENT_SCORE_FLOOR = 0.05  # if YAMNet's best score for the class is below this, rank by energy instead

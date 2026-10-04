@@ -66,3 +66,6 @@ app/android/.gradle/
 app/android/app/build/
 # Final model shipped with the app is allowed
 !app/assets/*.tflite
+
+# TF-Hub model download (YAMNet)
+models/tfhub_cache/
