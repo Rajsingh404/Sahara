@@ -36,7 +36,7 @@ def test_synthetic_mixing_snr_and_peak(tmp_path):
     assert len(mixed) == t_samples
 
     # Check peak amplitude (no clipping above 1.0)
-    assert np.max(np.abs(mixed)) <= 0.99
+    assert np.max(np.abs(mixed)) <= 0.99 + 1e-6  # float32 rounding
 
     # Check approximate SNR achieved
     # load_audio peak-normalizes both inputs to 1.0 peak amplitude

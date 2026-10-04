@@ -13,7 +13,7 @@ from collections import defaultdict
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
-from src.config import METADATA_DIR, PROCESSED_DATA_DIR, MODELS_DIR, SOUND_CLASSES, RAW_DATA_DIR
+from src.config import METADATA_DIR, PROCESSED_DATA_DIR, MODELS_DIR, SOUND_CLASSES, get_raw_dir
 
 def hr(title: str):
     print(f"\n{'─'*60}")
@@ -26,15 +26,16 @@ def check_raw_data():
         "fsd50k": "FSD50K (Google Drive)",
         "audioset": "AudioSet (yt-dlp)",
         "desed": "DESED real soundscapes",
-        "indian_ambient": "Indian Ambient (Phase 4)",
+        "indian_ambient": "Indian Ambient (team recordings)",
+        "inoise": "iNoise Indian noise",
     }
     for folder, label in datasets.items():
-        root = RAW_DATA_DIR / folder
+        root = get_raw_dir(folder)
         if not root.exists():
             print(f"  {label:40s} ✗ not found")
             continue
-        wav_count = sum(1 for p in root.rglob("*") if p.suffix.lower() in {".wav", ".flac"} and p.is_file())
-        print(f"  {label:40s} {wav_count:6d} audio files")
+        wav_count = sum(1 for p in root.rglob("*") if p.suffix.lower() in {".wav", ".flac", ".mp3", ".m4a"} and p.is_file())
+        print(f"  {label:40s} {wav_count:6d} audio files  ({root})")
         if folder == "audioset":
             for cls in SOUND_CLASSES:
                 cls_dir = root / cls

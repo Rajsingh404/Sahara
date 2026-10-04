@@ -94,3 +94,4 @@ validators==0.35.0
 Werkzeug==3.1.8
 wrapt==2.3.0
 yt-dlp==2026.8.19
+setuptools==80.9.0
