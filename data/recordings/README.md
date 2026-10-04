@@ -53,7 +53,7 @@ standalone training set.
 ## Open labelling questions
 
 - **Aryan sort**: follows the team's final folder. Prachi's 15 clips are 12 positive / 3 negative; Mahi's "mahi 1–3"
-  are positive (Mahi saying "Aryan") and her "name 1–3" negative; Advika's "mahi" is negative.
+  are positive (the team filed them under Aryan) and her "name 1–3" negative; Advika's "mahi" is negative.
 - **Advika "door bang" (4 clips)**: labelled `knocking`; could be door slams.
 - **Advika door open/close and drawer bang (7 clips)**: moved to `background` as hard negatives, not knocks.
 - **Mahi washing machine**: the m4a clips are labelled `appliance_beep` on the assumption they contain the end-of-cycle
