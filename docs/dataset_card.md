@@ -69,10 +69,12 @@
 - **Academic Honesty Notice**: Every synthetic clip carries `source_type: synthetic_mixed` in manifests to ensure real and synthetic data are never silently conflated.
 - **Important Distinction**: `synthetic_mixed` and `iNoise` data do **NOT** substitute for the still-pending Indian ambient field recordings (target-class-in-Indian-context) or the personalization dev-set — both remain required, separate next steps.
 
-### Indian Ambient (Phase 4 — NOT YET RECORDED)
+### Indian Ambient (Phase 4 — first batch recorded)
 
-- **Status**: Placeholder — real field recordings will be added in Phase 4
-- **Location when ready**: `data/raw/indian_ambient/`
+- **Status**: 123 clips recorded by the team in September 2026 (63 target-class, 60 background), organised by `scripts/organise_recordings.py` from `data/recordings/label_map.csv`. See `data/recordings/README.md` for counts, the recorder split and open labelling questions.
+- **Classes covered**: doorbell 16, appliance_beep 16, knocking 14, dog_bark 11, baby_cry 6, background 60 (kitchen, temple, hawker, rain, TV, door/drawer, washing-machine spin). No smoke_alarm, siren or glass_break yet.
+- **Split**: by recorder (default test = Mahi, Prachi), via the extra `recorder` and `split` columns in `metadata.csv`. `manifest_builder.py` does not read `split` yet; it groups by `timestamp` (date + recorder).
+- **Location**: `data/raw/indian_ambient/`
 - **Hot-swap**: Re-running `src/data/manifest_builder.py` with NO code changes automatically incorporates this data once present. **Validated 2026-08-28 — test passed.**
 - **Expected structure**:
   ```
@@ -177,13 +179,13 @@ Optimizer: Adam lr=1e-3 · Loss: cost-sensitive weighted binary crossentropy · 
 - **Status**: Confirmed: `Smoke_detector_smoke_alarm` and `Baby_cry_infant_cry` do not appear in FSD50K dev or eval CSVs. These classes have only 20 clips each (AudioSet).
 - **Action**: Pull additional clips from AudioSet unbalanced set via `python src/data/download.py --dataset audioset` (no `--limit-per-class`) and add field recordings.
 
-### 3. Indian Ambient Dataset — Not Yet Recorded
-- **Status**: Phase 4 — blocked on field recording sessions
+### 3. Indian Ambient Dataset — First Batch Only
+- **Status**: 123 clips recorded (see above). smoke_alarm, siren and glass_break have no Indian recordings yet, and baby_cry/knocking come from one recorder each.
 - **Hot-swap design validated**: 2026-08-28 — dummy files added to `data/raw/indian_ambient/` and `manifest_builder.py` re-run with zero code changes; 2 indian_ambient rows appeared correctly. Empty-folder run produced 0 rows gracefully.
 - **Novel contribution**: First safety-sound dataset evaluated specifically in Indian urban/domestic acoustic environments.
 
-### 4. Personalization Module — Not Yet Started
-- **Status**: Phase 12 — blocked on Indian ambient data + full training pipeline.
+### 4. Personalization Module — Dev-Set Recorded, Model Not Started
+- **Status**: Phase 12. Name-call dev-set for "Aryan" recorded by all four team members: 38 positive, 19 negative (other or similar names such as "Arya", "Aryanshi"). Layout: `data/raw/personalization/aryan/{positive,negative}/` with a `metadata.csv` each.
 
 ---
 

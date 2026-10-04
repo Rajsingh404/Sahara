@@ -1,0 +1,20 @@
+filename,label,recorder,split,recording_device,timestamp,duration_sec,notes,source_path
+aryan_neg__advika__01.m4a,not_aryan,advika,train,iPhone_VoiceMemos,2026-09-17_advika,4.03,confirmed by the team's final sort,NotAryan/arya.m4a
+aryan_neg__advika__02.m4a,not_aryan,advika,train,iPhone_VoiceMemos,2026-09-17_advika,4.63,confirmed by the team's final sort,NotAryan/aryanshi.m4a
+aryan_neg__advika__03.m4a,not_aryan,advika,train,iPhone_VoiceMemos,2026-09-17_advika,3.07,confirmed by the team's final sort,NotAryan/mahi.m4a
+aryan_neg__mahi__01.m4a,not_aryan,mahi,test,phone_m4a,2026-09-17_mahi,2.28,confirmed by the team's final sort,NotAryan/name 2.m4a
+aryan_neg__mahi__02.m4a,not_aryan,mahi,test,phone_m4a,2026-09-17_mahi,3.14,confirmed by the team's final sort,NotAryan/name 3.m4a
+aryan_neg__mahi__03.m4a,not_aryan,mahi,test,phone_m4a,2026-09-17_mahi,1.94,confirmed by the team's final sort,NotAryan/name.m4a
+aryan_neg__prachi__01.m4a,not_aryan,prachi,test,phone_m4a,2026-10-04_prachi,8.09,sorted by the team in the final folder,NotAryan/Copy of New Recording 2.m4a
+aryan_neg__prachi__02.m4a,not_aryan,prachi,test,phone_m4a,2026-09-18_prachi,3.99,sorted by the team in the final folder,NotAryan/Copy of New Recording 3.m4a
+aryan_neg__prachi__03.m4a,not_aryan,prachi,test,phone_m4a,2026-09-18_prachi,2.20,sorted by the team in the final folder,NotAryan/Copy of New Recording 6.m4a
+aryan_neg__raj__01.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.05,,NotAryan/Not aryan 10.m4a
+aryan_neg__raj__02.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.56,,NotAryan/Not aryan 2.m4a
+aryan_neg__raj__03.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,4.07,,NotAryan/Not aryan 3.m4a
+aryan_neg__raj__04.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,4.33,,NotAryan/Not aryan 4.m4a
+aryan_neg__raj__05.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,4.42,,NotAryan/Not aryan 5.m4a
+aryan_neg__raj__06.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.39,,NotAryan/Not aryan 6.m4a
+aryan_neg__raj__07.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.22,,NotAryan/Not aryan 7.m4a
+aryan_neg__raj__08.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.99,,NotAryan/Not aryan 8.m4a
+aryan_neg__raj__09.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.14,,NotAryan/Not aryan 9.m4a
+aryan_neg__raj__10.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.82,,NotAryan/Not aryan.m4a
