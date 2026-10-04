@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import csv
 import numpy as np
-import pytest
 import soundfile as sf
 
 from src.config import SAMPLE_RATE

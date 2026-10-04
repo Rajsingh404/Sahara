@@ -13,7 +13,7 @@ from collections import defaultdict
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
-from src.config import METADATA_DIR, PROCESSED_DATA_DIR, MODELS_DIR, SOUND_CLASSES, get_raw_dir
+from src.config import METADATA_DIR, PROCESSED_DATA_DIR, MODELS_DIR, SOUND_CLASSES, get_raw_dir  # noqa: E402
 
 def hr(title: str):
     print(f"\n{'─'*60}")
@@ -103,13 +103,12 @@ def check_model():
         size = ckpt.stat().st_size / 1024
         print(f"  best_classifier.keras      ✓ ({size:.0f} KB)")
     else:
-        print(f"  best_classifier.keras      ✗ not trained yet")
+        print("  best_classifier.keras      ✗ not trained yet")
     
-    cm = REPO / "docs" / "confusion_matrix.png"
     if (REPO / "docs" / "confusion_matrix.png").exists():
-        print(f"  confusion_matrix.png       ✓")
+        print("  confusion_matrix.png       ✓")
     else:
-        print(f"  confusion_matrix.png       ✗ not generated yet")
+        print("  confusion_matrix.png       ✗ not generated yet")
 
 REPO = Path(__file__).resolve().parents[1]
 

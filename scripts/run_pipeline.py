@@ -14,14 +14,13 @@ Steps:
 from __future__ import annotations
 
 import argparse
-import shutil
 import sys
 import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src.config import METADATA_DIR, MODELS_DIR, PROCESSED_DATA_DIR, REPO_ROOT
+from src.config import METADATA_DIR, REPO_ROOT
 from src.data.manifest_builder import run as build_manifest
 from src.evaluation.confusion_matrix import evaluate_and_plot
 from src.preprocessing.build_features_cache import build_cache

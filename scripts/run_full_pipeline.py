@@ -11,7 +11,6 @@ Run from repo root:
 from __future__ import annotations
 
 import argparse
-import os
 import shutil
 import subprocess
 import sys
@@ -74,7 +73,7 @@ def step_indian_ambient_hotswap_test():
         print(f"  Backed up existing metadata.csv → {meta_backup.name}")
 
     # Create dummy WAV files (silent, 1s, 16kHz mono).
-    import wave, struct, math
+    import wave
     def _make_silent_wav(path: Path, duration_sec: float = 1.0, sr: int = 16000):
         path.parent.mkdir(parents=True, exist_ok=True)
         n_frames = int(duration_sec * sr)
@@ -142,12 +141,12 @@ def step_indian_ambient_hotswap_test():
     dummy_target.unlink(missing_ok=True)
     dummy_bg.unlink(missing_ok=True)
     meta_path.unlink(missing_ok=True)
-    print(f"  Removed dummy files and metadata.csv")
+    print("  Removed dummy files and metadata.csv")
 
     # Restore backup if it existed, else leave metadata absent.
     if meta_backup and meta_backup.exists():
         shutil.move(str(meta_backup), str(meta_path))
-        print(f"  Restored backup metadata.csv")
+        print("  Restored backup metadata.csv")
 
     print("\n  --- Re-running manifest builder WITHOUT indian_ambient (empty folder) ---")
     result2 = subprocess.run(
@@ -166,7 +165,7 @@ def step_indian_ambient_hotswap_test():
                 if row.get("source_dataset") == "indian_ambient":
                     ia_count2 += 1
     if ia_count2 == 0:
-        print(f"  ✅ EMPTY FOLDER TEST PASSED: 0 indian_ambient rows in manifest after cleanup")
+        print("  ✅ EMPTY FOLDER TEST PASSED: 0 indian_ambient rows in manifest after cleanup")
     else:
         print(f"  ❌ EMPTY FOLDER TEST FAILED: {ia_count2} rows remain after cleanup")
     print("\n  Manifest output (empty-folder run):")

@@ -57,7 +57,49 @@ def main() -> Path:
     ref = yamnet(wave)[1].numpy()
     print(f"yamnet.tflite: {target} ({target.stat().st_size / 1024:.0f} KiB), embeddings {lite.shape}")
     print(f"max |tflite - hub| = {np.abs(lite - ref).max():.2e}")
+    check_against_pipeline(target)
     return target
+
+
+def check_against_pipeline(target: Path, n_sources: int = 5) -> float:
+    """Embed every phone-style patch of one real clip per source with yamnet.tflite and compare
+    with src/preprocessing/features.extract_hop_embeddings (what training used)."""
+    import csv
+
+    from src.config import METADATA_DIR
+    from src.preprocessing.audio_utils import load_audio
+    from src.preprocessing.features import device_hops, extract_hop_embeddings
+
+    interpreter = tf.lite.Interpreter(model_path=str(target))
+    interpreter.allocate_tensors()
+    inp = interpreter.get_input_details()[0]["index"]
+    out = next(d for d in interpreter.get_output_details() if d["shape"][-1] == 1024)["index"]
+    picked: dict[str, str] = {}
+    manifest = METADATA_DIR / "test_manifest.csv"
+    if not manifest.exists():
+        print("No test manifest; skipping the 5-clip pipeline check.")
+        return float("nan")
+    with manifest.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            picked.setdefault(row["source_dataset"], row["filepath"])
+    worst = 0.0
+    for source, path in list(picked.items())[:n_sources]:
+        wave = load_audio(path, peak_normalize=False)
+        if wave is None:
+            continue
+        ref = extract_hop_embeddings(wave)["embeddings"]
+        starts, _ = device_hops(wave)
+        padded = np.pad(wave, (max(0, 16_000 - len(wave)), 0))
+        lite = []
+        for s in starts:
+            interpreter.set_tensor(inp, padded[s : s + INPUT_SAMPLES].astype(np.float32))
+            interpreter.invoke()
+            lite.append(interpreter.get_tensor(out)[0])
+        diff = float(np.abs(np.asarray(lite) - ref).max())
+        worst = max(worst, diff)
+        print(f"  {source:15s} {Path(path).name[:40]:40s} {len(starts):3d} patches  max |tflite - pipeline| = {diff:.2e}")
+    print(f"yamnet.tflite vs training pipeline, worst over {min(n_sources, len(picked))} clips: {worst:.2e}")
+    return worst
 
 
 if __name__ == "__main__":
