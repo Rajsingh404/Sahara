@@ -1,0 +1,24 @@
+filename,label,recorder,split,recording_device,timestamp,duration_sec,notes,source_path
+aryan_pos__advika__01.m4a,aryan,advika,train,phone_m4a,2026-09-17_advika,2.03,,Advika/Aryan/aryan 1
+aryan_pos__advika__02.m4a,aryan,advika,train,phone_m4a,2026-09-17_advika,3.73,,Advika/Aryan/aryan 2
+aryan_pos__advika__03.m4a,aryan,advika,train,phone_m4a,2026-09-17_advika,2.37,,Advika/Aryan/aryan 3
+aryan_pos__advika__04.m4a,aryan,advika,train,phone_m4a,2026-09-17_advika,2.03,,Advika/Aryan/aryan 4
+aryan_pos__advika__05.m4a,aryan,advika,train,iPhone_VoiceMemos,2026-09-17_advika,5.85,,Advika/Aryan/aryan 7.m4a
+aryan_pos__advika__06.m4a,aryan,advika,train,iPhone_VoiceMemos,2026-09-17_advika,3.63,,Advika/Aryan/aryan 8.m4a
+aryan_pos__advika__07.m4a,aryan,advika,train,iPhone_VoiceMemos,2026-09-17_advika,6.06,,Advika/Aryan/aryan 9.m4a
+aryan_pos__advika__08.m4a,aryan,advika,train,iPhone_VoiceMemos,2026-09-17_advika,4.71,,Advika/Aryan/aryan5.m4a
+aryan_pos__advika__09.m4a,aryan,advika,train,iPhone_VoiceMemos,2026-09-17_advika,5.31,,Advika/Aryan/aryan6.m4a
+aryan_pos__mahi__01.m4a,aryan,mahi,test,phone_m4a,2026-09-17_mahi,2.79,,Mahi/Aryan/aryan 2.m4a
+aryan_pos__mahi__02.m4a,aryan,mahi,test,phone_m4a,2026-09-17_mahi,2.79,,Mahi/Aryan/aryan 3.m4a
+aryan_pos__mahi__03.m4a,aryan,mahi,test,phone_m4a,2026-09-17_mahi,2.88,,Mahi/Aryan/aryan 4.m4a
+aryan_pos__mahi__04.m4a,aryan,mahi,test,phone_m4a,2026-09-17_mahi,2.88,,Mahi/Aryan/aryan.m4a
+aryan_pos__raj__01.m4a,aryan,raj,train,phone_m4a,2026-09-30_raj,5.18,,Raj/Aryan/Aryan01.m4a
+aryan_pos__raj__02.m4a,aryan,raj,train,phone_m4a,2026-09-30_raj,4.42,,Raj/Aryan/Aryan02.m4a
+aryan_pos__raj__03.m4a,aryan,raj,train,phone_m4a,2026-09-30_raj,4.25,,Raj/Aryan/Aryan03.m4a
+aryan_pos__raj__04.m4a,aryan,raj,train,phone_m4a,2026-09-30_raj,5.01,,Raj/Aryan/Aryan04.m4a
+aryan_pos__raj__05.m4a,aryan,raj,train,phone_m4a,2026-09-30_raj,5.18,,Raj/Aryan/Aryan05.m4a
+aryan_pos__raj__06.m4a,aryan,raj,train,phone_m4a,2026-09-30_raj,3.48,,Raj/Aryan/Aryan06.m4a
+aryan_pos__raj__07.m4a,aryan,raj,train,phone_m4a,2026-09-30_raj,3.73,,Raj/Aryan/Aryan07.m4a
+aryan_pos__raj__08.m4a,aryan,raj,train,phone_m4a,2026-09-30_raj,4.16,,Raj/Aryan/Aryan08.m4a
+aryan_pos__raj__09.m4a,aryan,raj,train,phone_m4a,2026-09-30_raj,4.25,,Raj/Aryan/Aryan09.m4a
+aryan_pos__raj__10.m4a,aryan,raj,train,phone_m4a,2026-09-30_raj,4.25,,Raj/Aryan/Aryan10.m4a

@@ -1,0 +1,181 @@
+drive_file_id,source_path,recorder,dataset,subset,label,filename,duration_sec,sample_rate,channels,recording_device,location_type,recorded_on,notes
+1dEdeAGa-OzcW4nZeEcKlt52lCXbXJlEc,Advika/Aryan/arya.m4a,advika,aryan,negative,not_aryan,aryan_neg__advika__01.m4a,4.03,48000,1,iPhone_VoiceMemos,,2026-09-17,"similar-sounding or other name, from filename"
+1rydPA5ea5XjBFi5AKPTDS6wP6QL6skb-,Advika/Aryan/aryan 1,advika,aryan,positive,aryan,aryan_pos__advika__01.m4a,2.03,48000,2,phone_m4a,,2026-09-17,
+1m6oESZy5_QAM5bztaBrJwhq0LQdO-b6M,Advika/Aryan/aryan 2,advika,aryan,positive,aryan,aryan_pos__advika__02.m4a,3.73,48000,2,phone_m4a,,2026-09-17,
+140S4xlcK32io2ZZrN1jaBQl88D-F7yZp,Advika/Aryan/aryan 3,advika,aryan,positive,aryan,aryan_pos__advika__03.m4a,2.37,48000,2,phone_m4a,,2026-09-17,
+156uvH69V9USYgW5K5wPDeinvHl8IP8p3,Advika/Aryan/aryan 4,advika,aryan,positive,aryan,aryan_pos__advika__04.m4a,2.03,48000,2,phone_m4a,,2026-09-17,
+1H5L99jst7OzNGVMpZ4Tk8Z-BycCeVaNY,Advika/Aryan/aryan 7.m4a,advika,aryan,positive,aryan,aryan_pos__advika__05.m4a,5.85,48000,1,iPhone_VoiceMemos,,2026-09-17,
+1ERZWYifQttoSGPByorV3stV0QpNmEeTX,Advika/Aryan/aryan 8.m4a,advika,aryan,positive,aryan,aryan_pos__advika__06.m4a,3.63,48000,1,iPhone_VoiceMemos,,2026-09-17,
+1La9ZuY9vrIUpwY1AZYng7Mqp7gfCVkOY,Advika/Aryan/aryan 9.m4a,advika,aryan,positive,aryan,aryan_pos__advika__07.m4a,6.06,48000,1,iPhone_VoiceMemos,,2026-09-17,
+1D1-lzNXoZd3dT6fAjtg_gMAZwZZn5zKU,Advika/Aryan/aryan5.m4a,advika,aryan,positive,aryan,aryan_pos__advika__08.m4a,4.71,48000,1,iPhone_VoiceMemos,,2026-09-17,
+1DrW3TzhFbyJ85TSN27Y7ybVXlvIZ-rhp,Advika/Aryan/aryan6.m4a,advika,aryan,positive,aryan,aryan_pos__advika__09.m4a,5.31,48000,1,iPhone_VoiceMemos,,2026-09-17,
+1b9Mvmt7GnGS5pfyJn3pApVbKO143q9Mr,Advika/Aryan/aryanshi.m4a,advika,aryan,negative,not_aryan,aryan_neg__advika__02.m4a,4.63,48000,1,iPhone_VoiceMemos,,2026-09-17,"similar-sounding or other name, from filename"
+1U0S-FmMA-d8XdcGNCyiZ3Rc1-Z6t7HTv,Advika/Aryan/mahi.m4a,advika,aryan,negative,not_aryan,aryan_neg__advika__03.m4a,3.07,48000,1,iPhone_VoiceMemos,,2026-09-17,"similar-sounding or other name, from filename"
+1VqzIxlqCEoYRrbotJZAFSbZgOQeXbnpp,Advika/baby cry/baby cry 1.m4a,advika,ambient,target_classes,baby_cry,baby_cry__advika__01.m4a,8.06,48000,1,phone_m4a,apartment,2026-09-17,
+1LQoknEwMfppi6huWTvvwo0UCQwVzzhFk,Advika/baby cry/baby cry 2.m4a,advika,ambient,target_classes,baby_cry,baby_cry__advika__02.m4a,10.67,48000,1,phone_m4a,apartment,2026-09-17,
+1Ra9IIoeL7PJK4b_3L0z6t_zwwtL_7J9J,Advika/baby cry/baby cry 3.m4a,advika,ambient,target_classes,baby_cry,baby_cry__advika__03.m4a,5.10,48000,1,phone_m4a,apartment,2026-09-17,
+1YFiiNGSNpi0ZgmxM6ZGd17QThaU9vw4z,Advika/baby cry/baby cry 4.m4a,advika,ambient,target_classes,baby_cry,baby_cry__advika__04.m4a,1.54,48000,1,phone_m4a,apartment,2026-09-17,
+1l4ic9HVfML5N3aeshXtaAK-d8G9baRvM,Advika/baby cry/baby cry 5.mp3,advika,ambient,target_classes,baby_cry,baby_cry__advika__05.mp3,9.48,24000,2,unknown_mp3,apartment,,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+1U1oIDKUpI_gSQua35AgYju3WAjnQI1uf,Advika/baby cry/baby cry 6.mp3,advika,ambient,target_classes,baby_cry,baby_cry__advika__06.mp3,8.98,24000,2,unknown_mp3,apartment,,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+1eN03Z3qphhLsuARy4Nj2oiKoxpW6mOng,Advika/door knocking/door bang 2.m4a,advika,ambient,target_classes,knocking,knocking__advika__01.m4a,2.22,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,"'door bang' filename: could be a slam rather than a knock, needs a listen"
+1auam5de0jxH4hr_vJcOKrB9D3thsli1-,Advika/door knocking/door bang 5,advika,ambient,target_classes,knocking,knocking__advika__02.m4a,2.13,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,"'door bang' filename: could be a slam rather than a knock, needs a listen"
+1W2R19gacZKdn7dO8Qom1aflKUwV-3f3R,Advika/door knocking/door bang.m4a,advika,ambient,target_classes,knocking,knocking__advika__03.m4a,2.22,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,"'door bang' filename: could be a slam rather than a knock, needs a listen"
+1uLGJGhk1yH3bE9QgOSwQU6pEMfXUWuid,Advika/door knocking/door close 1.m4a,advika,ambient,background,background,background_door_drawer__advika__01.m4a,2.82,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,"hard negative: door or drawer movement, not a knock"
+1KjF2jDZM1DMvfoQWzURoNEibDcdA-eGI,Advika/door knocking/door close 2.m4a,advika,ambient,background,background,background_door_drawer__advika__02.m4a,6.23,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,"hard negative: door or drawer movement, not a knock"
+17ivBfzg5G6TGt33Gu45G65QSEOCUiLP0,Advika/door knocking/door open 1.m4a,advika,ambient,background,background,background_door_drawer__advika__03.m4a,2.92,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,"hard negative: door or drawer movement, not a knock"
+1aEE_zXznT4ye34MkB-rI_nwi87vemEFi,Advika/door knocking/door open 2.m4a,advika,ambient,background,background,background_door_drawer__advika__04.m4a,3.65,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,"hard negative: door or drawer movement, not a knock"
+1qsreZNd1cH04P7dSU8AoHVt2BL0o257G,Advika/door knocking/door open 3.m4a,advika,ambient,background,background,background_door_drawer__advika__05.m4a,2.84,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,"hard negative: door or drawer movement, not a knock"
+1p9tk1w6uf1UJsBfp3tj-dC50xdoY3oQo,Advika/door knocking/doorbang2.m4a,advika,ambient,target_classes,knocking,knocking__advika__04.m4a,1.05,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,"'door bang' filename: could be a slam rather than a knock, needs a listen"
+1FfxWA0b_0D10ZC8fTScwnJEBZsmxIxiN,Advika/door knocking/drawer bang 3.m4a,advika,ambient,background,background,background_door_drawer__advika__06.m4a,2.24,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,"hard negative: door or drawer movement, not a knock"
+184dIr8VRc2c_bHYxeJmG_CHuAxqkJ-20,Advika/door knocking/drawer bang 4.m4a,advika,ambient,background,background,background_door_drawer__advika__07.m4a,3.56,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,"hard negative: door or drawer movement, not a knock"
+1HFBDCJr_V5DwcHgaHYs2zTh-toKuMXnT,Advika/door knocking/glass 3.m4a,advika,ambient,target_classes,knocking,knocking__advika__05.m4a,2.43,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,
+1NSmbJWQKnqP4StmKz1d-YUu1NpEXHtXW,Advika/door knocking/glass knock 2.m4a,advika,ambient,target_classes,knocking,knocking__advika__06.m4a,3.48,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,
+1O9d0FRu03ssFEGl5GBmukTaqqT33L-Ny,Advika/door knocking/glass knock 3.m4a,advika,ambient,target_classes,knocking,knocking__advika__07.m4a,5.15,44100,1,iPhone_VoiceMemos,apartment,2026-09-17,
+1s9rDwjmIGiRn7ra2f7-rpbcOMC-YhXrT,Advika/door knocking/glass knock.m4a,advika,ambient,target_classes,knocking,knocking__advika__08.m4a,2.22,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,
+18jne25TV4VoFGWu9XL1lUMAOHUXK2uw7,Advika/door knocking/glass4.m4a,advika,ambient,target_classes,knocking,knocking__advika__09.m4a,3.18,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,
+1t-jvXXqDbFhESbyi2BLzQJ8TNTKy0bCX,Advika/door knocking/wooden door,advika,ambient,target_classes,knocking,knocking__advika__10.m4a,1.86,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,
+1OPtDcG8RvTq-jcLyHabpUqABTzclrFr_,Advika/door knocking/wooden door 2,advika,ambient,target_classes,knocking,knocking__advika__11.m4a,1.79,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,
+12yUXktshAkmKRYFL_B3dSoSLos2fd4yB,Advika/door knocking/wooden door 3,advika,ambient,target_classes,knocking,knocking__advika__12.m4a,5.65,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,
+1ORyFT6TDPYi5SSOLnNKZxXyjUUYswAIa,Advika/door knocking/wooden door 4,advika,ambient,target_classes,knocking,knocking__advika__13.m4a,3.39,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,
+1ECeF85DsdrDfOvmjRzOSiO2dOVZ3nIdo,Advika/door knocking/wooden door 5,advika,ambient,target_classes,knocking,knocking__advika__14.m4a,2.90,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,
+1zZDy81H90M8R0SRSBqExKOjVGlA_olJX,Advika/Microwave/microwave 1.m4a,advika,ambient,target_classes,appliance_beep,appliance_beep__advika__01.m4a,6.10,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,microwave
+10c-vpMNli025BrmLRC_7qvXttPr8uzJ1,Advika/Microwave/microwave 2.m4a,advika,ambient,target_classes,appliance_beep,appliance_beep__advika__02.m4a,4.01,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,microwave
+1e0qZEPpLGDPxJ_L4vcLX-8v_1sA0F-Bg,Advika/Microwave/microwave 3.m4a,advika,ambient,target_classes,appliance_beep,appliance_beep__advika__03.m4a,9.94,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,microwave
+1LtxfnhUdIFour4dAwFBKwW0iWbLkR6Yr,Advika/Microwave/microwave 4.m4a,advika,ambient,target_classes,appliance_beep,appliance_beep__advika__04.m4a,6.25,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,microwave
+1dPi2q0ODTOyquTP-0iRhJhXPx4hHMlEJ,Advika/Microwave/microwave 5.m4a,advika,ambient,target_classes,appliance_beep,appliance_beep__advika__05.m4a,19.69,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,microwave
+1JIx7Jy4c54rgXR7eBLpuPuNydiDXhBuM,Advika/Microwave/microwave 6.m4a,advika,ambient,target_classes,appliance_beep,appliance_beep__advika__06.m4a,5.65,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,microwave
+15dQGXJOv1ZYI6wpRzdGec8jzRImyk_Jk,Advika/Microwave/microwave 7.mp3,advika,ambient,target_classes,appliance_beep,appliance_beep__advika__07.mp3,1.12,16000,1,unknown_mp3,apartment,,"microwave; mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+1mSLd-gEFpPQOT_pxpLxo8PztWf6ziU8t,Advika/Microwave/microwave 8.mp3,advika,ambient,target_classes,appliance_beep,appliance_beep__advika__08.mp3,8.57,24000,2,unknown_mp3,apartment,,"microwave; mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+1wuqyhjnyVVXpqaE-1EX_-TvefTH9pVwU,Advika/Microwave/microwave 9.mp3,advika,ambient,target_classes,appliance_beep,appliance_beep__advika__09.mp3,125.81,44100,2,unknown_mp3,apartment,,"microwave; mp3 with no recording metadata: confirm it was recorded by the team, not downloaded; long clip (126s), may need trimming"
+1OxtfPeXQzcHJneGkqtv_F6yrf_pY9w4a,Mahi/Aryan/aryan 2.m4a,mahi,aryan,positive,aryan,aryan_pos__mahi__01.m4a,2.79,48000,2,phone_m4a,,2026-09-17,
+1sahhV8Nh3eBnnEj5wa7GaAlkbKtpq8d3,Mahi/Aryan/aryan 3.m4a,mahi,aryan,positive,aryan,aryan_pos__mahi__02.m4a,2.79,48000,2,phone_m4a,,2026-09-17,
+16j9qRQGjFmAAHeuD5PQE_sXUbj72BRyc,Mahi/Aryan/aryan 4.m4a,mahi,aryan,positive,aryan,aryan_pos__mahi__03.m4a,2.88,48000,2,phone_m4a,,2026-09-17,
+10gg4PrGpPDjpYXAWPiJ96yx3uCUNOP6I,Mahi/Aryan/aryan.m4a,mahi,aryan,positive,aryan,aryan_pos__mahi__04.m4a,2.88,48000,2,phone_m4a,,2026-09-17,
+1FKbsFs6CP_VuUSfT3rjib6g6tNFHBHfA,Mahi/Aryan/mahi 2.m4a,mahi,aryan,negative,not_aryan,aryan_neg__mahi__01.m4a,1.86,48000,2,phone_m4a,,2026-09-17,"other name, from filename"
+1c-tyccbSeBCX4DcyOJTewrsaFg-ydri7,Mahi/Aryan/mahi 3.m4a,mahi,aryan,negative,not_aryan,aryan_neg__mahi__02.m4a,2.11,48000,2,phone_m4a,,2026-09-17,"other name, from filename"
+10r5P0xpof6JwIyskkUGt_cjA--N7VY7S,Mahi/Aryan/mahi.m4a,mahi,aryan,negative,not_aryan,aryan_neg__mahi__03.m4a,3.14,48000,2,phone_m4a,,2026-09-17,"other name, from filename"
+1IPAhmokv50Fho3aVfYgaOSUhvQ8QlTRR,Mahi/Aryan/name 2.m4a,mahi,aryan,negative,not_aryan,aryan_neg__mahi__04.m4a,2.28,48000,2,phone_m4a,,2026-09-17,"filename only says 'name'; assumed a non-Aryan name, needs a listen"
+1IhwHaw5lPWtJ5sowYngXmCYl59-VxdKT,Mahi/Aryan/name 3.m4a,mahi,aryan,negative,not_aryan,aryan_neg__mahi__05.m4a,3.14,48000,2,phone_m4a,,2026-09-17,"filename only says 'name'; assumed a non-Aryan name, needs a listen"
+1ZG-5eHJD1kTzkMbPPETKJb3JefTvmzWu,Mahi/Aryan/name.m4a,mahi,aryan,negative,not_aryan,aryan_neg__mahi__06.m4a,1.94,48000,2,phone_m4a,,2026-09-17,"filename only says 'name'; assumed a non-Aryan name, needs a listen"
+1BE69IKwUHivHXLx_CNAklr7MSgioywkh,Mahi/dog barking/dog1.mp3,mahi,ambient,target_classes,dog_bark,dog_bark__mahi__01.mp3,5.04,44100,1,iPhone_video_export,apartment,,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+1-9NkQiKJZnmtVajYW1PiCKL46YNmnyig,Mahi/dog barking/dog10.mp3,mahi,ambient,target_classes,dog_bark,dog_bark__mahi__02.mp3,2.88,48000,2,iPhone_video_export,apartment,2026-08-10,"phone video from 2026-08-10, older than the recording sessions"
+1wFBPUJdQphij4OGayalKelyUCEarq0oi,Mahi/dog barking/dog11.mp3,mahi,ambient,target_classes,dog_bark,dog_bark__mahi__03.mp3,4.52,44100,1,iPhone_video_export,apartment,2022-08-06,"phone video from 2022-08-06, older than the recording sessions"
+1J6WrSIu15lFGmvmqVwxQWN_vmQuBt3CL,Mahi/dog barking/dog2.mp3,mahi,ambient,target_classes,dog_bark,dog_bark__mahi__04.mp3,1.18,44100,1,iPhone_video_export,apartment,2024-11-25,"phone video from 2024-11-25, older than the recording sessions"
+1NHxjcW0Zcca_MZdAljocmtR6yxkQKNhd,Mahi/dog barking/dog3.mp3,mahi,ambient,target_classes,dog_bark,dog_bark__mahi__05.mp3,3.29,44100,1,iPhone_video_export,apartment,2024-11-25,"phone video from 2024-11-25, older than the recording sessions"
+1czAEWKZgFfkEgDjkpaJh8DbludRcA5Ss,Mahi/dog barking/dog4.mp3,mahi,ambient,target_classes,dog_bark,dog_bark__mahi__06.mp3,24.66,44100,1,unknown_mp3,apartment,,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+1GuXSvj2axLzVbAzdir0ZKFPSvxij2r5X,Mahi/dog barking/dog5.mp3,mahi,ambient,target_classes,dog_bark,dog_bark__mahi__07.mp3,6.14,44100,2,iPhone_video_export,apartment,,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+1nherhAlqVYFdK0MoYIh0bmx24LPKpTEh,Mahi/dog barking/dog6.mp3,mahi,ambient,target_classes,dog_bark,dog_bark__mahi__08.mp3,6.74,44100,2,iPhone_video_export,apartment,,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+1F-tVTl1ZCYe9lBrbz6h2RnsgSgVy8CMA,Mahi/dog barking/dog7.mp3,mahi,ambient,target_classes,dog_bark,dog_bark__mahi__09.mp3,22.73,44100,1,unknown_mp3,apartment,,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+1l_1LGMqVK36fyuwe3d6QkCpFmFwv92Yz,Mahi/dog barking/dog8.mp3,mahi,ambient,target_classes,dog_bark,dog_bark__mahi__10.mp3,4.39,24000,2,unknown_mp3,apartment,,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+1IYV1f8EqJEzhLpkU25qHxTWFswczE-Hx,Mahi/dog barking/dog9.mp3,mahi,ambient,target_classes,dog_bark,dog_bark__mahi__11.mp3,3.50,48000,2,iPhone_video_export,apartment,2026-04-05,"phone video from 2026-04-05, older than the recording sessions"
+1vRs4DJRTHXd4qGkEPPM5C-oVXeRW7zY0,Mahi/doorbell/Andheri West 2.m4a,mahi,ambient,target_classes,doorbell,doorbell__mahi__01.m4a,3.39,48000,2,phone_m4a,apartment,2026-09-17,
+1IG8k2ykG-64bsyNQTu6bZ1RkNePWKSMa,Mahi/doorbell/Andheri West 3.m4a,mahi,ambient,target_classes,doorbell,doorbell__mahi__02.m4a,4.59,48000,2,phone_m4a,apartment,2026-09-17,
+1D57zKyJublCJfzwNWcfJdWHCJVcnHcpq,Mahi/doorbell/Andheri West 4.m4a,mahi,ambient,target_classes,doorbell,doorbell__mahi__03.m4a,2.54,48000,2,phone_m4a,apartment,2026-09-17,
+1T4PT_ToegxOmWIPoT1h74DsV2gT-WUNo,Mahi/doorbell/Andheri West.m4a,mahi,ambient,target_classes,doorbell,doorbell__mahi__04.m4a,2.54,48000,2,phone_m4a,apartment,2026-09-17,
+1XNVjmKNrIbgl6-Wl1PJrh9UxSLTLUTQv,Mahi/doorbell/doorbell.mp3,mahi,ambient,target_classes,doorbell,doorbell__mahi__05.mp3,6.64,44100,1,unknown_mp3,apartment,,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+1Fns9hgjRT0ADD-cuFfml5nLO9de0AqEg,Mahi/doorbell/doorbell2.mp3,mahi,ambient,target_classes,doorbell,doorbell__mahi__06.mp3,4.88,44100,1,unknown_mp3,apartment,,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+18IDeQWK1b7Xmo751JUJejm7aDQr13gC2,Mahi/washing machine/washing 2.m4a,mahi,ambient,target_classes,appliance_beep,appliance_beep__mahi__01.m4a,4.33,48000,2,phone_m4a,apartment,2026-09-17,"washing machine; assumed to contain its beep, needs a listen"
+14QG52SDR7AZa9CAcgBpZhxVJM9gPeQuj,Mahi/washing machine/washing 3.m4a,mahi,ambient,target_classes,appliance_beep,appliance_beep__mahi__02.m4a,4.84,48000,2,phone_m4a,apartment,2026-09-17,"washing machine; assumed to contain its beep, needs a listen"
+1kwUSKwC_KveLtPw4-jSBiXD13uFfEUXd,Mahi/washing machine/washing 4.m4a,mahi,ambient,target_classes,appliance_beep,appliance_beep__mahi__03.m4a,3.31,48000,2,phone_m4a,apartment,2026-09-17,"washing machine; assumed to contain its beep, needs a listen"
+1i4OMFqDPPspMp2vbJj3-eYEMv8xFuu15,Mahi/washing machine/washing machine 2.m4a,mahi,ambient,target_classes,appliance_beep,appliance_beep__mahi__04.m4a,4.76,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,"washing machine; assumed to contain its beep, needs a listen"
+1UVCRYx-A0uMcu6wJYAoLIRlgkVgeBlo3,Mahi/washing machine/washing machine.m4a,mahi,ambient,target_classes,appliance_beep,appliance_beep__mahi__05.m4a,2.05,48000,1,iPhone_VoiceMemos,apartment,2026-09-17,"washing machine; assumed to contain its beep, needs a listen"
+1lTVzLBzZJTPRgNCx-QEPXxu0EntXA8Kj,Mahi/washing machine/washing-spinning.mp3,mahi,ambient,background,background,background_washing_machine__mahi__01.mp3,10.70,48000,1,unknown_mp3,apartment,,"hard negative: drum spinning, no beep; mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+1OY2DVE7sKUk_UQWQoqkUiMrZpMTWEcLy,Mahi/washing machine/washing.m4a,mahi,ambient,target_classes,appliance_beep,appliance_beep__mahi__06.m4a,3.22,48000,2,phone_m4a,apartment,2026-09-17,"washing machine; assumed to contain its beep, needs a listen"
+1UbZJQwbT4a7y643JD4pjKFo1HZhholN5,Mahi/washing machine/washing.mp3,mahi,ambient,target_classes,appliance_beep,appliance_beep__mahi__07.mp3,0.98,24000,2,unknown_mp3,apartment,,"washing machine; assumed to contain its beep, needs a listen; mp3 with no recording metadata: confirm it was recorded by the team, not downloaded"
+1oYGqTjleD_fcxqKajLDr3SHhUIexqDnW,Prachi/Aryan/Copy of New Recording 10.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__01.m4a,5.01,48000,1,phone_m4a,,2026-09-18,"generic filename; positive or negative unknown, needs a listen"
+1xFXISgQ_2O3CmoYpC0hB6jJI1rmX52hJ,Prachi/Aryan/Copy of New Recording 2.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__02.m4a,8.09,48000,1,phone_m4a,,2026-10-04,"generic filename; positive or negative unknown, needs a listen; second batch added 2026-10-04"
+15-dDKz-p80ubzscAz_b7Yt17jY1ElrN6,Prachi/Aryan/Copy of New Recording 2.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__03.m4a,2.71,48000,1,phone_m4a,,2026-09-18,"generic filename; positive or negative unknown, needs a listen"
+1ABHf2g8jr4YADqYpxF30u7gN75rGwlWK,Prachi/Aryan/Copy of New Recording 3.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__04.m4a,3.99,48000,1,phone_m4a,,2026-09-18,"generic filename; positive or negative unknown, needs a listen"
+1BN1zY73LbR31F4OBnxTyrzZF2HWLIrAo,Prachi/Aryan/Copy of New Recording 4.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__05.m4a,3.05,48000,1,phone_m4a,,2026-10-04,"generic filename; positive or negative unknown, needs a listen; second batch added 2026-10-04"
+1us_2vlUUIp8V-KDJ8-57gvtugvs1fHnB,Prachi/Aryan/Copy of New Recording 4.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__06.m4a,2.11,48000,1,phone_m4a,,2026-09-18,"generic filename; positive or negative unknown, needs a listen"
+12yQq8z_sSk3N4ObkS7w-xp6y3e0xvXSB,Prachi/Aryan/Copy of New Recording 5.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__07.m4a,2.71,48000,1,phone_m4a,,2026-10-04,"generic filename; positive or negative unknown, needs a listen; second batch added 2026-10-04"
+1jjOV_3zbDGoLQShG5LbPv5eJUo13Bmnx,Prachi/Aryan/Copy of New Recording 5.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__08.m4a,2.62,48000,1,phone_m4a,,2026-09-18,"generic filename; positive or negative unknown, needs a listen"
+1ziw3bLp4MLNMUjvHoZj-vvk_nxl8MeRI,Prachi/Aryan/Copy of New Recording 6.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__09.m4a,4.50,48000,1,phone_m4a,,2026-10-04,"generic filename; positive or negative unknown, needs a listen; second batch added 2026-10-04"
+1bOl-TbbJzMFQKCSRPwYxgobpNG2sBtWZ,Prachi/Aryan/Copy of New Recording 6.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__10.m4a,2.20,48000,1,phone_m4a,,2026-09-18,"generic filename; positive or negative unknown, needs a listen"
+1-FqFVw35bjJuJgE2-WfHGNR_MBRXy6Sc,Prachi/Aryan/Copy of New Recording 7.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__11.m4a,2.97,48000,1,phone_m4a,,2026-10-04,"generic filename; positive or negative unknown, needs a listen; second batch added 2026-10-04"
+1PmPrx2x2gEoDoNO8pRzAR_cNZcrKEf0S,Prachi/Aryan/Copy of New Recording 7.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__12.m4a,4.25,48000,1,phone_m4a,,2026-09-18,"generic filename; positive or negative unknown, needs a listen"
+1HF8BhxKNHZsudbN-IM-W9o-zyP8A8fBk,Prachi/Aryan/Copy of New Recording 8.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__13.m4a,2.54,48000,1,phone_m4a,,2026-09-18,"generic filename; positive or negative unknown, needs a listen"
+1le8-9juiC-zU3hO1O_GINrJCBcfnhMdY,Prachi/Aryan/Copy of New Recording 9.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__14.m4a,3.14,48000,1,phone_m4a,,2026-09-18,"generic filename; positive or negative unknown, needs a listen"
+1CY3FTiREznPhPf5GF9AzePVMYBYh--2C,Prachi/Aryan/Copy of New Recording.m4a,prachi,aryan,unverified,unverified,aryan_unverified__prachi__15.m4a,2.62,48000,1,phone_m4a,,2026-09-18,"generic filename; positive or negative unknown, needs a listen"
+1j35uEQNaXjhJLwgXsl0Nd_9qOStMi9Rm,Prachi/Doorbell/Copy of Doorbell 1.m4a,prachi,ambient,target_classes,doorbell,doorbell__prachi__01.m4a,4.59,48000,1,phone_m4a,apartment,2026-09-16,
+1UU2S0s0j25vhIeLh5TlQzKS-JMbmbOQ8,Prachi/Doorbell/Copy of Doorbell 10.m4a,prachi,ambient,target_classes,doorbell,doorbell__prachi__02.m4a,5.78,48000,1,phone_m4a,apartment,2026-09-16,
+1qfS48R0lkEro0z2WVql8UwW8dH2IXzfp,Prachi/Doorbell/Copy of Doorbell 2.m4a,prachi,ambient,target_classes,doorbell,doorbell__prachi__03.m4a,5.01,48000,1,phone_m4a,apartment,2026-09-16,
+1g2cgYdlfbC_bDpdHT-PCdeQQ2dCY1Eoj,Prachi/Doorbell/Copy of Doorbell 3.m4a,prachi,ambient,target_classes,doorbell,doorbell__prachi__04.m4a,10.22,48000,1,phone_m4a,apartment,2026-09-16,
+1sfzuMWycZSmj2B9n2JfdDdD0bCkBwyrW,Prachi/Doorbell/Copy of Doorbell 4.m4a,prachi,ambient,target_classes,doorbell,doorbell__prachi__05.m4a,6.12,48000,1,phone_m4a,apartment,2026-09-16,
+1UrI_WECahY1XqpIBokIHsLtdh26P25BI,Prachi/Doorbell/Copy of Doorbell 5.m4a,prachi,ambient,target_classes,doorbell,doorbell__prachi__06.m4a,10.30,48000,1,phone_m4a,apartment,2026-09-16,
+1TYNaCO-McdPZcmT8v1LPww2G07JyeYS5,Prachi/Doorbell/Copy of Doorbell 6.m4a,prachi,ambient,target_classes,doorbell,doorbell__prachi__07.m4a,5.95,48000,1,phone_m4a,apartment,2026-09-16,
+121eObf6cwB_gMmOyZ-L0iw9MUcBRhjXK,Prachi/Doorbell/Copy of Doorbell 7.m4a,prachi,ambient,target_classes,doorbell,doorbell__prachi__08.m4a,6.72,48000,1,phone_m4a,apartment,2026-09-16,
+160d00RcTaZJMyp0aDNoO3lcMPd6Uekvt,Prachi/Doorbell/Copy of Doorbell 8.m4a,prachi,ambient,target_classes,doorbell,doorbell__prachi__09.m4a,7.06,48000,1,phone_m4a,apartment,2026-09-16,
+1Onjioct4_68ugPjS0JoS5-lJwXuV-R91,Prachi/Doorbell/Copy of Doorbell 9.m4a,prachi,ambient,target_classes,doorbell,doorbell__prachi__10.m4a,4.59,48000,1,phone_m4a,apartment,2026-09-16,
+1lhBnzBqKPaSbQoyf26pWPiLLbneyiLRV,Prachi/Kitchen/Copy of Kitchen 1.m4a,prachi,ambient,background,background,background_kitchen__prachi__01.m4a,3.22,48000,1,phone_m4a,domestic_kitchen,2026-09-16,
+1wCfQcaFGogWFRlHvl8bn-9sGld_KnJWo,Prachi/Kitchen/Copy of Kitchen 10.m4a,prachi,ambient,background,background,background_kitchen__prachi__02.m4a,11.24,48000,1,phone_m4a,domestic_kitchen,2026-09-16,
+1smc-PS_wNETmi4rJ0_YgTl6JtfZuVEP_,Prachi/Kitchen/Copy of Kitchen 11.m4a,prachi,ambient,background,background,background_kitchen__prachi__03.m4a,4.93,48000,1,phone_m4a,domestic_kitchen,2026-09-16,
+1LWcA4WLYq79EUfHl5I2RfE9pTBes8EHh,Prachi/Kitchen/Copy of Kitchen 2.m4a,prachi,ambient,background,background,background_kitchen__prachi__04.m4a,3.99,48000,1,phone_m4a,domestic_kitchen,2026-09-16,
+1BcoReEdvUv1g3fw08zcGj9KjFhH5HqBH,Prachi/Kitchen/Copy of Kitchen 3.m4a,prachi,ambient,background,background,background_kitchen__prachi__05.m4a,4.16,48000,1,phone_m4a,domestic_kitchen,2026-09-16,
+1TS0t5EQ-PIj32fDHi6vnVhE8hKF7sAFM,Prachi/Kitchen/Copy of Kitchen 4.m4a,prachi,ambient,background,background,background_kitchen__prachi__06.m4a,7.74,48000,1,phone_m4a,domestic_kitchen,2026-09-16,
+1Qm2bKSQpUu5ZRdi_37miU6Y0D-JR1Ckf,Prachi/Kitchen/Copy of Kitchen 5.m4a,prachi,ambient,background,background,background_kitchen__prachi__07.m4a,4.33,48000,1,phone_m4a,domestic_kitchen,2026-09-16,
+1PlBMKn16-bimaUs93Q5Y1fxCeK3PZvfm,Prachi/Kitchen/Copy of Kitchen 6.m4a,prachi,ambient,background,background,background_kitchen__prachi__08.m4a,7.91,48000,1,phone_m4a,domestic_kitchen,2026-09-16,
+1QAwh63dsgPv1VxASob8M4xpHddL56nvN,Prachi/Kitchen/Copy of Kitchen 7.m4a,prachi,ambient,background,background,background_kitchen__prachi__09.m4a,3.90,48000,1,phone_m4a,domestic_kitchen,2026-09-16,
+1gZ9m_pSPYGyeQorVWubq2tfsyt6tQnsL,Prachi/Kitchen/Copy of Kitchen 8.m4a,prachi,ambient,background,background,background_kitchen__prachi__10.m4a,8.51,48000,1,phone_m4a,domestic_kitchen,2026-09-16,
+1aXYeKTBlbttqePThGZb_lgipzDkBAHy9,Prachi/Kitchen/Copy of Kitchen 9.m4a,prachi,ambient,background,background,background_kitchen__prachi__11.m4a,8.09,48000,1,phone_m4a,domestic_kitchen,2026-09-16,
+1f4bvYufCZWASfM5FXh8lq7lNRgYTWqyt,Prachi/Temple/Copy of Temple 1.m4a,prachi,ambient,background,background,background_temple__prachi__01.m4a,4.25,48000,1,phone_m4a,temple,2026-09-16,
+1XpVnP0e43CtelyBHi3WZ5IU-INlpFjAR,Prachi/Temple/Copy of Temple 10.m4a,prachi,ambient,background,background,background_temple__prachi__02.m4a,8.43,48000,1,phone_m4a,temple,2026-09-16,
+1QumISbNvK4qrCzaNjwhtpaV_wWLp0oqC,Prachi/Temple/Copy of Temple 11.m4a,prachi,ambient,background,background,background_temple__prachi__03.m4a,3.48,48000,1,phone_m4a,temple,2026-09-16,
+1udVH2PJoM6ubErhKNgbe3fGsieePAmM1,Prachi/Temple/Copy of Temple 2.m4a,prachi,ambient,background,background,background_temple__prachi__04.m4a,5.70,48000,1,phone_m4a,temple,2026-09-16,
+1uOFTRyAI4fCsUFxqKDFiSRXZnUoddFg7,Prachi/Temple/Copy of Temple 3.m4a,prachi,ambient,background,background,background_temple__prachi__05.m4a,10.56,48000,1,phone_m4a,temple,2026-09-16,
+1hEuJFUXwmVmgXjSZH1FWeatflGOMgYxI,Prachi/Temple/Copy of Temple 4.m4a,prachi,ambient,background,background,background_temple__prachi__06.m4a,5.44,48000,1,phone_m4a,temple,2026-09-16,
+1FXvt0dT-iGSCjFLTvxQ2Eb1JxHnC03ct,Prachi/Temple/Copy of Temple 5.m4a,prachi,ambient,background,background,background_temple__prachi__07.m4a,5.70,48000,1,phone_m4a,temple,2026-09-16,
+1KA1qzbgFOAIbJT92WfbLkD1e1Fl36WWj,Prachi/Temple/Copy of Temple 6.m4a,prachi,ambient,background,background,background_temple__prachi__08.m4a,6.38,48000,1,phone_m4a,temple,2026-09-16,
+1z967B4yR_11LSFKEQtnANCbiqP4U2jbf,Prachi/Temple/Copy of Temple 7.m4a,prachi,ambient,background,background,background_temple__prachi__09.m4a,5.18,48000,1,phone_m4a,temple,2026-09-16,
+1rSo98Y-o_dMV1L3MAOEhcWq9_z9tO2tb,Prachi/Temple/Copy of Temple 8.m4a,prachi,ambient,background,background,background_temple__prachi__10.m4a,5.87,48000,1,phone_m4a,temple,2026-09-16,
+1joZKAt5qBL2TYl8or8C11XWcxksfYCGE,Prachi/Temple/Copy of Temple 9.m4a,prachi,ambient,background,background,background_temple__prachi__11.m4a,5.18,48000,1,phone_m4a,temple,2026-09-16,
+1oTCncvrnA1VNDrUq6LeN7MDxeAZJSFvb,Raj/Aryan/Aryan01.m4a,raj,aryan,positive,aryan,aryan_pos__raj__01.m4a,5.18,48000,1,phone_m4a,,2026-09-30,
+1kx5oRzG1jLOXV3pnLnGOW4eIzIa-VsqM,Raj/Aryan/Aryan02.m4a,raj,aryan,positive,aryan,aryan_pos__raj__02.m4a,4.42,48000,1,phone_m4a,,2026-09-30,
+1RIMRnZDJzFLICxWOrLdvRsl3DrowXHwU,Raj/Aryan/Aryan03.m4a,raj,aryan,positive,aryan,aryan_pos__raj__03.m4a,4.25,48000,1,phone_m4a,,2026-09-30,
+1rmx2V7nb1OnqYhcGj19fJ7fxSvSIWwgT,Raj/Aryan/Aryan04.m4a,raj,aryan,positive,aryan,aryan_pos__raj__04.m4a,5.01,48000,1,phone_m4a,,2026-09-30,
+1D5693krl1BLguc4_ZMwJXL4w__gkzidJ,Raj/Aryan/Aryan05.m4a,raj,aryan,positive,aryan,aryan_pos__raj__05.m4a,5.18,48000,1,phone_m4a,,2026-09-30,
+1DI0kwVs-AX_NfHBIlvvcKmtjnPNxhxN5,Raj/Aryan/Aryan06.m4a,raj,aryan,positive,aryan,aryan_pos__raj__06.m4a,3.48,48000,1,phone_m4a,,2026-09-30,
+1_6ZRRlkXDsfIdWoKK__3bevTXTQhjPeH,Raj/Aryan/Aryan07.m4a,raj,aryan,positive,aryan,aryan_pos__raj__07.m4a,3.73,48000,1,phone_m4a,,2026-09-30,
+1NKYWvIcRD6Hc7KUk3zCOmlk44BNTlf8F,Raj/Aryan/Aryan08.m4a,raj,aryan,positive,aryan,aryan_pos__raj__08.m4a,4.16,48000,1,phone_m4a,,2026-09-30,
+1MEdGR3QayXBql-5xyY7rlGarkuLjCLgy,Raj/Aryan/Aryan09.m4a,raj,aryan,positive,aryan,aryan_pos__raj__09.m4a,4.25,48000,1,phone_m4a,,2026-09-30,
+1RKwLfXWclt9pB9NhxptAtjlg-rreKAF4,Raj/Aryan/Aryan10.m4a,raj,aryan,positive,aryan,aryan_pos__raj__10.m4a,4.25,48000,1,phone_m4a,,2026-09-30,
+1R0PTtNuyf1xAJtSa1Uxe9_p7ouGQrZoQ,Raj/Aryan/Not aryan 10.m4a,raj,aryan,negative,not_aryan,aryan_neg__raj__01.m4a,3.05,48000,1,phone_m4a,,2026-09-30,
+1mnF3qRuZiMCiFNsOVZ0EmYMolzXhTYnS,Raj/Aryan/Not aryan 2.m4a,raj,aryan,negative,not_aryan,aryan_neg__raj__02.m4a,3.56,48000,1,phone_m4a,,2026-09-30,
+1wuyZIvqU6d-W_Nj9fRBhu-RN3c7P67M2,Raj/Aryan/Not aryan 3.m4a,raj,aryan,negative,not_aryan,aryan_neg__raj__03.m4a,4.07,48000,1,phone_m4a,,2026-09-30,
+12iapWMIzKFlRVs81hmRF8jWQJgyapSKd,Raj/Aryan/Not aryan 4.m4a,raj,aryan,negative,not_aryan,aryan_neg__raj__04.m4a,4.33,48000,1,phone_m4a,,2026-09-30,
+1PZ2ICNJuF-05mhrLzmqKZrpa0qLRGVRp,Raj/Aryan/Not aryan 5.m4a,raj,aryan,negative,not_aryan,aryan_neg__raj__05.m4a,4.42,48000,1,phone_m4a,,2026-09-30,
+1R37nVBh8HaBHG9gWf9wB2yWxhhPGoora,Raj/Aryan/Not aryan 6.m4a,raj,aryan,negative,not_aryan,aryan_neg__raj__06.m4a,3.39,48000,1,phone_m4a,,2026-09-30,
+1BI5daFVePY88ozAj4S7y2VHbUC-Xonce,Raj/Aryan/Not aryan 7.m4a,raj,aryan,negative,not_aryan,aryan_neg__raj__07.m4a,3.22,48000,1,phone_m4a,,2026-09-30,
+1uOs95ZLsbI13Z6v6s89omeMPSxWPeBRG,Raj/Aryan/Not aryan 8.m4a,raj,aryan,negative,not_aryan,aryan_neg__raj__08.m4a,3.99,48000,1,phone_m4a,,2026-09-30,
+1v5UAH753oTIcW_c9D-20H1Rap-IvoGMv,Raj/Aryan/Not aryan 9.m4a,raj,aryan,negative,not_aryan,aryan_neg__raj__09.m4a,3.14,48000,1,phone_m4a,,2026-09-30,
+1wdEj1I_q_t-8MXVwL6383W2FY2001LhE,Raj/Aryan/Not aryan.m4a,raj,aryan,negative,not_aryan,aryan_neg__raj__10.m4a,3.82,48000,1,phone_m4a,,2026-09-30,
+1qMPg7gbSn66sXkNlE_0vQCOn3hwrkzzK,Raj/Hawker/Hawker01.m4a,raj,ambient,background,background,background_hawker__raj__01.m4a,8.51,48000,1,phone_m4a,street_market,2026-09-16,
+1prxHFAj8BOH5prCYcdv7omy_wE3tz3MO,Raj/Hawker/Hawker02.m4a,raj,ambient,background,background,background_hawker__raj__02.m4a,8.85,48000,1,phone_m4a,street_market,2026-09-16,
+1AbWRX12WRt3xsRAHpxArj1d8u6MWJ3X1,Raj/Hawker/Hawker03.m4a,raj,ambient,background,background,background_hawker__raj__03.m4a,8.43,48000,1,phone_m4a,street_market,2026-09-16,
+1Pn5JC1NEr1EbMk8buHvLMGRPlY1xJ63F,Raj/Hawker/Hawker04.m4a,raj,ambient,background,background,background_hawker__raj__04.m4a,8.17,48000,1,phone_m4a,street_market,2026-09-16,
+1U0IHhF3KvyaxAo3KAtKQEYebAFaLv38n,Raj/Hawker/Hawker05.m4a,raj,ambient,background,background,background_hawker__raj__05.m4a,9.54,48000,1,phone_m4a,street_market,2026-09-16,
+1scK6i6g8C4lDbiQn2y7WKXQIY80nPsUo,Raj/Hawker/Hawker06.m4a,raj,ambient,background,background,background_hawker__raj__06.m4a,7.83,48000,1,phone_m4a,street_market,2026-09-16,
+1XAVA95epBdL5tOHIl2zIOW6Gz9awtexP,Raj/Hawker/Hawker07.m4a,raj,ambient,background,background,background_hawker__raj__07.m4a,9.88,48000,1,phone_m4a,street_market,2026-09-16,
+1Taz3n93Oz7Lhh2FIXQASZE2rrHiyyCHq,Raj/Hawker/Hawker08.m4a,raj,ambient,background,background,background_hawker__raj__08.m4a,10.30,48000,1,phone_m4a,street_market,2026-09-16,
+1BPPNtHfSIjuufetN5IWYPrjr2P1IeGWV,Raj/Hawker/Hawker09.m4a,raj,ambient,background,background,background_hawker__raj__09.m4a,7.23,48000,1,phone_m4a,street_market,2026-09-16,
+1lDk-ipfg4zp1wqwwRVl4UaIdm_uTHP5K,Raj/Hawker/Hawker10.m4a,raj,ambient,background,background,background_hawker__raj__10.m4a,8.43,48000,1,phone_m4a,street_market,2026-09-16,
+1GsMAl7rOSzBEhlgJO3eDOmROe9FDGFhv,Raj/Rain/Rain01.m4a,raj,ambient,background,background,background_rain__raj__01.m4a,6.04,48000,1,phone_m4a,outdoor_rain,2026-09-16,
+1tAGggHbz-yo-rWMlWy6lMLjgxld5IJ4V,Raj/Rain/Rain02.m4a,raj,ambient,background,background,background_rain__raj__02.m4a,9.19,48000,1,phone_m4a,outdoor_rain,2026-09-16,
+1XZSf_oXu03hZMVTTIXzKYnBnIskphxOP,Raj/Rain/Rain03.m4a,raj,ambient,background,background,background_rain__raj__03.m4a,6.72,48000,1,phone_m4a,outdoor_rain,2026-09-16,
+1OMj18Sx8Rz4jiYS2i_klC2f_iz0AMmV3,Raj/Rain/Rain04.m4a,raj,ambient,background,background,background_rain__raj__04.m4a,7.40,48000,1,phone_m4a,outdoor_rain,2026-09-16,
+1aR95b_1GdH0Gu8MrzDRLUqOLHTlhkXPE,Raj/Rain/Rain05.m4a,raj,ambient,background,background,background_rain__raj__05.m4a,5.27,48000,1,phone_m4a,outdoor_rain,2026-09-16,
+1XKwozKxaunIJRps0lT12io2n4CXK3OC_,Raj/Rain/Rain06.m4a,raj,ambient,background,background,background_rain__raj__06.m4a,5.18,48000,1,phone_m4a,outdoor_rain,2026-09-16,
+1iwLMg4PUpzLl5V931P1-dx6JgtySgSqU,Raj/Rain/Rain07.m4a,raj,ambient,background,background,background_rain__raj__07.m4a,6.46,48000,1,phone_m4a,outdoor_rain,2026-09-16,
+17zgiMDp9lIiuwe2-rCCsXzHI8A0tPeH3,Raj/Rain/Rain08.m4a,raj,ambient,background,background,background_rain__raj__08.m4a,6.46,48000,1,phone_m4a,outdoor_rain,2026-09-16,
+1pawBRx3RytBQJpGTcO4_ZnVQbskTpPiN,Raj/Rain/Rain09.m4a,raj,ambient,background,background,background_rain__raj__09.m4a,7.32,48000,1,phone_m4a,outdoor_rain,2026-09-16,
+1xsx79q7Qe2MPKDGOZSu6tEnynHs_fLpf,Raj/Rain/Rain10.m4a,raj,ambient,background,background,background_rain__raj__10.m4a,6.89,48000,1,phone_m4a,outdoor_rain,2026-09-16,
+1ACJXbEy-16U-jAO49Ggj3v3bveHTEyIW,Raj/TV/TV01.m4a,raj,ambient,background,background,background_tv__raj__01.m4a,8.51,48000,1,phone_m4a,apartment,2026-09-16,
+1AVgBkzlpJRqGvW0Iqd9B-l8BUhT0kEtZ,Raj/TV/TV02.m4a,raj,ambient,background,background,background_tv__raj__02.m4a,9.11,48000,1,phone_m4a,apartment,2026-09-16,
+1N8pNlQ_nEYsBh7_N_bRsHQSc-uNevPgD,Raj/TV/TV03.m4a,raj,ambient,background,background,background_tv__raj__03.m4a,8.34,48000,1,phone_m4a,apartment,2026-09-16,
+1we6V2_LMzJduGBG35El1GyIpJ-iOKVMM,Raj/TV/TV04.m4a,raj,ambient,background,background,background_tv__raj__04.m4a,6.81,48000,1,phone_m4a,apartment,2026-09-16,
+1MrS7qIh1_TjFZC03GXz1beUNG_KgmMvt,Raj/TV/TV05.m4a,raj,ambient,background,background,background_tv__raj__05.m4a,8.51,48000,1,phone_m4a,apartment,2026-09-16,
+18IyXiM04T_ce17Bo1fBk8Wfwzp8ERRlq,Raj/TV/TV06.m4a,raj,ambient,background,background,background_tv__raj__06.m4a,7.83,48000,1,phone_m4a,apartment,2026-09-16,
+1QlKdCuAXGRc7ScVNC2PEtdMnkv3fcZZD,Raj/TV/TV07.m4a,raj,ambient,background,background,background_tv__raj__07.m4a,8.17,48000,1,phone_m4a,apartment,2026-09-16,
+1u0XBQPkJ43K3rDVPR29qQGi8Ajvdlg46,Raj/TV/TV08.m4a,raj,ambient,background,background,background_tv__raj__08.m4a,8.43,48000,1,phone_m4a,apartment,2026-09-16,
+1jxGreI1wY71aMClSQHmNueoOHrKSj6fP,Raj/TV/TV09.m4a,raj,ambient,background,background,background_tv__raj__09.m4a,7.66,48000,1,phone_m4a,apartment,2026-09-16,
+1RPZNccUNR7fDRKg6e3QmT2S2WEs-6_ci,Raj/TV/TV10.m4a,raj,ambient,background,background,background_tv__raj__10.m4a,7.91,48000,1,phone_m4a,apartment,2026-09-16,
