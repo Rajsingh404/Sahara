@@ -69,3 +69,15 @@ app/android/app/build/
 
 # TF-Hub model download (YAMNet)
 models/tfhub_cache/
+
+# Run records are small text files and are committed; models stay out.
+!models/logs/*/
+models/logs/*/*
+!models/logs/*/config.json
+!models/logs/*/metrics.json
+!models/logs/*/history.csv
+!models/logs/*/label_order.txt
+!models/logs/*/confusion_val.csv
+!models/logs/*/confusion_val.png
+!models/logs/runs_summary.csv
+!models/logs/selected_run.txt

@@ -1,0 +1,8 @@
+run,val_mAP,safety_floor_met,best_epoch,train_windows,lr,batch,synthetic,finetune_from,features,AP_smoke_alarm,AP_doorbell,AP_siren,AP_knocking,AP_dog_bark,AP_baby_cry,AP_glass_break,AP_appliance_beep,floorR_smoke_alarm,floorR_siren,floorR_glass_break
+20261004-1806_a_baseline,0.9019,True,1,10984,0.001,32,False,,processed,0.994,0.737,0.995,0.961,0.93,0.933,0.869,0.796,1.0,0.994,0.818
+20261004-1808_a_baseline_lr3e-4,0.9124,True,5,10984,0.0003,128,False,,processed,1.0,0.73,0.995,0.966,0.935,0.957,0.881,0.836,1.0,0.994,0.835
+20261004-1808_z_clipmean,0.8628,True,4,2141,0.001,32,False,,clip_mean,0.848,0.677,0.994,0.951,0.928,0.89,0.846,0.769,0.833,0.994,0.793
+20261004-1810_b_synthetic,0.8878,True,3,26634,0.0003,128,True,,processed,0.984,0.756,0.991,0.932,0.903,0.916,0.839,0.781,1.0,0.994,0.802
+20261004-1812_c_finetune_team_from_b,0.8887,True,2,1443,0.0001,64,True,20261004-1810_b_synthetic,processed,0.984,0.749,0.989,0.936,0.905,0.92,0.84,0.787,1.0,0.982,0.802
+20261004-1812_z_clipmean_lr3e-4,0.8476,True,8,2141,0.0003,128,False,,clip_mean,0.813,0.681,0.994,0.949,0.904,0.869,0.85,0.722,0.722,0.994,0.777
+20261004-1813_c_finetune_team_from_a,0.9133,True,1,1443,0.0001,64,False,20261004-1808_a_baseline_lr3e-4,processed,1.0,0.735,0.995,0.966,0.932,0.957,0.884,0.836,1.0,0.994,0.851
