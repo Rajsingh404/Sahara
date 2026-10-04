@@ -12,7 +12,8 @@ from pathlib import Path
 from urllib.request import urlopen
 
 from src.config import RAW_DATA_DIR, SOUND_CLASSES
-from src.data.common import count_audio_files, download_file
+from src.data.common import download_file
+from src.data.label_map import CLASS_LABEL_MAP
 
 # Default Google Drive sync path (override with SAHARA_FSD50K_GDRIVE or --gdrive-path).
 DEFAULT_GDRIVE_FSD50K = Path.home() / (
@@ -21,12 +22,7 @@ DEFAULT_GDRIVE_FSD50K = Path.home() / (
 FSD50K_ITEMS = ("FSD50K.dev_audio", "FSD50K.eval_audio", "FSD50K.ground_truth", "FSD50K.metadata")
 
 ZENODO_RECORD = "https://zenodo.org/api/records/4060432"
-FSD_LABELS = {
-    "smoke_alarm": ["Smoke_detector_smoke_alarm"], "doorbell": ["Doorbell"],
-    "siren": ["Siren"], "knocking": ["Knock"], "dog_bark": ["Bark"],
-    "baby_cry": ["Baby_cry_infant_cry"], "glass_break": ["Glass"],
-    "appliance_beep": ["Beep_buzzer", "Alarm", "Microwave_oven"],
-}
+FSD_LABELS = {name: CLASS_LABEL_MAP[name]["fsd50k"] for name in SOUND_CLASSES}
 
 
 def _record_files(dry_run: bool) -> list[dict]:

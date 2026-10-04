@@ -7,80 +7,83 @@ from src.config import SOUND_CLASSES
 # FSD50K has no dedicated background class; we leave the hook empty for now.
 BACKGROUND_LABEL = "background"
 
+# Native labels per source. Checked against FSD50K.ground_truth/vocabulary.csv and
+# AudioSet class_labels_indices.csv (2026-10-04). FSD50K has no smoke-alarm, baby-cry or
+# Beep_buzzer label; those classes come from AudioSet and ESC-50.
+# Deliberately left out:
+#   FSD50K "Alarm"  - mostly telephones, car alarms and ringtones, not appliance beeps.
+#   FSD50K "Glass"  - mostly clinking; only clips also tagged "Shatter" are glass_break.
+#   AudioSet "Dog"  - growls and whimpers; only "Bark" is dog_bark.
 CLASS_LABEL_MAP: dict[str, dict[str, list[str]]] = {
     "smoke_alarm": {
-        "fsd50k": ["Smoke_detector_smoke_alarm"],
-        "audioset": ["/m/01y3hg"],
-        "desed": ["Smoke_detector_smoke_alarm"],
+        "fsd50k": [],
+        "audioset": ["/m/01y3hg"],  # Smoke detector, smoke alarm
+        "esc50": [],
         "indian_ambient": ["smoke_alarm"],
         "synthetic_mixed": ["smoke_alarm"],
     },
     "doorbell": {
         "fsd50k": ["Doorbell"],
-        "audioset": ["/m/03wwcy"],
-        "desed": ["Doorbell"],
+        "audioset": ["/m/03wwcy"],  # Doorbell
+        "esc50": [],
         "indian_ambient": ["doorbell"],
         "synthetic_mixed": ["doorbell"],
     },
     "siren": {
         "fsd50k": ["Siren"],
-        "audioset": ["/m/03kmc9"],
-        "desed": ["Siren"],
+        "audioset": ["/m/03kmc9"],  # Siren
+        "esc50": ["siren"],
         "indian_ambient": ["siren"],
         "synthetic_mixed": ["siren"],
     },
     "knocking": {
         "fsd50k": ["Knock"],
-        "audioset": ["/m/07qnq_y"],  # Knock (best AudioSet mid match)
-        "desed": ["Knock"],
+        "audioset": ["/m/07r4wb8"],  # Knock
+        "esc50": ["door_wood_knock"],
         "indian_ambient": ["knocking"],
         "synthetic_mixed": ["knocking"],
     },
     "dog_bark": {
         "fsd50k": ["Bark"],
-        "audioset": ["/m/05tny_"],
-        "desed": ["Dog", "Bark"],
+        "audioset": ["/m/05tny_"],  # Bark
+        "esc50": ["dog"],
         "indian_ambient": ["dog_bark"],
         "synthetic_mixed": ["dog_bark"],
     },
     "baby_cry": {
-        "fsd50k": ["Baby_cry_infant_cry"],
-        "audioset": ["/t/dd00002"],
-        "desed": ["Baby_cry_infant_cry"],
+        "fsd50k": [],
+        "audioset": ["/t/dd00002"],  # Baby cry, infant cry
+        "esc50": ["crying_baby"],
         "indian_ambient": ["baby_cry"],
         "synthetic_mixed": ["baby_cry"],
     },
     "glass_break": {
-        "fsd50k": ["Glass"],
-        "audioset": ["/m/07rwj3x"],
-        "desed": ["Glass"],
+        "fsd50k": ["Shatter"],
+        "audioset": ["/m/07rn7sz"],  # Shatter
+        "esc50": ["glass_breaking"],
         "indian_ambient": ["glass_break"],
         "synthetic_mixed": ["glass_break"],
     },
     "appliance_beep": {
-        "fsd50k": ["Beep_buzzer", "Alarm", "Microwave_oven"],
-        "audioset": ["/m/03cl9h", "/m/029bxz"],  # Beep, bleep; Microwave oven
-        "desed": ["Beep_buzzer", "Microwave_oven"],
+        "fsd50k": ["Microwave_oven"],
+        "audioset": ["/m/02fs_r", "/m/0fx9l", "/m/046dlr"],  # Beep, bleep; Microwave oven; Alarm clock
+        "esc50": ["clock_alarm"],
         "indian_ambient": ["appliance_beep"],
         "synthetic_mixed": ["appliance_beep"],
     },
 }
 
-# AudioSet display-name fallbacks used when resolving mids from class_labels_indices.csv.
-AUDISET_DISPLAY_NAMES: dict[str, set[str]] = {
-    "smoke_alarm": {"Smoke detector, smoke alarm"},
-    "doorbell": {"Doorbell"},
-    "siren": {"Siren"},
-    "knocking": {"Knock"},
-    "dog_bark": {"Bark", "Dog"},
-    "baby_cry": {"Baby cry, infant cry"},
-    "glass_break": {"Glass", "Breaking", "Shatter"},
-    "appliance_beep": {"Beep, bleep", "Microwave oven", "Alarm clock"},
-}
+# DESED clips carrying these events are neither clean background nor a clean target
+# (Dog includes barking, Alarm_bell_ringing includes smoke alarms and beeps), so they are dropped.
+DESED_EXCLUDED_EVENTS = {"Dog", "Alarm_bell_ringing"}
 
 
 def fsd50k_labels_for_class(class_name: str) -> set[str]:
     return set(CLASS_LABEL_MAP[class_name]["fsd50k"])
+
+
+def esc50_categories_for_class(class_name: str) -> set[str]:
+    return set(CLASS_LABEL_MAP[class_name]["esc50"])
 
 
 def audioset_mids_for_class(class_name: str) -> set[str]:

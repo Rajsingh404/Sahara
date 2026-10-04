@@ -82,7 +82,7 @@ def test_manifest_builder_source_type_and_hot_swap(tmp_path, monkeypatch):
 
     assert len(ia_rows) == 1
     assert ia_rows[0]["label"] == "background"
-    assert ia_rows[0]["source_type"] == "real"
+    assert ia_rows[0]["source_type"] == "self_recorded"
     assert "source_type" in ia_rows[0]
 
     # Clean up dummy file and verify graceful handling (hot-swap test)

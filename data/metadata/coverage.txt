@@ -1,0 +1,11 @@
+class                   audioset           desed           esc50          fsd50k  indian_ambient  synthetic_mixe      real  real_test
+                        tr/va/te        tr/va/te        tr/va/te        tr/va/te        tr/va/te        tr/va/te
+smoke_alarm               14/3/3               -               -               -               -          42/0/0        20          3  << SHORT
+doorbell                  14/3/3               -               -       100/22/22          0/0/16         342/0/0       180         41
+siren                     19/8/4               -          35/2/3        91/19/22               -         435/0/0       203         29
+knocking                  14/0/0               -         26/11/3       254/59/60          14/0/0         924/0/0       441         63
+dog_bark                   6/2/1               -          28/3/9       375/82/79          0/0/11        1227/0/0       596        100
+baby_cry                  16/3/4               -          33/4/3               -           6/0/0         165/0/0        69          7  << SHORT
+glass_break             54/10/11               -          30/5/5       355/78/77               -        1317/0/0       625         93
+appliance_beep            12/8/3               -          33/1/6       145/30/31           9/0/7         597/0/0       285         47
+background                     -       423/90/92               -               -         37/0/23               -       665        115

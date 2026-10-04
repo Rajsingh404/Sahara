@@ -37,6 +37,10 @@ MODELS_DIR = REPO_ROOT / "models"
 _DRIVE_DATASETS = os.environ.get("SAHARA_DRIVE_DATASETS", "").strip()
 DRIVE_DATASETS_DIR: Path | None = Path(_DRIVE_DATASETS) if _DRIVE_DATASETS else None
 
+# Generated or organised locally; never read from / written to Drive.
+_LOCAL_ONLY = {"indian_ambient", "esc50", "inoise_chunks", "synthetic_mixed"}
+
+
 def get_raw_dir(dataset: str) -> Path:
     """Return the raw audio directory for *dataset*.
 
@@ -48,7 +52,8 @@ def get_raw_dir(dataset: str) -> Path:
         fsd50k          → FSD50K
         audioset        → AudioSet
         desed           → DESED
-        indian_ambient  → Indian_Ambient
+        indian_ambient  → always data/raw/indian_ambient (organise_recordings.py output;
+                          Drive's Indian_Ambient holds the unsorted originals)
         inoise          → iNoise
         inoise_chunks   → iNoise_chunks
         synthetic_mixed → SyntheticMixed
@@ -57,12 +62,11 @@ def get_raw_dir(dataset: str) -> Path:
         "fsd50k": "FSD50K",
         "audioset": "AudioSet",
         "desed": "DESED",
-        "indian_ambient": "Indian_Ambient",
         "inoise": "iNoise",
         "inoise_chunks": "iNoise_chunks",
         "synthetic_mixed": "SyntheticMixed",
     }
-    if DRIVE_DATASETS_DIR is not None:
+    if DRIVE_DATASETS_DIR is not None and dataset not in _LOCAL_ONLY:
         drive_name = _drive_name_map.get(dataset, dataset)
         drive_path = DRIVE_DATASETS_DIR / drive_name
         if drive_path.exists() and any(drive_path.iterdir()):
@@ -84,6 +88,9 @@ SYNTHETIC_MIXES_PER_TARGET = 3
 SYNTHETIC_SNR_MIN_DB = -5.0
 SYNTHETIC_SNR_MAX_DB = 10.0
 INOISE_CHUNK_DURATION_SEC = 5.0
+
+# AudioSet top-up target per class (clips on disk, after exact-mid filtering).
+AUDIOSET_TARGET_PER_CLASS = 200
 
 BATCH_SIZE = 32
 EPOCHS = 30

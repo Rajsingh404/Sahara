@@ -1,839 +1,499 @@
-filepath,label,source_dataset,source_type,duration_sec,recording_id
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\47141.wav,glass_break,fsd50k,real,0.0,fsd50k:47141
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\341397.wav,glass_break,fsd50k,real,0.0,fsd50k:341397
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\341402.wav,glass_break,fsd50k,real,0.0,fsd50k:341402
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\341406.wav,glass_break,fsd50k,real,0.0,fsd50k:341406
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\341408.wav,glass_break,fsd50k,real,0.0,fsd50k:341408
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\341419.wav,glass_break,fsd50k,real,0.0,fsd50k:341419
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\14361.wav,glass_break,fsd50k,real,0.0,fsd50k:14361
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\27702.wav,glass_break,fsd50k,real,0.0,fsd50k:27702
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\331923.wav,glass_break,fsd50k,real,0.0,fsd50k:331923
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\213155.wav,glass_break,fsd50k,real,0.0,fsd50k:213155
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\268586.wav,glass_break,fsd50k,real,0.0,fsd50k:268586
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\204116.wav,glass_break,fsd50k,real,0.0,fsd50k:204116
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\204126.wav,glass_break,fsd50k,real,0.0,fsd50k:204126
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\427461.wav,glass_break,fsd50k,real,0.0,fsd50k:427461
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\84526.wav,glass_break,fsd50k,real,0.0,fsd50k:84526
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\89872.wav,glass_break,fsd50k,real,0.0,fsd50k:89872
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\242254.wav,glass_break,fsd50k,real,0.0,fsd50k:242254
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\89873.wav,glass_break,fsd50k,real,0.0,fsd50k:89873
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\369238.wav,glass_break,fsd50k,real,0.0,fsd50k:369238
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\255622.wav,glass_break,fsd50k,real,0.0,fsd50k:255622
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\255648.wav,glass_break,fsd50k,real,0.0,fsd50k:255648
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\242341.wav,glass_break,fsd50k,real,0.0,fsd50k:242341
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\255651.wav,glass_break,fsd50k,real,0.0,fsd50k:255651
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\186049.wav,glass_break,fsd50k,real,0.0,fsd50k:186049
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\242391.wav,glass_break,fsd50k,real,0.0,fsd50k:242391
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\406251.wav,glass_break,fsd50k,real,0.0,fsd50k:406251
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\393965.wav,glass_break,fsd50k,real,0.0,fsd50k:393965
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\415482.wav,glass_break,fsd50k,real,0.0,fsd50k:415482
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\242443.wav,glass_break,fsd50k,real,0.0,fsd50k:242443
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\151305.wav,glass_break,fsd50k,real,0.0,fsd50k:151305
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88850.wav,glass_break,fsd50k,real,0.0,fsd50k:88850
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88862.wav,glass_break,fsd50k,real,0.0,fsd50k:88862
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\242462.wav,glass_break,fsd50k,real,0.0,fsd50k:242462
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88870.wav,glass_break,fsd50k,real,0.0,fsd50k:88870
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88871.wav,glass_break,fsd50k,real,0.0,fsd50k:88871
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\89907.wav,glass_break,fsd50k,real,0.0,fsd50k:89907
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\89908.wav,glass_break,fsd50k,real,0.0,fsd50k:89908
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88886.wav,glass_break,fsd50k,real,0.0,fsd50k:88886
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\89912.wav,glass_break,fsd50k,real,0.0,fsd50k:89912
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88895.wav,glass_break,fsd50k,real,0.0,fsd50k:88895
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\89917.wav,glass_break,fsd50k,real,0.0,fsd50k:89917
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\89923.wav,glass_break,fsd50k,real,0.0,fsd50k:89923
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\51038.wav,glass_break,fsd50k,real,0.0,fsd50k:51038
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88955.wav,glass_break,fsd50k,real,0.0,fsd50k:88955
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\383978.wav,glass_break,fsd50k,real,0.0,fsd50k:383978
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\235497.wav,glass_break,fsd50k,real,0.0,fsd50k:235497
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\9206.wav,glass_break,fsd50k,real,0.0,fsd50k:9206
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\179227.wav,glass_break,fsd50k,real,0.0,fsd50k:179227
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\179234.wav,glass_break,fsd50k,real,0.0,fsd50k:179234
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\179240.wav,glass_break,fsd50k,real,0.0,fsd50k:179240
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\322602.wav,glass_break,fsd50k,real,0.0,fsd50k:322602
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\349240.wav,glass_break,fsd50k,real,0.0,fsd50k:349240
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\179265.wav,glass_break,fsd50k,real,0.0,fsd50k:179265
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\379015.wav,glass_break,fsd50k,real,0.0,fsd50k:379015
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\145559.wav,glass_break,fsd50k,real,0.0,fsd50k:145559
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\213161.wav,glass_break,fsd50k,real,0.0,fsd50k:213161
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\213162.wav,glass_break,fsd50k,real,0.0,fsd50k:213162
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\372919.wav,glass_break,fsd50k,real,0.0,fsd50k:372919
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\85184.wav,glass_break,fsd50k,real,0.0,fsd50k:85184
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\344271.wav,glass_break,fsd50k,real,0.0,fsd50k:344271
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\216284.wav,glass_break,fsd50k,real,0.0,fsd50k:216284
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\216299.wav,glass_break,fsd50k,real,0.0,fsd50k:216299
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\273647.wav,glass_break,fsd50k,real,0.0,fsd50k:273647
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\434437.wav,glass_break,fsd50k,real,0.0,fsd50k:434437
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\71947.wav,glass_break,fsd50k,real,0.0,fsd50k:71947
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\434449.wav,glass_break,fsd50k,real,0.0,fsd50k:434449
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\434450.wav,glass_break,fsd50k,real,0.0,fsd50k:434450
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\260434.wav,glass_break,fsd50k,real,0.0,fsd50k:260434
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\221528.wav,glass_break,fsd50k,real,0.0,fsd50k:221528
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\204122.wav,glass_break,fsd50k,real,0.0,fsd50k:204122
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\65902.wav,glass_break,fsd50k,real,0.0,fsd50k:65902
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\204144.wav,glass_break,fsd50k,real,0.0,fsd50k:204144
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\371093.wav,glass_break,fsd50k,real,0.0,fsd50k:371093
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\412054.wav,glass_break,fsd50k,real,0.0,fsd50k:412054
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\178582.wav,glass_break,fsd50k,real,0.0,fsd50k:178582
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\378285.wav,glass_break,fsd50k,real,0.0,fsd50k:378285
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\118198.wav,glass_break,fsd50k,real,0.0,fsd50k:118198
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\173560.wav,glass_break,fsd50k,real,0.0,fsd50k:173560
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\126465.wav,glass_break,fsd50k,real,0.0,fsd50k:126465
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\173580.wav,glass_break,fsd50k,real,0.0,fsd50k:173580
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\173600.wav,glass_break,fsd50k,real,0.0,fsd50k:173600
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\390708.wav,glass_break,fsd50k,real,0.0,fsd50k:390708
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\390709.wav,glass_break,fsd50k,real,0.0,fsd50k:390709
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\390721.wav,glass_break,fsd50k,real,0.0,fsd50k:390721
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\390725.wav,glass_break,fsd50k,real,0.0,fsd50k:390725
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\390726.wav,glass_break,fsd50k,real,0.0,fsd50k:390726
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\390729.wav,glass_break,fsd50k,real,0.0,fsd50k:390729
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\148074.wav,glass_break,fsd50k,real,0.0,fsd50k:148074
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\389804.wav,glass_break,fsd50k,real,0.0,fsd50k:389804
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\216748.wav,glass_break,fsd50k,real,0.0,fsd50k:216748
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\390707.wav,glass_break,fsd50k,real,0.0,fsd50k:390707
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\164540.wav,glass_break,fsd50k,real,0.0,fsd50k:164540
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\219847.wav,glass_break,fsd50k,real,0.0,fsd50k:219847
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\368336.wav,glass_break,fsd50k,real,0.0,fsd50k:368336
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\406257.wav,glass_break,fsd50k,real,0.0,fsd50k:406257
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\257791.wav,glass_break,fsd50k,real,0.0,fsd50k:257791
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\93964.wav,glass_break,fsd50k,real,0.0,fsd50k:93964
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\89894.wav,glass_break,fsd50k,real,0.0,fsd50k:89894
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\89895.wav,glass_break,fsd50k,real,0.0,fsd50k:89895
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\208696.wav,glass_break,fsd50k,real,0.0,fsd50k:208696
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\145209.wav,glass_break,fsd50k,real,0.0,fsd50k:145209
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88917.wav,glass_break,fsd50k,real,0.0,fsd50k:88917
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88922.wav,glass_break,fsd50k,real,0.0,fsd50k:88922
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88923.wav,glass_break,fsd50k,real,0.0,fsd50k:88923
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88924.wav,glass_break,fsd50k,real,0.0,fsd50k:88924
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\95078.wav,glass_break,fsd50k,real,0.0,fsd50k:95078
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88945.wav,glass_break,fsd50k,real,0.0,fsd50k:88945
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\204688.wav,glass_break,fsd50k,real,0.0,fsd50k:204688
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\204698.wav,glass_break,fsd50k,real,0.0,fsd50k:204698
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\126878.wav,glass_break,fsd50k,real,0.0,fsd50k:126878
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\202093.wav,glass_break,fsd50k,real,0.0,fsd50k:202093
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\344712.wav,glass_break,fsd50k,real,0.0,fsd50k:344712
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\379184.wav,glass_break,fsd50k,real,0.0,fsd50k:379184
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\220959.wav,glass_break,fsd50k,real,0.0,fsd50k:220959
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\326990.wav,glass_break,fsd50k,real,0.0,fsd50k:326990
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\60467.wav,glass_break,fsd50k,real,0.0,fsd50k:60467
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\60472.wav,glass_break,fsd50k,real,0.0,fsd50k:60472
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\214187.wav,glass_break,fsd50k,real,0.0,fsd50k:214187
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\214188.wav,glass_break,fsd50k,real,0.0,fsd50k:214188
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\214193.wav,glass_break,fsd50k,real,0.0,fsd50k:214193
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\389432.wav,glass_break,fsd50k,real,0.0,fsd50k:389432
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\414219.wav,glass_break,fsd50k,real,0.0,fsd50k:414219
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\2139.wav,glass_break,fsd50k,real,0.0,fsd50k:2139
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\131879.wav,glass_break,fsd50k,real,0.0,fsd50k:131879
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\104670.wav,glass_break,fsd50k,real,0.0,fsd50k:104670
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\416285.wav,glass_break,fsd50k,real,0.0,fsd50k:416285
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\416288.wav,glass_break,fsd50k,real,0.0,fsd50k:416288
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\94788.wav,glass_break,fsd50k,real,0.0,fsd50k:94788
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\346696.wav,glass_break,fsd50k,real,0.0,fsd50k:346696
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\346699.wav,glass_break,fsd50k,real,0.0,fsd50k:346699
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\382028.wav,glass_break,fsd50k,real,0.0,fsd50k:382028
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\178282.wav,glass_break,fsd50k,real,0.0,fsd50k:178282
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\69246.wav,glass_break,fsd50k,real,0.0,fsd50k:69246
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\339637.wav,glass_break,fsd50k,real,0.0,fsd50k:339637
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\406717.wav,glass_break,fsd50k,real,0.0,fsd50k:406717
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\339649.wav,glass_break,fsd50k,real,0.0,fsd50k:339649
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\339646.wav,glass_break,fsd50k,real,0.0,fsd50k:339646
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\339652.wav,glass_break,fsd50k,real,0.0,fsd50k:339652
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\204047.wav,glass_break,fsd50k,real,0.0,fsd50k:204047
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\158993.wav,glass_break,fsd50k,real,0.0,fsd50k:158993
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\208658.wav,glass_break,fsd50k,real,0.0,fsd50k:208658
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\208664.wav,glass_break,fsd50k,real,0.0,fsd50k:208664
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\159003.wav,glass_break,fsd50k,real,0.0,fsd50k:159003
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\159007.wav,glass_break,fsd50k,real,0.0,fsd50k:159007
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\188224.wav,glass_break,fsd50k,real,0.0,fsd50k:188224
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\188226.wav,glass_break,fsd50k,real,0.0,fsd50k:188226
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\352066.wav,glass_break,fsd50k,real,0.0,fsd50k:352066
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\250696.wav,glass_break,fsd50k,real,0.0,fsd50k:250696
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\94682.wav,glass_break,fsd50k,real,0.0,fsd50k:94682
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\92638.wav,glass_break,fsd50k,real,0.0,fsd50k:92638
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\378853.wav,glass_break,fsd50k,real,0.0,fsd50k:378853
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\360433.wav,glass_break,fsd50k,real,0.0,fsd50k:360433
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\132634.wav,glass_break,fsd50k,real,0.0,fsd50k:132634
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\395492.wav,glass_break,fsd50k,real,0.0,fsd50k:395492
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\379407.wav,glass_break,fsd50k,real,0.0,fsd50k:379407
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\327556.wav,glass_break,fsd50k,real,0.0,fsd50k:327556
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\360681.wav,glass_break,fsd50k,real,0.0,fsd50k:360681
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\144175.wav,glass_break,fsd50k,real,0.0,fsd50k:144175
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\186692.wav,glass_break,fsd50k,real,0.0,fsd50k:186692
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\406849.wav,glass_break,fsd50k,real,0.0,fsd50k:406849
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\339080.wav,glass_break,fsd50k,real,0.0,fsd50k:339080
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\339082.wav,glass_break,fsd50k,real,0.0,fsd50k:339082
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\369293.wav,glass_break,fsd50k,real,0.0,fsd50k:369293
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\336425.wav,glass_break,fsd50k,real,0.0,fsd50k:336425
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\392319.wav,glass_break,fsd50k,real,0.0,fsd50k:392319
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\29712.wav,glass_break,fsd50k,real,0.0,fsd50k:29712
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\172000.wav,glass_break,fsd50k,real,0.0,fsd50k:172000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\978.wav,glass_break,fsd50k,real,0.0,fsd50k:978
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\422633.wav,glass_break,fsd50k,real,0.0,fsd50k:422633
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\77534.wav,glass_break,fsd50k,real,0.0,fsd50k:77534
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\171996.wav,glass_break,fsd50k,real,0.0,fsd50k:171996
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\182896.wav,glass_break,fsd50k,real,0.0,fsd50k:182896
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\37789.wav,glass_break,fsd50k,real,0.0,fsd50k:37789
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\366738.wav,glass_break,fsd50k,real,0.0,fsd50k:366738
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\977.wav,glass_break,fsd50k,real,0.0,fsd50k:977
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\347143.wav,glass_break,fsd50k,real,0.0,fsd50k:347143
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\198396.wav,glass_break,fsd50k,real,0.0,fsd50k:198396
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\134848.wav,glass_break,fsd50k,real,0.0,fsd50k:134848
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\38957.wav,glass_break,fsd50k,real,0.0,fsd50k:38957
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\206171.wav,glass_break,fsd50k,real,0.0,fsd50k:206171
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\390342.wav,glass_break,fsd50k,real,0.0,fsd50k:390342
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\429028.wav,glass_break,fsd50k,real,0.0,fsd50k:429028
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\142328.wav,glass_break,fsd50k,real,0.0,fsd50k:142328
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\87433.wav,glass_break,fsd50k,real,0.0,fsd50k:87433
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\64457.wav,glass_break,fsd50k,real,0.0,fsd50k:64457
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\406091.wav,glass_break,fsd50k,real,0.0,fsd50k:406091
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\206150.wav,glass_break,fsd50k,real,0.0,fsd50k:206150
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\glass_break\-lYg4hm25hU_30_000_40_000.wav,glass_break,audioset,real,19.9935,audioset:-lYg4hm25hU
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\glass_break\0arN4pk83lA_30_000_40_000.wav,glass_break,audioset,real,19.9935,audioset:0arN4pk83lA
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\glass_break\6aVDXoU2j2M_440_000_450_000.wav,glass_break,audioset,real,19.9935,audioset:6aVDXoU2j2M
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\glass_break\AM_8JACTDh0_30_000_40_000.wav,glass_break,audioset,real,10.008,audioset:AM
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\87315.wav,appliance_beep,fsd50k,real,0.0,fsd50k:87315
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\402958.wav,appliance_beep,fsd50k,real,0.0,fsd50k:402958
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\66585.wav,appliance_beep,fsd50k,real,0.0,fsd50k:66585
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\83488.wav,appliance_beep,fsd50k,real,0.0,fsd50k:83488
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\322130.wav,appliance_beep,fsd50k,real,0.0,fsd50k:322130
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\179858.wav,appliance_beep,fsd50k,real,0.0,fsd50k:179858
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\179864.wav,appliance_beep,fsd50k,real,0.0,fsd50k:179864
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\379034.wav,appliance_beep,fsd50k,real,0.0,fsd50k:379034
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\179866.wav,appliance_beep,fsd50k,real,0.0,fsd50k:179866
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\113319.wav,appliance_beep,fsd50k,real,0.0,fsd50k:113319
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\77509.wav,appliance_beep,fsd50k,real,0.0,fsd50k:77509
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\255699.wav,appliance_beep,fsd50k,real,0.0,fsd50k:255699
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\175856.wav,appliance_beep,fsd50k,real,0.0,fsd50k:175856
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\175853.wav,appliance_beep,fsd50k,real,0.0,fsd50k:175853
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\175854.wav,appliance_beep,fsd50k,real,0.0,fsd50k:175854
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\164626.wav,appliance_beep,fsd50k,real,0.0,fsd50k:164626
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\264993.wav,appliance_beep,fsd50k,real,0.0,fsd50k:264993
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\419698.wav,appliance_beep,fsd50k,real,0.0,fsd50k:419698
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\425848.wav,appliance_beep,fsd50k,real,0.0,fsd50k:425848
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\117165.wav,appliance_beep,fsd50k,real,0.0,fsd50k:117165
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\403455.wav,appliance_beep,fsd50k,real,0.0,fsd50k:403455
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\379754.wav,appliance_beep,fsd50k,real,0.0,fsd50k:379754
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\221639.wav,appliance_beep,fsd50k,real,0.0,fsd50k:221639
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\159753.wav,appliance_beep,fsd50k,real,0.0,fsd50k:159753
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\338973.wav,appliance_beep,fsd50k,real,0.0,fsd50k:338973
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88121.wav,appliance_beep,fsd50k,real,0.0,fsd50k:88121
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\65152.wav,appliance_beep,fsd50k,real,0.0,fsd50k:65152
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\34952.wav,appliance_beep,fsd50k,real,0.0,fsd50k:34952
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\322205.wav,appliance_beep,fsd50k,real,0.0,fsd50k:322205
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\108192.wav,appliance_beep,fsd50k,real,0.0,fsd50k:108192
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\98536.wav,appliance_beep,fsd50k,real,0.0,fsd50k:98536
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\181601.wav,appliance_beep,fsd50k,real,0.0,fsd50k:181601
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\315758.wav,appliance_beep,fsd50k,real,0.0,fsd50k:315758
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\100357.wav,appliance_beep,fsd50k,real,0.0,fsd50k:100357
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\403474.wav,appliance_beep,fsd50k,real,0.0,fsd50k:403474
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\104475.wav,appliance_beep,fsd50k,real,0.0,fsd50k:104475
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\110692.wav,appliance_beep,fsd50k,real,0.0,fsd50k:110692
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\100460.wav,appliance_beep,fsd50k,real,0.0,fsd50k:100460
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\125102.wav,appliance_beep,fsd50k,real,0.0,fsd50k:125102
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\26961.wav,appliance_beep,fsd50k,real,0.0,fsd50k:26961
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\26964.wav,appliance_beep,fsd50k,real,0.0,fsd50k:26964
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\26965.wav,appliance_beep,fsd50k,real,0.0,fsd50k:26965
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\22876.wav,appliance_beep,fsd50k,real,0.0,fsd50k:22876
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\389509.wav,appliance_beep,fsd50k,real,0.0,fsd50k:389509
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\377249.wav,appliance_beep,fsd50k,real,0.0,fsd50k:377249
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\72126.wav,appliance_beep,fsd50k,real,0.0,fsd50k:72126
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\387534.wav,appliance_beep,fsd50k,real,0.0,fsd50k:387534
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\203287.wav,appliance_beep,fsd50k,real,0.0,fsd50k:203287
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\270883.wav,appliance_beep,fsd50k,real,0.0,fsd50k:270883
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\371292.wav,appliance_beep,fsd50k,real,0.0,fsd50k:371292
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\266924.wav,appliance_beep,fsd50k,real,0.0,fsd50k:266924
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\262853.wav,appliance_beep,fsd50k,real,0.0,fsd50k:262853
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\96973.wav,appliance_beep,fsd50k,real,0.0,fsd50k:96973
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\262897.wav,appliance_beep,fsd50k,real,0.0,fsd50k:262897
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\238390.wav,appliance_beep,fsd50k,real,0.0,fsd50k:238390
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\93020.wav,appliance_beep,fsd50k,real,0.0,fsd50k:93020
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\324459.wav,appliance_beep,fsd50k,real,0.0,fsd50k:324459
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\217989.wav,appliance_beep,fsd50k,real,0.0,fsd50k:217989
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\418705.wav,appliance_beep,fsd50k,real,0.0,fsd50k:418705
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\423929.wav,appliance_beep,fsd50k,real,0.0,fsd50k:423929
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\158622.wav,appliance_beep,fsd50k,real,0.0,fsd50k:158622
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\54193.wav,appliance_beep,fsd50k,real,0.0,fsd50k:54193
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\33723.wav,appliance_beep,fsd50k,real,0.0,fsd50k:33723
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\33724.wav,appliance_beep,fsd50k,real,0.0,fsd50k:33724
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\33733.wav,appliance_beep,fsd50k,real,0.0,fsd50k:33733
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\216009.wav,appliance_beep,fsd50k,real,0.0,fsd50k:216009
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\33744.wav,appliance_beep,fsd50k,real,0.0,fsd50k:33744
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\33745.wav,appliance_beep,fsd50k,real,0.0,fsd50k:33745
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\324586.wav,appliance_beep,fsd50k,real,0.0,fsd50k:324586
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\117793.wav,appliance_beep,fsd50k,real,0.0,fsd50k:117793
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\419023.wav,appliance_beep,fsd50k,real,0.0,fsd50k:419023
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\34005.wav,appliance_beep,fsd50k,real,0.0,fsd50k:34005
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\13613.wav,appliance_beep,fsd50k,real,0.0,fsd50k:13613
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\56671.wav,appliance_beep,fsd50k,real,0.0,fsd50k:56671
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\345497.wav,appliance_beep,fsd50k,real,0.0,fsd50k:345497
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\93643.wav,appliance_beep,fsd50k,real,0.0,fsd50k:93643
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\318945.wav,appliance_beep,fsd50k,real,0.0,fsd50k:318945
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\126519.wav,appliance_beep,fsd50k,real,0.0,fsd50k:126519
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\126559.wav,appliance_beep,fsd50k,real,0.0,fsd50k:126559
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\341621.wav,appliance_beep,fsd50k,real,0.0,fsd50k:341621
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\204424.wav,appliance_beep,fsd50k,real,0.0,fsd50k:204424
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\204425.wav,appliance_beep,fsd50k,real,0.0,fsd50k:204425
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\204426.wav,appliance_beep,fsd50k,real,0.0,fsd50k:204426
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\251542.wav,appliance_beep,fsd50k,real,0.0,fsd50k:251542
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\34525.wav,appliance_beep,fsd50k,real,0.0,fsd50k:34525
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\202474.wav,appliance_beep,fsd50k,real,0.0,fsd50k:202474
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\364271.wav,appliance_beep,fsd50k,real,0.0,fsd50k:364271
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\96063.wav,appliance_beep,fsd50k,real,0.0,fsd50k:96063
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\192343.wav,appliance_beep,fsd50k,real,0.0,fsd50k:192343
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\368471.wav,appliance_beep,fsd50k,real,0.0,fsd50k:368471
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\407394.wav,appliance_beep,fsd50k,real,0.0,fsd50k:407394
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\69552.wav,appliance_beep,fsd50k,real,0.0,fsd50k:69552
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\202676.wav,appliance_beep,fsd50k,real,0.0,fsd50k:202676
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\350642.wav,appliance_beep,fsd50k,real,0.0,fsd50k:350642
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\209698.wav,appliance_beep,fsd50k,real,0.0,fsd50k:209698
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\351539.wav,appliance_beep,fsd50k,real,0.0,fsd50k:351539
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\117564.wav,appliance_beep,fsd50k,real,0.0,fsd50k:117564
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\234565.wav,appliance_beep,fsd50k,real,0.0,fsd50k:234565
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\234566.wav,appliance_beep,fsd50k,real,0.0,fsd50k:234566
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\117572.wav,appliance_beep,fsd50k,real,0.0,fsd50k:117572
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\167545.wav,appliance_beep,fsd50k,real,0.0,fsd50k:167545
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\167548.wav,appliance_beep,fsd50k,real,0.0,fsd50k:167548
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\258179.wav,appliance_beep,fsd50k,real,0.0,fsd50k:258179
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\352656.wav,appliance_beep,fsd50k,real,0.0,fsd50k:352656
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\201946.wav,appliance_beep,fsd50k,real,0.0,fsd50k:201946
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\194279.wav,appliance_beep,fsd50k,real,0.0,fsd50k:194279
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\134067.wav,appliance_beep,fsd50k,real,0.0,fsd50k:134067
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\178137.wav,appliance_beep,fsd50k,real,0.0,fsd50k:178137
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\190582.wav,appliance_beep,fsd50k,real,0.0,fsd50k:190582
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\383629.wav,appliance_beep,fsd50k,real,0.0,fsd50k:383629
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\203941.wav,appliance_beep,fsd50k,real,0.0,fsd50k:203941
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\196380.wav,appliance_beep,fsd50k,real,0.0,fsd50k:196380
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\185755.wav,appliance_beep,fsd50k,real,0.0,fsd50k:185755
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\21986.wav,appliance_beep,fsd50k,real,0.0,fsd50k:21986
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\382620.wav,appliance_beep,fsd50k,real,0.0,fsd50k:382620
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\324275.wav,appliance_beep,fsd50k,real,0.0,fsd50k:324275
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\201945.wav,appliance_beep,fsd50k,real,0.0,fsd50k:201945
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\261593.wav,appliance_beep,fsd50k,real,0.0,fsd50k:261593
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\243607.wav,appliance_beep,fsd50k,real,0.0,fsd50k:243607
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\250096.wav,appliance_beep,fsd50k,real,0.0,fsd50k:250096
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\100634.wav,appliance_beep,fsd50k,real,0.0,fsd50k:100634
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\187314.wav,appliance_beep,fsd50k,real,0.0,fsd50k:187314
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\364805.wav,appliance_beep,fsd50k,real,0.0,fsd50k:364805
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\158509.wav,appliance_beep,fsd50k,real,0.0,fsd50k:158509
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\323128.wav,appliance_beep,fsd50k,real,0.0,fsd50k:323128
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\383601.wav,appliance_beep,fsd50k,real,0.0,fsd50k:383601
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\267901.wav,appliance_beep,fsd50k,real,0.0,fsd50k:267901
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\383624.wav,appliance_beep,fsd50k,real,0.0,fsd50k:383624
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\173000.wav,appliance_beep,fsd50k,real,0.0,fsd50k:173000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\144224.wav,appliance_beep,fsd50k,real,0.0,fsd50k:144224
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\417858.wav,appliance_beep,fsd50k,real,0.0,fsd50k:417858
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\275566.wav,appliance_beep,fsd50k,real,0.0,fsd50k:275566
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\275070.wav,appliance_beep,fsd50k,real,0.0,fsd50k:275070
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\203943.wav,appliance_beep,fsd50k,real,0.0,fsd50k:203943
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\203948.wav,appliance_beep,fsd50k,real,0.0,fsd50k:203948
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\422668.wav,appliance_beep,fsd50k,real,0.0,fsd50k:422668
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\196373.wav,appliance_beep,fsd50k,real,0.0,fsd50k:196373
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\196375.wav,appliance_beep,fsd50k,real,0.0,fsd50k:196375
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\399205.wav,appliance_beep,fsd50k,real,0.0,fsd50k:399205
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\411519.wav,appliance_beep,fsd50k,real,0.0,fsd50k:411519
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\411521.wav,appliance_beep,fsd50k,real,0.0,fsd50k:411521
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\21985.wav,appliance_beep,fsd50k,real,0.0,fsd50k:21985
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\69652.wav,appliance_beep,fsd50k,real,0.0,fsd50k:69652
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88112.wav,appliance_beep,fsd50k,real,0.0,fsd50k:88112
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\90193.wav,appliance_beep,fsd50k,real,0.0,fsd50k:90193
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\258175.wav,appliance_beep,fsd50k,real,0.0,fsd50k:258175
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\256160.wav,appliance_beep,fsd50k,real,0.0,fsd50k:256160
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\432313.wav,appliance_beep,fsd50k,real,0.0,fsd50k:432313
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\250048.wav,appliance_beep,fsd50k,real,0.0,fsd50k:250048
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\250050.wav,appliance_beep,fsd50k,real,0.0,fsd50k:250050
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\188828.wav,appliance_beep,fsd50k,real,0.0,fsd50k:188828
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\125420.wav,appliance_beep,fsd50k,real,0.0,fsd50k:125420
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\328188.wav,appliance_beep,fsd50k,real,0.0,fsd50k:328188
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\315919.wav,appliance_beep,fsd50k,real,0.0,fsd50k:315919
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\268917.wav,appliance_beep,fsd50k,real,0.0,fsd50k:268917
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\426615.wav,appliance_beep,fsd50k,real,0.0,fsd50k:426615
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\266891.wav,appliance_beep,fsd50k,real,0.0,fsd50k:266891
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\45721.wav,appliance_beep,fsd50k,real,0.0,fsd50k:45721
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\352958.wav,appliance_beep,fsd50k,real,0.0,fsd50k:352958
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\361153.wav,appliance_beep,fsd50k,real,0.0,fsd50k:361153
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\94933.wav,appliance_beep,fsd50k,real,0.0,fsd50k:94933
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\66289.wav,appliance_beep,fsd50k,real,0.0,fsd50k:66289
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\66291.wav,appliance_beep,fsd50k,real,0.0,fsd50k:66291
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\422649.wav,appliance_beep,fsd50k,real,0.0,fsd50k:422649
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\66300.wav,appliance_beep,fsd50k,real,0.0,fsd50k:66300
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\262911.wav,appliance_beep,fsd50k,real,0.0,fsd50k:262911
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\215819.wav,appliance_beep,fsd50k,real,0.0,fsd50k:215819
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\144236.wav,appliance_beep,fsd50k,real,0.0,fsd50k:144236
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\265088.wav,appliance_beep,fsd50k,real,0.0,fsd50k:265088
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\214020.wav,appliance_beep,fsd50k,real,0.0,fsd50k:214020
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\384009.wav,appliance_beep,fsd50k,real,0.0,fsd50k:384009
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\177209.wav,appliance_beep,fsd50k,real,0.0,fsd50k:177209
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\326730.wav,appliance_beep,fsd50k,real,0.0,fsd50k:326730
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\334947.wav,appliance_beep,fsd50k,real,0.0,fsd50k:334947
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\369844.wav,appliance_beep,fsd50k,real,0.0,fsd50k:369844
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\29962.wav,appliance_beep,fsd50k,real,0.0,fsd50k:29962
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\79147.wav,appliance_beep,fsd50k,real,0.0,fsd50k:79147
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\351545.wav,appliance_beep,fsd50k,real,0.0,fsd50k:351545
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\345421.wav,appliance_beep,fsd50k,real,0.0,fsd50k:345421
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\19880.wav,appliance_beep,fsd50k,real,0.0,fsd50k:19880
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\87466.wav,appliance_beep,fsd50k,real,0.0,fsd50k:87466
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\212531.wav,appliance_beep,fsd50k,real,0.0,fsd50k:212531
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\71255.wav,appliance_beep,fsd50k,real,0.0,fsd50k:71255
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\20101.wav,appliance_beep,fsd50k,real,0.0,fsd50k:20101
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\251540.wav,appliance_beep,fsd50k,real,0.0,fsd50k:251540
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\24271.wav,appliance_beep,fsd50k,real,0.0,fsd50k:24271
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\26348.wav,appliance_beep,fsd50k,real,0.0,fsd50k:26348
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\337657.wav,appliance_beep,fsd50k,real,0.0,fsd50k:337657
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\253713.wav,appliance_beep,fsd50k,real,0.0,fsd50k:253713
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\397161.wav,appliance_beep,fsd50k,real,0.0,fsd50k:397161
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\274289.wav,appliance_beep,fsd50k,real,0.0,fsd50k:274289
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\22410.wav,appliance_beep,fsd50k,real,0.0,fsd50k:22410
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\157590.wav,appliance_beep,fsd50k,real,0.0,fsd50k:157590
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\223183.wav,appliance_beep,fsd50k,real,0.0,fsd50k:223183
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\352230.wav,appliance_beep,fsd50k,real,0.0,fsd50k:352230
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\169958.wav,appliance_beep,fsd50k,real,0.0,fsd50k:169958
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\253928.wav,appliance_beep,fsd50k,real,0.0,fsd50k:253928
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\352235.wav,appliance_beep,fsd50k,real,0.0,fsd50k:352235
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\110570.wav,appliance_beep,fsd50k,real,0.0,fsd50k:110570
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\202128.wav,appliance_beep,fsd50k,real,0.0,fsd50k:202128
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\391978.wav,appliance_beep,fsd50k,real,0.0,fsd50k:391978
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\391980.wav,appliance_beep,fsd50k,real,0.0,fsd50k:391980
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\233493.wav,appliance_beep,fsd50k,real,0.0,fsd50k:233493
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\111125.wav,appliance_beep,fsd50k,real,0.0,fsd50k:111125
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\389664.wav,appliance_beep,fsd50k,real,0.0,fsd50k:389664
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\94264.wav,appliance_beep,fsd50k,real,0.0,fsd50k:94264
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\344637.wav,appliance_beep,fsd50k,real,0.0,fsd50k:344637
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\71786.wav,appliance_beep,fsd50k,real,0.0,fsd50k:71786
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\377514.wav,appliance_beep,fsd50k,real,0.0,fsd50k:377514
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\177880.wav,appliance_beep,fsd50k,real,0.0,fsd50k:177880
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\400687.wav,appliance_beep,fsd50k,real,0.0,fsd50k:400687
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\156109.wav,appliance_beep,fsd50k,real,0.0,fsd50k:156109
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\136694.wav,appliance_beep,fsd50k,real,0.0,fsd50k:136694
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\116346.wav,appliance_beep,fsd50k,real,0.0,fsd50k:116346
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\432641.wav,appliance_beep,fsd50k,real,0.0,fsd50k:432641
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\166441.wav,appliance_beep,fsd50k,real,0.0,fsd50k:166441
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\350283.wav,appliance_beep,fsd50k,real,0.0,fsd50k:350283
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\180339.wav,appliance_beep,fsd50k,real,0.0,fsd50k:180339
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\198844.wav,appliance_beep,fsd50k,real,0.0,fsd50k:198844
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\154840.wav,appliance_beep,fsd50k,real,0.0,fsd50k:154840
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\91366.wav,appliance_beep,fsd50k,real,0.0,fsd50k:91366
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\191733.wav,appliance_beep,fsd50k,real,0.0,fsd50k:191733
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\340905.wav,appliance_beep,fsd50k,real,0.0,fsd50k:340905
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\235962.wav,appliance_beep,fsd50k,real,0.0,fsd50k:235962
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\58368.wav,appliance_beep,fsd50k,real,0.0,fsd50k:58368
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\58371.wav,appliance_beep,fsd50k,real,0.0,fsd50k:58371
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\405358.wav,appliance_beep,fsd50k,real,0.0,fsd50k:405358
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\101851.wav,appliance_beep,fsd50k,real,0.0,fsd50k:101851
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\52053.wav,appliance_beep,fsd50k,real,0.0,fsd50k:52053
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\136522.wav,appliance_beep,fsd50k,real,0.0,fsd50k:136522
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\424295.wav,appliance_beep,fsd50k,real,0.0,fsd50k:424295
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\408417.wav,appliance_beep,fsd50k,real,0.0,fsd50k:408417
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\128013.wav,appliance_beep,fsd50k,real,0.0,fsd50k:128013
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\59512.wav,appliance_beep,fsd50k,real,0.0,fsd50k:59512
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\330956.wav,appliance_beep,fsd50k,real,0.0,fsd50k:330956
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\315904.wav,appliance_beep,fsd50k,real,0.0,fsd50k:315904
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\376374.wav,appliance_beep,fsd50k,real,0.0,fsd50k:376374
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\398415.wav,appliance_beep,fsd50k,real,0.0,fsd50k:398415
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\405592.wav,appliance_beep,fsd50k,real,0.0,fsd50k:405592
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\376926.wav,appliance_beep,fsd50k,real,0.0,fsd50k:376926
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\317075.wav,appliance_beep,fsd50k,real,0.0,fsd50k:317075
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\191125.wav,appliance_beep,fsd50k,real,0.0,fsd50k:191125
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\105117.wav,appliance_beep,fsd50k,real,0.0,fsd50k:105117
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\245940.wav,appliance_beep,fsd50k,real,0.0,fsd50k:245940
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\81085.wav,appliance_beep,fsd50k,real,0.0,fsd50k:81085
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\49310.wav,appliance_beep,fsd50k,real,0.0,fsd50k:49310
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\22847.wav,appliance_beep,fsd50k,real,0.0,fsd50k:22847
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\328541.wav,appliance_beep,fsd50k,real,0.0,fsd50k:328541
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\104803.wav,appliance_beep,fsd50k,real,0.0,fsd50k:104803
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\366440.wav,appliance_beep,fsd50k,real,0.0,fsd50k:366440
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\127857.wav,appliance_beep,fsd50k,real,0.0,fsd50k:127857
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\411030.wav,appliance_beep,fsd50k,real,0.0,fsd50k:411030
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\434085.wav,appliance_beep,fsd50k,real,0.0,fsd50k:434085
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\120229.wav,appliance_beep,fsd50k,real,0.0,fsd50k:120229
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\362918.wav,appliance_beep,fsd50k,real,0.0,fsd50k:362918
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\57806.wav,appliance_beep,fsd50k,real,0.0,fsd50k:57806
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\238561.wav,appliance_beep,fsd50k,real,0.0,fsd50k:238561
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\257001.wav,appliance_beep,fsd50k,real,0.0,fsd50k:257001
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\326645.wav,appliance_beep,fsd50k,real,0.0,fsd50k:326645
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\155639.wav,appliance_beep,fsd50k,real,0.0,fsd50k:155639
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\141309.wav,appliance_beep,fsd50k,real,0.0,fsd50k:141309
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\275353.wav,appliance_beep,fsd50k,real,0.0,fsd50k:275353
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\57695.wav,appliance_beep,fsd50k,real,0.0,fsd50k:57695
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\98948.wav,appliance_beep,fsd50k,real,0.0,fsd50k:98948
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\254822.wav,appliance_beep,fsd50k,real,0.0,fsd50k:254822
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\27785.wav,appliance_beep,fsd50k,real,0.0,fsd50k:27785
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\400697.wav,appliance_beep,fsd50k,real,0.0,fsd50k:400697
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\380482.wav,appliance_beep,fsd50k,real,0.0,fsd50k:380482
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\123305.wav,appliance_beep,fsd50k,real,0.0,fsd50k:123305
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\185631.wav,appliance_beep,fsd50k,real,0.0,fsd50k:185631
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\349187.wav,appliance_beep,fsd50k,real,0.0,fsd50k:349187
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\14575.wav,appliance_beep,fsd50k,real,0.0,fsd50k:14575
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\190953.wav,appliance_beep,fsd50k,real,0.0,fsd50k:190953
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\119555.wav,appliance_beep,fsd50k,real,0.0,fsd50k:119555
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\426784.wav,appliance_beep,fsd50k,real,0.0,fsd50k:426784
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\414494.wav,appliance_beep,fsd50k,real,0.0,fsd50k:414494
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\108536.wav,appliance_beep,fsd50k,real,0.0,fsd50k:108536
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\378898.wav,appliance_beep,fsd50k,real,0.0,fsd50k:378898
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\188032.wav,appliance_beep,fsd50k,real,0.0,fsd50k:188032
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\405572.wav,appliance_beep,fsd50k,real,0.0,fsd50k:405572
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\415298.wav,appliance_beep,fsd50k,real,0.0,fsd50k:415298
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\206082.wav,appliance_beep,fsd50k,real,0.0,fsd50k:206082
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\29623.wav,appliance_beep,fsd50k,real,0.0,fsd50k:29623
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\233062.wav,appliance_beep,fsd50k,real,0.0,fsd50k:233062
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\90649.wav,appliance_beep,fsd50k,real,0.0,fsd50k:90649
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\383778.wav,appliance_beep,fsd50k,real,0.0,fsd50k:383778
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\131597.wav,appliance_beep,fsd50k,real,0.0,fsd50k:131597
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\348322.wav,appliance_beep,fsd50k,real,0.0,fsd50k:348322
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\54277.wav,appliance_beep,fsd50k,real,0.0,fsd50k:54277
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\71222.wav,appliance_beep,fsd50k,real,0.0,fsd50k:71222
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\85088.wav,appliance_beep,fsd50k,real,0.0,fsd50k:85088
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\245860.wav,appliance_beep,fsd50k,real,0.0,fsd50k:245860
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\81062.wav,appliance_beep,fsd50k,real,0.0,fsd50k:81062
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\423103.wav,appliance_beep,fsd50k,real,0.0,fsd50k:423103
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\245445.wav,appliance_beep,fsd50k,real,0.0,fsd50k:245445
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\345808.wav,appliance_beep,fsd50k,real,0.0,fsd50k:345808
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\381728.wav,appliance_beep,fsd50k,real,0.0,fsd50k:381728
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\397097.wav,appliance_beep,fsd50k,real,0.0,fsd50k:397097
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\60755.wav,appliance_beep,fsd50k,real,0.0,fsd50k:60755
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\204186.wav,appliance_beep,fsd50k,real,0.0,fsd50k:204186
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\340920.wav,appliance_beep,fsd50k,real,0.0,fsd50k:340920
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\84925.wav,appliance_beep,fsd50k,real,0.0,fsd50k:84925
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\344600.wav,appliance_beep,fsd50k,real,0.0,fsd50k:344600
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\94213.wav,appliance_beep,fsd50k,real,0.0,fsd50k:94213
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\171451.wav,appliance_beep,fsd50k,real,0.0,fsd50k:171451
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\108469.wav,appliance_beep,fsd50k,real,0.0,fsd50k:108469
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\128867.wav,appliance_beep,fsd50k,real,0.0,fsd50k:128867
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\426785.wav,appliance_beep,fsd50k,real,0.0,fsd50k:426785
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\appliance_beep\05wEdbchyjM_10_000_20_000.wav,appliance_beep,audioset,real,19.9935,audioset:05wEdbchyjM
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\appliance_beep\0E8p38QTjgI_60_000_70_000.wav,appliance_beep,audioset,real,10.0081875,audioset:0E8p38QTjgI
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\appliance_beep\3cGGjixLbY0_30_000_40_000.wav,appliance_beep,audioset,real,10.008,audioset:3cGGjixLbY0
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\appliance_beep\4q-bJgKlVI0_260_000_270_000.wav,appliance_beep,audioset,real,19.9935,audioset:4q-bJgKlVI0
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\appliance_beep\4ZpeXiY0iZI_0_000_10_000.wav,appliance_beep,audioset,real,10.0078125,audioset:4ZpeXiY0iZI
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\appliance_beep\6ILTmnfHyl8_190_000_200_000.wav,appliance_beep,audioset,real,19.9935,audioset:6ILTmnfHyl8
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\88121.wav,siren,fsd50k,real,0.0,fsd50k:88121
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\89682.wav,siren,fsd50k,real,0.0,fsd50k:89682
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\421017.wav,siren,fsd50k,real,0.0,fsd50k:421017
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\168621.wav,siren,fsd50k,real,0.0,fsd50k:168621
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\156868.wav,siren,fsd50k,real,0.0,fsd50k:156868
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\23750.wav,siren,fsd50k,real,0.0,fsd50k:23750
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\203720.wav,siren,fsd50k,real,0.0,fsd50k:203720
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\277508.wav,siren,fsd50k,real,0.0,fsd50k:277508
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\258169.wav,siren,fsd50k,real,0.0,fsd50k:258169
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\326074.wav,siren,fsd50k,real,0.0,fsd50k:326074
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\324579.wav,siren,fsd50k,real,0.0,fsd50k:324579
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\117120.wav,siren,fsd50k,real,0.0,fsd50k:117120
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\117121.wav,siren,fsd50k,real,0.0,fsd50k:117121
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\71299.wav,siren,fsd50k,real,0.0,fsd50k:71299
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\58371.wav,siren,fsd50k,real,0.0,fsd50k:58371
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\117181.wav,siren,fsd50k,real,0.0,fsd50k:117181
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\133473.wav,siren,fsd50k,real,0.0,fsd50k:133473
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\361333.wav,siren,fsd50k,real,0.0,fsd50k:361333
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\119634.wav,siren,fsd50k,real,0.0,fsd50k:119634
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\115239.wav,siren,fsd50k,real,0.0,fsd50k:115239
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\siren\-Y1qiiugnk8_30_000_40_000.wav,siren,audioset,real,19.9935,audioset:-Y1qiiugnk8
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\siren\0PhU-PIsUMw_80_000_90_000.wav,siren,audioset,real,19.9935,audioset:0PhU-PIsUMw
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\siren\6F3YIb0Uw4I_30_000_40_000.wav,siren,audioset,real,19.9935,audioset:6F3YIb0Uw4I
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236129.wav,dog_bark,fsd50k,real,0.0,fsd50k:236129
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236209.wav,dog_bark,fsd50k,real,0.0,fsd50k:236209
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236224.wav,dog_bark,fsd50k,real,0.0,fsd50k:236224
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\348247.wav,dog_bark,fsd50k,real,0.0,fsd50k:348247
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\333914.wav,dog_bark,fsd50k,real,0.0,fsd50k:333914
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\118961.wav,dog_bark,fsd50k,real,0.0,fsd50k:118961
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\147672.wav,dog_bark,fsd50k,real,0.0,fsd50k:147672
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\29936.wav,dog_bark,fsd50k,real,0.0,fsd50k:29936
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\418108.wav,dog_bark,fsd50k,real,0.0,fsd50k:418108
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\162148.wav,dog_bark,fsd50k,real,0.0,fsd50k:162148
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\85362.wav,dog_bark,fsd50k,real,0.0,fsd50k:85362
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\398724.wav,dog_bark,fsd50k,real,0.0,fsd50k:398724
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\235913.wav,dog_bark,fsd50k,real,0.0,fsd50k:235913
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\332175.wav,dog_bark,fsd50k,real,0.0,fsd50k:332175
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\380350.wav,dog_bark,fsd50k,real,0.0,fsd50k:380350
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236016.wav,dog_bark,fsd50k,real,0.0,fsd50k:236016
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236019.wav,dog_bark,fsd50k,real,0.0,fsd50k:236019
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236028.wav,dog_bark,fsd50k,real,0.0,fsd50k:236028
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236026.wav,dog_bark,fsd50k,real,0.0,fsd50k:236026
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236040.wav,dog_bark,fsd50k,real,0.0,fsd50k:236040
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236043.wav,dog_bark,fsd50k,real,0.0,fsd50k:236043
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236050.wav,dog_bark,fsd50k,real,0.0,fsd50k:236050
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236052.wav,dog_bark,fsd50k,real,0.0,fsd50k:236052
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236058.wav,dog_bark,fsd50k,real,0.0,fsd50k:236058
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236055.wav,dog_bark,fsd50k,real,0.0,fsd50k:236055
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\365089.wav,dog_bark,fsd50k,real,0.0,fsd50k:365089
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\234030.wav,dog_bark,fsd50k,real,0.0,fsd50k:234030
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236099.wav,dog_bark,fsd50k,real,0.0,fsd50k:236099
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236111.wav,dog_bark,fsd50k,real,0.0,fsd50k:236111
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236117.wav,dog_bark,fsd50k,real,0.0,fsd50k:236117
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236127.wav,dog_bark,fsd50k,real,0.0,fsd50k:236127
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\420447.wav,dog_bark,fsd50k,real,0.0,fsd50k:420447
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236146.wav,dog_bark,fsd50k,real,0.0,fsd50k:236146
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236147.wav,dog_bark,fsd50k,real,0.0,fsd50k:236147
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\264833.wav,dog_bark,fsd50k,real,0.0,fsd50k:264833
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236176.wav,dog_bark,fsd50k,real,0.0,fsd50k:236176
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236178.wav,dog_bark,fsd50k,real,0.0,fsd50k:236178
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\85664.wav,dog_bark,fsd50k,real,0.0,fsd50k:85664
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236207.wav,dog_bark,fsd50k,real,0.0,fsd50k:236207
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\155317.wav,dog_bark,fsd50k,real,0.0,fsd50k:155317
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236213.wav,dog_bark,fsd50k,real,0.0,fsd50k:236213
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236216.wav,dog_bark,fsd50k,real,0.0,fsd50k:236216
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236233.wav,dog_bark,fsd50k,real,0.0,fsd50k:236233
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236235.wav,dog_bark,fsd50k,real,0.0,fsd50k:236235
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236239.wav,dog_bark,fsd50k,real,0.0,fsd50k:236239
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\220904.wav,dog_bark,fsd50k,real,0.0,fsd50k:220904
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236275.wav,dog_bark,fsd50k,real,0.0,fsd50k:236275
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\236281.wav,dog_bark,fsd50k,real,0.0,fsd50k:236281
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\404233.wav,dog_bark,fsd50k,real,0.0,fsd50k:404233
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\74513.wav,dog_bark,fsd50k,real,0.0,fsd50k:74513
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\372523.wav,dog_bark,fsd50k,real,0.0,fsd50k:372523
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\372526.wav,dog_bark,fsd50k,real,0.0,fsd50k:372526
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\372529.wav,dog_bark,fsd50k,real,0.0,fsd50k:372529
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\47926.wav,dog_bark,fsd50k,real,0.0,fsd50k:47926
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\387685.wav,dog_bark,fsd50k,real,0.0,fsd50k:387685
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\387690.wav,dog_bark,fsd50k,real,0.0,fsd50k:387690
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\193394.wav,dog_bark,fsd50k,real,0.0,fsd50k:193394
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\245666.wav,dog_bark,fsd50k,real,0.0,fsd50k:245666
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\98262.wav,dog_bark,fsd50k,real,0.0,fsd50k:98262
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\257585.wav,dog_bark,fsd50k,real,0.0,fsd50k:257585
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\264842.wav,dog_bark,fsd50k,real,0.0,fsd50k:264842
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\62335.wav,dog_bark,fsd50k,real,0.0,fsd50k:62335
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\159568.wav,dog_bark,fsd50k,real,0.0,fsd50k:159568
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\364993.wav,dog_bark,fsd50k,real,0.0,fsd50k:364993
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\89213.wav,dog_bark,fsd50k,real,0.0,fsd50k:89213
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\366219.wav,dog_bark,fsd50k,real,0.0,fsd50k:366219
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\185951.wav,dog_bark,fsd50k,real,0.0,fsd50k:185951
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\410174.wav,dog_bark,fsd50k,real,0.0,fsd50k:410174
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\424593.wav,dog_bark,fsd50k,real,0.0,fsd50k:424593
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\328076.wav,dog_bark,fsd50k,real,0.0,fsd50k:328076
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\407593.wav,dog_bark,fsd50k,real,0.0,fsd50k:407593
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\327666.wav,dog_bark,fsd50k,real,0.0,fsd50k:327666
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\178497.wav,dog_bark,fsd50k,real,0.0,fsd50k:178497
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\194252.wav,dog_bark,fsd50k,real,0.0,fsd50k:194252
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\15791.wav,dog_bark,fsd50k,real,0.0,fsd50k:15791
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\428860.wav,dog_bark,fsd50k,real,0.0,fsd50k:428860
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\118901.wav,dog_bark,fsd50k,real,0.0,fsd50k:118901
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\424958.wav,dog_bark,fsd50k,real,0.0,fsd50k:424958
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\412504.wav,dog_bark,fsd50k,real,0.0,fsd50k:412504
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\408807.wav,dog_bark,fsd50k,real,0.0,fsd50k:408807
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\dog_bark\0kdRxEiEGIs_190_000_200_000.wav,dog_bark,audioset,real,19.9935,audioset:0kdRxEiEGIs
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\dog_bark\1eI2-vhs0YY_21_000_31_000.wav,dog_bark,audioset,real,10.78125,audioset:1eI2-vhs0YY
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\dog_bark\2JEeD3O0NnM_30_000_40_000.wav,dog_bark,audioset,real,19.9935,audioset:2JEeD3O0NnM
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\277510.wav,doorbell,fsd50k,real,0.0,fsd50k:277510
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\69181.wav,doorbell,fsd50k,real,0.0,fsd50k:69181
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\361564.wav,doorbell,fsd50k,real,0.0,fsd50k:361564
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\100634.wav,doorbell,fsd50k,real,0.0,fsd50k:100634
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\187314.wav,doorbell,fsd50k,real,0.0,fsd50k:187314
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\275569.wav,doorbell,fsd50k,real,0.0,fsd50k:275569
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\81072.wav,doorbell,fsd50k,real,0.0,fsd50k:81072
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\171755.wav,doorbell,fsd50k,real,0.0,fsd50k:171755
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\196368.wav,doorbell,fsd50k,real,0.0,fsd50k:196368
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\196370.wav,doorbell,fsd50k,real,0.0,fsd50k:196370
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\196371.wav,doorbell,fsd50k,real,0.0,fsd50k:196371
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\196373.wav,doorbell,fsd50k,real,0.0,fsd50k:196373
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\79180.wav,doorbell,fsd50k,real,0.0,fsd50k:79180
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\399205.wav,doorbell,fsd50k,real,0.0,fsd50k:399205
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\31133.wav,doorbell,fsd50k,real,0.0,fsd50k:31133
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\223671.wav,doorbell,fsd50k,real,0.0,fsd50k:223671
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\249303.wav,doorbell,fsd50k,real,0.0,fsd50k:249303
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\131642.wav,doorbell,fsd50k,real,0.0,fsd50k:131642
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\doorbell\-9ek6eO0RtI_260_000_270_000.wav,doorbell,audioset,real,19.9935,audioset:-9ek6eO0RtI
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\doorbell\4c1omzV5pP8_90_000_100_000.wav,doorbell,audioset,real,19.9935,audioset:4c1omzV5pP8
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\doorbell\6WJitOS-RHw_110_000_120_000.wav,doorbell,audioset,real,19.9935,audioset:6WJitOS-RHw
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\doorbell\9Bln0rDEx_o_30_000_40_000.wav,doorbell,audioset,real,10.008,audioset:9Bln0rDEx
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\doorbell\BurGML_ZqSA_100_000_110_000.wav,doorbell,audioset,real,19.9935,audioset:BurGML
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\doorbell\LEwXpKnJMaQ_440_000_450_000.wav,doorbell,audioset,real,19.9935,audioset:LEwXpKnJMaQ
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\doorbell\M0HQ3VWaJpg_0_000_10_000.wav,doorbell,audioset,real,10.0078125,audioset:M0HQ3VWaJpg
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\342552.wav,knocking,fsd50k,real,0.0,fsd50k:342552
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\211501.wav,knocking,fsd50k,real,0.0,fsd50k:211501
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\211503.wav,knocking,fsd50k,real,0.0,fsd50k:211503
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\144946.wav,knocking,fsd50k,real,0.0,fsd50k:144946
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\144510.wav,knocking,fsd50k,real,0.0,fsd50k:144510
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\389798.wav,knocking,fsd50k,real,0.0,fsd50k:389798
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\412855.wav,knocking,fsd50k,real,0.0,fsd50k:412855
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\370899.wav,knocking,fsd50k,real,0.0,fsd50k:370899
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\164568.wav,knocking,fsd50k,real,0.0,fsd50k:164568
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\164571.wav,knocking,fsd50k,real,0.0,fsd50k:164571
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\370920.wav,knocking,fsd50k,real,0.0,fsd50k:370920
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\422639.wav,knocking,fsd50k,real,0.0,fsd50k:422639
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\182024.wav,knocking,fsd50k,real,0.0,fsd50k:182024
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\178991.wav,knocking,fsd50k,real,0.0,fsd50k:178991
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\209221.wav,knocking,fsd50k,real,0.0,fsd50k:209221
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\218981.wav,knocking,fsd50k,real,0.0,fsd50k:218981
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\113138.wav,knocking,fsd50k,real,0.0,fsd50k:113138
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\52290.wav,knocking,fsd50k,real,0.0,fsd50k:52290
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\144951.wav,knocking,fsd50k,real,0.0,fsd50k:144951
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\193841.wav,knocking,fsd50k,real,0.0,fsd50k:193841
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\193867.wav,knocking,fsd50k,real,0.0,fsd50k:193867
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\148946.wav,knocking,fsd50k,real,0.0,fsd50k:148946
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\349244.wav,knocking,fsd50k,real,0.0,fsd50k:349244
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\349284.wav,knocking,fsd50k,real,0.0,fsd50k:349284
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\349306.wav,knocking,fsd50k,real,0.0,fsd50k:349306
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\193830.wav,knocking,fsd50k,real,0.0,fsd50k:193830
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\193836.wav,knocking,fsd50k,real,0.0,fsd50k:193836
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\193837.wav,knocking,fsd50k,real,0.0,fsd50k:193837
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\193866.wav,knocking,fsd50k,real,0.0,fsd50k:193866
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\193871.wav,knocking,fsd50k,real,0.0,fsd50k:193871
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\232923.wav,knocking,fsd50k,real,0.0,fsd50k:232923
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\315935.wav,knocking,fsd50k,real,0.0,fsd50k:315935
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\251424.wav,knocking,fsd50k,real,0.0,fsd50k:251424
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\32297.wav,knocking,fsd50k,real,0.0,fsd50k:32297
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\94789.wav,knocking,fsd50k,real,0.0,fsd50k:94789
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\265968.wav,knocking,fsd50k,real,0.0,fsd50k:265968
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\265003.wav,knocking,fsd50k,real,0.0,fsd50k:265003
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\218984.wav,knocking,fsd50k,real,0.0,fsd50k:218984
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\188276.wav,knocking,fsd50k,real,0.0,fsd50k:188276
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\241644.wav,knocking,fsd50k,real,0.0,fsd50k:241644
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\250539.wav,knocking,fsd50k,real,0.0,fsd50k:250539
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.dev_audio\428164.wav,knocking,fsd50k,real,0.0,fsd50k:428164
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\327432.wav,knocking,fsd50k,real,0.0,fsd50k:327432
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\364835.wav,knocking,fsd50k,real,0.0,fsd50k:364835
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\372230.wav,knocking,fsd50k,real,0.0,fsd50k:372230
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\328126.wav,knocking,fsd50k,real,0.0,fsd50k:328126
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\41862.wav,knocking,fsd50k,real,0.0,fsd50k:41862
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\347585.wav,knocking,fsd50k,real,0.0,fsd50k:347585
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\402452.wav,knocking,fsd50k,real,0.0,fsd50k:402452
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\142350.wav,knocking,fsd50k,real,0.0,fsd50k:142350
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\210535.wav,knocking,fsd50k,real,0.0,fsd50k:210535
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\353036.wav,knocking,fsd50k,real,0.0,fsd50k:353036
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\60748.wav,knocking,fsd50k,real,0.0,fsd50k:60748
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\187284.wav,knocking,fsd50k,real,0.0,fsd50k:187284
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\fsd50k\FSD50K.eval_audio\352673.wav,knocking,fsd50k,real,0.0,fsd50k:352673
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\knocking\-JBvPwxaVVg_110_000_120_000.wav,knocking,audioset,real,19.9935,audioset:-JBvPwxaVVg
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\knocking\0EM3MvTgPL4_20_000_30_000.wav,knocking,audioset,real,19.9935,audioset:0EM3MvTgPL4
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\knocking\0I_Pi3zt4WY_0_000_10_000.wav,knocking,audioset,real,10.0078125,audioset:0I
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\knocking\1U7l0iDgxJ0_30_000_40_000.wav,knocking,audioset,real,10.008,audioset:1U7l0iDgxJ0
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\knocking\9pcuvLLUPS8_80_000_90_000.wav,knocking,audioset,real,19.9935,audioset:9pcuvLLUPS8
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\smoke_alarm\02rLonMSO9k_60_000_70_000.wav,smoke_alarm,audioset,real,19.9935,audioset:02rLonMSO9k
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\smoke_alarm\8guASCeupec_180_000_190_000.wav,smoke_alarm,audioset,real,10.008875,audioset:8guASCeupec
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\smoke_alarm\CSfbHfwsIVE_20_000_30_000.wav,smoke_alarm,audioset,real,19.9935,audioset:CSfbHfwsIVE
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\baby_cry\IlcfrqcH7tE_60_000_70_000.wav,baby_cry,audioset,real,19.9935,audioset:IlcfrqcH7tE
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\baby_cry\YUhIbX0xn_E_30_000_40_000.wav,baby_cry,audioset,real,19.9935,audioset:YUhIbX0xn
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\audioset\baby_cry\Z5wu71zydKE_0_000_10_000.wav,baby_cry,audioset,real,10.0078125,audioset:Z5wu71zydKE
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\unlabel_in_domain\Y25DvbDv0-94_110.000_120.000.wav,background,desed,real,10.0,desed:unlabel_in_domain:Y25DvbDv0-94_110.000_120.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\unlabel_in_domain\Y3daSrt5mRTM_10.000_20.000.wav,background,desed,real,10.0,desed:unlabel_in_domain:Y3daSrt5mRTM_10.000_20.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\unlabel_in_domain\Y4kaM8FO0tX0_18.000_28.000.wav,background,desed,real,9.469206349206349,desed:unlabel_in_domain:Y4kaM8FO0tX0_18.000_28.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\unlabel_in_domain\YBoe3MeEpn_c_380.000_390.000.wav,background,desed,real,10.0,desed:unlabel_in_domain:YBoe3MeEpn_c_380.000_390.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\unlabel_in_domain\YeqeZwoNpZNU_210.000_220.000.wav,background,desed,real,10.0,desed:unlabel_in_domain:YeqeZwoNpZNU_210.000_220.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\unlabel_in_domain\YjdLSYuBzSgs_280.000_290.000.wav,background,desed,real,10.0,desed:unlabel_in_domain:YjdLSYuBzSgs_280.000_290.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\unlabel_in_domain\Ysh3SY0ulr-8_20.000_30.000.wav,background,desed,real,10.0,desed:unlabel_in_domain:Ysh3SY0ulr-8_20.000_30.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\Y16ccKlJF5H8_6.000_16.000.wav,background,desed,real,9.162630385487528,desed:weak:Y16ccKlJF5H8_6.000_16.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\Y16th_TIPv84_30.000_40.000.wav,background,desed,real,10.0,desed:weak:Y16th_TIPv84_30.000_40.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\Y1b1b-9_AcFg_30.000_40.000.wav,background,desed,real,10.0,desed:weak:Y1b1b-9_AcFg_30.000_40.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\Y1DVyj_Q5f0A_12.000_22.000.wav,background,desed,real,10.0,desed:weak:Y1DVyj_Q5f0A_12.000_22.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\Y1Unp4vddTlM_30.000_40.000.wav,background,desed,real,10.0,desed:weak:Y1Unp4vddTlM_30.000_40.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\Y1VyUmkngG5g_10.000_20.000.wav,background,desed,real,10.0,desed:weak:Y1VyUmkngG5g_10.000_20.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\Y2A0V2P_k54o_140.000_150.000.wav,background,desed,real,10.0,desed:weak:Y2A0V2P_k54o_140.000_150.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\Y2BdRnFt3tSY_180.000_190.000.wav,background,desed,real,10.0,desed:weak:Y2BdRnFt3tSY_180.000_190.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\Y2gvtmPZBNqw_30.000_40.000.wav,background,desed,real,10.0,desed:weak:Y2gvtmPZBNqw_30.000_40.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\Y3BcwNM72zcQ_10.000_20.000.wav,background,desed,real,10.0,desed:weak:Y3BcwNM72zcQ_10.000_20.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\Ybm0xs7iYwo4_60.000_70.000.wav,background,desed,real,10.0,desed:weak:Ybm0xs7iYwo4_60.000_70.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\YbRUUPDD_nSQ_22.000_32.000.wav,background,desed,real,10.0,desed:weak:YbRUUPDD_nSQ_22.000_32.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\YL7bzKI26Pek_190.000_200.000.wav,background,desed,real,10.0,desed:weak:YL7bzKI26Pek_190.000_200.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\YL9_QOpRG8s8_0.000_10.000.wav,background,desed,real,10.0,desed:weak:YL9_QOpRG8s8_0.000_10.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\YMkF2nVQypFM_30.000_40.000.wav,background,desed,real,10.0,desed:weak:YMkF2nVQypFM_30.000_40.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\YMsy4mmS1DYc_110.000_120.000.wav,background,desed,real,10.0,desed:weak:YMsy4mmS1DYc_110.000_120.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\YrzAqETGwotg_20.000_30.000.wav,background,desed,real,10.0,desed:weak:YrzAqETGwotg_20.000_30.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\YTgp484iUwEg_190.000_200.000.wav,background,desed,real,10.0,desed:weak:YTgp484iUwEg_190.000_200.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\YVafgccb1ubk_320.000_330.000.wav,background,desed,real,10.0,desed:weak:YVafgccb1ubk_320.000_330.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\YYTdVeMwwYkY_11.000_21.000.wav,background,desed,real,9.967619047619047,desed:weak:YYTdVeMwwYkY_11.000_21.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\train\weak\YzNvgZ5QPAFI_30.000_40.000.wav,background,desed,real,10.0,desed:weak:YzNvgZ5QPAFI_30.000_40.000
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\0-0MLvQfung_0_10.wav,background,desed,real,10.0,desed:public:0-0MLvQfung_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\06gFpwTehEM_0_10.wav,background,desed,real,10.0,desed:public:06gFpwTehEM_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\0B_FmLiGad0_117_127.wav,background,desed,real,10.0,desed:public:0B_FmLiGad0_117_127
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\0JPrU0UV6cQ_185_195.wav,background,desed,real,10.0,desed:public:0JPrU0UV6cQ_185_195
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\1LKP1ZyHgVg_0_10.wav,background,desed,real,10.0,desed:public:1LKP1ZyHgVg_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\1PG36qCNq-8_598_608.wav,background,desed,real,10.0,desed:public:1PG36qCNq-8_598_608
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\2MN7pxnGG4g_0_10.wav,background,desed,real,10.0,desed:public:2MN7pxnGG4g_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\2rscFDAe1qI_0_10.wav,background,desed,real,10.0,desed:public:2rscFDAe1qI_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\3awAJGoAyeI_456_466.wav,background,desed,real,10.0,desed:public:3awAJGoAyeI_456_466
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\3ssQMGnK118_364_374.wav,background,desed,real,10.0,desed:public:3ssQMGnK118_364_374
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\4YNJix0AJBA_288_298.wav,background,desed,real,10.0,desed:public:4YNJix0AJBA_288_298
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\50PqzTQomOM_137_147.wav,background,desed,real,10.0,desed:public:50PqzTQomOM_137_147
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\842HgZcd2e8_102_112.wav,background,desed,real,10.0,desed:public:842HgZcd2e8_102_112
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\87wrn2pq0l0_19_29.wav,background,desed,real,10.0,desed:public:87wrn2pq0l0_19_29
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\9CjEdliO2Mc_34_44.wav,background,desed,real,10.0,desed:public:9CjEdliO2Mc_34_44
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\9DYcovm9i0M_741_751.wav,background,desed,real,10.0,desed:public:9DYcovm9i0M_741_751
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\9zkkUJh91pM_50_60.wav,background,desed,real,10.0,desed:public:9zkkUJh91pM_50_60
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\A4ajRYMfoTw_0_10.wav,background,desed,real,10.0,desed:public:A4ajRYMfoTw_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\AaeemnJDijQ_250_260.wav,background,desed,real,10.0,desed:public:AaeemnJDijQ_250_260
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\aBA1eEsIktM_19_29.wav,background,desed,real,10.0,desed:public:aBA1eEsIktM_19_29
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\AtZDE37weFM_443_453.wav,background,desed,real,10.0,desed:public:AtZDE37weFM_443_453
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\AW9ZKFZKhDE_49_59.wav,background,desed,real,10.0,desed:public:AW9ZKFZKhDE_49_59
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\A_Ove_2c-UQ_37_47.wav,background,desed,real,10.0,desed:public:A_Ove_2c-UQ_37_47
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\b3fGGBCgGTM_0_10.wav,background,desed,real,10.0,desed:public:b3fGGBCgGTM_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\bArpayhy7Mw_0_10.wav,background,desed,real,10.0,desed:public:bArpayhy7Mw_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\bytycbbtLdo_477_487.wav,background,desed,real,10.0,desed:public:bytycbbtLdo_477_487
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\CEdJH2tBDfo_25_35.wav,background,desed,real,10.0,desed:public:CEdJH2tBDfo_25_35
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\cLgqUWTSbJQ_0_10.wav,background,desed,real,10.0,desed:public:cLgqUWTSbJQ_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\D4S8gsjX0KQ_400_410.wav,background,desed,real,10.0,desed:public:D4S8gsjX0KQ_400_410
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\DaPDBXyAwtc_315_325.wav,background,desed,real,10.0,desed:public:DaPDBXyAwtc_315_325
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\dfRtayqQAls_14_24.wav,background,desed,real,10.0,desed:public:dfRtayqQAls_14_24
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\dfRtayqQAls_55_65.wav,background,desed,real,10.0,desed:public:dfRtayqQAls_55_65
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\E19MFHRAJB8_516_526.wav,background,desed,real,10.0,desed:public:E19MFHRAJB8_516_526
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\E5FKAyY7rjI_0_10.wav,background,desed,real,10.0,desed:public:E5FKAyY7rjI_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\e8jhGkgHG44_0_10.wav,background,desed,real,10.0,desed:public:e8jhGkgHG44_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\EED6P07onn8_210_220.wav,background,desed,real,10.0,desed:public:EED6P07onn8_210_220
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\ej9V6yE1kzs_0_10.wav,background,desed,real,10.0,desed:public:ej9V6yE1kzs_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\eLQHmLaMOOI_0_10.wav,background,desed,real,10.0,desed:public:eLQHmLaMOOI_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\eXg3xAdtBNY_957_967.wav,background,desed,real,10.0,desed:public:eXg3xAdtBNY_957_967
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\Eylcb4rbLSo_242_252.wav,background,desed,real,10.0,desed:public:Eylcb4rbLSo_242_252
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\FX1emZuec5w_7_17.wav,background,desed,real,10.0,desed:public:FX1emZuec5w_7_17
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\FXutBrd9vrM_0_10.wav,background,desed,real,10.0,desed:public:FXutBrd9vrM_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\G5wlhYFdlxw_508_518.wav,background,desed,real,10.0,desed:public:G5wlhYFdlxw_508_518
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\gHuQbIVXyag_12_22.wav,background,desed,real,10.0,desed:public:gHuQbIVXyag_12_22
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\GiItnQaLIug_1279_1289.wav,background,desed,real,10.0,desed:public:GiItnQaLIug_1279_1289
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\G_gXG6mIBwI_0_10.wav,background,desed,real,10.0,desed:public:G_gXG6mIBwI_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\HLIlAH2CjFw_488_498.wav,background,desed,real,10.0,desed:public:HLIlAH2CjFw_488_498
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\I0FoWHYWHdQ_109_119.wav,background,desed,real,10.0,desed:public:I0FoWHYWHdQ_109_119
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\I0FoWHYWHdQ_187_197.wav,background,desed,real,10.0,desed:public:I0FoWHYWHdQ_187_197
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\iVNxnElSF2M_0_10.wav,background,desed,real,10.0,desed:public:iVNxnElSF2M_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\IzxcAbblWco_3_13.wav,background,desed,real,10.0,desed:public:IzxcAbblWco_3_13
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\JuxXzuhHtC8_8_18.wav,background,desed,real,10.0,desed:public:JuxXzuhHtC8_8_18
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\kXH3gubXqmI_463_473.wav,background,desed,real,10.0,desed:public:kXH3gubXqmI_463_473
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\LKABaHrgJbs_0_10.wav,background,desed,real,10.0,desed:public:LKABaHrgJbs_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\Mhtd0LawnIc_1_11.wav,background,desed,real,10.0,desed:public:Mhtd0LawnIc_1_11
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\MsU_XyZisio_0_10.wav,background,desed,real,10.0,desed:public:MsU_XyZisio_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\nBVVRNFivnA_0_10.wav,background,desed,real,10.0,desed:public:nBVVRNFivnA_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\NFTiAWQZgdQ_20_30.wav,background,desed,real,10.0,desed:public:NFTiAWQZgdQ_20_30
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\NpaZI5_hk18_224_234.wav,background,desed,real,10.0,desed:public:NpaZI5_hk18_224_234
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\nPS9ED01s3I_0_10.wav,background,desed,real,10.0,desed:public:nPS9ED01s3I_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\O0rsix08f50_0_10.wav,background,desed,real,10.0,desed:public:O0rsix08f50_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\oe2WvuNIMEM_226_236.wav,background,desed,real,10.0,desed:public:oe2WvuNIMEM_226_236
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\oOY8XDS9AXE_25_35.wav,background,desed,real,10.0,desed:public:oOY8XDS9AXE_25_35
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\oQ2ERbbqL34_14_24.wav,background,desed,real,10.0,desed:public:oQ2ERbbqL34_14_24
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\OULuMUbLmLw_0_10.wav,background,desed,real,10.0,desed:public:OULuMUbLmLw_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\PfOrbtKdC8E_9_19.wav,background,desed,real,10.0,desed:public:PfOrbtKdC8E_9_19
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\pZ5g7ztW7iM_250_260.wav,background,desed,real,10.0,desed:public:pZ5g7ztW7iM_250_260
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\Q1SONPdUnww_0_10.wav,background,desed,real,10.0,desed:public:Q1SONPdUnww_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\QE463qYkj8c_997_1007.wav,background,desed,real,10.0,desed:public:QE463qYkj8c_997_1007
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\qoctnXzSYnk_0_7.wav,background,desed,real,7.0,desed:public:qoctnXzSYnk_0_7
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\Qo_LHgcj0ao_34_44.wav,background,desed,real,10.0,desed:public:Qo_LHgcj0ao_34_44
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\QsY7F-ecD_U_4_14.wav,background,desed,real,10.0,desed:public:QsY7F-ecD_U_4_14
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\QwczfjpP1BU_0_10.wav,background,desed,real,10.0,desed:public:QwczfjpP1BU_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\rNhv6U3mT4Y_9_19.wav,background,desed,real,10.0,desed:public:rNhv6U3mT4Y_9_19
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\r_CUAdmKG7Q_24_34.wav,background,desed,real,10.0,desed:public:r_CUAdmKG7Q_24_34
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\scL0NmgauxQ_0_10.wav,background,desed,real,10.0,desed:public:scL0NmgauxQ_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\sd1gAgsXMsc_77_87.wav,background,desed,real,10.0,desed:public:sd1gAgsXMsc_77_87
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\sO7U0uxgOcA_0_10.wav,background,desed,real,10.0,desed:public:sO7U0uxgOcA_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\sUPF7cCn66k_336_346.wav,background,desed,real,10.0,desed:public:sUPF7cCn66k_336_346
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\t2XGcLwnMww_0_10.wav,background,desed,real,10.0,desed:public:t2XGcLwnMww_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\t4nbHLc79wM_265_275.wav,background,desed,real,10.0,desed:public:t4nbHLc79wM_265_275
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\t8QP9mcBULY_540_550.wav,background,desed,real,10.0,desed:public:t8QP9mcBULY_540_550
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\t9nEkbCWavs_263_273.wav,background,desed,real,10.0,desed:public:t9nEkbCWavs_263_273
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\ToMpoUakDfw_252_262.wav,background,desed,real,10.0,desed:public:ToMpoUakDfw_252_262
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\TqMRd9pxWao_169_179.wav,background,desed,real,10.0,desed:public:TqMRd9pxWao_169_179
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\tWSiJKKZhNc_1070_1080.wav,background,desed,real,10.0,desed:public:tWSiJKKZhNc_1070_1080
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\uRLJKuTPoE0_160_170.wav,background,desed,real,10.0,desed:public:uRLJKuTPoE0_160_170
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\uTTeGZtf8gw_0_10.wav,background,desed,real,10.0,desed:public:uTTeGZtf8gw_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\uu3PCZlcQkE_146_156.wav,background,desed,real,10.0,desed:public:uu3PCZlcQkE_146_156
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\vbk65s3inHM_0_10.wav,background,desed,real,10.0,desed:public:vbk65s3inHM_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\VCCRNTbfc_c_0_10.wav,background,desed,real,10.0,desed:public:VCCRNTbfc_c_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\VDMOFa8iRqo_396_406.wav,background,desed,real,10.0,desed:public:VDMOFa8iRqo_396_406
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\Vh7YjTK2DMc_10_20.wav,background,desed,real,10.0,desed:public:Vh7YjTK2DMc_10_20
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\W7GdMZgJy64_480_490.wav,background,desed,real,10.0,desed:public:W7GdMZgJy64_480_490
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\wh7IGUd9vXI_129_139.wav,background,desed,real,10.0,desed:public:wh7IGUd9vXI_129_139
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\Wo8DdXBsRkY_460_470.wav,background,desed,real,10.0,desed:public:Wo8DdXBsRkY_460_470
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\WuTzULvSYPo_216_226.wav,background,desed,real,10.0,desed:public:WuTzULvSYPo_216_226
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\w_cy-aa4JGo_182_192.wav,background,desed,real,10.0,desed:public:w_cy-aa4JGo_182_192
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\xIZpF7kMWkY_40_50.wav,background,desed,real,10.0,desed:public:xIZpF7kMWkY_40_50
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\YFG7d4y7EqU_535_545.wav,background,desed,real,10.0,desed:public:YFG7d4y7EqU_535_545
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\yTTiQEZzNBc_0_5.wav,background,desed,real,5.0,desed:public:yTTiQEZzNBc_0_5
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\yuWjGeMSdB8_0_10.wav,background,desed,real,10.0,desed:public:yuWjGeMSdB8_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\YVe9cQaEVLA_90_100.wav,background,desed,real,10.0,desed:public:YVe9cQaEVLA_90_100
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\yyB3bhKiffM_195_205.wav,background,desed,real,10.0,desed:public:yyB3bhKiffM_195_205
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\YYqaGwN2epw_22_32.wav,background,desed,real,10.0,desed:public:YYqaGwN2epw_22_32
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\YYqaGwN2epw_46_56.wav,background,desed,real,10.0,desed:public:YYqaGwN2epw_46_56
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\z3U0udLH974_0_10.wav,background,desed,real,10.0,desed:public:z3U0udLH974_0_10
-C:\Users\tprac\Downloads\sahara\sahara\data\raw\desed\real\audio\eval\public\ZLdapxSVyV4_106_116.wav,background,desed,real,10.0,desed:public:ZLdapxSVyV4_106_116
+filepath,label,source_dataset,source_type,duration_sec,recording_id,recorder
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/1-74517-A-37.wav,appliance_beep,esc50,real,5.0,fs:74517,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/223740.wav,appliance_beep,fsd50k,real,0.0,fs:223740,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/408767.wav,appliance_beep,fsd50k,real,0.0,fs:408767,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/71786.wav,appliance_beep,fsd50k,real,0.0,fs:71786,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/268525.wav,appliance_beep,fsd50k,real,0.0,fs:268525,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/94264.wav,appliance_beep,fsd50k,real,0.0,fs:94264,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/186380.wav,appliance_beep,fsd50k,real,0.0,fs:186380,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/4-169508-A-37.wav,appliance_beep,esc50,real,5.0,fs:169508,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/371620.wav,appliance_beep,fsd50k,real,0.0,fs:371620,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/262918.wav,appliance_beep,fsd50k,real,0.0,fs:262918,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/389427.wav,appliance_beep,fsd50k,real,0.0,fs:389427,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/85923.wav,appliance_beep,fsd50k,real,0.0,fs:85923,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/175401.wav,appliance_beep,fsd50k,real,0.0,fs:175401,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/83184.wav,appliance_beep,fsd50k,real,0.0,fs:83184,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/190577.wav,appliance_beep,fsd50k,real,0.0,fs:190577,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/appliance_beep/-SiNctMT5vE_5_000_15_000.wav,appliance_beep,audioset,real,13.9935,yt:-SiNctMT5vE,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/5-211408-A-37.wav,appliance_beep,esc50,real,5.0,fs:211408,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/111124.wav,appliance_beep,fsd50k,real,0.0,fs:111124,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/257435.wav,appliance_beep,fsd50k,real,0.0,fs:257435,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/422815.wav,appliance_beep,fsd50k,real,0.0,fs:422815,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/326193.wav,appliance_beep,fsd50k,real,0.0,fs:326193,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/85458.wav,appliance_beep,fsd50k,real,0.0,fs:85458,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/4-209536-A-37.wav,appliance_beep,esc50,real,5.0,fs:209536,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/appliance_beep/2E_cfP2PLUQ_40_000_50_000.wav,appliance_beep,audioset,real,10.0158125,yt:2E_cfP2PLUQ,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/appliance_beep/21hoAaR-W_c_160_000_170_000.wav,appliance_beep,audioset,real,19.9935,yt:21hoAaR-W_c,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/94214.wav,appliance_beep,fsd50k,real,0.0,fs:94214,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/144231.wav,appliance_beep,fsd50k,real,0.0,fs:144231,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/211934.wav,appliance_beep,fsd50k,real,0.0,fs:211934,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/56257.wav,appliance_beep,fsd50k,real,0.0,fs:56257,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/345486.wav,appliance_beep,fsd50k,real,0.0,fs:345486,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/257436.wav,appliance_beep,fsd50k,real,0.0,fs:257436,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/5-219242-A-37.wav,appliance_beep,esc50,real,5.0,fs:219242,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/5-219242-B-37.wav,appliance_beep,esc50,real,5.0,fs:219242,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/131597.wav,appliance_beep,fsd50k,real,0.0,fs:131597,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/48401.wav,appliance_beep,fsd50k,real,0.0,fs:48401,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/209539.wav,appliance_beep,fsd50k,real,0.0,fs:209539,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/144225.wav,appliance_beep,fsd50k,real,0.0,fs:144225,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/111125.wav,appliance_beep,fsd50k,real,0.0,fs:111125,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/344600.wav,appliance_beep,fsd50k,real,0.0,fs:344600,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/345485.wav,appliance_beep,fsd50k,real,0.0,fs:345485,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/baby_cry/HVv0jG7J0to_490_000_500_000.wav,baby_cry,audioset,real,10.0185,yt:HVv0jG7J0to,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/baby_cry/ESM5iFLydek_130_000_140_000.wav,baby_cry,audioset,real,19.9935,yt:ESM5iFLydek,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/baby_cry/NQddcOXRcmI_9_000_19_000.wav,baby_cry,audioset,real,10.017125,yt:NQddcOXRcmI,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/2-66637-A-20.wav,baby_cry,esc50,real,5.0,fs:66637,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/2-66637-B-20.wav,baby_cry,esc50,real,5.0,fs:66637,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/baby_cry/Zod0m8VClJA_3_000_13_000.wav,baby_cry,audioset,real,11.9935,yt:Zod0m8VClJA,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/2-80482-A-20.wav,baby_cry,esc50,real,5.0,fs:80482,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/train/weak/Y3drnEnI8bls_10.000_20.000.wav,background,desed,real,10.0,yt:3drnEnI8bls,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/sreuIxHKt0E_33_43.wav,background,desed,real,10.0,yt:sreuIxHKt0E,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/HpRvSpsed7w_222_232.wav,background,desed,real,10.0,yt:HpRvSpsed7w,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/HpRvSpsed7w_240_250.wav,background,desed,real,10.0,yt:HpRvSpsed7w,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/G9z_0Zq28_Y_216_226.wav,background,desed,real,10.0,yt:G9z_0Zq28_Y,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/G9z_0Zq28_Y_260_270.wav,background,desed,real,10.0,yt:G9z_0Zq28_Y,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/B5gInnQnoLk_423_433.wav,background,desed,real,10.0,yt:B5gInnQnoLk,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/B4gnwvuWaZ4_40_50.wav,background,desed,real,10.0,yt:B4gnwvuWaZ4,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/D9l2WbEm2p8_36_46.wav,background,desed,real,10.0,yt:D9l2WbEm2p8,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/9ukvwp1Z1WQ_0_10.wav,background,desed,real,10.0,yt:9ukvwp1Z1WQ,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/train/weak/Y0Sq8ge7D4wU_3.000_13.000.wav,background,desed,real,9.84063492063492,yt:0Sq8ge7D4wU,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/wPqpto9P1fU_0_10.wav,background,desed,real,10.0,yt:wPqpto9P1fU,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/aBA1eEsIktM_19_29.wav,background,desed,real,10.0,yt:aBA1eEsIktM,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/7DE3rPuroG0_65_75.wav,background,desed,real,10.0,yt:7DE3rPuroG0,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/45OrmgLniPE_940_950.wav,background,desed,real,10.0,yt:45OrmgLniPE,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/6ze6mWloUw8_144_154.wav,background,desed,real,10.0,yt:6ze6mWloUw8,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/Q48FfV6udXs_296_306.wav,background,desed,real,10.0,yt:Q48FfV6udXs,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/-dJ-9S6PdYM_498_508.wav,background,desed,real,10.0,yt:-dJ-9S6PdYM,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/JYwj64SVBHY_395_405.wav,background,desed,real,10.0,yt:JYwj64SVBHY,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/OXMj_D9oB44_16_26.wav,background,desed,real,10.0,yt:OXMj_D9oB44,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/f_OA9Yqkhx4_0_9.wav,background,desed,real,9.0,yt:f_OA9Yqkhx4,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/5dPr-ueDFRE_10_20.wav,background,desed,real,10.0,yt:5dPr-ueDFRE,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/train/weak/Y2gs0Ltt5niY_30.000_40.000.wav,background,desed,real,10.0,yt:2gs0Ltt5niY,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/b3fGGBCgGTM_0_10.wav,background,desed,real,10.0,yt:b3fGGBCgGTM,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/8ykvfuAfh3Q_23_33.wav,background,desed,real,10.0,yt:8ykvfuAfh3Q,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/cKgGzyBosrA_14_24.wav,background,desed,real,10.0,yt:cKgGzyBosrA,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/R85OVJX6fAo_9_19.wav,background,desed,real,10.0,yt:R85OVJX6fAo,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/PERVXXw9le4_758_768.wav,background,desed,real,10.0,yt:PERVXXw9le4,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/RzXYJAIr27U_0_10.wav,background,desed,real,10.0,yt:RzXYJAIr27U,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/vBShYV79LK0_782_792.wav,background,desed,real,10.0,yt:vBShYV79LK0,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/train/weak/Y2nSWjsRllr8_30.000_40.000.wav,background,desed,real,10.0,yt:2nSWjsRllr8,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/validation/validation/YwK3BpK1-Apw_30.000_40.000.wav,background,desed,real,10.0,yt:wK3BpK1-Apw,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/URBuec48buc_0_10.wav,background,desed,real,10.0,yt:URBuec48buc,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/J1TPeGMCAYw_1312_1322.wav,background,desed,real,10.0,yt:J1TPeGMCAYw,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/zqH2H6OYy_M_107_117.wav,background,desed,real,10.0,yt:zqH2H6OYy_M,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/03Gx1-dXY6A_466_476.wav,background,desed,real,10.0,yt:03Gx1-dXY6A,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/BlrC0i8_67g_9_19.wav,background,desed,real,10.0,yt:BlrC0i8_67g,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/OULuMUbLmLw_0_10.wav,background,desed,real,10.0,yt:OULuMUbLmLw,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/QsY7F-ecD_U_4_14.wav,background,desed,real,10.0,yt:QsY7F-ecD_U,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/aUf48Qu6TaE_1_11.wav,background,desed,real,10.0,yt:aUf48Qu6TaE,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/train/weak/Y0DtJdRFPmS4_30.000_40.000.wav,background,desed,real,10.0,yt:0DtJdRFPmS4,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/5zF2tJIkqdU_30_40.wav,background,desed,real,10.0,yt:5zF2tJIkqdU,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/PFPzBVXoawI_1607_1617.wav,background,desed,real,10.0,yt:PFPzBVXoawI,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/IhaS57v37Nk_153_163.wav,background,desed,real,10.0,yt:IhaS57v37Nk,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/TkOqM7blqz0_172_182.wav,background,desed,real,10.0,yt:TkOqM7blqz0,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/LNGP0hK-qQc_134_144.wav,background,desed,real,10.0,yt:LNGP0hK-qQc,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/68BYINd-Wr8_329_339.wav,background,desed,real,10.0,yt:68BYINd-Wr8,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/Y5PYnkpkAZQ_0_10.wav,background,desed,real,10.0,yt:5PYnkpkAZQ_,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/train/weak/Y0i31R7PS-GA_20.000_30.000.wav,background,desed,real,9.675124716553288,yt:0i31R7PS-GA,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/NiY7nu3xu5Q_290_300.wav,background,desed,real,10.0,yt:NiY7nu3xu5Q,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/HLIlAH2CjFw_488_498.wav,background,desed,real,10.0,yt:HLIlAH2CjFw,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/0BYDGId5pdo_0_10.wav,background,desed,real,10.0,yt:0BYDGId5pdo,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/PeNwCvGYEtg_130_140.wav,background,desed,real,10.0,yt:PeNwCvGYEtg,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/2sMzNr0q_as_246_256.wav,background,desed,real,10.0,yt:2sMzNr0q_as,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/udvgswbGqyE_0_10.wav,background,desed,real,10.0,yt:udvgswbGqyE,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/YMZ1Y6r_9Jc_205_215.wav,background,desed,real,10.0,yt:MZ1Y6r_9Jc_,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/z3U0udLH974_0_10.wav,background,desed,real,10.0,yt:z3U0udLH974,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/J0Ruo0PDfQo_8_18.wav,background,desed,real,10.0,yt:J0Ruo0PDfQo,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/jRIQ2hbckVw_128_138.wav,background,desed,real,10.0,yt:jRIQ2hbckVw,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/S4ydJVobM7M_37_47.wav,background,desed,real,10.0,yt:S4ydJVobM7M,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/Df7veBP0Wu4_28_38.wav,background,desed,real,10.0,yt:Df7veBP0Wu4,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/QE463qYkj8c_997_1007.wav,background,desed,real,10.0,yt:QE463qYkj8c,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/hypG3Tgf5A0_3_13.wav,background,desed,real,10.0,yt:hypG3Tgf5A0,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/K36wIELI9mE_489_499.wav,background,desed,real,10.0,yt:K36wIELI9mE,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/QwczfjpP1BU_0_10.wav,background,desed,real,10.0,yt:QwczfjpP1BU,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/VonB8ACTcR4_77_87.wav,background,desed,real,10.0,yt:VonB8ACTcR4,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/6VmWlDdKsLQ_104_114.wav,background,desed,real,10.0,yt:6VmWlDdKsLQ,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/gHuQbIVXyag_12_22.wav,background,desed,real,10.0,yt:gHuQbIVXyag,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/xIZpF7kMWkY_40_50.wav,background,desed,real,10.0,yt:xIZpF7kMWkY,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/IF6f0rmB6dE_27_37.wav,background,desed,real,10.0,yt:IF6f0rmB6dE,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/iStSYb2NjhE_844_854.wav,background,desed,real,10.0,yt:iStSYb2NjhE,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/ljRFJz8idEY_325_335.wav,background,desed,real,10.0,yt:ljRFJz8idEY,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/train/weak/Y15nVe6RwUNM_19.000_29.000.wav,background,desed,real,9.281927437641723,yt:15nVe6RwUNM,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/Tp2YNgJBYHI_125_135.wav,background,desed,real,10.0,yt:Tp2YNgJBYHI,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/4fToGeoB7Qw_41_51.wav,background,desed,real,10.0,yt:4fToGeoB7Qw,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/DAtsXfxKG0A_53_63.wav,background,desed,real,10.0,yt:DAtsXfxKG0A,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/KilQtE5Nl90_0_10.wav,background,desed,real,10.0,yt:KilQtE5Nl90,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/RrxUPpJ9zaM_84_94.wav,background,desed,real,10.0,yt:RrxUPpJ9zaM,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/G5P75b9G5fA_10_20.wav,background,desed,real,10.0,yt:G5P75b9G5fA,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/AYcRe4sIABM_328_338.wav,background,desed,real,10.0,yt:AYcRe4sIABM,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/J5pibI98hVg_167_177.wav,background,desed,real,10.0,yt:J5pibI98hVg,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/train/weak/Y0kOj9aZEySE_21.000_31.000.wav,background,desed,real,9.046621315192743,yt:0kOj9aZEySE,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/yL5PlVi24dI_958_968.wav,background,desed,real,10.0,yt:yL5PlVi24dI,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/JT34KB_DYk8_86_96.wav,background,desed,real,10.0,yt:JT34KB_DYk8,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/fKxQaqctjbg_0_10.wav,background,desed,real,10.0,yt:fKxQaqctjbg,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/64zwMCsqdeM_106_116.wav,background,desed,real,10.0,yt:64zwMCsqdeM,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/64zwMCsqdeM_133_143.wav,background,desed,real,10.0,yt:64zwMCsqdeM,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/eXg3xAdtBNY_957_967.wav,background,desed,real,10.0,yt:eXg3xAdtBNY,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/Rion2W9pBmM_23_33.wav,background,desed,real,10.0,yt:Rion2W9pBmM,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/ylZiYbw6AOU_354_364.wav,background,desed,real,10.0,yt:ylZiYbw6AOU,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/train/weak/Y0uab4-3d6MM_30.000_40.000.wav,background,desed,real,9.671315192743764,yt:0uab4-3d6MM,
+/Users/rajsingh/Desktop/Sahara/data/raw/desed/real/audio/eval/public/-6Vtt4ubkC8_78_88.wav,background,desed,real,10.0,yt:-6Vtt4ubkC8,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/115535.wav,dog_bark,fsd50k,real,0.0,fs:115535,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/94217.wav,dog_bark,fsd50k,real,0.0,fs:94217,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236110.wav,dog_bark,fsd50k,real,0.0,fs:236110,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/116163.wav,dog_bark,fsd50k,real,0.0,fs:116163,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/338322.wav,dog_bark,fsd50k,real,0.0,fs:338322,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/3-180256-A-0.wav,dog_bark,esc50,real,5.0,fs:180256,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/325470.wav,dog_bark,fsd50k,real,0.0,fs:325470,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/155311.wav,dog_bark,fsd50k,real,0.0,fs:155311,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236216.wav,dog_bark,fsd50k,real,0.0,fs:236216,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/55005.wav,dog_bark,fsd50k,real,0.0,fs:55005,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193394.wav,dog_bark,fsd50k,real,0.0,fs:193394,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236017.wav,dog_bark,fsd50k,real,0.0,fs:236017,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/328729.wav,dog_bark,fsd50k,real,0.0,fs:328729,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/17486.wav,dog_bark,fsd50k,real,0.0,fs:17486,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/dog_bark/2mJbGx5D-zA_150_000_160_000.wav,dog_bark,audioset,real,19.9935,yt:2mJbGx5D-zA,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236267.wav,dog_bark,fsd50k,real,0.0,fs:236267,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236097.wav,dog_bark,fsd50k,real,0.0,fs:236097,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/5-9032-A-0.wav,dog_bark,esc50,real,5.0,fs:9032,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/328087.wav,dog_bark,fsd50k,real,0.0,fs:328087,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/119420.wav,dog_bark,fsd50k,real,0.0,fs:119420,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/125554.wav,dog_bark,fsd50k,real,0.0,fs:125554,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/180052.wav,dog_bark,fsd50k,real,0.0,fs:180052,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236101.wav,dog_bark,fsd50k,real,0.0,fs:236101,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/170015.wav,dog_bark,fsd50k,real,0.0,fs:170015,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/3-170015-A-0.wav,dog_bark,esc50,real,5.0,fs:170015,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236084.wav,dog_bark,fsd50k,real,0.0,fs:236084,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/398885.wav,dog_bark,fsd50k,real,0.0,fs:398885,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/359120.wav,dog_bark,fsd50k,real,0.0,fs:359120,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236223.wav,dog_bark,fsd50k,real,0.0,fs:236223,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/183992.wav,dog_bark,fsd50k,real,0.0,fs:183992,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/4-183992-A-0.wav,dog_bark,esc50,real,5.0,fs:183992,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/244469.wav,dog_bark,fsd50k,real,0.0,fs:244469,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236210.wav,dog_bark,fsd50k,real,0.0,fs:236210,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236045.wav,dog_bark,fsd50k,real,0.0,fs:236045,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236149.wav,dog_bark,fsd50k,real,0.0,fs:236149,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/50885.wav,dog_bark,fsd50k,real,0.0,fs:50885,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236263.wav,dog_bark,fsd50k,real,0.0,fs:236263,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/404233.wav,dog_bark,fsd50k,real,0.0,fs:404233,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/379170.wav,dog_bark,fsd50k,real,0.0,fs:379170,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236131.wav,dog_bark,fsd50k,real,0.0,fs:236131,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/328055.wav,dog_bark,fsd50k,real,0.0,fs:328055,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/5-231762-A-0.wav,dog_bark,esc50,real,5.0,fs:231762,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/166489.wav,dog_bark,fsd50k,real,0.0,fs:166489,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236078.wav,dog_bark,fsd50k,real,0.0,fs:236078,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/327138.wav,dog_bark,fsd50k,real,0.0,fs:327138,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/408810.wav,dog_bark,fsd50k,real,0.0,fs:408810,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/73373.wav,dog_bark,fsd50k,real,0.0,fs:73373,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/348247.wav,dog_bark,fsd50k,real,0.0,fs:348247,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/72829.wav,dog_bark,fsd50k,real,0.0,fs:72829,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/414415.wav,dog_bark,fsd50k,real,0.0,fs:414415,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236071.wav,dog_bark,fsd50k,real,0.0,fs:236071,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236227.wav,dog_bark,fsd50k,real,0.0,fs:236227,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/38272.wav,dog_bark,fsd50k,real,0.0,fs:38272,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236116.wav,dog_bark,fsd50k,real,0.0,fs:236116,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236028.wav,dog_bark,fsd50k,real,0.0,fs:236028,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/382736.wav,dog_bark,fsd50k,real,0.0,fs:382736,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/333914.wav,dog_bark,fsd50k,real,0.0,fs:333914,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/372571.wav,dog_bark,fsd50k,real,0.0,fs:372571,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/85661.wav,dog_bark,fsd50k,real,0.0,fs:85661,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/261286.wav,dog_bark,fsd50k,real,0.0,fs:261286,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/11722.wav,dog_bark,fsd50k,real,0.0,fs:11722,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236193.wav,dog_bark,fsd50k,real,0.0,fs:236193,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/325479.wav,dog_bark,fsd50k,real,0.0,fs:325479,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/5-213855-A-0.wav,dog_bark,esc50,real,5.0,fs:213855,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/182501.wav,dog_bark,fsd50k,real,0.0,fs:182501,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236095.wav,dog_bark,fsd50k,real,0.0,fs:236095,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/131258.wav,dog_bark,fsd50k,real,0.0,fs:131258,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236066.wav,dog_bark,fsd50k,real,0.0,fs:236066,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/4-199261-A-0.wav,dog_bark,esc50,real,5.0,fs:199261,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/15791.wav,dog_bark,fsd50k,real,0.0,fs:15791,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236041.wav,dog_bark,fsd50k,real,0.0,fs:236041,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236099.wav,dog_bark,fsd50k,real,0.0,fs:236099,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/418154.wav,dog_bark,fsd50k,real,0.0,fs:418154,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/344955.wav,dog_bark,fsd50k,real,0.0,fs:344955,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/29596.wav,dog_bark,fsd50k,real,0.0,fs:29596,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236172.wav,dog_bark,fsd50k,real,0.0,fs:236172,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/325469.wav,dog_bark,fsd50k,real,0.0,fs:325469,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/95532.wav,dog_bark,fsd50k,real,0.0,fs:95532,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236269.wav,dog_bark,fsd50k,real,0.0,fs:236269,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/5-203128-A-0.wav,dog_bark,esc50,real,5.0,fs:203128,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/5-203128-B-0.wav,dog_bark,esc50,real,5.0,fs:203128,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236277.wav,dog_bark,fsd50k,real,0.0,fs:236277,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/178118.wav,dog_bark,fsd50k,real,0.0,fs:178118,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/268019.wav,dog_bark,fsd50k,real,0.0,fs:268019,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236169.wav,dog_bark,fsd50k,real,0.0,fs:236169,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236219.wav,dog_bark,fsd50k,real,0.0,fs:236219,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/236061.wav,dog_bark,fsd50k,real,0.0,fs:236061,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/418155.wav,dog_bark,fsd50k,real,0.0,fs:418155,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/275568.wav,doorbell,fsd50k,real,0.0,fs:275568,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/275629.wav,doorbell,fsd50k,real,0.0,fs:275629,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/277510.wav,doorbell,fsd50k,real,0.0,fs:277510,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/275564.wav,doorbell,fsd50k,real,0.0,fs:275564,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/196374.wav,doorbell,fsd50k,real,0.0,fs:196374,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/393333.wav,doorbell,fsd50k,real,0.0,fs:393333,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/397919.wav,doorbell,fsd50k,real,0.0,fs:397919,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/253982.wav,doorbell,fsd50k,real,0.0,fs:253982,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/275071.wav,doorbell,fsd50k,real,0.0,fs:275071,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/418074.wav,doorbell,fsd50k,real,0.0,fs:418074,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/399092.wav,doorbell,fsd50k,real,0.0,fs:399092,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/399205.wav,doorbell,fsd50k,real,0.0,fs:399205,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/doorbell/Add11iatg0Y_50_000_60_000.wav,doorbell,audioset,real,19.9935,yt:Add11iatg0Y,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/168029.wav,doorbell,fsd50k,real,0.0,fs:168029,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/348322.wav,doorbell,fsd50k,real,0.0,fs:348322,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/doorbell/M0HQ3VWaJpg_0_000_10_000.wav,doorbell,audioset,real,10.0078125,yt:M0HQ3VWaJpg,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/397621.wav,doorbell,fsd50k,real,0.0,fs:397621,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/203942.wav,doorbell,fsd50k,real,0.0,fs:203942,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/100634.wav,doorbell,fsd50k,real,0.0,fs:100634,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/345275.wav,doorbell,fsd50k,real,0.0,fs:345275,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/87151.wav,doorbell,fsd50k,real,0.0,fs:87151,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/81065.wav,doorbell,fsd50k,real,0.0,fs:81065,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/192761.wav,doorbell,fsd50k,real,0.0,fs:192761,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/77892.wav,doorbell,fsd50k,real,0.0,fs:77892,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/doorbell/BJ8up8BXMjg_570_000_580_000.wav,doorbell,audioset,real,10.01125,yt:BJ8up8BXMjg,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/204140.wav,glass_break,fsd50k,real,0.0,fs:204140,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/173595.wav,glass_break,fsd50k,real,0.0,fs:173595,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/344271.wav,glass_break,fsd50k,real,0.0,fs:344271,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/219844.wav,glass_break,fsd50k,real,0.0,fs:219844,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/173602.wav,glass_break,fsd50k,real,0.0,fs:173602,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88922.wav,glass_break,fsd50k,real,0.0,fs:88922,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/368341.wav,glass_break,fsd50k,real,0.0,fs:368341,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/115922.wav,glass_break,fsd50k,real,0.0,fs:115922,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89891.wav,glass_break,fsd50k,real,0.0,fs:89891,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/232176.wav,glass_break,fsd50k,real,0.0,fs:232176,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/378289.wav,glass_break,fsd50k,real,0.0,fs:378289,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/glass_break/inscwqhuL0o_100_000_110_000.wav,glass_break,audioset,real,19.9935,yt:inscwqhuL0o,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/270811.wav,glass_break,fsd50k,real,0.0,fs:270811,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/216299.wav,glass_break,fsd50k,real,0.0,fs:216299,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/glass_break/IclkG1Ux8to_30_000_40_000.wav,glass_break,audioset,real,19.9935,yt:IclkG1Ux8to,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390700.wav,glass_break,fsd50k,real,0.0,fs:390700,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/426205.wav,glass_break,fsd50k,real,0.0,fs:426205,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390714.wav,glass_break,fsd50k,real,0.0,fs:390714,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/59263.wav,glass_break,fsd50k,real,0.0,fs:59263,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/203368.wav,glass_break,fsd50k,real,0.0,fs:203368,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/92642.wav,glass_break,fsd50k,real,0.0,fs:92642,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/376197.wav,glass_break,fsd50k,real,0.0,fs:376197,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390727.wav,glass_break,fsd50k,real,0.0,fs:390727,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/194685.wav,glass_break,fsd50k,real,0.0,fs:194685,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/250710.wav,glass_break,fsd50k,real,0.0,fs:250710,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/2-250710-A-39.wav,glass_break,esc50,real,5.0,fs:250710,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/391327.wav,glass_break,fsd50k,real,0.0,fs:391327,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/217172.wav,glass_break,fsd50k,real,0.0,fs:217172,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/glass_break/RPuCtUVfntk_30_000_40_000.wav,glass_break,audioset,real,19.9935,yt:RPuCtUVfntk,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/204119.wav,glass_break,fsd50k,real,0.0,fs:204119,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/4-204119-A-39.wav,glass_break,esc50,real,5.0,fs:204119,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/118198.wav,glass_break,fsd50k,real,0.0,fs:118198,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/278152.wav,glass_break,fsd50k,real,0.0,fs:278152,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/179240.wav,glass_break,fsd50k,real,0.0,fs:179240,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/189575.wav,glass_break,fsd50k,real,0.0,fs:189575,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/179228.wav,glass_break,fsd50k,real,0.0,fs:179228,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/322602.wav,glass_break,fsd50k,real,0.0,fs:322602,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/173611.wav,glass_break,fsd50k,real,0.0,fs:173611,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/glass_break/RTLvin_qGWs_260_000_270_000.wav,glass_break,audioset,real,10.001625,yt:RTLvin_qGWs,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/173619.wav,glass_break,fsd50k,real,0.0,fs:173619,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/321143.wav,glass_break,fsd50k,real,0.0,fs:321143,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/204686.wav,glass_break,fsd50k,real,0.0,fs:204686,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/glass_break/0H2uMhzSitY_520_000_530_000.wav,glass_break,audioset,real,19.9935,yt:0H2uMhzSitY,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/213162.wav,glass_break,fsd50k,real,0.0,fs:213162,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88931.wav,glass_break,fsd50k,real,0.0,fs:88931,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/219940.wav,glass_break,fsd50k,real,0.0,fs:219940,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/208656.wav,glass_break,fsd50k,real,0.0,fs:208656,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/204695.wav,glass_break,fsd50k,real,0.0,fs:204695,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/328611.wav,glass_break,fsd50k,real,0.0,fs:328611,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/382732.wav,glass_break,fsd50k,real,0.0,fs:382732,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/427788.wav,glass_break,fsd50k,real,0.0,fs:427788,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/173591.wav,glass_break,fsd50k,real,0.0,fs:173591,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/162169.wav,glass_break,fsd50k,real,0.0,fs:162169,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/85184.wav,glass_break,fsd50k,real,0.0,fs:85184,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/1-85184-A-39.wav,glass_break,esc50,real,5.0,fs:85184,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/145209.wav,glass_break,fsd50k,real,0.0,fs:145209,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/glass_break/1PK0s_W9hkM_0_000_10_000.wav,glass_break,audioset,real,10.0078125,yt:1PK0s_W9hkM,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/173592.wav,glass_break,fsd50k,real,0.0,fs:173592,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/223552.wav,glass_break,fsd50k,real,0.0,fs:223552,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/glass_break/W65c_uSH4mg_200_000_210_000.wav,glass_break,audioset,real,19.9935,yt:W65c_uSH4mg,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/315646.wav,glass_break,fsd50k,real,0.0,fs:315646,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/glass_break/Fbxs3CnA5OY_70_000_80_000.wav,glass_break,audioset,real,10.016,yt:Fbxs3CnA5OY,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89905.wav,glass_break,fsd50k,real,0.0,fs:89905,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/178582.wav,glass_break,fsd50k,real,0.0,fs:178582,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/216293.wav,glass_break,fsd50k,real,0.0,fs:216293,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/glass_break/tgqSbhlQntE_0_000_9_000.wav,glass_break,audioset,real,8.010875,yt:tgqSbhlQntE,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88935.wav,glass_break,fsd50k,real,0.0,fs:88935,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/112213.wav,glass_break,fsd50k,real,0.0,fs:112213,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/2-112213-A-39.wav,glass_break,esc50,real,5.0,fs:112213,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/2-112213-B-39.wav,glass_break,esc50,real,5.0,fs:112213,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390704.wav,glass_break,fsd50k,real,0.0,fs:390704,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88923.wav,glass_break,fsd50k,real,0.0,fs:88923,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/71947.wav,glass_break,fsd50k,real,0.0,fs:71947,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/390726.wav,glass_break,fsd50k,real,0.0,fs:390726,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/367624.wav,glass_break,fsd50k,real,0.0,fs:367624,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/204132.wav,glass_break,fsd50k,real,0.0,fs:204132,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/221533.wav,glass_break,fsd50k,real,0.0,fs:221533,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/414047.wav,glass_break,fsd50k,real,0.0,fs:414047,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/173557.wav,glass_break,fsd50k,real,0.0,fs:173557,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/216288.wav,glass_break,fsd50k,real,0.0,fs:216288,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/164332.wav,glass_break,fsd50k,real,0.0,fs:164332,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/glass_break/PG1xWRrwUkE_210_000_220_000.wav,glass_break,audioset,real,19.9935,yt:PG1xWRrwUkE,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/77530.wav,glass_break,fsd50k,real,0.0,fs:77530,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/glass_break/OOik9i9wrU8_0_000_10_000.wav,glass_break,audioset,real,10.0135,yt:OOik9i9wrU8,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/41348.wav,glass_break,fsd50k,real,0.0,fs:41348,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/203379.wav,glass_break,fsd50k,real,0.0,fs:203379,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/204698.wav,glass_break,fsd50k,real,0.0,fs:204698,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/97669.wav,glass_break,fsd50k,real,0.0,fs:97669,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/85550.wav,glass_break,fsd50k,real,0.0,fs:85550,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/368905.wav,glass_break,fsd50k,real,0.0,fs:368905,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/89888.wav,glass_break,fsd50k,real,0.0,fs:89888,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88806.wav,glass_break,fsd50k,real,0.0,fs:88806,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/68654.wav,glass_break,fsd50k,real,0.0,fs:68654,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193836.wav,knocking,fsd50k,real,0.0,fs:193836,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193855.wav,knocking,fsd50k,real,0.0,fs:193855,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/366236.wav,knocking,fsd50k,real,0.0,fs:366236,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/103999.wav,knocking,fsd50k,real,0.0,fs:103999,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/1-103999-A-30.wav,knocking,esc50,real,5.0,fs:103999,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/430844.wav,knocking,fsd50k,real,0.0,fs:430844,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/209222.wav,knocking,fsd50k,real,0.0,fs:209222,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/190025.wav,knocking,fsd50k,real,0.0,fs:190025,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/410827.wav,knocking,fsd50k,real,0.0,fs:410827,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/429964.wav,knocking,fsd50k,real,0.0,fs:429964,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193841.wav,knocking,fsd50k,real,0.0,fs:193841,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/148944.wav,knocking,fsd50k,real,0.0,fs:148944,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/349294.wav,knocking,fsd50k,real,0.0,fs:349294,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/164571.wav,knocking,fsd50k,real,0.0,fs:164571,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193829.wav,knocking,fsd50k,real,0.0,fs:193829,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/335988.wav,knocking,fsd50k,real,0.0,fs:335988,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/41862.wav,knocking,fsd50k,real,0.0,fs:41862,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/399825.wav,knocking,fsd50k,real,0.0,fs:399825,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/347944.wav,knocking,fsd50k,real,0.0,fs:347944,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/347401.wav,knocking,fsd50k,real,0.0,fs:347401,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/148947.wav,knocking,fsd50k,real,0.0,fs:148947,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/323481.wav,knocking,fsd50k,real,0.0,fs:323481,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/402443.wav,knocking,fsd50k,real,0.0,fs:402443,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/402612.wav,knocking,fsd50k,real,0.0,fs:402612,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/32296.wav,knocking,fsd50k,real,0.0,fs:32296,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/26781.wav,knocking,fsd50k,real,0.0,fs:26781,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/85253.wav,knocking,fsd50k,real,0.0,fs:85253,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/335393.wav,knocking,fsd50k,real,0.0,fs:335393,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/34261.wav,knocking,fsd50k,real,0.0,fs:34261,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/266600.wav,knocking,fsd50k,real,0.0,fs:266600,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/34859.wav,knocking,fsd50k,real,0.0,fs:34859,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/182024.wav,knocking,fsd50k,real,0.0,fs:182024,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/137083.wav,knocking,fsd50k,real,0.0,fs:137083,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193873.wav,knocking,fsd50k,real,0.0,fs:193873,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/419089.wav,knocking,fsd50k,real,0.0,fs:419089,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/188878.wav,knocking,fsd50k,real,0.0,fs:188878,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/4-188878-A-30.wav,knocking,esc50,real,5.0,fs:188878,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/154463.wav,knocking,fsd50k,real,0.0,fs:154463,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/369710.wav,knocking,fsd50k,real,0.0,fs:369710,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/76813.wav,knocking,fsd50k,real,0.0,fs:76813,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/275912.wav,knocking,fsd50k,real,0.0,fs:275912,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/103995.wav,knocking,fsd50k,real,0.0,fs:103995,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/1-103995-A-30.wav,knocking,esc50,real,5.0,fs:103995,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/186517.wav,knocking,fsd50k,real,0.0,fs:186517,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/190024.wav,knocking,fsd50k,real,0.0,fs:190024,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/349285.wav,knocking,fsd50k,real,0.0,fs:349285,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/325229.wav,knocking,fsd50k,real,0.0,fs:325229,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/408590.wav,knocking,fsd50k,real,0.0,fs:408590,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/188276.wav,knocking,fsd50k,real,0.0,fs:188276,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/349299.wav,knocking,fsd50k,real,0.0,fs:349299,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/274943.wav,knocking,fsd50k,real,0.0,fs:274943,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/274814.wav,knocking,fsd50k,real,0.0,fs:274814,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/378740.wav,knocking,fsd50k,real,0.0,fs:378740,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/113138.wav,knocking,fsd50k,real,0.0,fs:113138,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/144942.wav,knocking,fsd50k,real,0.0,fs:144942,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/370913.wav,knocking,fsd50k,real,0.0,fs:370913,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/53442.wav,knocking,fsd50k,real,0.0,fs:53442,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/366346.wav,knocking,fsd50k,real,0.0,fs:366346,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/349305.wav,knocking,fsd50k,real,0.0,fs:349305,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/233795.wav,knocking,fsd50k,real,0.0,fs:233795,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/193869.wav,knocking,fsd50k,real,0.0,fs:193869,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/265044.wav,knocking,fsd50k,real,0.0,fs:265044,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/218985.wav,knocking,fsd50k,real,0.0,fs:218985,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/2-43802-A-42.wav,siren,esc50,real,5.0,fs:43802,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/353265.wav,siren,fsd50k,real,0.0,fs:353265,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/59512.wav,siren,fsd50k,real,0.0,fs:59512,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/62878.wav,siren,fsd50k,real,0.0,fs:62878,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/3-62878-A-42.wav,siren,esc50,real,5.0,fs:62878,
+/Users/rajsingh/Desktop/Sahara/data/raw/esc50/audio/3-62878-B-42.wav,siren,esc50,real,5.0,fs:62878,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/389518.wav,siren,fsd50k,real,0.0,fs:389518,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/405358.wav,siren,fsd50k,real,0.0,fs:405358,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/392801.wav,siren,fsd50k,real,0.0,fs:392801,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/268221.wav,siren,fsd50k,real,0.0,fs:268221,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/siren/-34Lznw_wUA_10_000_20_000.wav,siren,audioset,real,19.9935,yt:-34Lznw_wUA,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/338973.wav,siren,fsd50k,real,0.0,fs:338973,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/siren/4ekovmvm3jM_30_000_40_000.wav,siren,audioset,real,10.008,yt:4ekovmvm3jM,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/382620.wav,siren,fsd50k,real,0.0,fs:382620,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/siren/0JPT13OUVV8_220_000_230_000.wav,siren,audioset,real,19.9935,yt:0JPT13OUVV8,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/23750.wav,siren,fsd50k,real,0.0,fs:23750,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/23750.wav,dog_bark,fsd50k,real,0.0,fs:23750,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/93639.wav,siren,fsd50k,real,0.0,fs:93639,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/88121.wav,siren,fsd50k,real,0.0,fs:88121,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/198297.wav,siren,fsd50k,real,0.0,fs:198297,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/410825.wav,siren,fsd50k,real,0.0,fs:410825,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/334084.wav,siren,fsd50k,real,0.0,fs:334084,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/242101.wav,siren,fsd50k,real,0.0,fs:242101,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/181601.wav,siren,fsd50k,real,0.0,fs:181601,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/380664.wav,siren,fsd50k,real,0.0,fs:380664,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/348325.wav,siren,fsd50k,real,0.0,fs:348325,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/420661.wav,siren,fsd50k,real,0.0,fs:420661,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.eval_audio/58368.wav,siren,fsd50k,real,0.0,fs:58368,
+/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets/FSD50K/FSD50K.dev_audio/322205.wav,siren,fsd50k,real,0.0,fs:322205,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/siren/-_dElQcyJnA_30_000_40_000.wav,siren,audioset,real,19.9935,yt:-_dElQcyJnA,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/smoke_alarm/2fc_QUbbS-I_470_000_480_000.wav,smoke_alarm,audioset,real,19.9935,yt:2fc_QUbbS-I,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/smoke_alarm/04JKX_vlePE_90_000_100_000.wav,smoke_alarm,audioset,real,19.9935,yt:04JKX_vlePE,
+/Users/rajsingh/Desktop/Sahara/data/raw/audioset/smoke_alarm/2i_xXpPIi0w_210_000_220_000.wav,smoke_alarm,audioset,real,19.9935,yt:2i_xXpPIi0w,
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/dog_bark__mahi__01.mp3,dog_bark,indian_ambient,self_recorded,5.04,indian_ambient:undated_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/dog_bark__mahi__02.mp3,dog_bark,indian_ambient,self_recorded,2.88,indian_ambient:2026-08-10_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/dog_bark__mahi__03.mp3,dog_bark,indian_ambient,self_recorded,4.52,indian_ambient:2022-08-06_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/dog_bark__mahi__04.mp3,dog_bark,indian_ambient,self_recorded,1.18,indian_ambient:2024-11-25_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/dog_bark__mahi__05.mp3,dog_bark,indian_ambient,self_recorded,3.29,indian_ambient:2024-11-25_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/dog_bark__mahi__06.mp3,dog_bark,indian_ambient,self_recorded,24.66,indian_ambient:undated_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/dog_bark__mahi__07.mp3,dog_bark,indian_ambient,self_recorded,6.14,indian_ambient:undated_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/dog_bark__mahi__08.mp3,dog_bark,indian_ambient,self_recorded,6.74,indian_ambient:undated_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/dog_bark__mahi__09.mp3,dog_bark,indian_ambient,self_recorded,22.73,indian_ambient:undated_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/dog_bark__mahi__10.mp3,dog_bark,indian_ambient,self_recorded,4.39,indian_ambient:undated_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/dog_bark__mahi__11.mp3,dog_bark,indian_ambient,self_recorded,3.5,indian_ambient:2026-04-05_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__mahi__01.m4a,doorbell,indian_ambient,self_recorded,3.39,indian_ambient:2026-09-17_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__mahi__02.m4a,doorbell,indian_ambient,self_recorded,4.59,indian_ambient:2026-09-17_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__mahi__03.m4a,doorbell,indian_ambient,self_recorded,2.54,indian_ambient:2026-09-17_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__mahi__04.m4a,doorbell,indian_ambient,self_recorded,2.54,indian_ambient:2026-09-17_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__mahi__05.mp3,doorbell,indian_ambient,self_recorded,6.64,indian_ambient:undated_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__mahi__06.mp3,doorbell,indian_ambient,self_recorded,4.88,indian_ambient:undated_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/appliance_beep__mahi__01.m4a,appliance_beep,indian_ambient,self_recorded,4.33,indian_ambient:2026-09-17_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/appliance_beep__mahi__02.m4a,appliance_beep,indian_ambient,self_recorded,4.84,indian_ambient:2026-09-17_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/appliance_beep__mahi__03.m4a,appliance_beep,indian_ambient,self_recorded,3.31,indian_ambient:2026-09-17_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/appliance_beep__mahi__04.m4a,appliance_beep,indian_ambient,self_recorded,4.76,indian_ambient:2026-09-17_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/appliance_beep__mahi__05.m4a,appliance_beep,indian_ambient,self_recorded,2.05,indian_ambient:2026-09-17_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_washing_machine__mahi__01.mp3,background,indian_ambient,self_recorded,10.7,indian_ambient:undated_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/appliance_beep__mahi__06.m4a,appliance_beep,indian_ambient,self_recorded,3.22,indian_ambient:2026-09-17_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/appliance_beep__mahi__07.mp3,appliance_beep,indian_ambient,self_recorded,0.98,indian_ambient:undated_mahi,mahi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__prachi__01.m4a,doorbell,indian_ambient,self_recorded,4.59,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__prachi__02.m4a,doorbell,indian_ambient,self_recorded,5.78,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__prachi__03.m4a,doorbell,indian_ambient,self_recorded,5.01,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__prachi__04.m4a,doorbell,indian_ambient,self_recorded,10.22,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__prachi__05.m4a,doorbell,indian_ambient,self_recorded,6.12,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__prachi__06.m4a,doorbell,indian_ambient,self_recorded,10.3,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__prachi__07.m4a,doorbell,indian_ambient,self_recorded,5.95,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__prachi__08.m4a,doorbell,indian_ambient,self_recorded,6.72,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__prachi__09.m4a,doorbell,indian_ambient,self_recorded,7.06,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/target_classes/doorbell__prachi__10.m4a,doorbell,indian_ambient,self_recorded,4.59,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_kitchen__prachi__01.m4a,background,indian_ambient,self_recorded,3.22,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_kitchen__prachi__02.m4a,background,indian_ambient,self_recorded,11.24,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_kitchen__prachi__03.m4a,background,indian_ambient,self_recorded,4.93,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_kitchen__prachi__04.m4a,background,indian_ambient,self_recorded,3.99,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_kitchen__prachi__05.m4a,background,indian_ambient,self_recorded,4.16,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_kitchen__prachi__06.m4a,background,indian_ambient,self_recorded,7.74,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_kitchen__prachi__07.m4a,background,indian_ambient,self_recorded,4.33,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_kitchen__prachi__08.m4a,background,indian_ambient,self_recorded,7.91,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_kitchen__prachi__09.m4a,background,indian_ambient,self_recorded,3.9,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_kitchen__prachi__10.m4a,background,indian_ambient,self_recorded,8.51,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_kitchen__prachi__11.m4a,background,indian_ambient,self_recorded,8.09,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_temple__prachi__01.m4a,background,indian_ambient,self_recorded,4.25,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_temple__prachi__02.m4a,background,indian_ambient,self_recorded,8.43,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_temple__prachi__03.m4a,background,indian_ambient,self_recorded,3.48,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_temple__prachi__04.m4a,background,indian_ambient,self_recorded,5.7,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_temple__prachi__05.m4a,background,indian_ambient,self_recorded,10.56,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_temple__prachi__06.m4a,background,indian_ambient,self_recorded,5.44,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_temple__prachi__07.m4a,background,indian_ambient,self_recorded,5.7,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_temple__prachi__08.m4a,background,indian_ambient,self_recorded,6.38,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_temple__prachi__09.m4a,background,indian_ambient,self_recorded,5.18,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_temple__prachi__10.m4a,background,indian_ambient,self_recorded,5.87,indian_ambient:2026-09-16_prachi,prachi
+/Users/rajsingh/Desktop/Sahara/data/raw/indian_ambient/background/background_temple__prachi__11.m4a,background,indian_ambient,self_recorded,5.18,indian_ambient:2026-09-16_prachi,prachi

@@ -7,15 +7,13 @@ from __future__ import annotations
 
 import logging
 import os
-import shutil
 import sys
-import tempfile
 from pathlib import Path
 
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from src.config import DRIVE_DATASETS_DIR, get_raw_dir
+from src.config import get_raw_dir
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)

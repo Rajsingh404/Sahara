@@ -86,6 +86,12 @@ def find_source(row: dict, source: Path) -> Path | None:
     ):
         if candidate.is_file():
             return candidate
+    # Drive folder names can carry stray trailing spaces ("dog barking ").
+    folder, _, name = row["source_path"].rpartition("/")
+    if folder:
+        for child in source.iterdir() if source.is_dir() else ():
+            if child.is_dir() and child.name.strip() == folder.strip() and (child / name).is_file():
+                return child / name
     return None
 
 

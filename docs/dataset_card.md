@@ -1,223 +1,158 @@
 # SAHARA Dataset Card
 
-**Project**: SAHARA — Safety-Aware Hearing Assistance with Real-time Alerts  
-**Version**: Phase 2-3 (baseline pipeline complete; cached FSD50K embeddings available)  
-**Last updated**: 2026-08-28  
-**Task**: Multi-label 8-class safety-critical sound detection for Deaf/Hard-of-Hearing users  
-**Model architecture**: Frozen YAMNet backbone + trainable dense classifier head. TFLite export is a next-phase task.
+**Project**: SAHARA (Sound-based Alert & Haptic Assistance for Real-time Awareness)
+**Task**: multi-label detection of 8 safety sounds, plus `background`, for Deaf / Hard-of-Hearing users
+**Last updated**: 2026-10-04 (Phase 1 of the build plan, branch `feat/integration`)
+**Source of truth for counts**: `data/metadata/coverage.txt`, written by `python src/data/manifest_builder.py`
+
+Class order is fixed by `SOUND_CLASSES` in `src/config.py`:
+`smoke_alarm, doorbell, siren, knocking, dog_bark, baby_cry, glass_break, appliance_beep`.
+Native-label mappings live only in `src/data/label_map.py`.
 
 ---
 
-## Target Classes
+## Coverage (clips per class × source, train / val / test)
 
-| Canonical Label | Safety Scenario |
-|---|---|
-| `smoke_alarm` | Fire/smoke alert |
-| `doorbell` | Visitor / delivery notification |
-| `siren` | Emergency vehicle, building alarm |
-| `knocking` | Door knock |
-| `dog_bark` | Pet/visitor alert |
-| `baby_cry` | Infant distress |
-| `glass_break` | Intrusion / accident |
-| `appliance_beep` | Microwave, washing machine, oven timer |
+| Class | AudioSet | ESC-50 | FSD50K | Team (Indian) | Synthetic (train only) | **Real total** | **Real test** |
+|---|---|---|---|---|---|---|---|
+| smoke_alarm | 14/3/3 | – | – | – | 42/0/0 | **20** | **3** ⚠ |
+| doorbell | 14/3/3 | – | 100/22/22 | 0/0/16 | 342/0/0 | 180 | 41 |
+| siren | 19/8/4 | 35/2/3 | 91/19/22 | – | 435/0/0 | 203 | 29 |
+| knocking | 14/0/0 | 26/11/3 | 254/59/60 | 14/0/0 | 924/0/0 | 441 | 63 |
+| dog_bark | 6/2/1 | 28/3/9 | 375/82/79 | 0/0/11 | 1227/0/0 | 596 | 100 |
+| baby_cry | 16/3/4 | 33/4/3 | – | 6/0/0 | 165/0/0 | **69** | **7** ⚠ |
+| glass_break | 54/10/11 | 30/5/5 | 355/78/77 | – | 1317/0/0 | 625 | 93 |
+| appliance_beep | 12/8/3 | 33/1/6 | 145/30/31 | 9/0/7 | 597/0/0 | 285 | 47 |
+| background | – | – | – | 37/0/23 | – | 665 (DESED 605) | 115 |
 
-**Background class** (`background`): Non-target ambient audio used as negative examples. Sourced from DESED real soundscapes and (Phase 4) Indian ambient recordings.
+Targets from the build plan: ≥ 150 real clips per class and ≥ 20 real clips in test.
+**smoke_alarm and baby_cry fall short.** Every other class meets both.
 
----
-
-## Data Sources
-
-### FSD50K
-
-- **Source**: [Fonseca et al., 2021](https://arxiv.org/abs/2010.00475) — Freesound Dataset 50K
-- **License**: Varies per clip (Creative Commons); see FSD50K.metadata for per-file licenses
-- **Location**: raw audio is not retained locally after caching; reproducible source download is implemented in `src/data/download_fsd50k.py`.
-- **Status**: Ground-truth-derived manifest rows and cached YAMNet embeddings are available locally. Re-download the source audio only if rebuilding the embedding cache from scratch.
-- **Manifest rows matched**: 4,494 clips across 8 target classes (from ground-truth CSVs)
-- **Embeddings extracted**: 4,494 target-class FSD50K clips
-
-### AudioSet
-
-- **Source**: [Gemmeke et al., 2017](https://research.google.com/audioset/) — Google AudioSet
-- **License**: CC BY 4.0 (metadata); individual YouTube clips subject to YouTube ToS
-- **Location**: `data/raw/audioset/<class_name>/` — **locally available on disk**
-- **Download method**: yt-dlp, 10-second segments at 16 kHz mono WAV
-- **Status**: 161 clips downloaded (20–21 per class), all locally available and embedded
-- **Failed downloads log**: `data/raw/audioset/failed_downloads.csv`
-
-### DESED
-
-- **Source**: [Turpault et al., 2019](https://dcase.community/challenge2019/task4-sound-event-detection-in-domestic-environments) — Domestic Environment Sound Event Detection
-- **License**: See individual clip licenses in DESED metadata
-- **Location**: `data/raw/desed/real/` — locally available on disk
-- **Status**: ~884–904 clips (background negatives); some upstream URLs fail to resolve — logged and skipped
-- **Role**: Background/negative soundscape audio in manifests; not used for training embeddings in current baseline (target-class-only training)
-
-### iNoise (Indian Noise Database)
-
-- **Source**: [Kopparapu, Sheikh, Thanneeru, IEEE DataPort](https://ieee-dataport.org/documents/inoise-indian-noise-database) (DOI: 10.21227/w3xm-jn45)
-- **License**: IEEE DataPort Open Access
-- **Location**: `$SAHARA_DRIVE_DATASETS/iNoise/` (raw) and `$SAHARA_DRIVE_DATASETS/iNoise_chunks/` (5s chunks) — **Drive-resident**
-- **Categories**: Outdoor (Autorickshaw, Bus, Highway, Railway Station, Street) and Indoor (Airport, Cafeteria, Home, Train, Workplace)
-- **Role**: Background/negative ambient noise (mapped to `background` label, `source_type: real`)
-
-### Synthetic Mixed Audio (`synthetic_mixed`)
-
-- **Source**: Additive mixing pipeline (`src/preprocessing/synthetic_mixing.py`) combining target clips (FSD50K/AudioSet) with background chunks (iNoise/DESED) at randomized SNR (-5 dB to 10 dB).
-- **Location**: `$SAHARA_DRIVE_DATASETS/SyntheticMixed/` with companion `$SAHARA_DRIVE_DATASETS/SyntheticMixed/synthetic_metadata.csv` — **Drive-resident**
-- **Role**: Data augmentation and background robustness tuning for the 8 target classes.
-- **Academic Honesty Notice**: Every synthetic clip carries `source_type: synthetic_mixed` in manifests to ensure real and synthetic data are never silently conflated.
-- **Important Distinction**: `synthetic_mixed` and `iNoise` data do **NOT** substitute for the still-pending Indian ambient field recordings (target-class-in-Indian-context) or the personalization dev-set — both remain required, separate next steps.
-
-### Indian Ambient (Phase 4 — first batch recorded)
-
-- **Status**: 123 clips recorded by the team in September 2026 (63 target-class, 60 background), organised by `scripts/organise_recordings.py` from `data/recordings/label_map.csv`. See `data/recordings/README.md` for counts, the recorder split and open labelling questions.
-- **Classes covered**: doorbell 16, appliance_beep 16, knocking 14, dog_bark 11, baby_cry 6, background 60 (kitchen, temple, hawker, rain, TV, door/drawer, washing-machine spin). No smoke_alarm, siren or glass_break yet.
-- **Split**: by recorder (default test = Mahi, Prachi), via the extra `recorder` and `split` columns in `metadata.csv`. `manifest_builder.py` does not read `split` yet; it groups by `timestamp` (date + recorder).
-- **Location**: `data/raw/indian_ambient/`
-- **Hot-swap**: Re-running `src/data/manifest_builder.py` with NO code changes automatically incorporates this data once present. **Validated 2026-08-28 — test passed.**
-- **Expected structure**:
-  ```
-  data/raw/indian_ambient/
-  ├── metadata.csv          ← Required: schema below
-  ├── target_classes/       ← Safety-critical sound recordings in Indian contexts
-  └── background/           ← Ambient negatives: traffic, temple bells, monsoon rain, etc.
-  ```
-- **`metadata.csv` schema**:
-
-  | Column | Type | Description |
-  |---|---|---|
-  | `filename` | str | Filename only (not full path) |
-  | `class` | str | One of the 8 canonical class names, or `background` |
-  | `is_background` | bool | `true` for files in `background/`, `false` for `target_classes/` |
-  | `location_type` | str | e.g. `urban_street`, `apartment`, `market` |
-  | `recording_device` | str | e.g. `OnePlus_Nord_CE4`, `Zoom_H1n` |
-  | `distance_m` | float | Approximate distance in metres (source to mic) |
-  | `timestamp` | str | ISO-8601 or YYYY-MM-DD session tag (used as recording_id for split stability) |
-  | `notes` | str | Free text — acoustic conditions, unusual interference, etc. |
+Manifest rows: 8,133 (train 7,192, val 443, test 498); 8,129 unique audio files
+(a few FSD50K clips carry two target labels and so have two rows).
+Real rows: FSD50K 1,901, DESED 605, ESC-50 240, AudioSet 215, team recordings 123. Synthetic rows: 5,049.
 
 ---
 
-## Per-Class Coverage Table
+## Sources
 
-*Generated by `src/data/manifest_builder.py` on 2026-08-28. Manifest includes all sources present under `data/raw/`.*
+| Source | Licence | Location | Role |
+|---|---|---|---|
+| FSD50K (Fonseca et al. 2021) | per clip: CC0 / CC BY / CC BY-NC | Google Drive for Desktop, `SAHARA_DRIVE_DATASETS/FSD50K` (streamed) | targets |
+| AudioSet (Gemmeke et al. 2017) | labels CC BY 4.0; audio from YouTube | `data/raw/audioset/<class>/` | targets |
+| ESC-50 (Piczak 2015) | CC BY-NC 3.0 (academic use) | `data/raw/esc50/` via `src/data/download_esc50.py` | targets |
+| DESED real soundscapes (Turpault et al. 2019) | per clip, see `desed/real/license_public_eval.tsv` | `data/raw/desed/real/` | background |
+| Team recordings (Advika, Mahi, Prachi, Raj; Sept 2026) | owned by the team | `data/raw/indian_ambient/`, built by `scripts/organise_recordings.py` | Indian-context targets + background |
+| Synthetic mixes | derived from the above | `data/raw/synthetic_mixed/` (local, 1.1 GB) | train-only augmentation |
+| iNoise (IEEE DataPort) | IEEE DataPort open access | **not present**: needs a manual, logged-in download | background (planned) |
 
-| Class | audioset | desed | fsd50k | **total** | Note |
-|---|---|---|---|---|---|
-| `smoke_alarm` | 20 | 0 | 0 | **20** | ⚠ LOW — FSD50K has no `Smoke_detector_smoke_alarm` label in dev/eval; AudioSet only |
-| `doorbell` | 20 | 0 | 144 | **164** | FSD50K pending sync |
-| `siren` | 20 | 0 | 132 | **152** | FSD50K pending sync |
-| `knocking` | 20 | 0 | 373 | **393** | FSD50K pending sync |
-| `dog_bark` | 20 | 0 | 536 | **556** | FSD50K pending sync |
-| `baby_cry` | 20 | 0 | 0 | **20** | ⚠ LOW — FSD50K has no `Baby_cry_infant_cry` label in dev/eval; AudioSet only |
-| `glass_break` | 21 | 0 | 1241 | **1262** | FSD50K pending sync |
-| `appliance_beep` | 20 | 0 | 2068 | **2088** | FSD50K pending sync |
-| `background` | 0 | 905 | 0 | **905** | DESED real soundscapes |
-| **Total target** | **161** | — | **4494** | **4655** | 161 embedded; 4494 blocked on Drive sync |
-
-**Manifest totals**: full=5,560 · train=3,892 · val=834 · test=834  
-**Embeddings extracted**: 4,655 target clips (4,494 FSD50K + 161 AudioSet) · train=3,259 · val=698 · test=698. Background rows are retained in the manifest but excluded from this 8-class baseline.
+Audio is never committed. `data/raw/` is git-ignored; only the manifests and `coverage.txt` are.
 
 ---
 
-## Manifest Structure
+## Label-mapping fixes (Phase 1)
 
-All data is unified into `data/metadata/`:
+Checked against FSD50K `vocabulary.csv` and AudioSet `class_labels_indices.csv`.
 
-| File | Rows (header+1) | Description |
+**FSD50K**
+- There is no smoke-alarm, baby-cry or `Beep_buzzer` label in FSD50K. The old map named
+  `Smoke_detector_smoke_alarm`, `Baby_cry_infant_cry` and `Beep_buzzer`, which match nothing.
+  (`Crying_and_sobbing` exists but is adult crying, so it is not used.)
+- `glass_break`: `Glass` → `Shatter`. Of 1,241 `Glass` clips, 731 are clinking only; the 510 tagged `Shatter` are kept.
+- `appliance_beep`: generic `Alarm` removed. Its 1,864 clips are mostly telephones (685), vehicle/car alarms,
+  ringtones, doorbells and sirens. Only `Microwave_oven` (206) remains. No FSD50K clip carries a smoke-alarm tag,
+  so `Alarm` cannot be routed to `smoke_alarm` either.
+
+**AudioSet**: four hard-coded ids were wrong (the build plan repeated one of them).
+
+| Class | Old id | Actually | Now |
+|---|---|---|---|
+| glass_break | `/m/07rwj3x` | Whoop | `/m/07rn7sz` Shatter |
+| knocking | `/m/07qnq_y` | Thump, thud | `/m/07r4wb8` Knock |
+| appliance_beep | `/m/03cl9h` | Ice cream truck | `/m/02fs_r` Beep, bleep; `/m/0fx9l` Microwave oven; `/m/046dlr` Alarm clock |
+| appliance_beep | `/m/029bxz` | (no such id) | – |
+
+A display-name fallback had also added `Glass`, `Breaking` and `Dog`. It is gone; only exact ids are used, and
+`dog_bark` is `Bark` only. Of the 188 AudioSet clips from the earlier run, **64 did not carry their class's label**
+(9 "appliance_beep" ice-cream trucks, 21 "glass_break" whoops/music, 15 "knocking" thumps, 19 generic dog sounds).
+They were moved to `data/interim/audioset_mislabelled/`. The AudioSet scanner now looks up every clip's real labels in
+the segment CSVs instead of trusting the folder it was downloaded into.
+
+**DESED**: every DESED clip used to be `background`, including clips with `Dog` (barking) and `Alarm_bell_ringing`.
+Those 224 clips and the 76 unlabelled in-domain clips are now dropped (`DESED_EXCLUDED_EVENTS` in `label_map.py`).
+
+### Coverage before → after
+
+| Class | Before (old manifest) | After |
 |---|---|---|
-| `full_manifest.csv` | 5,560 | All clips from all sources (`filepath, label, source_dataset, duration_sec, recording_id`) |
-| `train_manifest.csv` | 3,892 | 70% stratified by class + recording session |
-| `val_manifest.csv` | 834 | 15% — held-out for early stopping |
-| `test_manifest.csv` | 834 | 15% — held-out for final evaluation |
+| smoke_alarm | 20 | 20 |
+| doorbell | 164 | 180 |
+| siren | 152 | 203 |
+| knocking | 402 | 441 |
+| dog_bark | 556 | 596 |
+| baby_cry | 20 | 69 |
+| glass_break | 1,275 | 625 |
+| appliance_beep | 2,093 | 285 |
+| background | 905 | 665 |
 
-**Split strategy**: Stratified by class label, split at recording-session level (`recording_id`) to prevent data leakage from the same session across train/val/test.
+The large drops (glass_break, appliance_beep, background) are wrong labels removed, not data lost.
 
 ---
 
-## Baseline Training Results (2026-08-28)
+## Splits
 
-**Training data**: 3,259 target clips (FSD50K + AudioSet)  
-**Validation data**: 698 clips · **Test data**: 698 clips  
-**Augmentation**: Disabled for this reproducible baseline. The raw-waveform augmenter is available through `build_features_cache.py --augment` for future training experiments.
+70 / 15 / 15 by **recording group**, stratified by each group's rarest label (`split_rows()` in `manifest_builder.py`).
 
-### Training
+- **Group id = upstream source.** AudioSet and DESED both cut clips from YouTube, so both use `yt:<video id>`.
+  FSD50K and ESC-50 both come from Freesound, so both use `fs:<freesound id>`. The same video or Freesound clip
+  can therefore never sit in train in one dataset and test in another. All rows of a group go to one split,
+  including multi-label clips (the old split was per label and could put one clip in train and test).
+- **Team recordings keep the recorder split** from `organise_recordings.py`: train = Advika, Raj;
+  test = Mahi, Prachi; no validation rows. They are tagged `source_type=self_recorded`.
+- **Synthetic mixes are train-only** and grouped with the real clip they were made from. A mix whose source is not
+  in train is dropped. Validation and test are real audio only.
+- `tests/test_dataset_split.py` checks all of the above.
 
-| Metric | Train | Val |
+---
+
+## Synthetic mixes
+
+`python src/preprocessing/synthetic_mixing.py`: each of the 1,683 real train-split target clips is mixed onto 3
+random train-split background beds (DESED 423, team background 37) at an SNR drawn uniformly from −5 to +10 dB,
+then peak-limited to 0.99. 5,049 mixes. `synthetic_metadata.csv` records the source clip, its recording id, the bed
+and the SNR. Only train-split beds are used, so no validation/test audio reaches training. iNoise beds will be added
+when iNoise is downloaded. Synthetic rows are always `source_type=synthetic_mixed` and are never reported as
+real-world performance.
+
+---
+
+## Team recordings (Indian context)
+
+180 clips recorded on phones in September 2026. `data/recordings/label_map.csv` (Drive file ids) is the source of
+truth; `scripts/organise_recordings.py --source <Drive Indian_Ambient folder> --dest data/raw` rebuilds the layout.
+
+| Label | Train side (Advika, Raj) | Test side (Mahi, Prachi) |
 |---|---|---|
-| Loss / accuracy (final epoch) | 0.3261 / 0.7969 | 0.2263 / 0.8095 |
+| appliance_beep | 9 | 7 |
+| baby_cry | 6 | 0 |
+| knocking | 14 | 0 |
+| dog_bark | 0 | 11 |
+| doorbell | 0 | 16 |
+| background | 37 | 23 |
+| smoke_alarm, siren, glass_break | 0 | 0 |
+| "Aryan" positive / negative (personalization) | 19 / 13 | 19 / 6 |
 
-Optimizer: Adam lr=1e-3 · Loss: cost-sensitive weighted binary crossentropy · Architecture: Dense(256)→Drop(0.3)→Dense(128)→Drop(0.3)→Dense(8, sigmoid). Early stopping completed after 9 epochs; the best checkpoint was re-evaluated on 2026-08-29.
-
-### Evaluation (test set, 698 clips, threshold=0.5)
-
-| Class | Precision | Recall | F1 | AP |
-|---|---|---|---|---|
-| `smoke_alarm` | 0.000 | 0.000 | 0.000 | 0.090 |
-| `doorbell` | 0.682 | 0.395 | 0.500 | 0.632 |
-| `siren` | 0.333 | 0.333 | 0.333 | 0.250 |
-| `knocking` | 0.826 | 0.655 | 0.731 | 0.751 |
-| `dog_bark` | 1.000 | 0.893 | 0.943 | 0.956 |
-| `baby_cry` | 0.000 | 0.000 | 0.000 | 0.669 |
-| `glass_break` | 0.881 | 0.895 | 0.888 | 0.937 |
-| `appliance_beep` | 0.860 | 0.790 | 0.824 | 0.923 |
-| **Macro avg** | **0.573** | **0.495** | **0.527** | **mAP = 0.651** |
-
-> Note: This is a real but imbalanced baseline. Smoke alarm and baby cry each have only 20 clips; both have zero thresholded recall despite the safety weighting. Do not use these numbers as final deployment performance; tune thresholds and expand underrepresented classes in the next phase.
-
-**Confusion matrix**: `docs/confusion_matrix.png`
+Used as an Indian-context fine-tuning set (train side) and evaluation set (test side), not as the main training set.
+The test side has no knocking or baby_cry and the train side has no dog_bark or doorbell, so per-class Indian results
+cover only the classes present on each side.
 
 ---
 
-## Known Gaps
+## Known gaps
 
-### 1. Raw FSD50K Audio Is Not Retained Locally
-- **Status**: The 4,494 FSD50K target clips were embedded and the raw files were subsequently removed to conserve disk space.
-- **Impact**: Current training/evaluation artifacts are reproducible from cached embeddings, but rebuilding them from raw audio requires re-running the FSD50K downloader.
-
-### 2. smoke_alarm and baby_cry — Not in FSD50K
-- **Status**: Confirmed: `Smoke_detector_smoke_alarm` and `Baby_cry_infant_cry` do not appear in FSD50K dev or eval CSVs. These classes have only 20 clips each (AudioSet).
-- **Action**: Pull additional clips from AudioSet unbalanced set via `python src/data/download.py --dataset audioset` (no `--limit-per-class`) and add field recordings.
-
-### 3. Indian Ambient Dataset — First Batch Only
-- **Status**: 123 clips recorded (see above). smoke_alarm, siren and glass_break have no Indian recordings yet, and baby_cry/knocking come from one recorder each.
-- **Hot-swap design validated**: 2026-08-28 — dummy files added to `data/raw/indian_ambient/` and `manifest_builder.py` re-run with zero code changes; 2 indian_ambient rows appeared correctly. Empty-folder run produced 0 rows gracefully.
-- **Novel contribution**: First safety-sound dataset evaluated specifically in Indian urban/domestic acoustic environments.
-
-### 4. Personalization Module — Dev-Set Recorded, Model Not Started
-- **Status**: Phase 12. Name-call dev-set for "Aryan" recorded by all four team members: 38 positive, 19 negative (other or similar names such as "Arya", "Aryanshi"). Layout: `data/raw/personalization/aryan/{positive,negative}/` with a `metadata.csv` each.
-
----
-
-## Preprocessing Pipeline
-
-```
-Audio file (any format, any SR)
-    ↓ load_audio(): librosa.load(sr=16000, mono=True) + peak normalize
-    ↓ Drive-stub check (xattr): skip if not locally available
-    ↓ YAMNet (TF-Hub https://tfhub.dev/google/yamnet/1)
-        → frame-level 1024-d embeddings
-        → mean pool → single 1024-d vector per clip
-        → cache to data/processed/embedding_cache/<sha256>.npy
-    → stack into data/processed/embeddings_{full,train,val,test}.npz
-```
-
-**Log-mel spectrograms** (64 mel bins, n_fft=1024, hop=160, sr=16000) computed via `src/preprocessing/features.extract_logmel()` for visualization and report.
-
-**Augmentation** (config-toggleable, `--augment` flag): time-stretch ±10%, pitch-shift ±2 semitones, gain ±6 dB, background noise mix. Embedding-space Gaussian jitter available as fast alternative via `augment_embedding_batch()`.
-
----
-
-## Roadmap Context
-
-| Phase | Description | Status |
-|---|---|---|
-| 0–1 | Repo scaffolding, config, system architecture | ✅ Done |
-| 2–3 | Dataset acquisition, preprocessing, baseline model | ✅ Pipeline complete; FSD50K sync pending |
-| 4 | Indian ambient field recording + personalization dev-set | ⏳ Blocked (not yet recorded) |
-| 5–7 | Hyperparameter tuning, cost-sensitive threshold search, FAR evaluation | ⏳ Pending |
-| 8–9 | TFLite export, INT8 quantization, on-device inference pipeline | ⏳ Pending |
-| 10 | Native Kotlin Android app (Foreground Service + AudioRecord + BLE GATT client) | ⏳ Pending |
-| 11 | ESP32 custom wristband firmware (BLE GATT server, haptics, <₹1000 BOM) | ⏳ Pending |
-| 12 | Personalization (few-shot prototypical network fused with main classifier) | ⏳ Pending |
-| 13–14 | Testing strategy, deployment, GitHub polish, weekly milestone tracking | ⏳ Pending |
+1. **smoke_alarm (20 real clips, 3 in test) and baby_cry (69, 7 in test)** are below the ≥ 150 / ≥ 20 targets.
+   The AudioSet top-up was stopped by YouTube's bot check ("Sign in to confirm you're not a bot") after 4 parallel
+   downloads; see `data/raw/audioset/download_manifest.csv`. Neither class is in FSD50K, and ESC-50 has no smoke alarm.
+2. **iNoise is missing** everywhere (Mac, Drive, old zip). It needs a free IEEE DataPort login.
+3. **No team recordings of smoke_alarm, siren or glass_break.**
+4. FSD50K is streamed from Google Drive for Desktop; the first read of each file is slow (~2 s).

@@ -1,14 +1,15 @@
 """Synthetic Audio Mixing Pipeline.
 
-Mixes target sound clips (from FSD50K/AudioSet in train_manifest.csv) with background chunks
-(from iNoise_chunks or DESED) at controlled signal-to-noise ratios (SNR), saving outputs
-to Google Drive under $SAHARA_DRIVE_DATASETS/SyntheticMixed/{class_name}/.
+Mixes real train-split target clips with train-split background beds (DESED, team
+recordings, iNoise chunks when present) at SNRs in [SYNTHETIC_SNR_MIN_DB, SYNTHETIC_SNR_MAX_DB],
+saving outputs locally under data/raw/synthetic_mixed/{class_name}/. Mixes are train-only.
 """
 from __future__ import annotations
 
 import csv
+from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
 import logging
-import os
 import random
 import sys
 from pathlib import Path
@@ -27,6 +28,7 @@ from src.config import (
     SYNTHETIC_SNR_MIN_DB,
     get_raw_dir,
 )
+from src.data.label_map import BACKGROUND_LABEL
 from src.preprocessing.audio_utils import load_audio
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -37,6 +39,7 @@ def mix_target_with_background(
     target_clip_path: Path | str,
     background_chunk_path: Path | str,
     snr_db: float,
+    crop_fraction: float | None = None,
 ) -> np.ndarray:
     """Load target and background at 16kHz, scale background to snr_db, sum, and peak-normalize."""
     target = load_audio(target_clip_path, target_sr=SAMPLE_RATE)
@@ -56,7 +59,7 @@ def mix_target_with_background(
         background = np.tile(background, repeats)[:t_len]
     elif b_len > t_len:
         # Random start crop if background is longer
-        start = random.randint(0, b_len - t_len)
+        start = random.randint(0, b_len - t_len) if crop_fraction is None else int(crop_fraction * (b_len - t_len))
         background = background[start : start + t_len]
 
     # Calculate signal powers
@@ -79,106 +82,116 @@ def mix_target_with_background(
     return mixed.astype(np.float32)
 
 
-def find_available_background_chunks() -> list[Path]:
-    """Find background chunks in iNoise_chunks and DESED background set."""
-    chunks: list[Path] = []
+def _read_manifest(path: Path) -> list[dict]:
+    with path.open(newline="", encoding="utf-8") as handle:
+        return list(csv.DictReader(handle))
 
-    # iNoise_chunks
+
+def find_available_background_chunks(train_rows: list[dict] | None = None) -> list[Path]:
+    """Background beds: train-split background clips (DESED, team recordings) + iNoise chunks.
+
+    Only train-split clips are used, so no validation/test audio reaches training through a mix.
+    iNoise chunks are only used when iNoise is present (it needs a manual IEEE DataPort download).
+    """
+    if train_rows is None:
+        train_rows = _read_manifest(METADATA_DIR / "train_manifest.csv")
+    chunks = [Path(r["filepath"]) for r in train_rows
+              if r["label"] == BACKGROUND_LABEL and r["source_type"] != "synthetic_mixed"]
     inoise_chunks_dir = get_raw_dir("inoise_chunks")
     if inoise_chunks_dir.exists():
-        for root, _, files in os.walk(inoise_chunks_dir):
-            for f in files:
-                if f.lower().endswith(".wav"):
-                    chunks.append(Path(root) / f)
-
-    # DESED background
-    desed_real_dir = get_raw_dir("desed") / "real"
-    if desed_real_dir.exists():
-        for root, _, files in os.walk(desed_real_dir):
-            for f in files:
-                if f.lower().endswith(".wav"):
-                    chunks.append(Path(root) / f)
-
+        chunks.extend(sorted(inoise_chunks_dir.rglob("*.wav")))
     return chunks
+
+
+def _bed_source(path: Path) -> str:
+    text = str(path)
+    for name in ("inoise", "desed", "indian_ambient"):
+        if f"/{name}" in text:
+            return name
+    return "other"
 
 
 def generate_synthetic_dataset(
     mixes_per_target: int = SYNTHETIC_MIXES_PER_TARGET,
     snr_min: float = SYNTHETIC_SNR_MIN_DB,
     snr_max: float = SYNTHETIC_SNR_MAX_DB,
+    workers: int = 4,
 ) -> int:
-    random.seed(RANDOM_SEED)
-    np.random.seed(RANDOM_SEED)
+    """Mix every real train-split target clip onto ``mixes_per_target`` random beds.
 
+    Mixes are written to data/raw/synthetic_mixed/<class>/ with synthetic_metadata.csv,
+    which records the source clip's recording_id so the manifest builder keeps every mix
+    in train next to its source. Existing mixes are kept (the run resumes).
+    """
     train_manifest = METADATA_DIR / "train_manifest.csv"
     if not train_manifest.exists():
         logger.error("train_manifest.csv not found in %s", METADATA_DIR)
         return 0
-
-    bg_chunks = find_available_background_chunks()
+    train_rows = _read_manifest(train_manifest)
+    bg_chunks = find_available_background_chunks(train_rows)
     if not bg_chunks:
-        logger.warning("No background chunks found in iNoise_chunks or DESED.")
+        logger.warning("No train-split background clips found.")
         return 0
+    logger.info("Background beds: %d (%s)", len(bg_chunks), dict(Counter(_bed_source(b) for b in bg_chunks)))
 
     output_dir = get_raw_dir("synthetic_mixed")
     output_dir.mkdir(parents=True, exist_ok=True)
     meta_csv_path = output_dir / "synthetic_metadata.csv"
 
-    # Read train_manifest rows matching target sound classes
-    target_rows: list[dict] = []
-    with train_manifest.open(newline="", encoding="utf-8") as handle:
-        for row in csv.DictReader(handle):
-            if row["label"] in SOUND_CLASSES:
-                target_rows.append(row)
+    target_rows = [r for r in train_rows if r["label"] in SOUND_CLASSES and r["source_type"] != "synthetic_mixed"]
+    logger.info("Found %d real target clips in train_manifest.csv", len(target_rows))
 
-    logger.info("Found %d target clips in train_manifest.csv", len(target_rows))
-    generated_count = 0
-
-    metadata_rows: list[dict] = []
-
+    # Plan every mix up front from one seeded RNG, so results do not depend on thread timing.
+    rng = random.Random(RANDOM_SEED)
+    plans = []
     for row in target_rows:
+        for mix_idx in range(mixes_per_target):
+            plans.append((row, mix_idx, rng.choice(bg_chunks), round(rng.uniform(snr_min, snr_max), 1), rng.random()))
+
+    def make(plan) -> dict | None:
+        row, mix_idx, bg_path, snr_db, crop = plan
         target_path = Path(row["filepath"])
         label = row["label"]
-        class_out_dir = output_dir / label
-        class_out_dir.mkdir(parents=True, exist_ok=True)
-
-        for mix_idx in range(mixes_per_target):
-            bg_path = random.choice(bg_chunks)
-            snr_db = round(random.uniform(snr_min, snr_max), 1)
-
+        source = row["source_dataset"]
+        out_filename = f"syn_{source}_{target_path.stem}_{_bed_source(bg_path)}_snr{snr_db:+.1f}_v{mix_idx}.wav"
+        out_path = output_dir / label / out_filename
+        if not out_path.exists():
             try:
-                mixed_audio = mix_target_with_background(target_path, bg_path, snr_db)
-                bg_cat = bg_path.parent.name
-                out_filename = f"syn_{target_path.stem}_{bg_cat}_snr{snr_db:+.1f}_v{mix_idx}.wav"
-                out_path = class_out_dir / out_filename
-
-                sf.write(str(out_path), mixed_audio, SAMPLE_RATE)
-                generated_count += 1
-
-                metadata_rows.append(
-                    {
-                        "filename": out_filename,
-                        "source_target": str(target_path),
-                        "source_background": str(bg_path),
-                        "snr_db": snr_db,
-                        "label": label,
-                        "relative_filepath": f"{label}/{out_filename}",
-                    }
-                )
+                mixed_audio = mix_target_with_background(target_path, bg_path, snr_db, crop_fraction=crop)
             except Exception as exc:
                 logger.debug("Skipping mix for %s: %s", target_path, exc)
+                return None
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            sf.write(str(out_path), mixed_audio, SAMPLE_RATE)
+        return {
+            "filename": out_filename,
+            "label": label,
+            "relative_filepath": f"{label}/{out_filename}",
+            "source_target": str(target_path),
+            "source_dataset": source,
+            "source_recording_id": row["recording_id"],
+            "source_background": str(bg_path),
+            "bed_source": _bed_source(bg_path),
+            "snr_db": snr_db,
+            "duration_sec": round(sf.info(str(out_path)).duration, 3),
+        }
 
-    # Write synthetic_metadata.csv
+    metadata_rows: list[dict] = []
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for i, result in enumerate(pool.map(make, plans), 1):
+            if result:
+                metadata_rows.append(result)
+            if i % 500 == 0:
+                logger.info("%d / %d mixes", i, len(plans))
+
     if metadata_rows:
-        fieldnames = ["filename", "source_target", "source_background", "snr_db", "label", "relative_filepath"]
         with meta_csv_path.open("w", newline="", encoding="utf-8") as handle:
-            writer = csv.DictWriter(handle, fieldnames=fieldnames)
+            writer = csv.DictWriter(handle, fieldnames=list(metadata_rows[0]))
             writer.writeheader()
             writer.writerows(metadata_rows)
         logger.info("Saved synthetic metadata (%d rows) to %s", len(metadata_rows), meta_csv_path)
-
-    logger.info("Synthetic dataset generation complete: %d clips created", generated_count)
-    return generated_count
+    logger.info("Synthetic dataset: %d mixes from %d target clips", len(metadata_rows), len(target_rows))
+    return len(metadata_rows)
 
 
 if __name__ == "__main__":

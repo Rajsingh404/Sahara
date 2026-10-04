@@ -5,7 +5,7 @@ import argparse
 import csv
 import logging
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 import numpy as np
@@ -20,13 +20,13 @@ from src.config import (
     VALIDATION_SPLIT,
     get_raw_dir,
 )
-from src.data.label_map import BACKGROUND_LABEL, CLASS_LABEL_MAP, fsd50k_labels_for_class
+from src.data.label_map import BACKGROUND_LABEL, CLASS_LABEL_MAP, DESED_EXCLUDED_EVENTS
 from src.preprocessing.audio_utils import get_duration_sec
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
-MANIFEST_FIELDS = ["filepath", "label", "source_dataset", "source_type", "duration_sec", "recording_id"]
+MANIFEST_FIELDS = ["filepath", "label", "source_dataset", "source_type", "duration_sec", "recording_id", "recorder"]
 AUDIO_SUFFIXES = {".wav", ".flac", ".mp3", ".ogg", ".m4a"}
 
 
@@ -53,22 +53,25 @@ def _duration_best_effort(filepath: Path, csv_duration: float | None = None) -> 
 
 
 def _recording_id(source: str, filepath: Path, extra: str = "") -> str:
-    """Stable group id for stratified splits (same session stays in one split)."""
+    """Group id for splitting: every row sharing it lands in the same split.
+
+    AudioSet and DESED clips are both cut from YouTube videos, and FSD50K and ESC-50 clips
+    both come from Freesound, so the id is the upstream video / Freesound id. A clip that
+    appears in two datasets (or under two labels) therefore cannot straddle train and test.
+    """
     stem = filepath.stem
     if source == "audioset":
-        # video_id is embedded before the timestamp tokens.
-        parts = stem.split("_")
-        return f"audioset:{parts[0]}" if parts else f"audioset:{stem}"
+        return f"yt:{stem[:11]}"  # YouTube ids are 11 chars and may contain "_"
+    if source == "desed":
+        return f"yt:{stem.removeprefix('Y')[:11]}"
     if source == "fsd50k":
-        return f"fsd50k:{stem}"
+        return f"fs:{stem}"
+    if source == "esc50":
+        return f"fs:{extra}"  # ESC-50 src_file is the Freesound clip id
     if source == "indian_ambient":
         return f"indian_ambient:{extra or stem}"
-    if source == "desed":
-        return f"desed:{filepath.parent.name}:{stem}"
     if source == "inoise":
         return f"inoise:{filepath.parent.name}:{stem}"
-    if source == "synthetic_mixed":
-        return f"synthetic_mixed:{stem}"
     return f"{source}:{stem}"
 
 
@@ -142,7 +145,6 @@ def _scan_fsd50k(root: Path) -> list[dict]:
                     logger.debug("fsd50k: skipping empty file %s", csv_candidate)
                     continue
                 handle = csv_candidate.open(newline="", encoding="utf-8")
-                csv_path = csv_candidate
                 logger.debug("fsd50k: opened %s", csv_candidate)
                 break
             except OSError:
@@ -182,19 +184,50 @@ def _scan_fsd50k(root: Path) -> list[dict]:
     return rows
 
 
+def _audioset_segment_labels(root: Path, wanted: set[str]) -> dict[tuple[str, float], set[str]]:
+    """Positive labels per (video id, start) from the AudioSet segment CSVs, for wanted videos only."""
+    index: dict[tuple[str, float], set[str]] = {}
+    for name in ("eval_segments.csv", "balanced_train_segments.csv", "unbalanced_train_segments.csv"):
+        path = root / "metadata" / name
+        if not path.exists():
+            continue
+        with path.open(encoding="utf-8") as handle:
+            for line in handle:
+                if line.startswith("#") or line[:11] not in wanted:
+                    continue
+                parts = [p.strip() for p in line.split(",", 3)]
+                index[(parts[0], float(parts[1]))] = set(parts[3].strip().strip('"').split(","))
+    return index
+
+
 def _scan_audioset(root: Path) -> list[dict]:
+    """One row per clip and per target class its AudioSet labels actually carry.
+
+    The class folder a clip was downloaded into is not trusted on its own: the clip's
+    positive labels are looked up in the segment CSVs and matched against label_map mids.
+    """
     rows: list[dict] = []
     if not root.exists() or not any(root.iterdir()):
         logger.info("audioset: skipped — not yet downloaded")
         return rows
-    found = 0
-    for class_name in SOUND_CLASSES:
-        class_dir = root / class_name
-        if not class_dir.is_dir():
+    files = [f for c in SOUND_CLASSES if (root / c).is_dir() for f in (root / c).glob("*.wav")]
+    index = _audioset_segment_labels(root, {f.stem[:11] for f in files})
+    mids = {c: set(CLASS_LABEL_MAP[c]["audioset"]) for c in SOUND_CLASSES}
+    seen: set[tuple[str, str]] = set()
+    dropped = 0
+    for filepath in files:
+        start_tokens = filepath.stem[12:].split("_")
+        labels = index.get((filepath.stem[:11], float(f"{start_tokens[0]}.{start_tokens[1]}")), set())
+        matched = [c for c in SOUND_CLASSES if labels & mids[c]]
+        if not matched:
+            dropped += 1
             continue
-        for filepath in class_dir.rglob("*"):
-            if filepath.suffix.lower() not in AUDIO_SUFFIXES:
+        # The same segment can sit in two class folders; keep one copy per class.
+        for class_name in matched:
+            key = (filepath.stem, class_name)
+            if key in seen:
                 continue
+            seen.add(key)
             rows.append(
                 {
                     "filepath": str(filepath.resolve()),
@@ -204,47 +237,86 @@ def _scan_audioset(root: Path) -> list[dict]:
                     "recording_id": _recording_id("audioset", filepath),
                 }
             )
-            found += 1
-    if found == 0:
-        logger.info("audioset: skipped — folder exists but no audio files yet")
-    else:
-        logger.info("audioset: %d manifest rows", len(rows))
+    logger.info("audioset: %d manifest rows (%d clips dropped: labels match no target class)", len(rows), dropped)
     return rows
 
 
+def _scan_esc50(root: Path) -> list[dict]:
+    rows: list[dict] = []
+    meta = root / "meta" / "esc50.csv"
+    if not meta.exists():
+        logger.info("esc50: skipped — not yet downloaded")
+        return rows
+    category_to_class = {cat: c for c in SOUND_CLASSES for cat in CLASS_LABEL_MAP[c]["esc50"]}
+    with meta.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            label = category_to_class.get(row["category"])
+            filepath = root / "audio" / row["filename"]
+            if label is None or not filepath.exists():
+                continue
+            rows.append(
+                {
+                    "filepath": str(filepath.resolve()),
+                    "label": label,
+                    "source_dataset": "esc50",
+                    "duration_sec": 5.0,
+                    "recording_id": _recording_id("esc50", filepath, row["src_file"]),
+                }
+            )
+    logger.info("esc50: %d manifest rows", len(rows))
+    return rows
+
+
+def _desed_events(real: Path) -> dict[str, set[str]]:
+    """Event labels per DESED filename from the weak / strong metadata TSVs."""
+    events: dict[str, set[str]] = defaultdict(set)
+    for tsv in (real / "metadata").rglob("*.tsv"):
+        if tsv.name.startswith("._"):
+            continue
+        with tsv.open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle, delimiter="\t"):
+                labels = row.get("event_labels") or row.get("event_label") or ""
+                name = row.get("filename", "")
+                if name:
+                    events[name].update(lbl for lbl in labels.split(",") if lbl)
+    return events
+
+
 def _scan_desed(root: Path) -> list[dict]:
-    """DESED real soundscapes are background negatives unless strongly labeled."""
+    """DESED soundscapes as background, minus clips that contain a SAHARA-like event.
+
+    Clips with Dog or Alarm_bell_ringing (DESED_EXCLUDED_EVENTS) are dropped, and so is
+    the unlabelled in-domain subset, which was chosen for containing DESED's events.
+    """
     rows: list[dict] = []
     real = root / "real"
     if not real.exists() or not any(real.rglob("*")):
         logger.info("desed: skipped — not yet downloaded")
         return rows
-
-    desed_label_map: dict[str, str] = {}
-    for class_name in SOUND_CLASSES:
-        for native in CLASS_LABEL_MAP[class_name]["desed"]:
-            desed_label_map[native.lower()] = class_name
-
-    for filepath in real.rglob("*"):
-        if filepath.suffix.lower() not in AUDIO_SUFFIXES:
+    events = _desed_events(real)
+    dropped = Counter()
+    for filepath in sorted((real / "audio").rglob("*")):
+        if filepath.suffix.lower() not in AUDIO_SUFFIXES or filepath.name.startswith("._"):
             continue
-        lower = str(filepath).lower()
-        matched_class = None
-        for native, class_name in desed_label_map.items():
-            if native.lower().replace("_", " ") in lower.replace("_", " "):
-                matched_class = class_name
-                break
-        label = matched_class or BACKGROUND_LABEL
+        if "unlabel" in filepath.parent.name:
+            dropped["unlabelled"] += 1
+            continue
+        if filepath.name not in events:
+            dropped["no metadata"] += 1
+            continue
+        if events[filepath.name] & DESED_EXCLUDED_EVENTS:
+            dropped["dog/alarm event"] += 1
+            continue
         rows.append(
             {
                 "filepath": str(filepath.resolve()),
-                "label": label,
+                "label": BACKGROUND_LABEL,
                 "source_dataset": "desed",
                 "duration_sec": _duration_best_effort(filepath),
                 "recording_id": _recording_id("desed", filepath),
             }
         )
-    logger.info("desed: %d manifest rows", len(rows))
+    logger.info("desed: %d background rows (dropped %s)", len(rows), dict(dropped))
     return rows
 
 
@@ -273,13 +345,18 @@ def _scan_indian_ambient(root: Path) -> list[dict]:
                 logger.warning("indian_ambient: missing file %s", filepath)
                 continue
             session = row.get("timestamp", "") or row.get("notes", "") or filename
+            csv_duration = float(row["duration_sec"]) if row.get("duration_sec") else None
             rows.append(
                 {
                     "filepath": str(filepath.resolve()),
                     "label": label,
                     "source_dataset": "indian_ambient",
-                    "duration_sec": _duration_best_effort(filepath),
+                    "source_type": "self_recorded",
+                    "duration_sec": _duration_best_effort(filepath, csv_duration),
                     "recording_id": _recording_id("indian_ambient", filepath, session),
+                    "recorder": row.get("recorder", ""),
+                    # organise_recordings.py splits by recorder; honoured as-is.
+                    "split": row.get("split", "").strip(),
                 }
             )
     logger.info("indian_ambient: %d manifest rows", len(rows))
@@ -310,50 +387,37 @@ def _scan_inoise(root: Path) -> list[dict]:
 
 
 def _scan_synthetic_mixed(root: Path) -> list[dict]:
+    """Synthetic mixes, grouped with the real clip they were made from (train only)."""
     rows: list[dict] = []
     meta_path = root / "synthetic_metadata.csv"
-    if meta_path.exists():
-        with meta_path.open(newline="", encoding="utf-8") as handle:
-            for r in csv.DictReader(handle):
-                rel_p = r.get("relative_filepath") or f"{r['label']}/{r['filename']}"
-                filepath = root / rel_p
-                rows.append(
-                    {
-                        "filepath": str(filepath.resolve()),
-                        "label": r["label"],
-                        "source_dataset": "synthetic_mixed",
-                        "source_type": "synthetic_mixed",
-                        "duration_sec": _duration_best_effort(filepath),
-                        "recording_id": _recording_id("synthetic_mixed", filepath),
-                    }
-                )
-    elif root.exists():
-        for filepath in root.rglob("*"):
-            if filepath.suffix.lower() not in AUDIO_SUFFIXES or filepath.name == "synthetic_metadata.csv":
-                continue
-            label = filepath.parent.name
-            if label not in SOUND_CLASSES and label != BACKGROUND_LABEL:
+    if not meta_path.exists():
+        logger.info("synthetic_mixed: skipped — not yet generated")
+        return rows
+    with meta_path.open(newline="", encoding="utf-8") as handle:
+        for r in csv.DictReader(handle):
+            filepath = root / r["relative_filepath"]
+            if not r.get("source_recording_id"):
+                logger.warning("synthetic_mixed: %s has no source_recording_id; regenerate the mixes", filepath.name)
                 continue
             rows.append(
                 {
                     "filepath": str(filepath.resolve()),
-                    "label": label,
+                    "label": r["label"],
                     "source_dataset": "synthetic_mixed",
                     "source_type": "synthetic_mixed",
-                    "duration_sec": _duration_best_effort(filepath),
-                    "recording_id": _recording_id("synthetic_mixed", filepath),
+                    "duration_sec": float(r.get("duration_sec") or 0.0),
+                    "recording_id": r["source_recording_id"],
+                    "split": "train",
                 }
             )
-    if not rows:
-        logger.info("synthetic_mixed: skipped — not yet generated")
-    else:
-        logger.info("synthetic_mixed: %d manifest rows", len(rows))
+    logger.info("synthetic_mixed: %d manifest rows", len(rows))
     return rows
 
 
 SCANNERS = {
     "fsd50k": _scan_fsd50k,
     "audioset": _scan_audioset,
+    "esc50": _scan_esc50,
     "desed": _scan_desed,
     "indian_ambient": _scan_indian_ambient,
     "inoise": _scan_inoise,
@@ -370,14 +434,14 @@ def build_manifest(raw_dir: Path | None = None) -> list[dict]:
     that ad-hoc folders don't cause silent failures.
     """
     rows: list[dict] = []
-    # Always scan the six known datasets via get_raw_dir (Drive-aware).
+    # Always scan the known datasets via get_raw_dir (Drive-aware).
     for name, scanner in SCANNERS.items():
         dataset_dir = get_raw_dir(name)
         rows.extend(scanner(dataset_dir))
 
     for row in rows:
         if "source_type" not in row:
-            row["source_type"] = "synthetic_mixed" if row.get("source_dataset") == "synthetic_mixed" else "real"
+            row["source_type"] = "real"
 
     # Also scan any extra subdirs under raw_dir that aren't in SCANNERS
     # (future datasets, one-off folders, etc.) — log them as skipped.
@@ -390,61 +454,100 @@ def build_manifest(raw_dir: Path | None = None) -> list[dict]:
 
 
 def _stratified_split(rows: list[dict], train_frac: float, val_frac: float, seed: int) -> tuple[list, list, list]:
-    rng = np.random.default_rng(seed)
-    by_class_rec: dict[str, dict[str, list[dict]]] = defaultdict(lambda: defaultdict(list))
-    for row in rows:
-        by_class_rec[row["label"]][row["recording_id"]].append(row)
+    """Split by recording group, stratified by each group's rarest label.
 
+    All rows of a recording_id go to one split, even when the group carries several
+    labels (multi-label FSD50K clips, the same video in AudioSet and DESED).
+    """
+    groups: dict[str, list[dict]] = defaultdict(list)
+    for row in rows:
+        groups[row["recording_id"]].append(row)
+    label_groups = Counter(label for rec in groups.values() for label in {r["label"] for r in rec})
+    by_primary: dict[str, list[str]] = defaultdict(list)
+    for rec_id, rec_rows in groups.items():
+        primary = min({r["label"] for r in rec_rows}, key=lambda lbl: (label_groups[lbl], lbl))
+        by_primary[primary].append(rec_id)
+
+    rng = np.random.default_rng(seed)
     train, val, test = [], [], []
-    for label, recordings in by_class_rec.items():
-        rec_ids = list(recordings.keys())
+    for label in sorted(by_primary):
+        rec_ids = sorted(by_primary[label])
         rng.shuffle(rec_ids)
         n = len(rec_ids)
-        if n == 0:
+        n_val = int(round(n * val_frac)) if n >= 3 else 0
+        n_test = int(round(n * (1.0 - train_frac - val_frac))) if n >= 3 else 0
+        if n >= 3:
+            n_val, n_test = max(1, n_val), max(1, n_test)
+        for i, rec_id in enumerate(rec_ids):
+            target = val if i < n_val else test if i < n_val + n_test else train
+            target.extend(groups[rec_id])
+    return train, val, test
+
+
+def split_rows(rows: list[dict], train_frac: float, val_frac: float, seed: int) -> tuple[list, list, list]:
+    """Rows with a fixed ``split`` (team recordings, synthetic mixes) keep it; the rest are split by group.
+
+    Synthetic mixes stay only if their source clip is in train, so a mix can never carry
+    a validation or test clip into training.
+    """
+    fixed = [r for r in rows if r.get("split")]
+    free = [r for r in rows if not r.get("split")]
+    train, val, test = _stratified_split([r for r in free if r["source_type"] != "synthetic_mixed"], train_frac, val_frac, seed)
+    splits = {"train": train, "val": val, "test": test}
+    synthetic = [r for r in fixed if r["source_type"] == "synthetic_mixed"]
+    for row in fixed:
+        if row["source_type"] != "synthetic_mixed":
+            splits[row["split"]].append(row)
+    train_ids = {r["recording_id"] for r in train}
+    orphans = 0
+    for row in synthetic:
+        if row["recording_id"] not in train_ids:
+            orphans += 1
             continue
-        n_val = max(1, int(round(n * val_frac))) if n > 2 else (1 if n == 3 else 0)
-        n_test = max(1, int(round(n * (1.0 - train_frac - val_frac)))) if n > 2 else (1 if n == 3 else 0)
-        if n_val + n_test >= n:
-            n_val = 1 if n >= 2 else 0
-            n_test = 1 if n >= 3 else 0
-        val_ids = set(rec_ids[:n_val])
-        test_ids = set(rec_ids[n_val : n_val + n_test])
-        for rec_id, rec_rows in recordings.items():
-            if rec_id in val_ids:
-                val.extend(rec_rows)
-            elif rec_id in test_ids:
-                test.extend(rec_rows)
-            else:
-                train.extend(rec_rows)
+        train.append(row)
+    if orphans:
+        logger.warning("dropped %d synthetic rows whose source clip is not in train", orphans)
     return train, val, test
 
 
 def write_manifest(path: Path, rows: list[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    for r in rows:
-        if "source_type" not in r:
-            r["source_type"] = "synthetic_mixed" if r.get("source_dataset") == "synthetic_mixed" else "real"
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=MANIFEST_FIELDS)
+        writer = csv.DictWriter(handle, fieldnames=MANIFEST_FIELDS, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
 
 
-def print_coverage_table(rows: list[dict]) -> None:
-    counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
-    sources = sorted({row["source_dataset"] for row in rows}) or ["(none)"]
-    labels = list(SOUND_CLASSES) + [BACKGROUND_LABEL]
-    for row in rows:
-        counts[row["label"]][row["source_dataset"]] += 1
+MIN_REAL_CLIPS = 150
+MIN_REAL_TEST_CLIPS = 20
 
-    header = ["class", *sources, "total"]
-    print("\nPer-class coverage (clips)")
-    print("\t".join(header))
-    for label in labels:
-        row_counts = [str(counts[label].get(src, 0)) for src in sources]
-        total = sum(counts[label].get(src, 0) for src in sources)
-        flag = "  LOW" if label in SOUND_CLASSES and total < 100 else ""
-        print("\t".join([label, *row_counts, str(total)]) + flag)
+
+def coverage_table(splits: dict[str, list[dict]]) -> str:
+    """Clips per class x source x split, flagging classes below the real-clip minimums."""
+    counts: dict[tuple[str, str, str], int] = Counter()
+    for split_name, rows in splits.items():
+        for row in rows:
+            counts[(row["label"], row["source_dataset"], split_name)] += 1
+    sources = sorted({src for _, src, _ in counts})
+    lines = ["class           " + "".join(f"{s[:14]:>16s}" for s in sources) + "      real  real_test",
+             "                " + "".join(f"{'tr/va/te':>16s}" for _ in sources)]
+    for label in [*SOUND_CLASSES, BACKGROUND_LABEL]:
+        cells = []
+        for src in sources:
+            t, v, e = (counts[(label, src, s)] for s in ("train", "val", "test"))
+            cells.append(f"{f'{t}/{v}/{e}' if t + v + e else '-':>16s}")
+        real = sum(n for (lbl, src, _), n in counts.items() if lbl == label and src != "synthetic_mixed")
+        real_test = sum(n for (lbl, src, sp), n in counts.items() if lbl == label and sp == "test" and src != "synthetic_mixed")
+        flag = ""
+        if label in SOUND_CLASSES and (real < MIN_REAL_CLIPS or real_test < MIN_REAL_TEST_CLIPS):
+            flag = "  << SHORT"
+        lines.append(f"{label:16s}" + "".join(cells) + f"{real:10d}{real_test:11d}{flag}")
+    return "\n".join(lines)
+
+
+def print_coverage_table(rows: list[dict]) -> None:
+    """Back-compatible single-table view (all rows counted as one split)."""
+    print(coverage_table({"train": rows}))
 
 
 def run(raw_dir: Path | None = None) -> dict[str, int]:
@@ -452,17 +555,19 @@ def run(raw_dir: Path | None = None) -> dict[str, int]:
     if not rows:
         logger.warning("No manifest rows found — check data/raw/ contents")
     METADATA_DIR.mkdir(parents=True, exist_ok=True)
-    write_manifest(METADATA_DIR / "full_manifest.csv", rows)
 
     train_frac = 1.0 - VALIDATION_SPLIT - TEST_SPLIT
-    train, val, test = _stratified_split(rows, train_frac, VALIDATION_SPLIT, RANDOM_SEED)
+    train, val, test = split_rows(rows, train_frac, VALIDATION_SPLIT, RANDOM_SEED)
+    write_manifest(METADATA_DIR / "full_manifest.csv", train + val + test)
     write_manifest(METADATA_DIR / "train_manifest.csv", train)
     write_manifest(METADATA_DIR / "val_manifest.csv", val)
     write_manifest(METADATA_DIR / "test_manifest.csv", test)
 
-    print(f"\nManifest totals: full={len(rows)} train={len(train)} val={len(val)} test={len(test)}")
-    print_coverage_table(rows)
-    return {"full": len(rows), "train": len(train), "val": len(val), "test": len(test)}
+    table = coverage_table({"train": train, "val": val, "test": test})
+    (METADATA_DIR / "coverage.txt").write_text(table + "\n", encoding="utf-8")
+    print(f"\nManifest totals: full={len(train) + len(val) + len(test)} train={len(train)} val={len(val)} test={len(test)}")
+    print(table)
+    return {"full": len(train) + len(val) + len(test), "train": len(train), "val": len(val), "test": len(test)}
 
 
 def main() -> None:
