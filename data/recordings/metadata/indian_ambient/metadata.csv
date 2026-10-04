@@ -1,0 +1,124 @@
+filename,class,is_background,location_type,recording_device,distance_m,timestamp,notes,recorder,split,duration_sec,source_path
+baby_cry__advika__01.m4a,baby_cry,false,apartment,phone_m4a,,2026-09-17_advika,,advika,train,8.06,baby cry/baby cry 1.m4a
+baby_cry__advika__02.m4a,baby_cry,false,apartment,phone_m4a,,2026-09-17_advika,,advika,train,10.67,baby cry/baby cry 2.m4a
+baby_cry__advika__03.m4a,baby_cry,false,apartment,phone_m4a,,2026-09-17_advika,,advika,train,5.10,baby cry/baby cry 3.m4a
+baby_cry__advika__04.m4a,baby_cry,false,apartment,phone_m4a,,2026-09-17_advika,,advika,train,1.54,baby cry/baby cry 4.m4a
+baby_cry__advika__05.mp3,baby_cry,false,apartment,unknown_mp3,,undated_advika,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",advika,train,9.48,baby cry/baby cry 5.mp3
+baby_cry__advika__06.mp3,baby_cry,false,apartment,unknown_mp3,,undated_advika,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",advika,train,8.98,baby cry/baby cry 6.mp3
+knocking__advika__01.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,"'door bang' filename: could be a slam rather than a knock, needs a listen",advika,train,2.22,door knocking/door bang 2.m4a
+knocking__advika__02.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,"'door bang' filename: could be a slam rather than a knock, needs a listen",advika,train,2.13,door knocking/door bang 5.m4a
+knocking__advika__03.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,"'door bang' filename: could be a slam rather than a knock, needs a listen",advika,train,2.22,door knocking/door bang.m4a
+background_door_drawer__advika__01.m4a,background,true,apartment,iPhone_VoiceMemos,,2026-09-17_advika,"hard negative: door or drawer movement, not a knock",advika,train,2.82,door knocking/door close 1.m4a
+background_door_drawer__advika__02.m4a,background,true,apartment,iPhone_VoiceMemos,,2026-09-17_advika,"hard negative: door or drawer movement, not a knock",advika,train,6.23,door knocking/door close 2.m4a
+background_door_drawer__advika__03.m4a,background,true,apartment,iPhone_VoiceMemos,,2026-09-17_advika,"hard negative: door or drawer movement, not a knock",advika,train,2.92,door knocking/door open 1.m4a
+background_door_drawer__advika__04.m4a,background,true,apartment,iPhone_VoiceMemos,,2026-09-17_advika,"hard negative: door or drawer movement, not a knock",advika,train,3.65,door knocking/door open 2.m4a
+background_door_drawer__advika__05.m4a,background,true,apartment,iPhone_VoiceMemos,,2026-09-17_advika,"hard negative: door or drawer movement, not a knock",advika,train,2.84,door knocking/door open 3.m4a
+knocking__advika__04.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,"'door bang' filename: could be a slam rather than a knock, needs a listen",advika,train,1.05,door knocking/doorbang2.m4a
+background_door_drawer__advika__06.m4a,background,true,apartment,iPhone_VoiceMemos,,2026-09-17_advika,"hard negative: door or drawer movement, not a knock",advika,train,2.24,door knocking/drawer bang 3.m4a
+background_door_drawer__advika__07.m4a,background,true,apartment,iPhone_VoiceMemos,,2026-09-17_advika,"hard negative: door or drawer movement, not a knock",advika,train,3.56,door knocking/drawer bang 4.m4a
+knocking__advika__05.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,,advika,train,2.43,door knocking/glass 3.m4a
+knocking__advika__06.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,,advika,train,3.48,door knocking/glass knock 2.m4a
+knocking__advika__07.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,,advika,train,5.15,door knocking/glass knock 3.m4a
+knocking__advika__08.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,,advika,train,2.22,door knocking/glass knock.m4a
+knocking__advika__09.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,,advika,train,3.18,door knocking/glass4.m4a
+knocking__advika__10.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,,advika,train,1.86,door knocking/wooden door.m4a
+knocking__advika__11.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,,advika,train,1.79,door knocking/wooden door 2.m4a
+knocking__advika__12.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,,advika,train,5.65,door knocking/wooden door 3.m4a
+knocking__advika__13.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,,advika,train,3.39,door knocking/wooden door 4.m4a
+knocking__advika__14.m4a,knocking,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,,advika,train,2.90,door knocking/wooden door 5.m4a
+appliance_beep__advika__01.m4a,appliance_beep,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,microwave,advika,train,6.10,Microwave/microwave 1.m4a
+appliance_beep__advika__02.m4a,appliance_beep,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,microwave,advika,train,4.01,Microwave/microwave 2.m4a
+appliance_beep__advika__03.m4a,appliance_beep,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,microwave,advika,train,9.94,Microwave/microwave 3.m4a
+appliance_beep__advika__04.m4a,appliance_beep,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,microwave,advika,train,6.25,Microwave/microwave 4.m4a
+appliance_beep__advika__05.m4a,appliance_beep,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,microwave,advika,train,19.69,Microwave/microwave 5.m4a
+appliance_beep__advika__06.m4a,appliance_beep,false,apartment,iPhone_VoiceMemos,,2026-09-17_advika,microwave,advika,train,5.65,Microwave/microwave 6.m4a
+appliance_beep__advika__07.mp3,appliance_beep,false,apartment,unknown_mp3,,undated_advika,"microwave; mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",advika,train,1.12,Microwave/microwave 7.mp3
+appliance_beep__advika__08.mp3,appliance_beep,false,apartment,unknown_mp3,,undated_advika,"microwave; mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",advika,train,8.57,Microwave/microwave 8.mp3
+appliance_beep__advika__09.mp3,appliance_beep,false,apartment,unknown_mp3,,undated_advika,"microwave; mp3 with no recording metadata: confirm it was recorded by the team, not downloaded; long clip (126s), may need trimming",advika,train,125.81,Microwave/microwave 9.mp3
+dog_bark__mahi__01.mp3,dog_bark,false,apartment,iPhone_video_export,,undated_mahi,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",mahi,test,5.04,dog barking/dog1.mp3
+dog_bark__mahi__02.mp3,dog_bark,false,apartment,iPhone_video_export,,2026-08-10_mahi,"phone video from 2026-08-10, older than the recording sessions",mahi,test,2.88,dog barking/dog10.mp3
+dog_bark__mahi__03.mp3,dog_bark,false,apartment,iPhone_video_export,,2022-08-06_mahi,"phone video from 2022-08-06, older than the recording sessions",mahi,test,4.52,dog barking/dog11.mp3
+dog_bark__mahi__04.mp3,dog_bark,false,apartment,iPhone_video_export,,2024-11-25_mahi,"phone video from 2024-11-25, older than the recording sessions",mahi,test,1.18,dog barking/dog2.mp3
+dog_bark__mahi__05.mp3,dog_bark,false,apartment,iPhone_video_export,,2024-11-25_mahi,"phone video from 2024-11-25, older than the recording sessions",mahi,test,3.29,dog barking/dog3.mp3
+dog_bark__mahi__06.mp3,dog_bark,false,apartment,unknown_mp3,,undated_mahi,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",mahi,test,24.66,dog barking/dog4.mp3
+dog_bark__mahi__07.mp3,dog_bark,false,apartment,iPhone_video_export,,undated_mahi,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",mahi,test,6.14,dog barking/dog5.mp3
+dog_bark__mahi__08.mp3,dog_bark,false,apartment,iPhone_video_export,,undated_mahi,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",mahi,test,6.74,dog barking/dog6.mp3
+dog_bark__mahi__09.mp3,dog_bark,false,apartment,unknown_mp3,,undated_mahi,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",mahi,test,22.73,dog barking/dog7.mp3
+dog_bark__mahi__10.mp3,dog_bark,false,apartment,unknown_mp3,,undated_mahi,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",mahi,test,4.39,dog barking/dog8.mp3
+dog_bark__mahi__11.mp3,dog_bark,false,apartment,iPhone_video_export,,2026-04-05_mahi,"phone video from 2026-04-05, older than the recording sessions",mahi,test,3.50,dog barking/dog9.mp3
+doorbell__mahi__01.m4a,doorbell,false,apartment,phone_m4a,,2026-09-17_mahi,,mahi,test,3.39,Doorbell/Andheri West 2.m4a
+doorbell__mahi__02.m4a,doorbell,false,apartment,phone_m4a,,2026-09-17_mahi,,mahi,test,4.59,Doorbell/Andheri West 3.m4a
+doorbell__mahi__03.m4a,doorbell,false,apartment,phone_m4a,,2026-09-17_mahi,,mahi,test,2.54,Doorbell/Andheri West 4.m4a
+doorbell__mahi__04.m4a,doorbell,false,apartment,phone_m4a,,2026-09-17_mahi,,mahi,test,2.54,Doorbell/Andheri West.m4a
+doorbell__mahi__05.mp3,doorbell,false,apartment,unknown_mp3,,undated_mahi,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",mahi,test,6.64,Doorbell/doorbell.mp3
+doorbell__mahi__06.mp3,doorbell,false,apartment,unknown_mp3,,undated_mahi,"mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",mahi,test,4.88,Doorbell/doorbell2.mp3
+appliance_beep__mahi__01.m4a,appliance_beep,false,apartment,phone_m4a,,2026-09-17_mahi,"washing machine; assumed to contain its beep, needs a listen",mahi,test,4.33,washing machine/washing 2.m4a
+appliance_beep__mahi__02.m4a,appliance_beep,false,apartment,phone_m4a,,2026-09-17_mahi,"washing machine; assumed to contain its beep, needs a listen",mahi,test,4.84,washing machine/washing 3.m4a
+appliance_beep__mahi__03.m4a,appliance_beep,false,apartment,phone_m4a,,2026-09-17_mahi,"washing machine; assumed to contain its beep, needs a listen",mahi,test,3.31,washing machine/washing 4.m4a
+appliance_beep__mahi__04.m4a,appliance_beep,false,apartment,iPhone_VoiceMemos,,2026-09-17_mahi,"washing machine; assumed to contain its beep, needs a listen",mahi,test,4.76,washing machine/washing machine 2.m4a
+appliance_beep__mahi__05.m4a,appliance_beep,false,apartment,iPhone_VoiceMemos,,2026-09-17_mahi,"washing machine; assumed to contain its beep, needs a listen",mahi,test,2.05,washing machine/washing machine.m4a
+background_washing_machine__mahi__01.mp3,background,true,apartment,unknown_mp3,,undated_mahi,"hard negative: drum spinning, no beep; mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",mahi,test,10.70,washing machine/washing-spinning.mp3
+appliance_beep__mahi__06.m4a,appliance_beep,false,apartment,phone_m4a,,2026-09-17_mahi,"washing machine; assumed to contain its beep, needs a listen",mahi,test,3.22,washing machine/washing.m4a
+appliance_beep__mahi__07.mp3,appliance_beep,false,apartment,unknown_mp3,,undated_mahi,"washing machine; assumed to contain its beep, needs a listen; mp3 with no recording metadata: confirm it was recorded by the team, not downloaded",mahi,test,0.98,washing machine/washing.mp3
+doorbell__prachi__01.m4a,doorbell,false,apartment,phone_m4a,,2026-09-16_prachi,,prachi,test,4.59,Doorbell/Copy of Doorbell 1.m4a
+doorbell__prachi__02.m4a,doorbell,false,apartment,phone_m4a,,2026-09-16_prachi,,prachi,test,5.78,Doorbell/Copy of Doorbell 10.m4a
+doorbell__prachi__03.m4a,doorbell,false,apartment,phone_m4a,,2026-09-16_prachi,,prachi,test,5.01,Doorbell/Copy of Doorbell 2.m4a
+doorbell__prachi__04.m4a,doorbell,false,apartment,phone_m4a,,2026-09-16_prachi,,prachi,test,10.22,Doorbell/Copy of Doorbell 3.m4a
+doorbell__prachi__05.m4a,doorbell,false,apartment,phone_m4a,,2026-09-16_prachi,,prachi,test,6.12,Doorbell/Copy of Doorbell 4.m4a
+doorbell__prachi__06.m4a,doorbell,false,apartment,phone_m4a,,2026-09-16_prachi,,prachi,test,10.30,Doorbell/Copy of Doorbell 5.m4a
+doorbell__prachi__07.m4a,doorbell,false,apartment,phone_m4a,,2026-09-16_prachi,,prachi,test,5.95,Doorbell/Copy of Doorbell 6.m4a
+doorbell__prachi__08.m4a,doorbell,false,apartment,phone_m4a,,2026-09-16_prachi,,prachi,test,6.72,Doorbell/Copy of Doorbell 7.m4a
+doorbell__prachi__09.m4a,doorbell,false,apartment,phone_m4a,,2026-09-16_prachi,,prachi,test,7.06,Doorbell/Copy of Doorbell 8.m4a
+doorbell__prachi__10.m4a,doorbell,false,apartment,phone_m4a,,2026-09-16_prachi,,prachi,test,4.59,Doorbell/Copy of Doorbell 9.m4a
+background_kitchen__prachi__01.m4a,background,true,domestic_kitchen,phone_m4a,,2026-09-16_prachi,,prachi,test,3.22,Kitchen/Copy of Kitchen 1.m4a
+background_kitchen__prachi__02.m4a,background,true,domestic_kitchen,phone_m4a,,2026-09-16_prachi,,prachi,test,11.24,Kitchen/Copy of Kitchen 10.m4a
+background_kitchen__prachi__03.m4a,background,true,domestic_kitchen,phone_m4a,,2026-09-16_prachi,,prachi,test,4.93,Kitchen/Copy of Kitchen 11.m4a
+background_kitchen__prachi__04.m4a,background,true,domestic_kitchen,phone_m4a,,2026-09-16_prachi,,prachi,test,3.99,Kitchen/Copy of Kitchen 2.m4a
+background_kitchen__prachi__05.m4a,background,true,domestic_kitchen,phone_m4a,,2026-09-16_prachi,,prachi,test,4.16,Kitchen/Copy of Kitchen 3.m4a
+background_kitchen__prachi__06.m4a,background,true,domestic_kitchen,phone_m4a,,2026-09-16_prachi,,prachi,test,7.74,Kitchen/Copy of Kitchen 4.m4a
+background_kitchen__prachi__07.m4a,background,true,domestic_kitchen,phone_m4a,,2026-09-16_prachi,,prachi,test,4.33,Kitchen/Copy of Kitchen 5.m4a
+background_kitchen__prachi__08.m4a,background,true,domestic_kitchen,phone_m4a,,2026-09-16_prachi,,prachi,test,7.91,Kitchen/Copy of Kitchen 6.m4a
+background_kitchen__prachi__09.m4a,background,true,domestic_kitchen,phone_m4a,,2026-09-16_prachi,,prachi,test,3.90,Kitchen/Copy of Kitchen 7.m4a
+background_kitchen__prachi__10.m4a,background,true,domestic_kitchen,phone_m4a,,2026-09-16_prachi,,prachi,test,8.51,Kitchen/Copy of Kitchen 8.m4a
+background_kitchen__prachi__11.m4a,background,true,domestic_kitchen,phone_m4a,,2026-09-16_prachi,,prachi,test,8.09,Kitchen/Copy of Kitchen 9.m4a
+background_temple__prachi__01.m4a,background,true,temple,phone_m4a,,2026-09-16_prachi,,prachi,test,4.25,Temple/Copy of Temple 1.m4a
+background_temple__prachi__02.m4a,background,true,temple,phone_m4a,,2026-09-16_prachi,,prachi,test,8.43,Temple/Copy of Temple 10.m4a
+background_temple__prachi__03.m4a,background,true,temple,phone_m4a,,2026-09-16_prachi,,prachi,test,3.48,Temple/Copy of Temple 11.m4a
+background_temple__prachi__04.m4a,background,true,temple,phone_m4a,,2026-09-16_prachi,,prachi,test,5.70,Temple/Copy of Temple 2.m4a
+background_temple__prachi__05.m4a,background,true,temple,phone_m4a,,2026-09-16_prachi,,prachi,test,10.56,Temple/Copy of Temple 3.m4a
+background_temple__prachi__06.m4a,background,true,temple,phone_m4a,,2026-09-16_prachi,,prachi,test,5.44,Temple/Copy of Temple 4.m4a
+background_temple__prachi__07.m4a,background,true,temple,phone_m4a,,2026-09-16_prachi,,prachi,test,5.70,Temple/Copy of Temple 5.m4a
+background_temple__prachi__08.m4a,background,true,temple,phone_m4a,,2026-09-16_prachi,,prachi,test,6.38,Temple/Copy of Temple 6.m4a
+background_temple__prachi__09.m4a,background,true,temple,phone_m4a,,2026-09-16_prachi,,prachi,test,5.18,Temple/Copy of Temple 7.m4a
+background_temple__prachi__10.m4a,background,true,temple,phone_m4a,,2026-09-16_prachi,,prachi,test,5.87,Temple/Copy of Temple 8.m4a
+background_temple__prachi__11.m4a,background,true,temple,phone_m4a,,2026-09-16_prachi,,prachi,test,5.18,Temple/Copy of Temple 9.m4a
+background_hawker__raj__01.m4a,background,true,street_market,phone_m4a,,2026-09-16_raj,,raj,train,8.51,Hawker/Hawker01.m4a
+background_hawker__raj__02.m4a,background,true,street_market,phone_m4a,,2026-09-16_raj,,raj,train,8.85,Hawker/Hawker02.m4a
+background_hawker__raj__03.m4a,background,true,street_market,phone_m4a,,2026-09-16_raj,,raj,train,8.43,Hawker/Hawker03.m4a
+background_hawker__raj__04.m4a,background,true,street_market,phone_m4a,,2026-09-16_raj,,raj,train,8.17,Hawker/Hawker04.m4a
+background_hawker__raj__05.m4a,background,true,street_market,phone_m4a,,2026-09-16_raj,,raj,train,9.54,Hawker/Hawker05.m4a
+background_hawker__raj__06.m4a,background,true,street_market,phone_m4a,,2026-09-16_raj,,raj,train,7.83,Hawker/Hawker06.m4a
+background_hawker__raj__07.m4a,background,true,street_market,phone_m4a,,2026-09-16_raj,,raj,train,9.88,Hawker/Hawker07.m4a
+background_hawker__raj__08.m4a,background,true,street_market,phone_m4a,,2026-09-16_raj,,raj,train,10.30,Hawker/Hawker08.m4a
+background_hawker__raj__09.m4a,background,true,street_market,phone_m4a,,2026-09-16_raj,,raj,train,7.23,Hawker/Hawker09.m4a
+background_hawker__raj__10.m4a,background,true,street_market,phone_m4a,,2026-09-16_raj,,raj,train,8.43,Hawker/Hawker10.m4a
+background_rain__raj__01.m4a,background,true,outdoor_rain,phone_m4a,,2026-09-16_raj,,raj,train,6.04,Rain/Rain01.m4a
+background_rain__raj__02.m4a,background,true,outdoor_rain,phone_m4a,,2026-09-16_raj,,raj,train,9.19,Rain/Rain02.m4a
+background_rain__raj__03.m4a,background,true,outdoor_rain,phone_m4a,,2026-09-16_raj,,raj,train,6.72,Rain/Rain03.m4a
+background_rain__raj__04.m4a,background,true,outdoor_rain,phone_m4a,,2026-09-16_raj,,raj,train,7.40,Rain/Rain04.m4a
+background_rain__raj__05.m4a,background,true,outdoor_rain,phone_m4a,,2026-09-16_raj,,raj,train,5.27,Rain/Rain05.m4a
+background_rain__raj__06.m4a,background,true,outdoor_rain,phone_m4a,,2026-09-16_raj,,raj,train,5.18,Rain/Rain06.m4a
+background_rain__raj__07.m4a,background,true,outdoor_rain,phone_m4a,,2026-09-16_raj,,raj,train,6.46,Rain/Rain07.m4a
+background_rain__raj__08.m4a,background,true,outdoor_rain,phone_m4a,,2026-09-16_raj,,raj,train,6.46,Rain/Rain08.m4a
+background_rain__raj__09.m4a,background,true,outdoor_rain,phone_m4a,,2026-09-16_raj,,raj,train,7.32,Rain/Rain09.m4a
+background_rain__raj__10.m4a,background,true,outdoor_rain,phone_m4a,,2026-09-16_raj,,raj,train,6.89,Rain/Rain10.m4a
+background_tv__raj__01.m4a,background,true,apartment,phone_m4a,,2026-09-16_raj,,raj,train,8.51,TV/TV01.m4a
+background_tv__raj__02.m4a,background,true,apartment,phone_m4a,,2026-09-16_raj,,raj,train,9.11,TV/TV02.m4a
+background_tv__raj__03.m4a,background,true,apartment,phone_m4a,,2026-09-16_raj,,raj,train,8.34,TV/TV03.m4a
+background_tv__raj__04.m4a,background,true,apartment,phone_m4a,,2026-09-16_raj,,raj,train,6.81,TV/TV04.m4a
+background_tv__raj__05.m4a,background,true,apartment,phone_m4a,,2026-09-16_raj,,raj,train,8.51,TV/TV05.m4a
+background_tv__raj__06.m4a,background,true,apartment,phone_m4a,,2026-09-16_raj,,raj,train,7.83,TV/TV06.m4a
+background_tv__raj__07.m4a,background,true,apartment,phone_m4a,,2026-09-16_raj,,raj,train,8.17,TV/TV07.m4a
+background_tv__raj__08.m4a,background,true,apartment,phone_m4a,,2026-09-16_raj,,raj,train,8.43,TV/TV08.m4a
+background_tv__raj__09.m4a,background,true,apartment,phone_m4a,,2026-09-16_raj,,raj,train,7.66,TV/TV09.m4a
+background_tv__raj__10.m4a,background,true,apartment,phone_m4a,,2026-09-16_raj,,raj,train,7.91,TV/TV10.m4a
