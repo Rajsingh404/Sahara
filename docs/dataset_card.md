@@ -107,8 +107,8 @@ The large drops (glass_break, appliance_beep, background) are wrong labels remov
   FSD50K and ESC-50 both come from Freesound, so both use `fs:<freesound id>`. The same video or Freesound clip
   can therefore never sit in train in one dataset and test in another. All rows of a group go to one split,
   including multi-label clips (the old split was per label and could put one clip in train and test).
-- **Team recordings keep the recorder split** from `organise_recordings.py`: train = Advika, Raj;
-  test = Mahi, Prachi; no validation rows. They are tagged `source_type=self_recorded`.
+- **Team recordings keep the split written by `organise_recordings.py`**: per label, ~60 / 40 train / test across
+  recording conditions; no validation rows. They are tagged `source_type=self_recorded`.
 - **Synthetic mixes are train-only** and grouped with the real clip they were made from. A mix whose source is not
   in train is dropped. Validation and test are real audio only.
 - `tests/test_dataset_split.py` checks all of the above.
@@ -131,20 +131,23 @@ real-world performance.
 180 clips recorded on phones in September 2026. `data/recordings/label_map.csv` (Drive file ids) is the source of
 truth; `scripts/organise_recordings.py --source <Drive Indian_Ambient folder> --dest data/raw` rebuilds the layout.
 
-| Label | Train side (Advika, Raj) | Test side (Mahi, Prachi) |
+Split **per label** (not per person; every recording has its own conditions): ~40 % of each label goes to test,
+spread across the label's recording conditions (Drive folder × recorder); identical clips stay together.
+Details: `data/recordings/README.md`.
+
+| Label | Train | Test |
 |---|---|---|
-| appliance_beep | 9 | 7 |
-| baby_cry | 6 | 0 |
-| knocking | 14 | 0 |
-| dog_bark | 0 | 11 |
-| doorbell | 0 | 16 |
-| background | 37 | 23 |
+| appliance_beep | 10 | 6 |
+| baby_cry | 4 | 2 |
+| knocking | 8 | 6 |
+| dog_bark | 7 | 4 |
+| doorbell | 10 | 6 |
+| background | 36 | 24 |
 | smoke_alarm, siren, glass_break | 0 | 0 |
-| "Aryan" positive / negative (personalization) | 19 / 13 | 19 / 6 |
+| "Aryan" positive / negative (personalization) | 23 / 11 | 15 / 8 |
 
 Used as an Indian-context fine-tuning set (train side) and evaluation set (test side), not as the main training set.
-The test side has no knocking or baby_cry and the train side has no dog_bark or doorbell, so per-class Indian results
-cover only the classes present on each side.
+Every recorded class is now on both sides. smoke_alarm, siren and glass_break have no team recordings yet.
 
 ---
 

@@ -33,9 +33,10 @@ def test_label_map_rows_are_valid():
             assert row["subset"] in {"positive", "negative"}
 
 
-def test_split_keeps_each_recorder_on_one_side(tmp_path):
+def test_recorder_split_keeps_each_recorder_on_one_side(tmp_path):
     rows = organise_recordings.load_label_map()
-    organise_recordings.organise(rows, tmp_path, tmp_path, {"mahi"}, copy_audio=False)
+    splits = organise_recordings.recorder_splits(rows, {"mahi"})
+    organise_recordings.organise(rows, tmp_path, tmp_path, splits, copy_audio=False)
     with (tmp_path / "indian_ambient" / "metadata.csv").open(newline="") as handle:
         ambient = list(csv.DictReader(handle))
     splits = {}
@@ -43,3 +44,34 @@ def test_split_keeps_each_recorder_on_one_side(tmp_path):
         splits.setdefault(row["recorder"], set()).add(row["split"])
     assert splits["mahi"] == {"test"}
     assert all(s == {"train"} for rec, s in splits.items() if rec != "mahi")
+
+
+def test_label_split_covers_every_label_and_condition():
+    rows = organise_recordings.load_label_map()
+    splits = organise_recordings.label_splits(rows)
+    by_label, by_condition = {}, {}
+    for r in rows:
+        by_label.setdefault((r["dataset"], r["label"]), []).append(splits[r["filename"]])
+        by_condition.setdefault((r["label"], organise_recordings.condition(r)), []).append(splits[r["filename"]])
+    for key, sides in by_label.items():
+        n, n_test = len(sides), sides.count("test")
+        assert set(sides) == {"train", "test"}, key
+        assert abs(n_test - 0.4 * n) <= 1, (key, n, n_test)  # ~40 % test per label
+    # Every condition with at least 3 clips appears on both sides.
+    for key, sides in by_condition.items():
+        if len(sides) >= 3:
+            assert set(sides) == {"train", "test"}, key
+
+
+def test_label_split_keeps_identical_audio_together():
+    rows = organise_recordings.load_label_map()
+    splits = organise_recordings.label_splits(rows)
+    dups = [r for r in rows if r["same_audio_as"]]
+    assert dups
+    for r in dups:
+        assert splits[r["filename"]] == splits[r["same_audio_as"]]
+
+
+def test_label_split_is_reproducible():
+    rows = organise_recordings.load_label_map()
+    assert organise_recordings.label_splits(rows) == organise_recordings.label_splits(rows)

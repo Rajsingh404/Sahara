@@ -16,8 +16,10 @@ audio into
     <dest>/indian_ambient/{target_classes,background}/ + metadata.csv
     <dest>/personalization/aryan/{positive,negative}/ + metadata.csv
 
-and assigns a ``split`` column by recorder, so no person's voice, phone or room
-appears in both train and test.
+and assigns a ``split`` column. Default (``--split-by label``): each label is split on its own,
+~60 % train / 40 % test, with the test quota shared across the label's recording conditions
+(Drive folder x recorder) so both sides see every condition; identical clips stay together.
+``--split-by recorder`` keeps the earlier rule (whole recorders held out as test).
 
 Usage (from the repo root):
 
@@ -44,6 +46,8 @@ DRIVE_URL = (
     "https://drive.usercontent.google.com/download?id={}&export=download&confirm=t"
 )
 DEFAULT_TEST_RECORDERS = ("mahi", "prachi")
+TEST_FRACTION = 0.4
+SPLIT_SEED = 42
 
 AMBIENT_FIELDS = [
     "filename",
@@ -116,6 +120,58 @@ def session_tag(row: dict) -> str:
     return f"{row['recorded_on'] or 'undated'}_{row['recorder']}"
 
 
+def condition(row: dict) -> str:
+    """Recording condition: Drive folder + recorder (e.g. 'Doorbell|prachi')."""
+    return f"{row['source_path'].split('/')[0].strip()}|{row['recorder']}"
+
+
+def _duplicate_key(row: dict) -> str:
+    # Clips with identical audio are marked in label_map.csv (`same_audio_as`, e.g. 'door bang 2'
+    # is 'door bang' re-saved); they must land on the same side.
+    return row.get("same_audio_as") or row["filename"]
+
+
+def label_splits(rows: list[dict], test_fraction: float = TEST_FRACTION, seed: int = SPLIT_SEED) -> dict[str, str]:
+    """filename -> 'train' | 'test', split per label and spread across recording conditions."""
+    import random
+
+    splits: dict[str, str] = {}
+    by_label: dict[tuple, list[dict]] = {}
+    for row in rows:
+        by_label.setdefault((row["dataset"], row["label"]), []).append(row)
+    for (dataset, label), label_rows in sorted(by_label.items()):
+        n = len(label_rows)
+        target = int(test_fraction * n + 0.5)
+        if n >= 2:
+            target = min(max(target, 1), n - 1)
+        strata: dict[str, list[list[dict]]] = {}
+        groups: dict[tuple, list[dict]] = {}
+        for row in sorted(label_rows, key=lambda r: r["filename"]):
+            groups.setdefault(_duplicate_key(row), []).append(row)
+        for group in groups.values():
+            strata.setdefault(condition(group[0]), []).append(group)
+        # Largest-remainder share of the label's test quota per condition.
+        quota = {c: test_fraction * sum(len(g) for g in gs) for c, gs in strata.items()}
+        alloc = {c: int(q) for c, q in quota.items()}
+        for c in sorted(quota, key=lambda c: (-(quota[c] - alloc[c]), c))[: max(0, target - sum(alloc.values()))]:
+            alloc[c] += 1
+        rng = random.Random(f"{seed}-{dataset}-{label}")
+        for c in sorted(strata):
+            gs = strata[c]
+            rng.shuffle(gs)
+            taken = 0
+            for group in gs:
+                side = "test" if taken < alloc[c] else "train"
+                taken += len(group) if side == "test" else 0
+                for row in group:
+                    splits[row["filename"]] = side
+    return splits
+
+
+def recorder_splits(rows: list[dict], test_recorders: set[str]) -> dict[str, str]:
+    return {r["filename"]: "test" if r["recorder"] in test_recorders else "train" for r in rows}
+
+
 def write_csv(path: Path, fields: list[str], rows: list[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as handle:
@@ -128,14 +184,14 @@ def organise(
     rows: list[dict],
     source: Path,
     dest: Path,
-    test_recorders: set[str],
+    splits: dict[str, str],
     copy_audio: bool = True,
 ) -> int:
     ambient: list[dict] = []
     personal: dict[str, list[dict]] = {}
     missing = 0
     for row in rows:
-        split = "test" if row["recorder"] in test_recorders else "train"
+        split = splits[row["filename"]]
         if copy_audio:
             src = find_source(row, source)
             if src is None:
@@ -187,26 +243,17 @@ def organise(
     return missing
 
 
-def summarise(rows: list[dict], test_recorders: set[str]) -> None:
+def summarise(rows: list[dict], splits: dict[str, str]) -> None:
     by_label = Counter((r["dataset"], r["label"]) for r in rows)
-    by_recorder = Counter(r["recorder"] for r in rows)
-    by_split = Counter(
-        (
-            r["dataset"],
-            r["label"],
-            "test" if r["recorder"] in test_recorders else "train",
-        )
-        for r in rows
-    )
-    print("\nclips per label (train/test):")
+    by_split = Counter((r["dataset"], r["label"], splits[r["filename"]]) for r in rows)
+    by_condition = Counter((r["dataset"], r["label"], condition(r), splits[r["filename"]]) for r in rows)
+    print("\nclips per label (train/test), and per recording condition:")
     for dataset, label in sorted(by_label):
         tr, te = by_split[(dataset, label, "train")], by_split[(dataset, label, "test")]
-        print(
-            f"  {dataset:8s} {label:15s} {by_label[(dataset, label)]:4d}  ({tr}/{te})"
-        )
-    print("clips per recorder:")
-    for rec, n in sorted(by_recorder.items()):
-        print(f"  {rec:8s} {n:4d}  {'test' if rec in test_recorders else 'train'}")
+        print(f"  {dataset:8s} {label:15s} {by_label[(dataset, label)]:4d}  ({tr}/{te})")
+        for cond in sorted({c for d, lbl, c, _ in by_condition if (d, lbl) == (dataset, label)}):
+            ctr, cte = by_condition[(dataset, label, cond, "train")], by_condition[(dataset, label, cond, "test")]
+            print(f"      {cond:32s} {ctr:3d}/{cte}")
 
 
 def main() -> None:
@@ -228,9 +275,15 @@ def main() -> None:
         help="Fetch every clip in the label map into --source first.",
     )
     parser.add_argument(
+        "--split-by",
+        choices=("label", "recorder"),
+        default="label",
+        help="label (default): per-label split across conditions; recorder: hold out --test-recorders.",
+    )
+    parser.add_argument(
         "--test-recorders",
         default=",".join(DEFAULT_TEST_RECORDERS),
-        help="Comma-separated recorders held out as test (default: %(default)s).",
+        help="With --split-by recorder: comma-separated recorders held out as test (default: %(default)s).",
     )
     parser.add_argument(
         "--metadata-only",
@@ -245,10 +298,9 @@ def main() -> None:
     }
     if args.download:
         download(rows, args.source)
-    missing = organise(
-        rows, args.source, args.dest, test_recorders, copy_audio=not args.metadata_only
-    )
-    summarise(rows, test_recorders)
+    splits = label_splits(rows) if args.split_by == "label" else recorder_splits(rows, test_recorders)
+    missing = organise(rows, args.source, args.dest, splits, copy_audio=not args.metadata_only)
+    summarise(rows, splits)
     if missing:
         sys.exit(f"{missing} clips were missing from {args.source}")
 

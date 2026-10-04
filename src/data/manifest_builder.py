@@ -375,7 +375,7 @@ def _scan_indian_ambient(root: Path) -> list[dict]:
                     "duration_sec": _duration_best_effort(filepath, csv_duration),
                     "recording_id": _recording_id("indian_ambient", filepath, session),
                     "recorder": row.get("recorder", ""),
-                    # organise_recordings.py splits by recorder; honoured as-is.
+                    # organise_recordings.py writes the split (per label, across conditions); honoured as-is.
                     "split": row.get("split", "").strip(),
                 }
             )

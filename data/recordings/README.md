@@ -30,22 +30,29 @@ data/raw/personalization/aryan/
 `manifest_builder.py` picks up `data/raw/indian_ambient/` with no code changes. A copy of the organised audio lives in
 the project's shared folder at `sahara-data/`.
 
-## Split by recorder
+## Split by label (default since 2026-10-04)
 
-Each clip's `split` comes from who recorded it, so one person's voice, phone and room never sit on both sides.
-Default test recorders: **Mahi, Prachi** (`--test-recorders` changes it). Because each person recorded different
-sounds, no recorder split covers every class on both sides:
+Every recording was made in its own conditions, so clips are split **per label**, not per person
+(`--split-by label`, the default). For each label about 40 % of the clips go to test, and that share is spread
+across the label's recording conditions (Drive folder × recorder) by largest-remainder rounding, so both sides see
+every condition. The pick inside a condition is seeded (`SPLIT_SEED = 42`), so the split is reproducible. Clips
+with the same audio are marked in `label_map.csv` (`same_audio_as`; today only `door bang 2.m4a` = `door bang.m4a`)
+and always land on the same side.
 
-| Label | Train (Advika, Raj) | Test (Mahi, Prachi) |
-|---|---|---|
-| appliance_beep | 9 (microwave) | 7 (washing machine) |
-| baby_cry | 6 | 0 |
-| knocking | 14 | 0 |
-| dog_bark | 0 | 11 |
-| doorbell | 0 | 16 |
-| background | 37 | 23 |
-| aryan (positive) | 19 | 19 |
-| not_aryan (negative) | 13 | 6 |
+| Label | Train | Test | Conditions (train/test) |
+|---|---|---|---|
+| appliance_beep | 10 | 6 | Microwave·Advika 6/3, washing machine·Mahi 4/3 |
+| baby_cry | 4 | 2 | baby cry·Advika 4/2 |
+| knocking | 8 | 6 | door knocking·Advika 8/6 |
+| dog_bark | 7 | 4 | dog barking·Mahi 7/4 |
+| doorbell | 10 | 6 | Doorbell·Mahi 4/2, Doorbell·Prachi 6/4 |
+| background | 36 | 24 | Hawker 6/4, Kitchen 6/5, Rain 6/4, TV 6/4, Temple 7/4, door/drawer 4/3, washing spin 1/0 |
+| aryan (positive) | 23 | 15 | every recorder on both sides |
+| not_aryan (negative) | 11 | 8 | every recorder on both sides |
+
+Trade-off: a person's phone and room can now appear on both sides, so the Indian test set measures new clips in
+known conditions rather than an unseen person. The earlier rule is still available with
+`--split-by recorder --test-recorders mahi,prachi`.
 
 These clips are best used as an Indian-context evaluation and fine-tuning set on top of FSD50K/AudioSet, not as a
 standalone training set.

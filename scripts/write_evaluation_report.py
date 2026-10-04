@@ -21,7 +21,7 @@ from src.evaluation.streaming import selected_run_dir
 DOC = REPO_ROOT / "docs" / "evaluation_report.md"
 SET_TITLES = {
     "public": "Public test set (FSD50K, AudioSet, ESC-50 targets; DESED, ESC-50, FSD50K background)",
-    "indian_team": "Indian team test set (Mahi, Prachi; self-recorded, phones)",
+    "indian_team": "Indian team test set (team phone recordings, ~40 % of each label; self-recorded)",
     "synthetic": "Synthetic test set (test clips mixed onto test background, −5 to +10 dB): SYNTHETIC, not real-world",
 }
 
@@ -142,8 +142,8 @@ def build(run: str | None = None) -> str:
     out += ["## Known limitations", "",
             "- Window-level metrics count 0.5 s windows, so long clips weigh more than short ones; clip detection is the closer "
             "proxy for what a user experiences.",
-            "- The Indian team test set covers only the classes the test-side recorders captured; there are no team "
-            "recordings of smoke_alarm, siren or glass_break, and none of doorbell on the train side.",
+            "- The Indian team test set is small (a few clips per class) and split per label, so the same phone or room "
+            "can appear in train and test; there are no team recordings of smoke_alarm, siren or glass_break.",
             "- Synthetic results are reported separately and never as real-world performance.",
             f"- Safety-critical classes ({', '.join(SAFETY_CRITICAL_CLASSES)}) alert on a single window; their false alarms "
             "are listed above.", ""]

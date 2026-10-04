@@ -1,7 +1,7 @@
 """Evaluate a run on the held-out test data, reported as three separate test sets.
 
   public       FSD50K / AudioSet / ESC-50 targets + DESED / ESC-50 / FSD50K background (real)
-  indian_team  the team's test-side recordings (Mahi, Prachi): self-recorded, real
+  indian_team  the team's test-side recordings (per-label split, all recorders): self-recorded, real
   synthetic    test-split targets mixed onto test-split background (synthetic_mixing --split test);
                never used for training and never reported as real-world performance
 
