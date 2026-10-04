@@ -81,3 +81,7 @@ models/logs/*/*
 !models/logs/*/confusion_val.png
 !models/logs/runs_summary.csv
 !models/logs/selected_run.txt
+!models/logs/*/class_thresholds.json
+!models/logs/*/test_*.json
+!models/logs/*/confusion_test_*
+!models/logs/*/false_alarms.json

@@ -12,6 +12,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from src.config import (
+    FSD50K_BACKGROUND_SAMPLE,
     METADATA_DIR,
     RANDOM_SEED,
     RAW_DATA_DIR,
@@ -20,7 +21,7 @@ from src.config import (
     VALIDATION_SPLIT,
     get_raw_dir,
 )
-from src.data.label_map import BACKGROUND_LABEL, CLASS_LABEL_MAP, DESED_EXCLUDED_EVENTS
+from src.data.label_map import BACKGROUND_LABEL, CLASS_LABEL_MAP, DESED_EXCLUDED_EVENTS, FSD50K_BACKGROUND_EXCLUDE
 from src.preprocessing.audio_utils import get_duration_sec
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -126,6 +127,7 @@ def _scan_fsd50k(root: Path) -> list[dict]:
         ("eval.csv", "FSD50K.ground_truth", "FSD50K.eval_audio", "eval_audio"),
     ]
     found_gt = False
+    background_candidates: list[Path] = []
     for split_name, gt_prefix, audio_prefix, audio_plain in split_pairs:
         # Build candidate CSV paths: local cache first, then Drive paths.
         gt_candidates = [
@@ -159,6 +161,8 @@ def _scan_fsd50k(root: Path) -> list[dict]:
                 labels = [lbl.strip() for lbl in row.get("labels", "").split(",") if lbl.strip()]
                 matched = {label_to_class[lbl] for lbl in labels if lbl in label_to_class}
                 fname = row.get("fname", "").strip()
+                if fname and not matched and not set(labels) & FSD50K_BACKGROUND_EXCLUDE:
+                    background_candidates.append(audio_dir / f"{fname}.wav")
                 if not fname or not matched:
                     continue
                 # Construct path pointing to the Drive audio directory — no stat/exists call.
@@ -179,8 +183,23 @@ def _scan_fsd50k(root: Path) -> list[dict]:
 
     if not found_gt:
         logger.info("fsd50k: skipped — ground_truth CSVs not found")
-    else:
-        logger.info("fsd50k: %d manifest rows", len(rows))
+        return rows
+    rng = np.random.default_rng(RANDOM_SEED)
+    picked = sorted(rng.choice(len(background_candidates), size=min(FSD50K_BACKGROUND_SAMPLE, len(background_candidates)),
+                               replace=False)) if background_candidates else []
+    for i in picked:
+        filepath = background_candidates[i]
+        rows.append(
+            {
+                "filepath": str(filepath),
+                "label": BACKGROUND_LABEL,
+                "source_dataset": "fsd50k",
+                "duration_sec": csv_durations.get(filepath.stem, 0.0),
+                "recording_id": _recording_id("fsd50k", filepath),
+            }
+        )
+    logger.info("fsd50k: %d manifest rows (%d background sampled from %d candidates)", len(rows), len(picked),
+                len(background_candidates))
     return rows
 
 
@@ -250,9 +269,10 @@ def _scan_esc50(root: Path) -> list[dict]:
     category_to_class = {cat: c for c in SOUND_CLASSES for cat in CLASS_LABEL_MAP[c]["esc50"]}
     with meta.open(newline="", encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
-            label = category_to_class.get(row["category"])
+            # Unmapped ESC-50 categories (rain, footsteps, typing, car horn, ...) are background.
+            label = category_to_class.get(row["category"], BACKGROUND_LABEL)
             filepath = root / "audio" / row["filename"]
-            if label is None or not filepath.exists():
+            if not filepath.exists():
                 continue
             rows.append(
                 {

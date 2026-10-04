@@ -1,7 +1,6 @@
 """Trainable classifier head on frozen YAMNet embeddings."""
 from __future__ import annotations
 
-import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 

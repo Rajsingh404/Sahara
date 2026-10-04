@@ -1,7 +1,8 @@
-"""Download ESC-50 (Piczak 2015, CC BY-NC 3.0; fine for academic use) and keep only mapped categories.
+"""Download ESC-50 (Piczak 2015, CC BY-NC 3.0; fine for academic use): mapped categories as targets, the rest as background.
 
 The archive (~600 MB) is fetched once from GitHub and extracted to data/raw/esc50/ as
-    audio/*.wav  (5 s, 44.1 kHz mono; only clips of mapped categories are kept)
+    audio/*.wav  (5 s, 44.1 kHz mono; all 2,000 clips: mapped categories are targets,
+                  the other 44 categories are background)
     meta/esc50.csv
 """
 from __future__ import annotations
@@ -38,13 +39,11 @@ def run(dry_run: bool = False) -> dict[str, int]:
         (root / "meta" / "esc50.csv").write_text(meta, encoding="utf-8")
         (root / "audio").mkdir(parents=True, exist_ok=True)
         for row in csv.DictReader(meta.splitlines()):
-            target = categories.get(row["category"])
-            if target is None:
-                continue
             out = root / "audio" / row["filename"]
             if not out.exists():
                 out.write_bytes(zf.read(f"ESC-50-master/audio/{row['filename']}"))
-            counts[target] += 1
+            target = categories.get(row["category"], "background")
+            counts[target] = counts.get(target, 0) + 1
     print("ESC-50 clips per class:", counts)
     return counts
 

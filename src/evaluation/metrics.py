@@ -72,7 +72,7 @@ def safety_floor_recall(
     return out
 
 
-def window_confusion(y_true: np.ndarray, y_score: np.ndarray, out_stem, threshold: float = 0.5) -> np.ndarray:
+def window_confusion(y_true: np.ndarray, y_score: np.ndarray, out_stem, threshold=0.5) -> np.ndarray:
     """Confusion matrix over single-label windows: rows true, columns predicted (9 x 9).
 
     Predicted = the top-scoring class if it reaches ``threshold``, else background.
@@ -85,7 +85,9 @@ def window_confusion(y_true: np.ndarray, y_score: np.ndarray, out_stem, threshol
     keep = n_pos <= 1
     true_idx = np.where(n_pos[keep] == 0, len(SOUND_CLASSES), y_true[keep].argmax(axis=1))
     scores = y_score[keep]
-    pred_idx = np.where(scores.max(axis=1) >= threshold, scores.argmax(axis=1), len(SOUND_CLASSES))
+    # Per-class thresholds allowed: the class that clears its threshold by the largest ratio wins.
+    ratio = scores / np.broadcast_to(np.asarray(threshold, dtype=np.float32), scores.shape[1:])
+    pred_idx = np.where(ratio.max(axis=1) >= 1.0, ratio.argmax(axis=1), len(SOUND_CLASSES))
     matrix = np.zeros((len(labels), len(labels)), dtype=np.int64)
     np.add.at(matrix, (true_idx, pred_idx), 1)
 
@@ -110,7 +112,8 @@ def window_confusion(y_true: np.ndarray, y_score: np.ndarray, out_stem, threshol
                 if matrix[r, c]:
                     ax.text(c, r, matrix[r, c], ha="center", va="center", fontsize=7,
                             color="white" if norm[r, c] > 0.5 else "black")
-        ax.set_xlabel(f"predicted (top class >= {threshold}, else background)")
+        label = f"{threshold}" if np.ndim(threshold) == 0 else "its tuned threshold"
+        ax.set_xlabel(f"predicted (top class over {label}, else background)")
         ax.set_ylabel("true")
         ax.set_title(f"{out_stem.name}: single-label windows, row-normalised colour")
         fig.tight_layout()

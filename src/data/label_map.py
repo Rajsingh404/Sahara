@@ -77,6 +77,16 @@ CLASS_LABEL_MAP: dict[str, dict[str, list[str]]] = {
 # (Dog includes barking, Alarm_bell_ringing includes smoke alarms and beeps), so they are dropped.
 DESED_EXCLUDED_EVENTS = {"Dog", "Alarm_bell_ringing"}
 
+# FSD50K clips used as background must carry none of these labels: the 8 targets' labels
+# plus anything that sounds like a target (bells, beeps, phones, dogs, crying, glass, knocks).
+FSD50K_BACKGROUND_EXCLUDE = {
+    "Alarm", "Bark", "Bell", "Bicycle_bell", "Buzz", "Chime", "Chink_and_clink", "Church_bell",
+    "Clock", "Cowbell", "Crack", "Crying_and_sobbing", "Dog", "Domestic_animals_and_pets", "Doorbell",
+    "Glass", "Glockenspiel", "Gong", "Growling", "Hammer", "Knock", "Mallet_percussion",
+    "Marimba_and_xylophone", "Microwave_oven", "Ringtone", "Screaming", "Shatter", "Siren", "Tap",
+    "Telephone", "Thump_and_thud", "Tick-tock", "Wind_chime",
+}
+
 
 def fsd50k_labels_for_class(class_name: str) -> set[str]:
     return set(CLASS_LABEL_MAP[class_name]["fsd50k"])

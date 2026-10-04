@@ -21,6 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from src.config import (
     METADATA_DIR,
     RANDOM_SEED,
+    RAW_DATA_DIR,
     SAMPLE_RATE,
     SOUND_CLASSES,
     SYNTHETIC_MIXES_PER_TARGET,
@@ -87,27 +88,28 @@ def _read_manifest(path: Path) -> list[dict]:
         return list(csv.DictReader(handle))
 
 
-def find_available_background_chunks(train_rows: list[dict] | None = None) -> list[Path]:
-    """Background beds: train-split background clips (DESED, team recordings) + iNoise chunks.
+def find_available_background_chunks(split_rows: list[dict] | None = None, include_inoise: bool = True) -> list[Path]:
+    """Background beds: the split's own background clips + iNoise chunks (train only).
 
-    Only train-split clips are used, so no validation/test audio reaches training through a mix.
-    iNoise chunks are only used when iNoise is present (it needs a manual IEEE DataPort download).
+    Beds come from the same split as the targets, so no validation/test audio reaches training
+    through a mix. iNoise chunks are used when iNoise is present (it needs a manual IEEE
+    DataPort download); they are not split, so they are only used for training mixes.
     """
-    if train_rows is None:
-        train_rows = _read_manifest(METADATA_DIR / "train_manifest.csv")
-    chunks = [Path(r["filepath"]) for r in train_rows
+    if split_rows is None:
+        split_rows = _read_manifest(METADATA_DIR / "train_manifest.csv")
+    chunks = [Path(r["filepath"]) for r in split_rows
               if r["label"] == BACKGROUND_LABEL and r["source_type"] != "synthetic_mixed"]
     inoise_chunks_dir = get_raw_dir("inoise_chunks")
-    if inoise_chunks_dir.exists():
+    if include_inoise and inoise_chunks_dir.exists():
         chunks.extend(sorted(inoise_chunks_dir.rglob("*.wav")))
     return chunks
 
 
 def _bed_source(path: Path) -> str:
     text = str(path)
-    for name in ("inoise", "desed", "indian_ambient"):
+    for name in ("inoise", "desed", "indian_ambient", "esc50", "fsd50k", "FSD50K"):
         if f"/{name}" in text:
-            return name
+            return name.lower()
     return "other"
 
 
@@ -116,33 +118,35 @@ def generate_synthetic_dataset(
     snr_min: float = SYNTHETIC_SNR_MIN_DB,
     snr_max: float = SYNTHETIC_SNR_MAX_DB,
     workers: int = 4,
+    split: str = "train",
 ) -> int:
-    """Mix every real train-split target clip onto ``mixes_per_target`` random beds.
+    """Mix every real target clip of ``split`` onto ``mixes_per_target`` random beds of the same split.
 
-    Mixes are written to data/raw/synthetic_mixed/<class>/ with synthetic_metadata.csv,
-    which records the source clip's recording_id so the manifest builder keeps every mix
-    in train next to its source. Existing mixes are kept (the run resumes).
+    split="train" (default): data/raw/synthetic_mixed/<class>/ + synthetic_metadata.csv, which
+    records the source clip's recording_id so the manifest builder keeps every mix in train next
+    to its source. split="test": data/raw/synthetic_mixed_test/, a synthetic test set that is
+    never added to the manifests and only reported as synthetic. Existing mixes are kept.
     """
-    train_manifest = METADATA_DIR / "train_manifest.csv"
-    if not train_manifest.exists():
-        logger.error("train_manifest.csv not found in %s", METADATA_DIR)
+    split_manifest = METADATA_DIR / f"{split}_manifest.csv"
+    if not split_manifest.exists():
+        logger.error("%s not found", split_manifest)
         return 0
-    train_rows = _read_manifest(train_manifest)
-    bg_chunks = find_available_background_chunks(train_rows)
+    train_rows = _read_manifest(split_manifest)
+    bg_chunks = find_available_background_chunks(train_rows, include_inoise=split == "train")
     if not bg_chunks:
-        logger.warning("No train-split background clips found.")
+        logger.warning("No %s-split background clips found.", split)
         return 0
     logger.info("Background beds: %d (%s)", len(bg_chunks), dict(Counter(_bed_source(b) for b in bg_chunks)))
 
-    output_dir = get_raw_dir("synthetic_mixed")
+    output_dir = get_raw_dir("synthetic_mixed") if split == "train" else RAW_DATA_DIR / f"synthetic_mixed_{split}"
     output_dir.mkdir(parents=True, exist_ok=True)
     meta_csv_path = output_dir / "synthetic_metadata.csv"
 
     target_rows = [r for r in train_rows if r["label"] in SOUND_CLASSES and r["source_type"] != "synthetic_mixed"]
-    logger.info("Found %d real target clips in train_manifest.csv", len(target_rows))
+    logger.info("Found %d real target clips in %s", len(target_rows), split_manifest.name)
 
     # Plan every mix up front from one seeded RNG, so results do not depend on thread timing.
-    rng = random.Random(RANDOM_SEED)
+    rng = random.Random(f"{RANDOM_SEED}-{split}")
     plans = []
     for row in target_rows:
         for mix_idx in range(mixes_per_target):
@@ -195,4 +199,11 @@ def generate_synthetic_dataset(
 
 
 if __name__ == "__main__":
-    generate_synthetic_dataset()
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--split", choices=("train", "test"), default="train")
+    parser.add_argument("--mixes-per-target", type=int)
+    args = parser.parse_args()
+    default_mixes = SYNTHETIC_MIXES_PER_TARGET if args.split == "train" else 1
+    generate_synthetic_dataset(args.mixes_per_target or default_mixes, split=args.split)

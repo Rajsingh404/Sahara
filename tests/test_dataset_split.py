@@ -119,3 +119,21 @@ def test_desed_scanner_drops_dog_and_alarm_clips(tmp_path: Path):
     (real / "audio" / "train" / "unlabel_in_domain" / "Yunl00000000_0.000_10.000.wav").write_bytes(b"")
     rows = _scan_desed(tmp_path / "desed")
     assert [(Path(r["filepath"]).name, r["label"]) for r in rows] == [("Yvac00000000_0.000_10.000.wav", "background")]
+
+
+def test_fsd50k_background_sample_skips_target_like_labels(tmp_path: Path, monkeypatch):
+    from src.data import manifest_builder
+
+    gt = tmp_path / "FSD50K" / "FSD50K.ground_truth"
+    gt.mkdir(parents=True)
+    (gt / "dev.csv").write_text(
+        "fname,labels,mids,split\n"
+        '1,"Speech,Human_voice",x,train\n'  # background
+        '2,"Telephone,Alarm",x,train\n'  # phone/alarm: never background
+        '3,"Doorbell,Alarm",x,train\n'  # target
+        '4,"Dog,Animal",x,train\n'  # dog without Bark: excluded, not background
+    )
+    monkeypatch.setattr(manifest_builder, "METADATA_DIR", tmp_path / "no_cache" / "metadata")
+    rows = manifest_builder._scan_fsd50k(tmp_path / "FSD50K")
+    got = sorted((Path(r["filepath"]).stem, r["label"]) for r in rows)
+    assert got == [("1", "background"), ("3", "doorbell")]
