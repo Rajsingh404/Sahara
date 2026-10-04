@@ -2,9 +2,11 @@
 from __future__ import annotations
 
 import numpy as np
-from sklearn.metrics import average_precision_score, f1_score, precision_score, recall_score
+from sklearn.metrics import average_precision_score, f1_score, precision_recall_curve, precision_score, recall_score
 
-from src.config import SOUND_CLASSES
+from src.config import SAFETY_CRITICAL_CLASSES, SAFETY_PRECISION_FLOOR, SOUND_CLASSES
+
+BACKGROUND = "background"
 
 
 def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray, threshold: float = 0.5) -> dict:
@@ -41,6 +43,82 @@ def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray, threshold: float = 0
         "mAP": float(np.mean(aps)) if aps else 0.0,
     }
     return {"per_class": per_class, "macro": macro}
+
+
+def safety_floor_recall(
+    y_true: np.ndarray, y_score: np.ndarray, floor: float = SAFETY_PRECISION_FLOOR,
+    classes: tuple[str, ...] = SAFETY_CRITICAL_CLASSES,
+) -> dict[str, dict]:
+    """Best recall each safety-critical class reaches with precision >= ``floor``.
+
+    recall 0.0 means no threshold meets the floor. ``positives`` is the number of positive
+    windows the figure rests on.
+    """
+    out = {}
+    for name in classes:
+        i = SOUND_CLASSES.index(name)
+        yt, ys = y_true[:, i], y_score[:, i]
+        if yt.sum() == 0:
+            out[name] = {"recall": 0.0, "precision": 0.0, "threshold": None, "positives": 0}
+            continue
+        precision, recall, thresholds = precision_recall_curve(yt, ys)
+        ok = np.flatnonzero(precision[:-1] >= floor)
+        if ok.size == 0:
+            out[name] = {"recall": 0.0, "precision": 0.0, "threshold": None, "positives": int(yt.sum())}
+            continue
+        best = ok[np.argmax(recall[ok])]
+        out[name] = {"recall": float(recall[best]), "precision": float(precision[best]),
+                     "threshold": round(float(thresholds[best]), 4), "positives": int(yt.sum())}
+    return out
+
+
+def window_confusion(y_true: np.ndarray, y_score: np.ndarray, out_stem, threshold: float = 0.5) -> np.ndarray:
+    """Confusion matrix over single-label windows: rows true, columns predicted (9 x 9).
+
+    Predicted = the top-scoring class if it reaches ``threshold``, else background.
+    Windows with more than one positive label are left out. Writes <out_stem>.csv and .png.
+    """
+    from pathlib import Path
+
+    labels = [*SOUND_CLASSES, BACKGROUND]
+    n_pos = y_true.sum(axis=1)
+    keep = n_pos <= 1
+    true_idx = np.where(n_pos[keep] == 0, len(SOUND_CLASSES), y_true[keep].argmax(axis=1))
+    scores = y_score[keep]
+    pred_idx = np.where(scores.max(axis=1) >= threshold, scores.argmax(axis=1), len(SOUND_CLASSES))
+    matrix = np.zeros((len(labels), len(labels)), dtype=np.int64)
+    np.add.at(matrix, (true_idx, pred_idx), 1)
+
+    out_stem = Path(out_stem)
+    with out_stem.with_suffix(".csv").open("w", encoding="utf-8") as handle:
+        handle.write("true\\pred," + ",".join(labels) + "\n")
+        for name, row in zip(labels, matrix):
+            handle.write(name + "," + ",".join(str(v) for v in row) + "\n")
+    try:
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+
+        fig, ax = plt.subplots(figsize=(8, 7))
+        norm = matrix / np.maximum(matrix.sum(axis=1, keepdims=True), 1)
+        ax.imshow(norm, cmap="Blues", vmin=0, vmax=1)
+        ax.set_xticks(range(len(labels)), labels, rotation=45, ha="right")
+        ax.set_yticks(range(len(labels)), labels)
+        for r in range(len(labels)):
+            for c in range(len(labels)):
+                if matrix[r, c]:
+                    ax.text(c, r, matrix[r, c], ha="center", va="center", fontsize=7,
+                            color="white" if norm[r, c] > 0.5 else "black")
+        ax.set_xlabel(f"predicted (top class >= {threshold}, else background)")
+        ax.set_ylabel("true")
+        ax.set_title(f"{out_stem.name}: single-label windows, row-normalised colour")
+        fig.tight_layout()
+        fig.savefig(out_stem.with_suffix(".png"), dpi=120)
+        plt.close(fig)
+    except Exception:  # plotting is optional; the CSV is the record
+        pass
+    return matrix
 
 
 def print_metrics(metrics: dict) -> None:
