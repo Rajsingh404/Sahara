@@ -1,0 +1,25 @@
+name: sahara
+description: "SAHARA: on-device safety-sound alerts for Deaf and hard-of-hearing users."
+publish_to: 'none'
+
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  permission_handler: ^12.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  # labels.txt and class_thresholds.json are committed. The .tflite files are copied in by
+  # tool/sync_assets.py; the app runs without them and says the model is missing.
+  assets:
+    - assets/
