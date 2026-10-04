@@ -185,7 +185,7 @@ Optimizer: Adam lr=1e-3 · Loss: cost-sensitive weighted binary crossentropy · 
 - **Novel contribution**: First safety-sound dataset evaluated specifically in Indian urban/domestic acoustic environments.
 
 ### 4. Personalization Module — Dev-Set Recorded, Model Not Started
-- **Status**: Phase 12. Name-call dev-set for "Aryan" recorded by all four team members: 23 positive, 19 negative (other or similar names such as "Arya", "Aryanshi"), 15 not yet sorted. Layout: `data/raw/personalization/aryan/{positive,negative,unverified}/` with a `metadata.csv` each.
+- **Status**: Phase 12. Name-call dev-set for "Aryan" recorded by all four team members: 38 positive, 19 negative (other or similar names such as "Arya", "Aryanshi"). Layout: `data/raw/personalization/aryan/{positive,negative}/` with a `metadata.csv` each.
 
 ---
 

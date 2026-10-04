@@ -1,11 +1,12 @@
 # Team recordings
 
-Audio recorded by the four team members (Advika, Mahi, Prachi, Raj) in September 2026, from the shared Google Drive
-folder (one sub-folder per person). Audio never goes in git; this folder holds only the labels and generated metadata.
+Audio recorded by the four team members (Advika, Mahi, Prachi, Raj) in September 2026. The final Drive folder
+(`Datasets/Indian_Ambient`, one sub-folder per class) is byte-identical to the earlier per-person upload; each clip's
+recorder comes from that upload and is kept in `original_path`. Audio never goes in git; this folder holds only the labels and generated metadata.
 
 | File | What it is |
 |---|---|
-| `label_map.csv` | Source of truth. One row per Drive file: Drive id, original path, recorder, label, new filename, duration, device, notes. Edit this to fix a label, then re-run the script. |
+| `label_map.csv` | Source of truth. One row per Drive file: Drive id, final path, per-recorder path, recorder, label, new filename, duration, device, notes. Edit this to fix a label, then re-run the script. |
 | `metadata/` | The `metadata.csv` files `scripts/organise_recordings.py` writes next to the audio, committed for review. |
 
 ## Rebuild locally
@@ -23,8 +24,7 @@ data/raw/indian_ambient/
 └── background/             background_<scene>__<recorder>__NN.m4a|mp3
 data/raw/personalization/aryan/
 ├── positive/               people saying "Aryan"        + metadata.csv
-├── negative/               other / similar names         + metadata.csv
-└── unverified/             not yet sorted (see below)    + metadata.csv
+└── negative/               other / similar names         + metadata.csv
 ```
 
 `manifest_builder.py` picks up `data/raw/indian_ambient/` with no code changes. A copy of the organised audio lives in
@@ -44,18 +44,16 @@ sounds, no recorder split covers every class on both sides:
 | dog_bark | 0 | 11 |
 | doorbell | 0 | 16 |
 | background | 37 | 23 |
-| aryan (positive) | 19 | 4 |
+| aryan (positive) | 19 | 19 |
 | not_aryan (negative) | 13 | 6 |
-| unverified | 0 | 15 |
 
 These clips are best used as an Indian-context evaluation and fine-tuning set on top of FSD50K/AudioSet, not as a
 standalone training set.
 
 ## Open labelling questions
 
-- **Prachi/Aryan (15 clips)**: all named "Copy of New Recording N", so positive vs negative can't be told from the
-  name. Ten were added 2026-09-18 and five more on 2026-10-04. Kept in `unverified/` until someone listens.
-- **Mahi/Aryan "name", "name 2", "name 3"**: filed as negatives (assumed another name); needs a listen.
+- **Aryan sort**: follows the team's final folder. Prachi's 15 clips are 12 positive / 3 negative; Mahi's "mahi 1–3"
+  are positive (Mahi saying "Aryan") and her "name 1–3" negative; Advika's "mahi" is negative.
 - **Advika "door bang" (4 clips)**: labelled `knocking`; could be door slams.
 - **Advika door open/close and drawer bang (7 clips)**: moved to `background` as hard negatives, not knocks.
 - **Mahi washing machine**: the m4a clips are labelled `appliance_beep` on the assumption they contain the end-of-cycle

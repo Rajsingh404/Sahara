@@ -30,7 +30,7 @@ def test_label_map_rows_are_valid():
                 assert row["label"] in SOUND_CLASSES
         else:
             assert row["dataset"] == "aryan"
-            assert row["subset"] in {"positive", "negative", "unverified"}
+            assert row["subset"] in {"positive", "negative"}
 
 
 def test_split_keeps_each_recorder_on_one_side(tmp_path):

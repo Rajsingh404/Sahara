@@ -1,7 +1,8 @@
 """Organise the team's own recordings into the layouts the pipeline expects.
 
-The four team members (Advika, Mahi, Prachi, Raj) recorded two things into a
-shared Google Drive folder, one sub-folder per person:
+The four team members (Advika, Mahi, Prachi, Raj) recorded two things. The final
+Drive folder (Datasets/Indian_Ambient) groups clips by class; the recorder of each
+clip comes from the earlier per-person upload (``original_path``):
 
 * Indian ambient audio: target-class sounds (doorbell, knocking, ...) and
   background scenes (kitchen, temple, hawker, rain, TV).
@@ -13,7 +14,7 @@ Drive file with its recorder, label and new filename. This script copies the
 audio into
 
     <dest>/indian_ambient/{target_classes,background}/ + metadata.csv
-    <dest>/personalization/aryan/{positive,negative,unverified}/ + metadata.csv
+    <dest>/personalization/aryan/{positive,negative}/ + metadata.csv
 
 and assigns a ``split`` column by recorder, so no person's voice, phone or room
 appears in both train and test.
@@ -77,8 +78,12 @@ def load_label_map(path: Path = LABEL_MAP) -> list[dict]:
 
 
 def find_source(row: dict, source: Path) -> Path | None:
-    """Locate a clip either by Drive id or by its original Drive path."""
-    for candidate in (source / row["drive_file_id"], source / row["source_path"]):
+    """Locate a clip by Drive id, final Drive path or per-recorder Drive path."""
+    for candidate in (
+        source / row["drive_file_id"],
+        source / row["source_path"],
+        source / row["original_path"],
+    ):
         if candidate.is_file():
             return candidate
     return None
@@ -121,7 +126,7 @@ def organise(
     copy_audio: bool = True,
 ) -> int:
     ambient: list[dict] = []
-    personal: dict[str, list[dict]] = {"positive": [], "negative": [], "unverified": []}
+    personal: dict[str, list[dict]] = {}
     missing = 0
     for row in rows:
         split = "test" if row["recorder"] in test_recorders else "train"
@@ -152,7 +157,7 @@ def organise(
                 }
             )
         else:
-            personal[row["subset"]].append(
+            personal.setdefault(row["subset"], []).append(
                 {
                     "filename": row["filename"],
                     "label": row["label"],
