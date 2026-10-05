@@ -57,3 +57,59 @@ def write_rows(path: Path, rows: Iterable[dict], fields: list[str]) -> None:
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
         writer.writerows(rows)
+
+
+TIMED_OUT = object()
+
+
+def imap_with_timeout(fn, items, workers: int = 4, timeout: float = 120.0):
+    """Ordered ``(item, fn(item))`` over ``items`` on ``workers`` daemon threads.
+
+    An item still running ``timeout`` seconds after the consumer starts waiting for it yields
+    ``(item, TIMED_OUT)`` and its slot is handed to the next item, so one hung read (e.g. a
+    Google Drive file stuck after a network drop) cannot stall the run; the stuck daemon thread
+    is abandoned and does not block interpreter exit. Exceptions are returned as results.
+    """
+    import threading
+
+    items = list(items)
+    n = len(items)
+    out: list = [None] * n
+    done = [threading.Event() for _ in range(n)]
+    released = [False] * n
+    lock = threading.Lock()
+    slots = threading.Semaphore(workers)
+
+    def release(i: int) -> None:
+        with lock:
+            if not released[i]:
+                released[i] = True
+                slots.release()
+
+    def run(i: int) -> None:
+        try:
+            out[i] = fn(items[i])
+        except BaseException as exc:  # noqa: BLE001 - handed back to the caller
+            out[i] = exc
+        finally:
+            done[i].set()
+            release(i)
+
+    started = 0
+
+    def start(i: int) -> None:
+        threading.Thread(target=run, args=(i,), daemon=True).start()
+
+    for i in range(n):
+        while started <= i:  # item i must be running before we wait for it
+            slots.acquire()
+            start(started)
+            started += 1
+        while started < min(n, i + 1 + 4 * workers) and slots.acquire(blocking=False):  # prefetch
+            start(started)
+            started += 1
+        if done[i].wait(timeout):
+            yield items[i], out[i]
+        else:
+            release(i)
+            yield items[i], TIMED_OUT

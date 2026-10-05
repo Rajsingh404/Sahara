@@ -24,7 +24,6 @@ import json
 import sys
 import time
 from collections import Counter, defaultdict
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import numpy as np
@@ -39,11 +38,13 @@ from src.config import (
     RANDOM_SEED,
     SOUND_CLASSES,
 )
+from src.data.common import TIMED_OUT, imap_with_timeout
 from src.preprocessing.audio_utils import load_audio
 from src.preprocessing.features import extract_hop_embeddings, hop_cache_path, load_hop_cache, save_hop_cache
 from src.preprocessing.windowing import clip_examples, clip_mean_example
 
 SPLITS = ("train", "val", "test")
+READ_TIMEOUT_SEC = 120
 META_FIELDS = ("filepath", "source_dataset", "source_type", "recording_id")
 
 
@@ -87,12 +88,16 @@ def build_hop_cache(jobs: list[tuple[str, str]], io_workers: int = 4, background
         return job, wave
 
     failed = 0
-    with ThreadPoolExecutor(max_workers=io_workers) as pool, tqdm(total=len(todo), unit="clip") as bar:
-        # Audio I/O in threads (Drive streaming is the bottleneck); YAMNet on this thread.
-        for job, wave in pool.map(load, todo):
+    with tqdm(total=len(todo), unit="clip") as bar:
+        # Audio I/O in threads (Drive streaming is the bottleneck); YAMNet on this thread. A read that
+        # hangs (network drop) is skipped after READ_TIMEOUT_SEC; rerunning embeds what was skipped.
+        for job, result in imap_with_timeout(load, todo, io_workers, READ_TIMEOUT_SEC):
             bar.update(1)
+            wave = result[1] if isinstance(result, tuple) else None
             if wave is None or wave.size == 0:
                 failed += 1
+                if result is TIMED_OUT:
+                    print(f"timed out reading {job[0]}")
                 continue
             save_hop_cache(hop_cache_path(*job), extract_hop_embeddings(wave))
     return failed

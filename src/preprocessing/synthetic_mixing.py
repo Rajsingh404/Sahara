@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import csv
 from collections import Counter
-from concurrent.futures import ThreadPoolExecutor
 import logging
 import random
 import sys
@@ -29,11 +28,13 @@ from src.config import (
     SYNTHETIC_SNR_MIN_DB,
     get_raw_dir,
 )
+from src.data.common import TIMED_OUT, imap_with_timeout
 from src.data.label_map import BACKGROUND_LABEL
 from src.preprocessing.audio_utils import load_audio
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
+READ_TIMEOUT_SEC = 120  # a Drive read slower than this is skipped (network drop), not waited for
 
 
 def mix_target_with_background(
@@ -181,12 +182,17 @@ def generate_synthetic_dataset(
         }
 
     metadata_rows: list[dict] = []
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        for i, result in enumerate(pool.map(make, plans), 1):
-            if result:
-                metadata_rows.append(result)
-            if i % 500 == 0:
-                logger.info("%d / %d mixes", i, len(plans))
+    timed_out = 0
+    for i, (plan, result) in enumerate(imap_with_timeout(make, plans, workers, READ_TIMEOUT_SEC), 1):
+        if result is TIMED_OUT:
+            timed_out += 1
+            logger.warning("Skipped a mix: reading %s or its bed took over %ds", plan[0]["filepath"], READ_TIMEOUT_SEC)
+        elif isinstance(result, dict):
+            metadata_rows.append(result)
+        if i % 500 == 0:
+            logger.info("%d / %d mixes", i, len(plans))
+    if timed_out:
+        logger.warning("%d mixes skipped after read timeouts; rerun to fill them in", timed_out)
 
     if metadata_rows:
         with meta_csv_path.open("w", newline="", encoding="utf-8") as handle:
