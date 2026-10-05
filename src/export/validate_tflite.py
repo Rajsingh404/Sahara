@@ -20,6 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from src.config import PROCESSED_DATA_DIR
 from src.evaluation.metrics import compute_metrics
 from src.evaluation.streaming import load_head, selected_run_dir
+from src.models.classifier_head import head_predict
 from src.export.to_tflite import EXPORT_DIR
 
 FP32_TOLERANCE = 1e-4
@@ -50,7 +51,7 @@ def run(run: str | None = None) -> dict:
     run_dir = selected_run_dir(run)
     x = np.load(PROCESSED_DATA_DIR / "test_embeddings.npy")
     y = np.load(PROCESSED_DATA_DIR / "test_labels.npy")
-    keras_scores = load_head(run_dir).predict(x, batch_size=1024, verbose=0)
+    keras_scores = head_predict(load_head(run_dir), x)
     fp32 = predict_tflite(EXPORT_DIR / "sahara_fp32.tflite", x)
     int8 = predict_tflite(EXPORT_DIR / "sahara_int8.tflite", x)
     m_keras, m_int8 = compute_metrics(y, keras_scores)["macro"]["mAP"], compute_metrics(y, int8)["macro"]["mAP"]

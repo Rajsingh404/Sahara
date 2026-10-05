@@ -12,6 +12,7 @@ import numpy as np
 
 from src.config import HOP_SAMPLES, METADATA_DIR, MODELS_DIR, SAMPLE_RATE, SOUND_CLASSES
 from src.evaluation.policy import Detection, DetectionPolicy
+from src.models.classifier_head import head_predict
 from src.preprocessing.features import hop_cache_path, load_hop_cache
 from src.preprocessing.windowing import device_window_vectors
 
@@ -30,7 +31,10 @@ def selected_run_dir(run: str | Path | None = None) -> Path:
 def load_head(run_dir: Path):
     import tensorflow as tf
 
-    return tf.keras.models.load_model(run_dir / "model.keras", compile=False)
+    from src.models.classifier_head import HEAD_DEVICE
+
+    with tf.device(HEAD_DEVICE):
+        return tf.keras.models.load_model(run_dir / "model.keras", compile=False)
 
 
 def load_thresholds(path: Path = METADATA_DIR / "class_thresholds.json") -> dict[str, float]:
@@ -43,7 +47,7 @@ def hop_scores(model, hops: dict[str, np.ndarray]) -> np.ndarray:
     scores = np.zeros((len(hops["vad"]), len(SOUND_CLASSES)), dtype=np.float32)
     win = device_window_vectors(hops)
     if len(win["vectors"]):
-        scores[win["hop_index"]] = model.predict(win["vectors"], batch_size=1024, verbose=0)
+        scores[win["hop_index"]] = head_predict(model, win["vectors"])
     return scores
 
 

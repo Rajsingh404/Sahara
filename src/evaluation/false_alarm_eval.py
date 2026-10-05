@@ -23,6 +23,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from src.config import METADATA_DIR, SOUND_CLASSES
 from src.evaluation.policy import DetectionPolicy
+from src.models.classifier_head import head_predict
 from src.evaluation.streaming import HOP_MS, load_head, load_thresholds, run_policy, selected_run_dir
 from src.preprocessing.features import hop_cache_path, load_hop_cache
 from src.preprocessing.windowing import device_window_vectors
@@ -52,7 +53,7 @@ def stream_false_alarms(model, filepaths: list[str], thresholds: dict[str, float
         scores = np.zeros((len(hops["vad"]), len(SOUND_CLASSES)), np.float32)
         win = device_window_vectors(hops)
         if len(win["vectors"]):
-            scores[win["hop_index"]] = model.predict(win["vectors"], batch_size=1024, verbose=0)
+            scores[win["hop_index"]] = head_predict(model, win["vectors"])
         if pool_carry is not None:
             scores = scores[1:]  # the carried hop was already scored in the previous clip
         detections, t_ms = run_policy(policy, scores, t_ms)

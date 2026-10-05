@@ -27,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from src.config import METADATA_DIR, PROCESSED_DATA_DIR, RAW_DATA_DIR, SOUND_CLASSES
 from src.evaluation.metrics import window_confusion
 from src.evaluation.policy import DetectionPolicy
+from src.models.classifier_head import head_predict
 from src.evaluation.streaming import clip_hop_scores, load_head, load_thresholds, run_policy, selected_run_dir
 from src.preprocessing.build_features_cache import build_hop_cache
 from src.preprocessing.features import hop_cache_path, load_hop_cache
@@ -139,7 +140,7 @@ def run(run: str | None = None) -> dict:
         sets["synthetic"] = synthetic
     result = {"run": run_dir.name, "split": "test", "thresholds": thresholds, "sets": {}}
     for name, data in sets.items():
-        scores = model.predict(data["X"], batch_size=1024, verbose=0)
+        scores = head_predict(model, data["X"])
         metrics = window_metrics(data["Y"], scores, thresholds)
         metrics["clip_detection_with_app_policy"] = clip_detection(model, data["clips"], thresholds)
         metrics["source_type"] = "synthetic_mixed" if name == "synthetic" else ("self_recorded" if name == "indian_team" else "real")

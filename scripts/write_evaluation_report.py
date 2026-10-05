@@ -62,8 +62,11 @@ def build(run: str | None = None) -> str:
     summary = MODELS_DIR / "logs" / "runs_summary.csv"
     if summary.exists():
         with summary.open(newline="", encoding="utf-8") as handle:
-            rows = sorted(csv.DictReader(handle), key=lambda r: -float(r["val_mAP"]))
-        out += ["All recorded runs (`models/logs/runs_summary.csv`):", "",
+            all_rows = list(csv.DictReader(handle))
+        rows = sorted((r for r in all_rows if r.get("same_val_data") == "True"), key=lambda r: -float(r["val_mAP"]))
+        older = len(all_rows) - len(rows)
+        out += ["Runs scored on the current validation set (`models/logs/runs_summary.csv`; "
+                f"{older} earlier runs used a previous dataset build and are not comparable):", "",
                 "| Run | Val mAP | Synthetic | Fine-tuned from | Features | Safety floor |", "|---|---:|---|---|---|---|"]
         for r in rows:
             mark = " **(selected)**" if r["run"] == run_dir.name else ""

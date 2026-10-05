@@ -16,3 +16,18 @@ def build_classifier_head(input_dim: int = YAMNET_EMBEDDING_DIM, num_classes: in
     x = layers.Dropout(0.3)(x)
     outputs = layers.Dense(num_classes, activation="sigmoid", name="predictions")(x)
     return keras.Model(inputs=inputs, outputs=outputs, name="sahara_classifier_head")
+
+
+# The head always runs on the CPU. On Apple Silicon with tensorflow-metal 1.2.0 (TF 2.16,
+# Keras 3.15), Model.predict() on the Metal GPU returns wrong scores (max |diff| 0.80 vs a NumPy
+# forward pass, 99.9 % of rows; found 2026-10-05), while direct calls and CPU predict agree to
+# < 1e-6. The head is tiny, so CPU costs nothing. tests/test_head_device.py guards this.
+HEAD_DEVICE = "/CPU:0"
+
+
+def head_predict(model: keras.Model, X, batch_size: int = 4096):
+    """Scores for window vectors ``X`` [n, 1024] -> [n, 8], computed on the CPU."""
+    import tensorflow as tf
+
+    with tf.device(HEAD_DEVICE):
+        return model.predict(X, batch_size=batch_size, verbose=0)

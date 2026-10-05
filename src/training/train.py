@@ -43,7 +43,7 @@ from src.config import (
     SOUND_CLASSES,
 )
 from src.evaluation.metrics import compute_metrics, safety_floor_recall, window_confusion
-from src.models.classifier_head import build_classifier_head
+from src.models.classifier_head import HEAD_DEVICE, build_classifier_head, head_predict
 from src.training.losses import weighted_binary_crossentropy
 
 FINETUNE_REPLAY_RATIO = 2  # base-train windows replayed per team window while fine-tuning
@@ -82,12 +82,16 @@ class ValMAP(tf.keras.callbacks.Callback):
         self.X, self.Y = X, Y
 
     def on_epoch_end(self, epoch, logs=None):
-        scores = self.model.predict(self.X, batch_size=1024, verbose=0)
+        scores = head_predict(self.model, self.X)
         logs["val_mAP"] = compute_metrics(self.Y, scores)["macro"]["mAP"]
 
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()[:16] if path.exists() else "missing"
+
+
+def validation_fingerprint(features_dir: Path = PROCESSED_DATA_DIR) -> str:
+    return _sha256(features_dir / "val_embeddings.npy") + ":" + _sha256(features_dir / "val_labels.npy")
 
 
 def _git_sha() -> str:
@@ -129,36 +133,38 @@ def train(
         keep = source_type != "synthetic_mixed"
         X_train, Y_train, source_type = X_train[keep], Y_train[keep], source_type[keep]
 
-    if finetune_from is not None:
-        # Team train-side windows plus a replay sample of the base data, so classes the team did
-        # not record (smoke alarm, siren, glass, doorbell, dog) are not forgotten.
-        team = source_type == "self_recorded"
-        rng = np.random.default_rng(seed)
-        base_idx = np.flatnonzero(~team)
-        replay = rng.choice(base_idx, size=min(len(base_idx), FINETUNE_REPLAY_RATIO * int(team.sum())), replace=False)
-        idx = np.concatenate([np.flatnonzero(team), replay])
-        X_train, Y_train = X_train[idx], Y_train[idx]
-        model = tf.keras.models.load_model(Path(finetune_from) / "model.keras", compile=False)
-    else:
-        model = build_classifier_head()
+    # Build, train and reload the head on the CPU (see classifier_head.HEAD_DEVICE).
+    with tf.device(HEAD_DEVICE):
+        if finetune_from is not None:
+            # Team train-side windows plus a replay sample of the base data, so classes the team did
+            # not record (smoke alarm, siren, glass, doorbell, dog) are not forgotten.
+            team = source_type == "self_recorded"
+            rng = np.random.default_rng(seed)
+            base_idx = np.flatnonzero(~team)
+            replay = rng.choice(base_idx, size=min(len(base_idx), FINETUNE_REPLAY_RATIO * int(team.sum())), replace=False)
+            idx = np.concatenate([np.flatnonzero(team), replay])
+            X_train, Y_train = X_train[idx], Y_train[idx]
+            model = tf.keras.models.load_model(Path(finetune_from) / "model.keras", compile=False)
+        else:
+            model = build_classifier_head()
 
-    sample_weight = balanced_sample_weights(Y_train, balance_power)
-    model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate), loss=weighted_binary_crossentropy)
+        sample_weight = balanced_sample_weights(Y_train, balance_power)
+        model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate), loss=weighted_binary_crossentropy)
 
-    callbacks = [
-        ValMAP(X_val, Y_val),
-        tf.keras.callbacks.EarlyStopping(monitor="val_mAP", mode="max", patience=patience, restore_best_weights=True),
-        tf.keras.callbacks.ModelCheckpoint(run_dir / "model.keras", monitor="val_mAP", mode="max", save_best_only=True),
-        tf.keras.callbacks.CSVLogger(str(run_dir / "history.csv")),
-    ]
-    history = model.fit(
-        X_train, Y_train, sample_weight=sample_weight,
-        validation_data=(X_val, Y_val),
-        epochs=epochs, batch_size=batch_size, shuffle=True, callbacks=callbacks, verbose=2,
-    )
+        callbacks = [
+            ValMAP(X_val, Y_val),
+            tf.keras.callbacks.EarlyStopping(monitor="val_mAP", mode="max", patience=patience, restore_best_weights=True),
+            tf.keras.callbacks.ModelCheckpoint(run_dir / "model.keras", monitor="val_mAP", mode="max", save_best_only=True),
+            tf.keras.callbacks.CSVLogger(str(run_dir / "history.csv")),
+        ]
+        history = model.fit(
+            X_train, Y_train, sample_weight=sample_weight,
+            validation_data=(X_val, Y_val),
+            epochs=epochs, batch_size=batch_size, shuffle=True, callbacks=callbacks, verbose=2,
+        )
 
-    model = tf.keras.models.load_model(run_dir / "model.keras", compile=False)
-    val_scores = model.predict(X_val, batch_size=1024, verbose=0)
+        model = tf.keras.models.load_model(run_dir / "model.keras", compile=False)
+        val_scores = head_predict(model, X_val)
     metrics = compute_metrics(Y_val, val_scores)
     floor = safety_floor_recall(Y_val, val_scores)
     best_epoch = int(np.argmax(history.history["val_mAP"])) + 1
@@ -175,6 +181,8 @@ def train(
         "train_windows": int(len(X_train)),
         "train_positives": {c: int(Y_train[:, i].sum()) for i, c in enumerate(SOUND_CLASSES)},
         "val_windows": int(len(X_val)),
+        # Fingerprint of the validation set: runs are only comparable when this matches.
+        "val_sha256": validation_fingerprint(),
     }
     (run_dir / "metrics.json").write_text(json.dumps(result, indent=2))
     (run_dir / "label_order.txt").write_text("\n".join(SOUND_CLASSES) + "\n")

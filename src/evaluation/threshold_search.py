@@ -29,6 +29,7 @@ from src.config import (
     THRESHOLD_GRID_STEP,
 )
 from src.evaluation.streaming import load_head, selected_run_dir
+from src.models.classifier_head import head_predict
 
 
 def _grid() -> np.ndarray:
@@ -67,7 +68,7 @@ def run(run: str | None = None) -> dict[str, dict]:
     model = load_head(run_dir)
     X = np.load(PROCESSED_DATA_DIR / "val_embeddings.npy")
     Y = np.load(PROCESSED_DATA_DIR / "val_labels.npy")
-    results = choose_thresholds(Y, model.predict(X, batch_size=1024, verbose=0))
+    results = choose_thresholds(Y, head_predict(model, X))
     # Per-class objects first (the app's parser reads {"class": {"threshold": x, ...}}); provenance last.
     payload = {**results, "_meta": {"run": run_dir.name, "split": "val", "windows": int(len(X)),
                                     "grid": [THRESHOLD_GRID_START, THRESHOLD_GRID_END, THRESHOLD_GRID_STEP]}}
