@@ -159,6 +159,7 @@ def build(run: str | None = None) -> str:
             "| mAP 0.618 | handoff notes / CLAUDE.md | ~171 AudioSet clips; no run record |",
             "| mAP 0.651 | `docs/dataset_card.md` (2026-08-28 baseline) | 64 of 188 AudioSet clips mislabelled; FSD50K `Alarm` as appliance_beep; test split could leak multi-label clips |",
             "| macro AP 0.783 | previous `docs/evaluation_report.md` | test classes of 3–7 clips at threshold 0.5; no run record |",
+            "| val mAP 0.913 and other Phase 3 runs of 2026-10-04 | Phase 3 summary | scored with Keras `predict()` on the Metal GPU, which returns wrong scores (see `src/models/classifier_head.py`); earlier dataset build |",
             ""]
     return "\n".join(out)
 
