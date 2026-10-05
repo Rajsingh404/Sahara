@@ -1,0 +1,79 @@
+{
+  "smoke_alarm": {
+    "threshold": 0.2,
+    "precision": 0.7035,
+    "recall": 0.8832,
+    "f1": 0.7832,
+    "rule": "max recall with precision >= 0.7",
+    "val_positive_windows": 137,
+    "floor_met": true
+  },
+  "doorbell": {
+    "threshold": 0.67,
+    "precision": 0.7917,
+    "recall": 0.6333,
+    "f1": 0.7037,
+    "rule": "max F1",
+    "val_positive_windows": 60
+  },
+  "siren": {
+    "threshold": 0.27,
+    "precision": 0.7019,
+    "recall": 0.8588,
+    "f1": 0.7725,
+    "rule": "max recall with precision >= 0.7",
+    "val_positive_windows": 170,
+    "floor_met": true
+  },
+  "knocking": {
+    "threshold": 0.6,
+    "precision": 0.8654,
+    "recall": 0.7965,
+    "f1": 0.8295,
+    "rule": "max F1",
+    "val_positive_windows": 113
+  },
+  "dog_bark": {
+    "threshold": 0.57,
+    "precision": 0.9726,
+    "recall": 0.8875,
+    "f1": 0.9281,
+    "rule": "max F1",
+    "val_positive_windows": 240
+  },
+  "baby_cry": {
+    "threshold": 0.95,
+    "precision": 0.9057,
+    "recall": 0.6857,
+    "f1": 0.7805,
+    "rule": "max F1",
+    "val_positive_windows": 70
+  },
+  "glass_break": {
+    "threshold": 0.59,
+    "precision": 0.7033,
+    "recall": 0.8649,
+    "f1": 0.7758,
+    "rule": "max recall with precision >= 0.7",
+    "val_positive_windows": 148,
+    "floor_met": true
+  },
+  "appliance_beep": {
+    "threshold": 0.9,
+    "precision": 0.7407,
+    "recall": 0.4,
+    "f1": 0.5195,
+    "rule": "max F1",
+    "val_positive_windows": 150
+  },
+  "_meta": {
+    "run": "20261005-0827_c_finetune_team_from_a",
+    "split": "val",
+    "windows": 8505,
+    "grid": [
+      0.05,
+      0.95,
+      0.01
+    ]
+  }
+}

@@ -1,0 +1,262 @@
+{
+  "run": "20261005-0827_c_finetune_team_from_a",
+  "split": "test",
+  "thresholds": {
+    "smoke_alarm": 0.2,
+    "doorbell": 0.67,
+    "siren": 0.27,
+    "knocking": 0.6,
+    "dog_bark": 0.57,
+    "baby_cry": 0.95,
+    "glass_break": 0.59,
+    "appliance_beep": 0.9
+  },
+  "sets": {
+    "public": {
+      "clips": 794,
+      "hours": 1.411,
+      "false_alarms": 64,
+      "false_alarms_per_hour": 45.37,
+      "per_class": {
+        "smoke_alarm": {
+          "count": 10,
+          "per_hour": 7.09
+        },
+        "doorbell": {
+          "count": 2,
+          "per_hour": 1.42
+        },
+        "siren": {
+          "count": 17,
+          "per_hour": 12.05
+        },
+        "knocking": {
+          "count": 5,
+          "per_hour": 3.54
+        },
+        "dog_bark": {
+          "count": 2,
+          "per_hour": 1.42
+        },
+        "baby_cry": {
+          "count": 4,
+          "per_hour": 2.84
+        },
+        "glass_break": {
+          "count": 22,
+          "per_hour": 15.6
+        },
+        "appliance_beep": {
+          "count": 2,
+          "per_hour": 1.42
+        }
+      },
+      "examples": [
+        {
+          "class": "glass_break",
+          "file": "0BYDGId5pdo_0_10.wav",
+          "t_s": 29.0
+        },
+        {
+          "class": "siren",
+          "file": "4B6Ch03-wjQ_415_425.wav",
+          "t_s": 85.0
+        },
+        {
+          "class": "baby_cry",
+          "file": "8tbUCO_HtOU_3_13.wav",
+          "t_s": 159.5
+        },
+        {
+          "class": "glass_break",
+          "file": "_zxgEGoVLAE_11_21.wav",
+          "t_s": 430.0
+        },
+        {
+          "class": "glass_break",
+          "file": "h8c3djjWsMo_100_110.wav",
+          "t_s": 537.0
+        },
+        {
+          "class": "smoke_alarm",
+          "file": "hwGxTuO5DNo_57_67.wav",
+          "t_s": 556.5
+        },
+        {
+          "class": "smoke_alarm",
+          "file": "jsP5oinHnMs_81_91.wav",
+          "t_s": 580.0
+        },
+        {
+          "class": "glass_break",
+          "file": "jsP5oinHnMs_81_91.wav",
+          "t_s": 585.0
+        },
+        {
+          "class": "smoke_alarm",
+          "file": "kk2s7lMpHIs_31_41.wav",
+          "t_s": 596.0
+        },
+        {
+          "class": "glass_break",
+          "file": "nNgmn3MRSwg_64_74.wav",
+          "t_s": 632.5
+        },
+        {
+          "class": "siren",
+          "file": "sUPF7cCn66k_336_346.wav",
+          "t_s": 698.5
+        },
+        {
+          "class": "glass_break",
+          "file": "t8QP9mcBULY_540_550.wav",
+          "t_s": 714.0
+        },
+        {
+          "class": "baby_cry",
+          "file": "Y1DVyj_Q5f0A_12.000_22.000.wav",
+          "t_s": 850.0
+        },
+        {
+          "class": "siren",
+          "file": "Y2-dHuNPOmFg_30.000_40.000.wav",
+          "t_s": 881.0
+        },
+        {
+          "class": "siren",
+          "file": "1-24076-A-43.wav",
+          "t_s": 972.0
+        },
+        {
+          "class": "siren",
+          "file": "1-58277-A-3.wav",
+          "t_s": 1099.0
+        },
+        {
+          "class": "smoke_alarm",
+          "file": "2-100648-A-43.wav",
+          "t_s": 1125.5
+        },
+        {
+          "class": "knocking",
+          "file": "2-117615-D-48.wav",
+          "t_s": 1158.0
+        },
+        {
+          "class": "siren",
+          "file": "2-117795-B-3.wav",
+          "t_s": 1172.5
+        },
+        {
+          "class": "siren",
+          "file": "2-121978-A-29.wav",
+          "t_s": 1194.5
+        },
+        {
+          "class": "knocking",
+          "file": "2-209472-A-25.wav",
+          "t_s": 1263.0
+        },
+        {
+          "class": "smoke_alarm",
+          "file": "2-83270-A-13.wav",
+          "t_s": 1359.0
+        },
+        {
+          "class": "smoke_alarm",
+          "file": "4-108352-A-33.wav",
+          "t_s": 1604.5
+        },
+        {
+          "class": "siren",
+          "file": "4-144085-A-16.wav",
+          "t_s": 1620.5
+        },
+        {
+          "class": "glass_break",
+          "file": "4-215635-A-34.wav",
+          "t_s": 1747.0
+        }
+      ],
+      "hop_ms": 500
+    },
+    "indian_team": {
+      "clips": 24,
+      "hours": 0.038,
+      "false_alarms": 7,
+      "false_alarms_per_hour": 185.98,
+      "per_class": {
+        "smoke_alarm": {
+          "count": 1,
+          "per_hour": 26.57
+        },
+        "doorbell": {
+          "count": 1,
+          "per_hour": 26.57
+        },
+        "siren": {
+          "count": 3,
+          "per_hour": 79.7
+        },
+        "knocking": {
+          "count": 1,
+          "per_hour": 26.57
+        },
+        "dog_bark": {
+          "count": 0,
+          "per_hour": 0.0
+        },
+        "baby_cry": {
+          "count": 0,
+          "per_hour": 0.0
+        },
+        "glass_break": {
+          "count": 1,
+          "per_hour": 26.57
+        },
+        "appliance_beep": {
+          "count": 0,
+          "per_hour": 0.0
+        }
+      },
+      "examples": [
+        {
+          "class": "knocking",
+          "file": "background_door_drawer__advika__07.m4a",
+          "t_s": 3.5
+        },
+        {
+          "class": "siren",
+          "file": "background_hawker__raj__06.m4a",
+          "t_s": 26.0
+        },
+        {
+          "class": "glass_break",
+          "file": "background_kitchen__prachi__10.m4a",
+          "t_s": 54.5
+        },
+        {
+          "class": "siren",
+          "file": "background_temple__prachi__05.m4a",
+          "t_s": 89.0
+        },
+        {
+          "class": "smoke_alarm",
+          "file": "background_temple__prachi__05.m4a",
+          "t_s": 90.0
+        },
+        {
+          "class": "doorbell",
+          "file": "background_temple__prachi__05.m4a",
+          "t_s": 94.0
+        },
+        {
+          "class": "siren",
+          "file": "background_temple__prachi__07.m4a",
+          "t_s": 99.0
+        }
+      ],
+      "hop_ms": 500
+    }
+  }
+}

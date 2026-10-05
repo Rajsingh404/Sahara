@@ -1,0 +1,6 @@
+run,val_mAP,safety_floor_met,best_epoch,train_windows,lr,batch,synthetic,finetune_from,features,same_val_data,AP_smoke_alarm,AP_doorbell,AP_siren,AP_knocking,AP_dog_bark,AP_baby_cry,AP_glass_break,AP_appliance_beep,floorR_smoke_alarm,floorR_siren,floorR_glass_break
+20261005-0826_a_baseline,0.7923,True,4,40234,0.0003,128,False,,processed,True,0.834,0.658,0.828,0.862,0.916,0.853,0.827,0.561,0.891,0.859,0.851
+20261005-0826_b_synthetic,0.7724,True,3,58318,0.0003,128,True,,processed,True,0.812,0.664,0.814,0.811,0.927,0.823,0.816,0.513,0.869,0.806,0.818
+20261005-0827_c_finetune_team_from_a,0.7932,True,1,1482,0.0001,64,False,20261005-0826_a_baseline,processed,True,0.832,0.662,0.828,0.865,0.917,0.855,0.831,0.556,0.883,0.859,0.865
+20261005-0827_c_finetune_team_from_b,0.7738,True,1,1482,0.0001,64,True,20261005-0826_b_synthetic,processed,True,0.808,0.665,0.813,0.82,0.926,0.822,0.822,0.515,0.861,0.806,0.831
+20261005-0827_z_clipmean,0.771,True,33,5654,0.0003,128,False,,clip_mean,True,0.807,0.678,0.823,0.821,0.925,0.844,0.772,0.497,0.854,0.847,0.736
