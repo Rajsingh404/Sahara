@@ -1,79 +1,67 @@
 {
   "smoke_alarm": {
-    "threshold": 0.2,
-    "precision": 0.7035,
-    "recall": 0.8832,
-    "f1": 0.7832,
-    "rule": "max recall with precision >= 0.7",
-    "val_positive_windows": 137,
-    "floor_met": true
+    "threshold": 0.87,
+    "hits_required": 2,
+    "val_clip_detection": 0.8889,
+    "val_false_alarms_per_hour": 0.229,
+    "val_clips": 27
   },
   "doorbell": {
-    "threshold": 0.67,
-    "precision": 0.7917,
-    "recall": 0.6333,
-    "f1": 0.7037,
-    "rule": "max F1",
-    "val_positive_windows": 60
+    "threshold": 0.93,
+    "hits_required": 1,
+    "val_clip_detection": 0.4286,
+    "val_false_alarms_per_hour": 0.229,
+    "val_clips": 35
   },
   "siren": {
-    "threshold": 0.27,
-    "precision": 0.7019,
-    "recall": 0.8588,
-    "f1": 0.7725,
-    "rule": "max recall with precision >= 0.7",
-    "val_positive_windows": 170,
-    "floor_met": true
+    "threshold": 0.86,
+    "hits_required": 1,
+    "val_clip_detection": 0.8929,
+    "val_false_alarms_per_hour": 0.922,
+    "val_clips": 28
   },
   "knocking": {
-    "threshold": 0.6,
-    "precision": 0.8654,
-    "recall": 0.7965,
-    "f1": 0.8295,
-    "rule": "max F1",
-    "val_positive_windows": 113
+    "threshold": 0.89,
+    "hits_required": 1,
+    "val_clip_detection": 0.4103,
+    "val_false_alarms_per_hour": 0.0,
+    "val_clips": 78
   },
   "dog_bark": {
-    "threshold": 0.57,
-    "precision": 0.9726,
-    "recall": 0.8875,
-    "f1": 0.9281,
-    "rule": "max F1",
-    "val_positive_windows": 240
+    "threshold": 0.92,
+    "hits_required": 1,
+    "val_clip_detection": 0.8256,
+    "val_false_alarms_per_hour": 0.468,
+    "val_clips": 86
   },
   "baby_cry": {
-    "threshold": 0.95,
-    "precision": 0.9057,
-    "recall": 0.6857,
-    "f1": 0.7805,
-    "rule": "max F1",
-    "val_positive_windows": 70
+    "threshold": 0.63,
+    "hits_required": 3,
+    "val_clip_detection": 0.7273,
+    "val_false_alarms_per_hour": 0.909,
+    "val_clips": 22
   },
   "glass_break": {
-    "threshold": 0.59,
-    "precision": 0.7033,
-    "recall": 0.8649,
-    "f1": 0.7758,
-    "rule": "max recall with precision >= 0.7",
-    "val_positive_windows": 148,
-    "floor_met": true
+    "threshold": 0.98,
+    "hits_required": 1,
+    "val_clip_detection": 0.3814,
+    "val_false_alarms_per_hour": 0.929,
+    "val_clips": 97
   },
   "appliance_beep": {
-    "threshold": 0.9,
-    "precision": 0.7407,
-    "recall": 0.4,
-    "f1": 0.5195,
-    "rule": "max F1",
-    "val_positive_windows": 150
+    "threshold": 0.87,
+    "hits_required": 2,
+    "val_clip_detection": 0.2667,
+    "val_false_alarms_per_hour": 0.234,
+    "val_clips": 75
   },
   "_meta": {
-    "run": "20261005-0827_c_finetune_team_from_a",
+    "run": "20261005-195620_b_synthetic",
     "split": "val",
-    "windows": 8505,
-    "grid": [
-      0.05,
-      0.95,
-      0.01
-    ]
+    "method": "policy-aware (src/evaluation/policy_tuning.py)",
+    "false_alarm_budget_per_hour": 4.0,
+    "val_total_false_alarms_per_hour": 3.92,
+    "val_clips": 2303,
+    "val_negative_hours_max": 4.4
   }
 }

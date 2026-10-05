@@ -128,7 +128,7 @@ SAFETY_PRECISION_FLOOR = 0.70
 FALSE_ALARM_RATE_LIMIT = 0.10
 # Total alerts per hour allowed on validation audio that holds none of the alerted sounds, summed
 # over the 8 classes (src/evaluation/tune_policy.py). Chosen in Phase 4, see docs/evaluation_report.md.
-FALSE_ALARM_BUDGET_PER_HOUR = 2.0
+FALSE_ALARM_BUDGET_PER_HOUR = 4.0
 THRESHOLD_GRID_START = 0.05
 THRESHOLD_GRID_END = 0.95
 THRESHOLD_GRID_STEP = 0.01

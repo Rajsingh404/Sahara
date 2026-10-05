@@ -68,7 +68,7 @@ def step_synthetic() -> None:
 
 
 def step_features() -> None:
-    sh("src/preprocessing/build_features_cache.py", "--io-workers", "6", desc="YAMNet hop cache + window arrays")
+    sh("src/preprocessing/build_features_cache.py", "--io-workers", "12", desc="YAMNet hop cache + window arrays")
 
 
 def step_train() -> None:

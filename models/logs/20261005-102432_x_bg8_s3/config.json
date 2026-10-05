@@ -1,0 +1,171 @@
+{
+  "name": "x_bg8_s3",
+  "git_sha": "c0dd13259b3223b835d03effbb67b9d8ac61d762-dirty",
+  "created": "2026-10-05T10:24:48",
+  "args": {
+    "batch_size": 32,
+    "epochs": 30,
+    "learning_rate": 0.001,
+    "features_dir": "/Users/rajsingh/Desktop/Sahara/data/processed",
+    "include_synthetic": false,
+    "balance_power": 0.5,
+    "finetune_from": null,
+    "finetune_replay_ratio": null,
+    "patience": 6,
+    "seed": 3,
+    "background_weight": 1.0,
+    "class_boost": {},
+    "hard_negatives_from": null,
+    "hard_negative_weight": 1.0,
+    "hard_negative_threshold": 0.5
+  },
+  "manifest_sha256": {
+    "full": "9509ef80fa38fe62",
+    "train": "65c555eb703ced78",
+    "val": "3856432595cd368f",
+    "test": "aa2e6712a173bf4c"
+  },
+  "features_sha256": {
+    "train": "9d0d4f8db52000ad",
+    "val": "d43d16b7c0db0f78",
+    "test": "224b5abe43adc3e5"
+  },
+  "features_summary": {
+    "mode": "window",
+    "augment": false,
+    "failed_to_load": 0,
+    "splits": {
+      "train": {
+        "clips": 11282,
+        "windows": 58318,
+        "background_windows": 35343,
+        "positive_windows": {
+          "smoke_alarm": 2413,
+          "doorbell": 1564,
+          "siren": 2975,
+          "knocking": 2789,
+          "dog_bark": 5099,
+          "baby_cry": 1814,
+          "glass_break": 3634,
+          "appliance_beep": 2711
+        },
+        "windows_by_source_type": {
+          "real": 39740,
+          "self_recorded": 494,
+          "synthetic_mixed": 18084
+        },
+        "clips_missing_from_cache": 0
+      },
+      "val": {
+        "clips": 1198,
+        "windows": 8505,
+        "background_windows": 7445,
+        "positive_windows": {
+          "smoke_alarm": 137,
+          "doorbell": 60,
+          "siren": 170,
+          "knocking": 113,
+          "dog_bark": 240,
+          "baby_cry": 70,
+          "glass_break": 148,
+          "appliance_beep": 150
+        },
+        "windows_by_source_type": {
+          "real": 8505
+        },
+        "clips_missing_from_cache": 0
+      },
+      "test": {
+        "clips": 1234,
+        "windows": 8703,
+        "background_windows": 7557,
+        "positive_windows": {
+          "smoke_alarm": 118,
+          "doorbell": 74,
+          "siren": 153,
+          "knocking": 111,
+          "dog_bark": 258,
+          "baby_cry": 119,
+          "glass_break": 151,
+          "appliance_beep": 170
+        },
+        "windows_by_source_type": {
+          "real": 8382,
+          "self_recorded": 321
+        },
+        "clips_missing_from_cache": 0
+      }
+    },
+    "seconds": 2105.4
+  },
+  "config": {
+    "REPO_ROOT": "/Users/rajsingh/Desktop/Sahara",
+    "DATA_DIR": "/Users/rajsingh/Desktop/Sahara/data",
+    "RAW_DATA_DIR": "/Users/rajsingh/Desktop/Sahara/data/raw",
+    "INTERIM_DATA_DIR": "/Users/rajsingh/Desktop/Sahara/data/interim",
+    "PROCESSED_DATA_DIR": "/Users/rajsingh/Desktop/Sahara/data/processed",
+    "METADATA_DIR": "/Users/rajsingh/Desktop/Sahara/data/metadata",
+    "MODELS_DIR": "/Users/rajsingh/Desktop/Sahara/models",
+    "_DRIVE_DATASETS": "",
+    "DRIVE_DATASETS_DIR": null,
+    "_LOCAL_ONLY": "{'synthetic_mixed', 'indian_ambient', 'inoise_chunks', 'esc50'}",
+    "SAMPLE_RATE": 16000,
+    "YAMNET_EMBEDDING_DIM": 1024,
+    "SOUND_CLASSES": [
+      "smoke_alarm",
+      "doorbell",
+      "siren",
+      "knocking",
+      "dog_bark",
+      "baby_cry",
+      "glass_break",
+      "appliance_beep"
+    ],
+    "SYNTHETIC_MIXES_PER_TARGET": 3,
+    "SYNTHETIC_SNR_MIN_DB": -5.0,
+    "SYNTHETIC_SNR_MAX_DB": 10.0,
+    "INOISE_CHUNK_DURATION_SEC": 5.0,
+    "FSD50K_BACKGROUND_SAMPLE": 3000,
+    "AUDIOSET_TARGET_PER_CLASS": 200,
+    "BATCH_SIZE": 32,
+    "EPOCHS": 30,
+    "LEARNING_RATE": 0.001,
+    "VALIDATION_SPLIT": 0.15,
+    "TEST_SPLIT": 0.15,
+    "RANDOM_SEED": 42,
+    "AUGMENTATION_ENABLED": false,
+    "AUGMENTATION_VARIANTS_PER_CLIP": 1,
+    "POSITIVE_CLASS_WEIGHTS": {
+      "smoke_alarm": 3.0,
+      "doorbell": 1.0,
+      "siren": 3.0,
+      "knocking": 1.0,
+      "dog_bark": 1.0,
+      "baby_cry": 1.5,
+      "glass_break": 3.0,
+      "appliance_beep": 1.5
+    },
+    "SAFETY_CRITICAL_CLASSES": [
+      "smoke_alarm",
+      "siren",
+      "glass_break"
+    ],
+    "SAFETY_PRECISION_FLOOR": 0.7,
+    "FALSE_ALARM_RATE_LIMIT": 0.1,
+    "FALSE_ALARM_BUDGET_PER_HOUR": 2.0,
+    "THRESHOLD_GRID_START": 0.05,
+    "THRESHOLD_GRID_END": 0.95,
+    "THRESHOLD_GRID_STEP": 0.01,
+    "VAD_ENERGY_THRESHOLD": 0.0001,
+    "INFERENCE_WINDOW_SEC": 1.0,
+    "INFERENCE_HOP_SEC": 0.5,
+    "WINDOW_SAMPLES": 16000,
+    "HOP_SAMPLES": 8000,
+    "YAMNET_PATCH_SAMPLES": 15600,
+    "EMBEDDING_POOL": 2,
+    "EVENT_TOPK_FRACTION": 0.3,
+    "EVENT_TOPK_MAX": 8,
+    "EVENT_MIN_RELATIVE_SCORE": 0.25,
+    "EVENT_SCORE_FLOOR": 0.05
+  }
+}

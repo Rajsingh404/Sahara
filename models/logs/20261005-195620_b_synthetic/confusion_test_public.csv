@@ -1,0 +1,10 @@
+true\pred,smoke_alarm,doorbell,siren,knocking,dog_bark,baby_cry,glass_break,appliance_beep,background
+smoke_alarm,104,0,0,0,0,0,0,1,18
+doorbell,0,43,0,0,0,0,0,0,55
+siren,0,0,131,0,0,0,0,0,27
+knocking,0,0,0,34,0,0,0,0,120
+dog_bark,0,0,0,0,196,0,0,0,36
+baby_cry,0,0,0,0,0,92,0,0,19
+glass_break,0,0,0,0,0,0,87,0,76
+appliance_beep,11,0,1,0,0,0,0,91,182
+background,3,0,26,0,1,34,6,5,16918
