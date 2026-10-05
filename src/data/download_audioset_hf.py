@@ -51,10 +51,51 @@ def _to_wav(flac: bytes, out: Path) -> None:
     sf.write(out, np.clip(mono, -1.0, 1.0), SAMPLE_RATE, subtype="PCM_16")
 
 
+def _process_file(fs, path: str, classes: list[str], mids: dict, times: dict, root: Path) -> dict[str, int]:
+    """Read one parquet file's labels; fetch and write only the row groups holding wanted clips."""
+    added: dict[str, int] = defaultdict(int)
+    # Small, uncached reads for the label columns (default blocks pull in neighbouring audio: ~4x slower).
+    with fs.open(path, "rb", block_size=256 * 1024, cache_type="none") as handle:
+        pf = pq.ParquetFile(handle)
+        labels = pf.read(columns=["video_id", "labels"]).to_pylist()
+        wanted: dict[int, list[tuple[int, str, list[str]]]] = defaultdict(list)
+        offset = 0
+        for group in range(pf.metadata.num_row_groups):
+            n = pf.metadata.row_group(group).num_rows
+            for j, row in enumerate(labels[offset:offset + n]):
+                vid = row["video_id"]
+                hit = [c for c in classes if set(row["labels"]) & mids[c]]
+                if not hit or vid not in times:
+                    continue
+                start, end = times[vid]
+                stem = f"{vid}_{start.replace('.', '_')}_{end.replace('.', '_')}.wav"
+                hit = [c for c in hit if not (root / c / stem).exists()]
+                if hit:
+                    wanted[group].append((j, stem, hit))
+            offset += n
+    if not wanted:
+        return added
+    with fs.open(path, "rb") as handle:
+        pf = pq.ParquetFile(handle)
+        for group, items in wanted.items():
+            audio = pf.read_row_group(group, columns=["audio"]).column("audio").to_pylist()
+            for j, stem, hit in items:
+                for c in hit:
+                    try:
+                        _to_wav(audio[j]["bytes"], root / c / stem)
+                        added[c] += 1
+                    except Exception as exc:  # undecodable clip: skip, keep going
+                        print(f"skip {stem}: {exc!r}")
+    return added
+
+
 def run(classes: list[str], splits: list[str] | None = None, target_per_class: int | None = None,
-        class_targets: dict[str, int] | None = None) -> dict[str, int]:
+        class_targets: dict[str, int] | None = None, workers: int = 1, start_file: int = 1) -> dict[str, int]:
     """Add clips of ``classes``; stop a class once its target (``class_targets`` overrides
-    ``target_per_class``) is reached on disk."""
+    ``target_per_class``) is reached on disk. ``workers`` files are read in parallel (the label
+    read is network-latency bound); ``start_file`` (1-based) skips files already scanned."""
+    from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
+
     root = RAW_DATA_DIR / "audioset"
     splits = splits or ["eval", "bal_train"]
     times = _segment_times(root / "metadata", splits)
@@ -65,44 +106,32 @@ def run(classes: list[str], splits: list[str] | None = None, target_per_class: i
     def on_disk(c: str) -> int:
         return sum(1 for _ in (root / c).glob("*.wav")) if (root / c).is_dir() else 0
 
+    def still_needed() -> list[str]:
+        if target_per_class is None and not class_targets:
+            return list(classes)
+        limits = {c: (class_targets or {}).get(c, target_per_class) for c in classes}
+        return [c for c in classes if limits[c] is None or on_disk(c) < limits[c]]
+
     for split in splits:
         files = sorted(p for p in fs.ls(f"{REPO}/{split}", detail=False) if p.endswith(".parquet"))
-        for i, path in enumerate(files, 1):
-            if target_per_class is not None or class_targets:
-                limits = {c: (class_targets or {}).get(c, target_per_class) for c in classes}
-                classes = [c for c in classes if limits[c] is None or on_disk(c) < limits[c]]
-                if not classes:
+        queue = list(enumerate(files, 1))[max(0, start_file - 1):]
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            running = {}
+            while queue or running:
+                needed = still_needed()
+                while queue and len(running) < workers and needed:
+                    i, path = queue.pop(0)
+                    running[pool.submit(_process_file, fs, path, needed, mids, times, root)] = i
+                if not running:
                     print("All classes reached their targets on disk; stopping.")
                     return dict(added)
-            with fs.open(path, "rb") as handle:
-                pf = pq.ParquetFile(handle)
-                labels = pf.read(columns=["video_id", "labels"]).to_pylist()
-                # (row group, row in group) -> (video id, classes) for clips we still need
-                wanted: dict[int, list[tuple[int, str, list[str]]]] = defaultdict(list)
-                offset = 0
-                for group in range(pf.metadata.num_row_groups):
-                    n = pf.metadata.row_group(group).num_rows
-                    for j, row in enumerate(labels[offset:offset + n]):
-                        vid = row["video_id"]
-                        hit = [c for c in classes if set(row["labels"]) & mids[c]]
-                        if not hit or vid not in times:
-                            continue
-                        start, end = times[vid]
-                        stem = f"{vid}_{start.replace('.', '_')}_{end.replace('.', '_')}.wav"
-                        hit = [c for c in hit if not (root / c / stem).exists()]
-                        if hit:
-                            wanted[group].append((j, stem, hit))
-                    offset += n
-                for group, items in wanted.items():
-                    audio = pf.read_row_group(group, columns=["audio"]).column("audio").to_pylist()
-                    for j, stem, hit in items:
-                        for c in hit:
-                            try:
-                                _to_wav(audio[j]["bytes"], root / c / stem)
-                                added[c] += 1
-                            except Exception as exc:  # undecodable clip: skip, keep going
-                                print(f"skip {stem}: {exc!r}")
-            print(f"{split} {i}/{len(files)} added so far: {dict(added)}", flush=True)
+                done, _ = wait(running, return_when=FIRST_COMPLETED)
+                for future in done:
+                    i = running.pop(future)
+                    for c, n in future.result().items():
+                        added[c] += n
+                    print(f"{split} {i}/{len(files)} added so far: {dict(added)}; on disk: "
+                          f"{ {c: on_disk(c) for c in classes} }", flush=True)
     return dict(added)
 
 
@@ -113,6 +142,8 @@ if __name__ == "__main__":
     parser.add_argument("--target-per-class", type=int, help="Stop a class once this many clips are on disk.")
     parser.add_argument("--class-target", action="append", default=[], metavar="CLASS=N",
                         help="Per-class override of --target-per-class, e.g. baby_cry=105")
+    parser.add_argument("--workers", type=int, default=1, help="Parquet files read in parallel.")
+    parser.add_argument("--start-file", type=int, default=1, help="1-based file index to start from.")
     args = parser.parse_args()
     overrides = {k: int(v) for k, v in (item.split("=") for item in args.class_target)}
-    print("Added:", run(args.classes, args.splits, args.target_per_class, overrides))
+    print("Added:", run(args.classes, args.splits, args.target_per_class, overrides, args.workers, args.start_file))
