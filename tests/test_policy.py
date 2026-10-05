@@ -14,20 +14,22 @@ FIXTURE = Path(__file__).resolve().parents[1] / "app/android/app/src/test/resour
 
 
 def _read_fixture():
-    thresholds, rows = None, []
+    thresholds, hits, rows = None, {}, []
     for line in FIXTURE.read_text().splitlines():
         if line.startswith("#thresholds,"):
             thresholds = dict(zip(SOUND_CLASSES, map(float, line.split(",")[1:])))
+        elif line.startswith("#hits,"):
+            hits = dict(zip(SOUND_CLASSES, map(int, line.split(",")[1:])))
         elif line and not line.startswith("#") and not line.startswith("t_ms"):
             cells = line.split(",")
             rows.append((int(cells[0]), float(cells[1]), np.array(cells[2:10], dtype=np.float32),
                          [c for c in cells[10].split("|") if c]))
-    return thresholds, rows
+    return thresholds, hits, rows
 
 
 def test_python_policy_matches_fixture():
-    thresholds, rows = _read_fixture()
-    policy = DetectionPolicy(SOUND_CLASSES, thresholds)
+    thresholds, hits, rows = _read_fixture()
+    policy = DetectionPolicy(SOUND_CLASSES, thresholds, hits_per_class=hits)
     fired_total = 0
     for t_ms, sensitivity, scores, expected in rows:
         policy.sensitivity = sensitivity

@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from src.config import MODELS_DIR, REPO_ROOT, SAFETY_CRITICAL_CLASSES, SAFETY_PRECISION_FLOOR, SOUND_CLASSES
+from src.config import MODELS_DIR, REPO_ROOT, SAFETY_CRITICAL_CLASSES, SOUND_CLASSES
 from src.evaluation.streaming import selected_run_dir
 
 DOC = REPO_ROOT / "docs" / "evaluation_report.md"
@@ -51,8 +51,9 @@ def build(run: str | None = None) -> str:
         "- Model: frozen YAMNet → Dense head 256 → 128 → 8 sigmoid, weighted BCE, class-balanced sample weights.",
         "- Input: the phone's window vector (mean of the last two non-silent 0.5 s hop embeddings of raw mic audio), "
         "reproduced exactly in Python (`tests/test_windowing.py`, max difference 0.0).",
-        "- Selection: best validation mAP with the safety precision floor met (`scripts/compare_runs.py`); "
-        "thresholds tuned on validation only; test data used once, for this report.", "",
+        "- Selection: best validation *policy score* (weighted share of validation clips that raise the right alert "
+        "with thresholds and hits tuned to the false-alarm budget) with the safety precision floor met "
+        "(`scripts/compare_runs.py`); thresholds tuned on validation only; test data used once, for this report.", "",
     ]
 
     out += ["## Validation (model selection)", ""]
@@ -63,26 +64,44 @@ def build(run: str | None = None) -> str:
     if summary.exists():
         with summary.open(newline="", encoding="utf-8") as handle:
             all_rows = list(csv.DictReader(handle))
-        rows = sorted((r for r in all_rows if r.get("same_val_data") == "True"), key=lambda r: -float(r["val_mAP"]))
+        rows = sorted((r for r in all_rows if r.get("same_val_data") == "True"),
+                      key=lambda r: -float(r.get("policy_score") or 0))
         older = len(all_rows) - len(rows)
         out += ["Runs scored on the current validation set (`models/logs/runs_summary.csv`; "
                 f"{older} earlier runs used a previous dataset build and are not comparable):", "",
-                "| Run | Val mAP | Synthetic | Fine-tuned from | Features | Safety floor |", "|---|---:|---|---|---|---|"]
+                "| Run | Policy score | Val mAP | Synthetic | Fine-tuned from | Features | Safety floor |",
+                "|---|---:|---:|---|---|---|---|"]
         for r in rows:
             mark = " **(selected)**" if r["run"] == run_dir.name else ""
-            out.append(f"| `{r['run']}`{mark} | {float(r['val_mAP']):.3f} | {r['synthetic']} | {r['finetune_from'] or '–'} | "
+            ps = f"{float(r['policy_score']):.3f}" if r.get("policy_score") else "–"
+            out.append(f"| `{r['run']}`{mark} | {ps} | {float(r['val_mAP']):.3f} | {r['synthetic']} | {r['finetune_from'] or '–'} | "
                        f"{r['features']} | {'met' if r['safety_floor_met'] == 'True' else 'missed'} |")
         out.append("")
 
-    out += ["## Thresholds (tuned on validation)", ""]
-    if thr:
-        out += [f"`data/metadata/class_thresholds.json` (copy in `{rel}/class_thresholds.json`). Safety-critical classes: "
-                f"highest recall with precision ≥ {SAFETY_PRECISION_FLOOR}; others: best F1.", "",
-                "| Class | Threshold | Val precision | Val recall | Rule |", "|---|---:|---:|---:|---|"]
+    out += ["## Alert settings (tuned on validation against a false-alarm budget)", ""]
+    if thr and "hits_required" in thr.get(SOUND_CLASSES[0], {}):
+        meta = thr["_meta"]
+        out += [f"`data/metadata/class_thresholds.json` (copy in `{rel}/class_thresholds.json`), from "
+                "`src/evaluation/tune_policy.py`. Each class gets a threshold and how many of the last 3 windows must "
+                "clear it; together they maximise the weighted share of validation clips that raise the right alert, "
+                f"with total false alarms on validation audio without that sound ≤ **{meta['false_alarm_budget_per_hour']} "
+                f"per hour** (reached: {meta['val_total_false_alarms_per_hour']}/h over {meta['val_clips']} validation clips).",
+                "", "| Class | Threshold | Windows needed (of 3) | Val clips alerted | Val false alarms/h |",
+                "|---|---:|---:|---:|---:|"]
         for c in SOUND_CLASSES:
             t = thr[c]
-            out.append(f"| {c} | {t['threshold']:.2f} | {t['precision']:.3f} | {t['recall']:.3f} | {t['rule']} |")
+            out.append(f"| {c} | {t['threshold']:.3f} | {t['hits_required']} | {t['val_clip_detection']:.3f} "
+                       f"({t['val_clips']} clips) | {t['val_false_alarms_per_hour']:.2f} |")
         out.append("")
+        tuning = _load(run_dir / "policy_tuning.json")
+        if tuning:
+            out += ["Detection vs false-alarm budget on validation (same model; how the budget was chosen):", "",
+                    "| Budget (alerts/h) | Reached | Mean share of clips alerted |", "|---:|---:|---:|"]
+            for row in tuning["tradeoff"]:
+                out.append(f"| {row['budget_per_hour']} | {row['total_fa_per_hour']} | {row['mean_detection']:.3f} |")
+            out.append("")
+    elif thr:
+        out += ["Window-level thresholds (older format).", ""]
 
     out += ["## Test results", ""]
     if not test:
@@ -128,6 +147,26 @@ def build(run: str | None = None) -> str:
             out.append(f"| {name} | {r['clips']} | {r['hours']:.2f} | {r['false_alarms']} | "
                        f"{_f(r['false_alarms_per_hour'], 1)} | {main} |")
         out.append("")
+
+    out += ["## Indian team recordings: 5-fold cross-validation", ""]
+    cv = _load(run_dir / "team_cv.json")
+    if cv:
+        out += [f"All {cv['team_clips']} team clips are tested once by a model that never heard them "
+                f"(`{rel}/team_cv.json`, mode `{cv['mode']}`, team weight ×{cv['team_weight']}). *Without team data* = "
+                "the same recipe trained on public data only.", "",
+                "| Class | AP without team data | AP with team data | Clips alerted without | Clips alerted with |",
+                "|---|---:|---:|---:|---:|"]
+        for c in SOUND_CLASSES:
+            b, f = cv["base"]["per_class"].get(c), cv["finetuned"]["per_class"].get(c)
+            if not b:
+                out.append(f"| {c} | – | – | no team clips | – |")
+                continue
+            out.append(f"| {c} | {b['ap']:.3f} | {f['ap']:.3f} | {b['detected']}/{b['clips']} | {f['detected']}/{f['clips']} |")
+        out += ["", f"mAP {cv['base']['mAP']:.3f} → {cv['finetuned']['mAP']:.3f}. Team background "
+                f"({cv['finetuned']['background_clips']} clips, {cv['finetuned']['background_hours'] * 60:.1f} min): "
+                f"{cv['base']['background_false_alarms']} → {cv['finetuned']['background_false_alarms']} false alarms.", ""]
+    else:
+        out += ["Not run yet.", ""]
 
     out += ["## Export (TFLite)", ""]
     if exp:

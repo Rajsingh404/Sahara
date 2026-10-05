@@ -2,8 +2,8 @@
 
 The phone (AudioCaptureService.kt + InferenceEngine.kt + EmbeddingPool.kt) runs every 0.5 s:
 quiet hops (VAD) are skipped and do not enter the pool; every other hop is embedded and the
-head sees the mean of the last ``EMBEDDING_POOL`` (= 2) non-silent hop embeddings.
-``device_window_vectors`` reproduces that exactly.
+head sees, for each size in ``WINDOW_POOLS`` (= 2, 6), the mean of that many most recent
+non-silent hop embeddings, concatenated. ``device_window_vectors`` reproduces that exactly.
 
 Training examples (``clip_examples``):
 - background clips: every window, all-zero target;
@@ -19,6 +19,7 @@ import numpy as np
 
 from src.config import (
     EMBEDDING_POOL,
+    WINDOW_POOLS,
     EVENT_MIN_RELATIVE_SCORE,
     EVENT_SCORE_FLOOR,
     EVENT_TOPK_FRACTION,
@@ -27,26 +28,32 @@ from src.config import (
 )
 
 
-def device_window_vectors(hops: dict[str, np.ndarray], pool_size: int = EMBEDDING_POOL) -> dict[str, np.ndarray]:
+def device_window_vectors(
+    hops: dict[str, np.ndarray], pool_size: int | None = None, pools: tuple[int, ...] = WINDOW_POOLS,
+) -> dict[str, np.ndarray]:
     """Window vectors exactly as the phone forms them.
 
-    Returns ``vectors`` [m, 1024], ``class_scores`` [m, 8] (pooled the same way),
-    ``energy`` [m] (max hop energy in the pool) and ``hop_index`` [m] (the hop at which
-    the phone would classify this vector). Only VAD-passing hops produce a window.
+    Returns ``vectors`` [m, 1024 * len(pools)] (means over the last p non-silent hops, for each
+    p in ``pools``; ``pool_size`` = a single pool), ``class_scores`` [m, 8] and ``energy`` [m]
+    over the short pool (EMBEDDING_POOL), and ``hop_index`` [m] (the hop at which the phone
+    classifies this vector). Only VAD-passing hops produce a window.
     """
+    if pool_size is not None:
+        pools = (pool_size,)
     emb, scores, energy, vad = hops["embeddings"], hops["class_scores"], hops["energy"], hops["vad"]
-    pool: deque[int] = deque(maxlen=pool_size)
+    pool: deque[int] = deque(maxlen=max(pools))
     vectors, pooled_scores, pooled_energy, index = [], [], [], []
     for i in range(len(emb)):
         if not vad[i]:
             continue
         pool.append(i)
         members = list(pool)
-        vectors.append(emb[members].mean(axis=0))
-        pooled_scores.append(scores[members].mean(axis=0))
-        pooled_energy.append(energy[members].max())
+        vectors.append(np.concatenate([emb[members[-p:]].mean(axis=0) for p in pools]))
+        short = members[-min(EMBEDDING_POOL, max(pools)):]
+        pooled_scores.append(scores[short].mean(axis=0))
+        pooled_energy.append(energy[short].max())
         index.append(i)
-    dim = emb.shape[1] if emb.ndim == 2 else 1024
+    dim = (emb.shape[1] if emb.ndim == 2 else 1024) * len(pools)
     return {
         "vectors": np.asarray(vectors, dtype=np.float32).reshape(-1, dim),
         "class_scores": np.asarray(pooled_scores, dtype=np.float32).reshape(-1, len(SOUND_CLASSES)),

@@ -42,6 +42,11 @@ def load_thresholds(path: Path = METADATA_DIR / "class_thresholds.json") -> dict
     return {c: float(data[c]["threshold"]) for c in SOUND_CLASSES if c in data}
 
 
+def load_hits(path: Path = METADATA_DIR / "class_thresholds.json") -> dict[str, int]:
+    data = json.loads(path.read_text())
+    return {c: int(data[c]["hits_required"]) for c in SOUND_CLASSES if c in data and "hits_required" in data[c]}
+
+
 def hop_scores(model, hops: dict[str, np.ndarray]) -> np.ndarray:
     """[n_hops, 8] scores as the policy sees them: zeros on silent hops."""
     scores = np.zeros((len(hops["vad"]), len(SOUND_CLASSES)), dtype=np.float32)

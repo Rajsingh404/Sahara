@@ -6,7 +6,7 @@ import pytest
 import soundfile as sf
 
 from src.config import (
-    EMBEDDING_POOL,
+    WINDOW_POOLS,
     HOP_SAMPLES,
     SAMPLE_RATE,
     VAD_ENERGY_THRESHOLD,
@@ -30,7 +30,7 @@ def _fake_hops(vad, n_classes=8, dim=4):
 def test_pool_skips_silent_hops_like_the_phone():
     # Hops 0,1 loud, 2,3 silent, 4 loud: the phone's pool after hop 4 holds hops 1 and 4.
     hops = _fake_hops([True, True, False, False, True])
-    win = device_window_vectors(hops)
+    win = device_window_vectors(hops, pools=(2,))
     assert win["hop_index"].tolist() == [0, 1, 4]
     np.testing.assert_allclose(win["vectors"][0], hops["embeddings"][0])  # pool of one after a reset
     np.testing.assert_allclose(win["vectors"][2], hops["embeddings"][[1, 4]].mean(axis=0))
@@ -52,6 +52,14 @@ def test_background_clip_uses_every_window_with_zero_target():
     assert len(x) == 6 and not y.any()
 
 
+def test_short_and_long_pools_are_concatenated():
+    hops = _fake_hops([True] * 7)
+    win = device_window_vectors(hops, pools=(2, 6))
+    emb = hops["embeddings"]
+    np.testing.assert_allclose(win["vectors"][6], np.concatenate([emb[5:7].mean(0), emb[1:7].mean(0)]))
+    np.testing.assert_allclose(win["vectors"][1], np.concatenate([emb[0:2].mean(0), emb[0:2].mean(0)]))
+
+
 # --------------------------------------------------------------------------------------
 # Full parity with real YAMNet (needs the TF-Hub model; skipped if it cannot be loaded).
 
@@ -59,7 +67,7 @@ def test_background_clip_uses_every_window_with_zero_target():
 def _device_reference(pcm16: np.ndarray, yamnet) -> tuple[list[int], np.ndarray]:
     """Line-by-line port of the phone's capture loop, one YAMNet call per patch."""
     ring = np.zeros(WINDOW_SAMPLES, np.float32)
-    filled, pool, out, hops_done = 0, deque(maxlen=EMBEDDING_POOL), [], []
+    filled, pool, out, hops_done = 0, deque(maxlen=max(WINDOW_POOLS)), [], []
     for h in range(len(pcm16) // HOP_SAMPLES):
         chunk = pcm16[h * HOP_SAMPLES : (h + 1) * HOP_SAMPLES].astype(np.float32) / 32768.0  # AudioWindow.push
         ring = np.concatenate([ring[HOP_SAMPLES:], chunk])
@@ -71,7 +79,8 @@ def _device_reference(pcm16: np.ndarray, yamnet) -> tuple[list[int], np.ndarray]
             continue
         frames = yamnet(ring[-YAMNET_PATCH_SAMPLES:])[1].numpy()  # InferenceEngine.embed (tail)
         pool.append(frames.mean(axis=0))  # mean over frames (1 frame), then EmbeddingPool
-        out.append(np.mean(pool, axis=0))
+        items = list(pool)
+        out.append(np.concatenate([np.mean(items[-p:], axis=0) for p in WINDOW_POOLS]))
         hops_done.append(h - 1)  # index of the full-buffer hop sequence (first full buffer = 0)
     return hops_done, np.asarray(out, np.float32)
 

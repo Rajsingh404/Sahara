@@ -19,7 +19,9 @@ class DetectionPolicyFixtureTest {
             .bufferedReader().readLines()
         val thresholds = lines.first { it.startsWith("#thresholds,") }.split(",").drop(1)
             .mapIndexed { i, v -> labels[i] to v.toFloat() }.toMap()
-        val policy = DetectionPolicy(labels, thresholds)
+        val hits = lines.firstOrNull { it.startsWith("#hits,") }?.split(",")?.drop(1)
+            ?.mapIndexed { i, v -> labels[i] to v.toInt() }?.toMap().orEmpty()
+        val policy = DetectionPolicy(labels, thresholds, hitsPerClass = hits)
         var fired = 0
         for (line in lines) {
             if (line.isBlank() || line.startsWith("#") || line.startsWith("t_ms")) continue

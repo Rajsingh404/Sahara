@@ -4,10 +4,10 @@ from __future__ import annotations
 from tensorflow import keras
 from tensorflow.keras import layers
 
-from src.config import SOUND_CLASSES, YAMNET_EMBEDDING_DIM
+from src.config import HEAD_INPUT_DIM, SOUND_CLASSES
 
 
-def build_classifier_head(input_dim: int = YAMNET_EMBEDDING_DIM, num_classes: int | None = None) -> keras.Model:
+def build_classifier_head(input_dim: int = HEAD_INPUT_DIM, num_classes: int | None = None) -> keras.Model:
     num_classes = num_classes or len(SOUND_CLASSES)
     inputs = keras.Input(shape=(input_dim,), name="embedding")
     x = layers.Dense(256, activation="relu")(inputs)

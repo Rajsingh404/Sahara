@@ -28,7 +28,7 @@ from src.config import METADATA_DIR, PROCESSED_DATA_DIR, RAW_DATA_DIR, SOUND_CLA
 from src.evaluation.metrics import window_confusion
 from src.evaluation.policy import DetectionPolicy
 from src.models.classifier_head import head_predict
-from src.evaluation.streaming import clip_hop_scores, load_head, load_thresholds, run_policy, selected_run_dir
+from src.evaluation.streaming import clip_hop_scores, load_head, load_hits, load_thresholds, run_policy, selected_run_dir
 from src.preprocessing.build_features_cache import build_hop_cache
 from src.preprocessing.features import hop_cache_path, load_hop_cache
 from src.preprocessing.windowing import clip_examples
@@ -73,7 +73,7 @@ def clip_detection(model, clips: list[tuple[str, set[str]]], thresholds: dict[st
         scores = clip_hop_scores(model, filepath)
         if scores is None:
             continue
-        policy = DetectionPolicy(SOUND_CLASSES, thresholds)
+        policy = DetectionPolicy(SOUND_CLASSES, thresholds, hits_per_class=load_hits())
         detections, _ = run_policy(policy, scores)
         fired = {d.label for d in detections}
         for c in labels:

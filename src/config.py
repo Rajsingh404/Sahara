@@ -90,7 +90,7 @@ SYNTHETIC_SNR_MAX_DB = 10.0
 INOISE_CHUNK_DURATION_SEC = 5.0
 
 # Seeded sample of non-target FSD50K clips used as background (label_map.FSD50K_BACKGROUND_EXCLUDE).
-FSD50K_BACKGROUND_SAMPLE = 3000
+FSD50K_BACKGROUND_SAMPLE = 10000
 
 # AudioSet top-up target per class (clips on disk, after exact-mid filtering).
 AUDIOSET_TARGET_PER_CLASS = 200
@@ -126,6 +126,9 @@ POSITIVE_CLASS_WEIGHTS = {
 SAFETY_CRITICAL_CLASSES = ("smoke_alarm", "siren", "glass_break")
 SAFETY_PRECISION_FLOOR = 0.70
 FALSE_ALARM_RATE_LIMIT = 0.10
+# Total alerts per hour allowed on validation audio that holds none of the alerted sounds, summed
+# over the 8 classes (src/evaluation/tune_policy.py). Chosen in Phase 4, see docs/evaluation_report.md.
+FALSE_ALARM_BUDGET_PER_HOUR = 2.0
 THRESHOLD_GRID_START = 0.05
 THRESHOLD_GRID_END = 0.95
 THRESHOLD_GRID_STEP = 0.01
@@ -137,7 +140,11 @@ INFERENCE_HOP_SEC = 0.5
 WINDOW_SAMPLES = int(INFERENCE_WINDOW_SEC * SAMPLE_RATE)  # 16,000-sample ring buffer
 HOP_SAMPLES = int(INFERENCE_HOP_SEC * SAMPLE_RATE)  # inference every 8,000 samples
 YAMNET_PATCH_SAMPLES = 15_600  # newest 0.975 s of the buffer = one YAMNet patch
-EMBEDDING_POOL = 2  # head input = mean of the last 2 non-silent hop embeddings
+EMBEDDING_POOL = 2  # short pool: mean of the last 2 non-silent hop embeddings
+# Head input = concatenated means over each pool size: (2, 6) = ~1.5 s and ~3.5 s of context
+# (2,048 values). The app picks the pools from the head's input size (ModelConfig.kt).
+WINDOW_POOLS = (2, 6)
+HEAD_INPUT_DIM = YAMNET_EMBEDDING_DIM * len(WINDOW_POOLS)
 
 # Event-window selection for weakly labelled target clips (windowing.py). A clip is labelled
 # as a whole, but the event may fill only part of it, so only the windows most likely to hold

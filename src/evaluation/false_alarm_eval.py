@@ -21,10 +21,10 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from src.config import METADATA_DIR, SOUND_CLASSES
+from src.config import METADATA_DIR, SOUND_CLASSES, WINDOW_POOLS
 from src.evaluation.policy import DetectionPolicy
 from src.models.classifier_head import head_predict
-from src.evaluation.streaming import HOP_MS, load_head, load_thresholds, run_policy, selected_run_dir
+from src.evaluation.streaming import HOP_MS, load_head, load_hits, load_thresholds, run_policy, selected_run_dir
 from src.preprocessing.features import hop_cache_path, load_hop_cache
 from src.preprocessing.windowing import device_window_vectors
 
@@ -39,7 +39,7 @@ def _background_clips(split: str) -> dict[str, list[str]]:
 
 
 def stream_false_alarms(model, filepaths: list[str], thresholds: dict[str, float]) -> dict:
-    policy = DetectionPolicy(SOUND_CLASSES, thresholds)
+    policy = DetectionPolicy(SOUND_CLASSES, thresholds, hits_per_class=load_hits())
     pool_carry: dict | None = None
     t_ms, alerts, clips = 0, [], 0
     for fp in filepaths:
@@ -47,19 +47,21 @@ def stream_false_alarms(model, filepaths: list[str], thresholds: dict[str, float
         if not path.exists():
             continue
         hops = load_hop_cache(path)
+        carried = 0
         if pool_carry is not None:
-            # Carry the phone's pool across the clip boundary: prepend the last non-silent hop.
+            # Carry the phone's pool across the clip boundary: prepend the last non-silent hops.
+            carried = len(pool_carry["vad"])
             hops = {k: np.concatenate([pool_carry[k], hops[k]]) for k in hops}
         scores = np.zeros((len(hops["vad"]), len(SOUND_CLASSES)), np.float32)
         win = device_window_vectors(hops)
         if len(win["vectors"]):
             scores[win["hop_index"]] = head_predict(model, win["vectors"])
-        if pool_carry is not None:
-            scores = scores[1:]  # the carried hop was already scored in the previous clip
+        scores = scores[carried:]  # carried hops were already scored in the previous clip
         detections, t_ms = run_policy(policy, scores, t_ms)
         alerts.extend((d.label, fp, d.timestamp_ms) for d in detections)
         loud = np.flatnonzero(hops["vad"])
-        pool_carry = {k: v[loud[-1:]] for k, v in hops.items()} if loud.size else None
+        keep = loud[-(max(WINDOW_POOLS) - 1):] if max(WINDOW_POOLS) > 1 else loud[:0]
+        pool_carry = {k: v[keep] for k, v in hops.items()} if keep.size else None
         clips += 1
     hours = t_ms / 3_600_000
     per_class = Counter(label for label, _, _ in alerts)

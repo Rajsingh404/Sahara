@@ -57,8 +57,8 @@ class DetectionPolicyTest {
     fun usesPerClassThresholdsAndSensitivity() {
         val p = DetectionPolicy(labels, thresholds + ("glass_break" to 0.25f))
         assertTrue(p.update(scores("glass_break" to 0.2f), 0).isEmpty())
-        p.sensitivity = 1f // 0.25 * 0.6 = 0.15
-        assertEquals(0.15f, p.thresholdFor(labels.indexOf("glass_break")), 1e-6f)
+        p.sensitivity = 1f // logit(0.25) - 2 -> 0.0432
+        assertEquals(0.0432f, p.thresholdFor(labels.indexOf("glass_break")), 1e-4f)
         assertEquals(1, p.update(scores("glass_break" to 0.2f), 500).size)
     }
 
@@ -73,6 +73,24 @@ class DetectionPolicyTest {
         val p = DetectionPolicy(labels, thresholds)
         val fired = p.update(scores("siren" to 0.7f, "smoke_alarm" to 0.95f), 0)
         assertEquals(listOf("smoke_alarm", "siren"), fired.map { it.label })
+    }
+
+    @Test
+    fun perClassHitsOverrideDefaults() {
+        val p = DetectionPolicy(labels, thresholds, hitsPerClass = mapOf("siren" to 3, "knocking" to 1))
+        assertTrue(p.update(scores("siren" to 0.9f, "knocking" to 0.9f), 0).map { it.label } == listOf("knocking"))
+        assertTrue(p.update(scores("siren" to 0.9f), 500).isEmpty())
+        assertEquals("siren", p.update(scores("siren" to 0.9f), 1000).single().label)
+    }
+
+    @Test
+    fun sensitivityStaysMeaningfulNearOne() {
+        val p = DetectionPolicy(labels, thresholds + ("siren" to 0.99f))
+        val i = labels.indexOf("siren")
+        p.sensitivity = 1f
+        assertEquals(0.9305f, p.thresholdFor(i), 1e-3f)
+        p.sensitivity = -1f
+        assertEquals(0.9986f, p.thresholdFor(i), 1e-3f)
     }
 
     @Test(expected = IllegalArgumentException::class)

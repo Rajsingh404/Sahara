@@ -47,6 +47,7 @@ from src.models.classifier_head import HEAD_DEVICE, build_classifier_head, head_
 from src.training.losses import weighted_binary_crossentropy
 
 FINETUNE_REPLAY_RATIO = 2  # base-train windows replayed per team window while fine-tuning
+HARD_NEGATIVE_THRESHOLD = 0.5  # background windows scoring >= this under --hard-negatives-from
 
 
 def load_split(name: str, features_dir: Path = PROCESSED_DATA_DIR) -> tuple[np.ndarray, np.ndarray, dict]:
@@ -60,17 +61,30 @@ def load_split(name: str, features_dir: Path = PROCESSED_DATA_DIR) -> tuple[np.n
     return X, Y, meta
 
 
-def balanced_sample_weights(Y: np.ndarray, power: float) -> np.ndarray:
+def balanced_sample_weights(
+    Y: np.ndarray,
+    power: float,
+    background_weight: float = 1.0,
+    class_boost: dict[str, float] | None = None,
+    hard: np.ndarray | None = None,
+    hard_weight: float = 1.0,
+) -> np.ndarray:
     """Weight each window by (group frequency)^-power; groups = 8 classes + background.
 
     power=0 means no balancing, 1 = full inverse frequency, 0.5 (default) = inverse sqrt,
     which lifts smoke_alarm / baby_cry without letting a few clips dominate. A window with
-    several positives takes its rarest class's weight. Weights are scaled to mean 1.
+    several positives takes its rarest class's weight. Then: background windows x
+    ``background_weight``, positives of a boosted class x its ``class_boost``, hard negatives
+    x ``hard_weight``. Weights are scaled to mean 1.
     """
     counts = np.append(Y.sum(axis=0), (Y.sum(axis=1) == 0).sum()).astype(np.float64)
     group_w = np.where(counts > 0, counts, 1.0) ** -power
+    for c, boost in (class_boost or {}).items():
+        group_w[SOUND_CLASSES.index(c)] *= boost
     per_window = np.where(Y > 0, Y * group_w[:-1], 0).max(axis=1)
-    per_window = np.where(Y.sum(axis=1) == 0, group_w[-1], per_window)
+    per_window = np.where(Y.sum(axis=1) == 0, group_w[-1] * background_weight, per_window)
+    if hard is not None:
+        per_window = np.where(hard, per_window * hard_weight, per_window)
     return (per_window / per_window.mean()).astype(np.float32)
 
 
@@ -119,9 +133,15 @@ def train(
     finetune_from: Path | None = None,
     patience: int = 6,
     seed: int = RANDOM_SEED,
+    background_weight: float = 1.0,
+    class_boost: dict[str, float] | None = None,
+    hard_negatives_from: Path | None = None,
+    hard_negative_weight: float = 1.0,
+    hard_negative_threshold: float = HARD_NEGATIVE_THRESHOLD,
+    team_weight: float = 1.0,
 ) -> Path:
     tf.keras.utils.set_random_seed(seed)
-    run_dir = MODELS_DIR / "logs" / f"{datetime.now():%Y%m%d-%H%M}_{name}"
+    run_dir = MODELS_DIR / "logs" / f"{datetime.now():%Y%m%d-%H%M%S}_{name}"
     run_dir.mkdir(parents=True, exist_ok=False)
 
     X_train, Y_train, meta_train = load_split("train", features_dir)
@@ -133,6 +153,16 @@ def train(
         keep = source_type != "synthetic_mixed"
         X_train, Y_train, source_type = X_train[keep], Y_train[keep], source_type[keep]
 
+    # Hard negatives: background windows an earlier model scores >= threshold for any class.
+    hard = np.zeros(len(X_train), dtype=bool)
+    if hard_negatives_from is not None and hard_negative_weight != 1.0:
+        with tf.device(HEAD_DEVICE):
+            ref = tf.keras.models.load_model(Path(hard_negatives_from) / "model.keras", compile=False)
+        background = Y_train.sum(axis=1) == 0
+        hard[background] = head_predict(ref, X_train[background]).max(axis=1) >= hard_negative_threshold
+        print(f"Hard negatives: {int(hard.sum())} of {int(background.sum())} background windows "
+              f"(score >= {hard_negative_threshold} under {Path(hard_negatives_from).name}) weighted x{hard_negative_weight}")
+
     # Build, train and reload the head on the CPU (see classifier_head.HEAD_DEVICE).
     with tf.device(HEAD_DEVICE):
         if finetune_from is not None:
@@ -143,12 +173,17 @@ def train(
             base_idx = np.flatnonzero(~team)
             replay = rng.choice(base_idx, size=min(len(base_idx), FINETUNE_REPLAY_RATIO * int(team.sum())), replace=False)
             idx = np.concatenate([np.flatnonzero(team), replay])
-            X_train, Y_train = X_train[idx], Y_train[idx]
+            X_train, Y_train, hard = X_train[idx], Y_train[idx], hard[idx]
             model = tf.keras.models.load_model(Path(finetune_from) / "model.keras", compile=False)
         else:
             model = build_classifier_head()
 
-        sample_weight = balanced_sample_weights(Y_train, balance_power)
+        sample_weight = balanced_sample_weights(Y_train, balance_power, background_weight, class_boost,
+                                                hard, hard_negative_weight)
+        if team_weight != 1.0 and finetune_from is None:
+            # Joint training: the team's Indian recordings count team_weight times (team_cv.py).
+            sample_weight = np.where(source_type == "self_recorded", sample_weight * team_weight, sample_weight)
+            sample_weight = (sample_weight / sample_weight.mean()).astype(np.float32)
         model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate), loss=weighted_binary_crossentropy)
 
         callbacks = [
@@ -197,7 +232,11 @@ def train(
                  "features_dir": str(features_dir), "include_synthetic": include_synthetic,
                  "balance_power": balance_power, "finetune_from": str(finetune_from) if finetune_from else None,
                  "finetune_replay_ratio": FINETUNE_REPLAY_RATIO if finetune_from else None,
-                 "patience": patience, "seed": seed},
+                 "patience": patience, "seed": seed, "background_weight": background_weight,
+                 "class_boost": class_boost or {},
+                 "hard_negatives_from": str(hard_negatives_from) if hard_negatives_from else None,
+                 "hard_negative_weight": hard_negative_weight, "hard_negative_threshold": hard_negative_threshold,
+                 "team_weight": team_weight},
         "manifest_sha256": {s: _sha256(METADATA_DIR / f"{s}_manifest.csv") for s in ("full", "train", "val", "test")},
         "features_sha256": {s: _sha256(features_dir / f"{s}_embeddings.npy") for s in ("train", "val", "test")},
         "features_summary": json.loads(feature_summary.read_text()) if feature_summary.exists() else None,
@@ -223,9 +262,17 @@ def main() -> None:
     parser.add_argument("--finetune-from", type=Path, help="Run folder whose model.keras is fine-tuned on team windows.")
     parser.add_argument("--patience", type=int, default=6)
     parser.add_argument("--seed", type=int, default=RANDOM_SEED)
+    parser.add_argument("--background-weight", type=float, default=1.0, help="Multiplier for background windows.")
+    parser.add_argument("--class-boost", action="append", default=[], metavar="CLASS=X",
+                        help="Multiplier for a class's positive windows, e.g. doorbell=2 (repeatable).")
+    parser.add_argument("--hard-negatives-from", type=Path, help="Run whose model picks hard background windows.")
+    parser.add_argument("--hard-negative-weight", type=float, default=1.0)
+    parser.add_argument("--team-weight", type=float, default=1.0, help="Multiplier for the team's recordings.")
     args = parser.parse_args()
+    boosts = {k: float(v) for k, v in (b.split("=") for b in args.class_boost)}
     train(args.name, args.batch_size, args.epochs, args.learning_rate, args.features_dir, not args.no_synthetic,
-          args.balance_power, args.finetune_from, args.patience, args.seed)
+          args.balance_power, args.finetune_from, args.patience, args.seed, args.background_weight, boosts,
+          args.hard_negatives_from, args.hard_negative_weight, team_weight=args.team_weight)
 
 
 if __name__ == "__main__":

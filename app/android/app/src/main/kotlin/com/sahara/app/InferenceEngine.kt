@@ -26,13 +26,17 @@ import java.nio.ByteOrder
 class InferenceEngine private constructor(
     val labels: List<String>,
     val thresholds: Map<String, Float>,
+    val hitsRequired: Map<String, Int>,
     private val classifier: Interpreter,
     private val yamnet: Interpreter?,
 ) : Closeable {
 
     private val headIsEmbeddingModel = yamnet != null
-    private val pool = EmbeddingPool(ModelConfig.EMBEDDING_DIM, ModelConfig.EMBEDDING_POOL)
     private val classifierInputLen = classifier.getInputTensor(0).numElements()
+    private val pool = EmbeddingPool(
+        ModelConfig.EMBEDDING_DIM,
+        *(ModelConfig.poolsForHeadInput(classifierInputLen) ?: intArrayOf(ModelConfig.EMBEDDING_POOL)),
+    )
 
     /** [window] is the latest audio, 16 kHz mono floats, oldest first. Returns one score per label. */
     fun predict(window: FloatArray): FloatArray {
@@ -133,6 +137,9 @@ class InferenceEngine private constructor(
         fun loadThresholds(context: Context): Map<String, Float> =
             readAssetText(context, THRESHOLDS_ASSET)?.let(AssetParsers::parseThresholds).orEmpty()
 
+        fun loadHitsRequired(context: Context): Map<String, Int> =
+            readAssetText(context, THRESHOLDS_ASSET)?.let(AssetParsers::parseHitsRequired).orEmpty()
+
         /** Returns null (with [ModelStatus.reason] set) when the model assets are missing or invalid. */
         fun load(context: Context): InferenceEngine? {
             val labels = loadLabels(context)
@@ -142,7 +149,7 @@ class InferenceEngine private constructor(
             return try {
                 val options = Interpreter.Options().setNumThreads(2)
                 val classifier = Interpreter(direct(classifierBytes), options)
-                val needsYamnet = classifier.getInputTensor(0).numElements() == ModelConfig.EMBEDDING_DIM
+                val needsYamnet = ModelConfig.poolsForHeadInput(classifier.getInputTensor(0).numElements()) != null
                 val yamnet = if (needsYamnet) {
                     val bytes = readAsset(context, YAMNET_ASSET)
                     if (bytes == null) {
@@ -161,7 +168,7 @@ class InferenceEngine private constructor(
                     }
                 } else null
                 ModelStatus.reason = null
-                InferenceEngine(labels, loadThresholds(context), classifier, yamnet)
+                InferenceEngine(labels, loadThresholds(context), loadHitsRequired(context), classifier, yamnet)
             } catch (e: Exception) {
                 Log.e(TAG, "model load failed", e)
                 fail("model failed to load: ${e.message}")

@@ -67,7 +67,8 @@ class AudioCaptureService : Service() {
             stopSelf()
             return
         }
-        policy = DetectionPolicy(engine.labels, engine.thresholds).also { applySettings(it) }
+        policy = DetectionPolicy(engine.labels, engine.thresholds, hitsPerClass = engine.hitsRequired)
+            .also { applySettings(it) }
         running = true
         lastError = null
         instance = this

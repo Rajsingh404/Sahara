@@ -185,8 +185,8 @@ def _scan_fsd50k(root: Path) -> list[dict]:
         logger.info("fsd50k: skipped — ground_truth CSVs not found")
         return rows
     rng = np.random.default_rng(RANDOM_SEED)
-    picked = sorted(rng.choice(len(background_candidates), size=min(FSD50K_BACKGROUND_SAMPLE, len(background_candidates)),
-                               replace=False)) if background_candidates else []
+    # A seeded permutation: a larger FSD50K_BACKGROUND_SAMPLE always contains every smaller one.
+    picked = sorted(rng.permutation(len(background_candidates))[:FSD50K_BACKGROUND_SAMPLE]) if background_candidates else []
     for i in picked:
         filepath = background_candidates[i]
         rows.append(

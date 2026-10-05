@@ -14,4 +14,16 @@ object ModelConfig {
     const val VAD_ENERGY_THRESHOLD = 1e-4f
     /** Embeddings averaged before the head, mirroring the mean-pooling used in training. */
     const val EMBEDDING_POOL = 2
+    /**
+     * WINDOW_POOLS in src/config.py: the head sees the mean of the last 2 and of the last 6
+     * non-silent embeddings, concatenated (2,048 values). A 1,024-input head uses [2] only.
+     */
+    val WINDOW_POOLS = intArrayOf(2, 6)
+
+    /** Pool sizes for a head with [inputLen] inputs, or null if the size matches no layout. */
+    fun poolsForHeadInput(inputLen: Int): IntArray? = when (inputLen) {
+        EMBEDDING_DIM -> intArrayOf(EMBEDDING_POOL)
+        EMBEDDING_DIM * WINDOW_POOLS.size -> WINDOW_POOLS
+        else -> null
+    }
 }

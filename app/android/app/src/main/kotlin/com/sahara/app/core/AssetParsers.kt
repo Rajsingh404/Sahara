@@ -19,4 +19,10 @@ object AssetParsers {
         }
         return result
     }
+
+    /** Reads `{"class": {..., "hits_required": 2, ...}}` (tune_policy.py output). Absent -> empty. */
+    fun parseHitsRequired(json: String): Map<String, Int> {
+        val nested = Regex("\"([A-Za-z0-9_]+)\"\\s*:\\s*\\{[^{}]*?\"hits_required\"\\s*:\\s*([0-9]+)")
+        return nested.findAll(json).associate { it.groupValues[1] to it.groupValues[2].toInt() }
+    }
 }

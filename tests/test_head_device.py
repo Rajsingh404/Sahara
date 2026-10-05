@@ -18,5 +18,5 @@ def _numpy_forward(model, x):
 
 def test_head_predict_matches_numpy():
     model = build_classifier_head()
-    x = np.abs(np.random.default_rng(0).normal(0, 1, (512, 1024))).astype(np.float32)
+    x = np.abs(np.random.default_rng(0).normal(0, 1, (512, model.input_shape[1]))).astype(np.float32)
     np.testing.assert_allclose(head_predict(model, x), _numpy_forward(model, x.astype(np.float64)), atol=1e-5)

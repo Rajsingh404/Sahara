@@ -11,9 +11,10 @@ Run from the repo root with the venv active and SAHARA_DRIVE_DATASETS set (FSD50
 Steps (each is an existing module, run as a subprocess and stopped on the first failure):
   data       organise team recordings (from Drive, if present), ESC-50, manifests
   synthetic  train-only mixes, manifests again (to add them), synthetic test set
-  features   per-hop YAMNet cache -> window arrays (and the clip-mean arrays for comparison)
-  train      runs a (real only), b (+synthetic), c (team fine-tune of a and of b); select on validation
-  eval       thresholds on validation; test metrics (public / Indian / synthetic); false alarms per hour
+  features   per-hop YAMNet cache -> window arrays
+  train      a (real data), b (+ synthetic), e (5-seed ensemble of a); select on validation policy score
+  eval       alert settings tuned on validation to the false-alarm budget; test metrics (public / Indian /
+             synthetic); false alarms per hour; 5-fold cross-validation over the team recordings
   export     FP32 + INT8 head, validation against Keras, YAMNet TFLite
   report     docs/evaluation_report.md from the run files
 Downloads (AudioSet, FSD50K, DESED, iNoise) are separate: see src/data/download*.py.
@@ -30,8 +31,11 @@ REPO = Path(__file__).resolve().parents[1]
 VENV_PYTHON = REPO / ".venv" / "bin" / "python"
 PYTHON = str(VENV_PYTHON) if VENV_PYTHON.exists() else sys.executable
 STEPS = ("data", "synthetic", "features", "train", "eval", "export", "report")
-RECIPE = ["--learning-rate", "3e-4", "--batch-size", "128", "--epochs", "40", "--patience", "8"]
-FINETUNE = ["--learning-rate", "1e-4", "--batch-size", "64", "--epochs", "20", "--patience", "5"]
+# Phase 4 recipe (chosen on validation and team cross-validation, see docs/evaluation_report.md):
+# background windows x8 (fewer false alarms), team recordings x10 (Indian context), real data only.
+RECIPE = ["--learning-rate", "3e-4", "--batch-size", "128", "--epochs", "40", "--patience", "8",
+          "--background-weight", "8", "--team-weight", "10"]
+ENSEMBLE_SEEDS = (42, 1, 2, 3, 4)
 
 
 def sh(*args: str, desc: str) -> None:
@@ -65,25 +69,25 @@ def step_synthetic() -> None:
 
 def step_features() -> None:
     sh("src/preprocessing/build_features_cache.py", "--io-workers", "6", desc="YAMNet hop cache + window arrays")
-    sh("src/preprocessing/build_features_cache.py", "--mode", "clip_mean", desc="Clip-mean arrays (comparison)")
 
 
 def step_train() -> None:
-    sh("src/training/train.py", "--name", "a_baseline", "--no-synthetic", *RECIPE, desc="Run a: real data")
-    sh("src/training/train.py", "--name", "b_synthetic", *RECIPE, desc="Run b: + synthetic")
-    sh("src/training/train.py", "--name", "c_finetune_team_from_a", "--no-synthetic",
-       "--finetune-from", newest_run("a_baseline"), *FINETUNE, desc="Run c: team fine-tune of a")
-    sh("src/training/train.py", "--name", "c_finetune_team_from_b",
-       "--finetune-from", newest_run("b_synthetic"), *FINETUNE, desc="Run c: team fine-tune of b")
-    sh("src/training/train.py", "--name", "z_clipmean", "--features-dir", "data/processed/clip_mean", "--no-synthetic",
-       *RECIPE, desc="Comparison: old clip-mean features")
-    sh("scripts/compare_runs.py", desc="Select a run on validation")
+    sh("src/training/train.py", "--name", "a_real", "--no-synthetic", *RECIPE, desc="Run a: real data")
+    sh("src/training/train.py", "--name", "b_synthetic", *RECIPE, desc="Run b: + synthetic mixes")
+    members = [newest_run("a_real")]
+    for seed in ENSEMBLE_SEEDS[1:]:
+        sh("src/training/train.py", "--name", f"a_real_s{seed}", "--seed", str(seed), "--no-synthetic", *RECIPE,
+           desc=f"Ensemble member, seed {seed}")
+        members.append(newest_run(f"a_real_s{seed}"))
+    sh("scripts/make_ensemble.py", "--name", "e_ens5_real", *members, desc="Run e: 5-seed ensemble of a")
+    sh("scripts/compare_runs.py", desc="Select a run on validation (policy score)")
 
 
 def step_eval() -> None:
-    sh("src/evaluation/threshold_search.py", desc="Thresholds (validation)")
+    sh("src/evaluation/tune_policy.py", desc="Alert settings tuned to the false-alarm budget (validation)")
     sh("src/evaluation/evaluate.py", desc="Test metrics")
     sh("src/evaluation/false_alarm_eval.py", desc="False alarms per hour")
+    sh("src/evaluation/team_cv.py", "--mode", "joint", "--team-weight", "10", desc="Team recordings: 5-fold CV")
 
 
 def step_export(sync_assets: bool) -> None:

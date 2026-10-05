@@ -25,6 +25,14 @@ class AssetParsersTest {
     }
 
     @Test
+    fun parsesHitsRequired() {
+        val json = """{"siren": {"threshold": 0.99, "hits_required": 3}, "doorbell": {"threshold": 0.6},
+            "_meta": {"run": "x"}}"""
+        assertEquals(mapOf("siren" to 3), AssetParsers.parseHitsRequired(json))
+        assertEquals(mapOf("siren" to 0.99f, "doorbell" to 0.6f), AssetParsers.parseThresholds(json))
+    }
+
+    @Test
     fun parsesFlatThresholds() {
         assertEquals(mapOf("doorbell" to 0.2f), AssetParsers.parseThresholds("""{"doorbell": 0.2}"""))
     }
