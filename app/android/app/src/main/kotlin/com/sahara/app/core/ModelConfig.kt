@@ -15,8 +15,9 @@ object ModelConfig {
     /** Embeddings averaged before the head, mirroring the mean-pooling used in training. */
     const val EMBEDDING_POOL = 2
     /**
-     * WINDOW_POOLS in src/config.py: the head sees the mean of the last 2 and of the last 6
-     * non-silent embeddings, concatenated (2,048 values). A 1,024-input head uses [2] only.
+     * Long-context layout supported by the app: the mean of the last 2 and of the last 6
+     * non-silent embeddings, concatenated (2,048 values). Used only when the head has 2,048
+     * inputs (src/config.py WINDOW_POOLS = (2, 6)); the current head has 1,024 and uses [2].
      */
     val WINDOW_POOLS = intArrayOf(2, 6)
 

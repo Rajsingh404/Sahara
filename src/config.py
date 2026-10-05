@@ -141,9 +141,10 @@ WINDOW_SAMPLES = int(INFERENCE_WINDOW_SEC * SAMPLE_RATE)  # 16,000-sample ring b
 HOP_SAMPLES = int(INFERENCE_HOP_SEC * SAMPLE_RATE)  # inference every 8,000 samples
 YAMNET_PATCH_SAMPLES = 15_600  # newest 0.975 s of the buffer = one YAMNet patch
 EMBEDDING_POOL = 2  # short pool: mean of the last 2 non-silent hop embeddings
-# Head input = concatenated means over each pool size: (2, 6) = ~1.5 s and ~3.5 s of context
-# (2,048 values). The app picks the pools from the head's input size (ModelConfig.kt).
-WINDOW_POOLS = (2, 6)
+# Head input = concatenated means over each pool size. (2, 6) (~1.5 s and ~3.5 s of context,
+# 2,048 values) was tried in Phase 4 and did not beat (2,) across seeds, so the head input stays
+# 1,024. The app picks the pools from the head's input size (ModelConfig.kt).
+WINDOW_POOLS = (2,)
 HEAD_INPUT_DIM = YAMNET_EMBEDDING_DIM * len(WINDOW_POOLS)
 
 # Event-window selection for weakly labelled target clips (windowing.py). A clip is labelled
