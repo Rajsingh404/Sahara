@@ -176,6 +176,18 @@ def build(run: str | None = None) -> str:
                 f"Sizes (KiB): {', '.join(f'{k} {v}' for k, v in exp['sizes_kib'].items())}. Source: `{rel}/export_validation.json`.", ""]
     else:
         out += ["Not run yet (Phase 5).", ""]
+    app_check = _load(run_dir / "app_pipeline_check.json")
+    if app_check:
+        out += ["**Shipped in `app/assets/`: the FP32 head** (1.2 MB) with `yamnet.tflite` (12.6 MB). The alert thresholds "
+                "were tuned on full-precision scores and several sit at 0.93–0.98, where INT8's score changes (up to "
+                f"{exp['int8_max_abs_diff']:.3f}) could move alerts; the INT8 saving (~0.9 MB) is not worth that risk."
+                if exp else "**Shipped in `app/assets/`: the FP32 head** with `yamnet.tflite`.",
+                "",
+                f"End-to-end check (`app/tool/check_app_pipeline.py`): {app_check['clips']} test clips replayed through exactly "
+                "what the app runs (16-bit PCM → 1 s ring buffer → VAD → `yamnet.tflite` → embedding pool → "
+                "`sahara_classifier.tflite` → alert policy with the bundled settings) raise the same alerts as the evaluation "
+                f"pipeline in **{app_check['same_alerts']}/{app_check['clips']}** clips; max score difference "
+                f"{app_check['max_score_diff']:.4f}. Source: `{rel}/app_pipeline_check.json`.", ""]
 
     out += ["## On-device measurements", "",
             "Not measured yet (Phase 6, needs the test phone): end-to-end latency, inference time per window, "

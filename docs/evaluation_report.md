@@ -138,6 +138,10 @@ mAP 0.721 → 0.757. Team background (60 clips, 5.9 min): 4 → 3 false alarms.
 
 FP32 head vs Keras on 18649 test windows: max |diff| 2.68e-07 (pass, limit 1e-4). INT8 mAP 0.7764 vs Keras 0.7873: drop 0.0109 (pass, limit 0.02). Sizes (KiB): sahara_fp32.tflite 1159.4, sahara_int8.tflite 292.6, yamnet.tflite 12575.3. Source: `models/logs/20261005-195620_b_synthetic/export_validation.json`.
 
+**Shipped in `app/assets/`: the FP32 head** (1.2 MB) with `yamnet.tflite` (12.6 MB). The alert thresholds were tuned on full-precision scores and several sit at 0.93–0.98, where INT8's score changes (up to 0.054) could move alerts; the INT8 saving (~0.9 MB) is not worth that risk.
+
+End-to-end check (`app/tool/check_app_pipeline.py`): 90 test clips replayed through exactly what the app runs (16-bit PCM → 1 s ring buffer → VAD → `yamnet.tflite` → embedding pool → `sahara_classifier.tflite` → alert policy with the bundled settings) raise the same alerts as the evaluation pipeline in **90/90** clips; max score difference 0.0196. Source: `models/logs/20261005-195620_b_synthetic/app_pipeline_check.json`.
+
 ## On-device measurements
 
 Not measured yet (Phase 6, needs the test phone): end-to-end latency, inference time per window, battery per hour, RAM.

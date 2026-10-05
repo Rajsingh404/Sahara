@@ -86,3 +86,4 @@ models/logs/*/*
 !models/logs/*/confusion_test_*
 !models/logs/*/false_alarms.json
 !models/logs/*/export_validation.json
+!models/logs/*/app_pipeline_check.json
