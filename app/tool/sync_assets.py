@@ -10,6 +10,8 @@ Writes:
     app/assets/class_thresholds.json    copy of data/metadata/class_thresholds.json
     app/assets/sahara_classifier.tflite sahara_int8.tflite if present, else sahara_fp32.tflite
     app/assets/yamnet.tflite            only with --yamnet (see export_yamnet_tflite.py)
+    app/assets/personal_center.bin      custom-sound centring vector, if models/exported/ has it
+                                        (src/personalization/export_center.py)
 
 Needs only the standard library (it parses src/config.py instead of importing TensorFlow).
 """
@@ -70,6 +72,11 @@ def main() -> None:
     else:
         shutil.copyfile(model, ASSETS / "sahara_classifier.tflite")
         print(f"sahara_classifier.tflite: {model} ({model.stat().st_size / 1024:.1f} KiB)")
+
+    center = exported / "personal_center.bin"
+    if center.exists():
+        shutil.copyfile(center, ASSETS / "personal_center.bin")
+        print(f"personal_center.bin: {center.stat().st_size} bytes")
 
     if args.yamnet:
         shutil.copyfile(args.yamnet, ASSETS / "yamnet.tflite")

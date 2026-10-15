@@ -147,6 +147,26 @@ class WristbandChanged extends SaharaEvent {
   final WristbandInfo info;
 }
 
+/// Progress of a custom-sound enrolment (CustomEnrolment.kt).
+class EnrolmentState {
+  const EnrolmentState({this.samples = 0, this.minSamples = 5, this.maxSamples = 10, this.error});
+
+  final int samples;
+  final int minSamples;
+  final int maxSamples;
+  final String? error;
+
+  bool get canFinish => samples >= minSamples;
+  bool get full => samples >= maxSamples;
+
+  factory EnrolmentState.fromMap(Map<dynamic, dynamic> m) => EnrolmentState(
+    samples: (m['samples'] as num?)?.toInt() ?? 0,
+    minSamples: (m['minSamples'] as num?)?.toInt() ?? 5,
+    maxSamples: (m['maxSamples'] as num?)?.toInt() ?? 10,
+    error: m['error'] as String?,
+  );
+}
+
 /// Dart side of the `sahara/control` + `sahara/events` channels (SaharaChannel.kt).
 abstract class SaharaApi {
   Stream<SaharaEvent> get events;
@@ -163,6 +183,13 @@ abstract class SaharaApi {
   Future<void> simulateAlert(int classId);
   Future<void> dismissAlert();
   Future<DetectionEvent?> consumeLaunchAlert();
+
+  // Custom sounds (Phase 7). Enrolment audio never leaves native memory; only a prototype is kept.
+  Future<List<String>> listCustomSounds();
+  Future<EnrolmentState> recordEnrolmentSample();
+  Future<String?> finishEnrolment(String name);
+  Future<void> cancelEnrolment();
+  Future<List<String>> deleteCustomSound(String name);
 }
 
 class ChannelSaharaApi implements SaharaApi {
@@ -235,4 +262,26 @@ class ChannelSaharaApi implements SaharaApi {
     final m = await _methods.invokeMethod<Map>('consumeLaunchAlert');
     return m == null ? null : DetectionEvent.fromMap(m);
   }
+
+  @override
+  Future<List<String>> listCustomSounds() async =>
+      (await _methods.invokeMethod<List>('listCustomSounds') ?? const []).cast<String>();
+
+  @override
+  Future<EnrolmentState> recordEnrolmentSample() async =>
+      EnrolmentState.fromMap(await _methods.invokeMethod<Map>('recordEnrolmentSample') ?? const {});
+
+  /// Returns null when saved, else the reason it was not.
+  @override
+  Future<String?> finishEnrolment(String name) async {
+    final m = await _methods.invokeMethod<Map>('finishEnrolment', {'name': name}) ?? const {};
+    return m['saved'] == true ? null : (m['error'] as String? ?? 'Could not save the sound');
+  }
+
+  @override
+  Future<void> cancelEnrolment() => _methods.invokeMethod('cancelEnrolment');
+
+  @override
+  Future<List<String>> deleteCustomSound(String name) async =>
+      (await _methods.invokeMethod<List>('deleteCustomSound', {'name': name}) ?? const []).cast<String>();
 }

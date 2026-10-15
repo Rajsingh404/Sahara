@@ -83,8 +83,19 @@ class SoundClass {
 
   /// Metadata for [label]; unknown labels (e.g. a retrained model with a new class) get a
   /// generic entry instead of crashing.
+  static const customPrefix = 'custom:';
+
   static SoundClass of(String label) =>
       _catalog[label] ??
+      (label.startsWith(customPrefix)
+          ? SoundClass(
+              label: label,
+              name: label.substring(customPrefix.length),
+              icon: Icons.graphic_eq,
+              color: const Color(0xFF3949AB),
+              advice: 'Your custom sound was heard.',
+            )
+          : null) ??
       SoundClass(
         label: label,
         name: label.split('_').map((w) => w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1)}').join(' '),

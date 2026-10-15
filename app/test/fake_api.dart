@@ -64,4 +64,37 @@ class FakeSaharaApi implements SaharaApi {
   Future<void> dismissAlert() async => calls.add('dismiss');
   @override
   Future<DetectionEvent?> consumeLaunchAlert() async => null;
+
+  final customSounds = <String>[];
+  int enrolSamples = 0;
+
+  @override
+  Future<List<String>> listCustomSounds() async => List.of(customSounds);
+  @override
+  Future<EnrolmentState> recordEnrolmentSample() async {
+    calls.add('record');
+    enrolSamples++;
+    return EnrolmentState(samples: enrolSamples);
+  }
+
+  @override
+  Future<String?> finishEnrolment(String name) async {
+    if (name.trim().isEmpty) return 'Give the sound a name';
+    if (enrolSamples < 5) return 'Record at least 5 samples';
+    customSounds.add(name.trim());
+    enrolSamples = 0;
+    return null;
+  }
+
+  @override
+  Future<void> cancelEnrolment() async {
+    calls.add('cancelEnrolment');
+    enrolSamples = 0;
+  }
+
+  @override
+  Future<List<String>> deleteCustomSound(String name) async {
+    customSounds.remove(name);
+    return List.of(customSounds);
+  }
 }

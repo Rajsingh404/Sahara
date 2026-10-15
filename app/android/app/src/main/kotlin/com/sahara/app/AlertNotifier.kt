@@ -20,6 +20,7 @@ object AlertNotifier {
     const val EXTRA_ALERT_CLASS_ID = "sahara_alert_class_id"
     const val EXTRA_ALERT_CONFIDENCE = "sahara_alert_confidence"
     const val EXTRA_ALERT_TIME = "sahara_alert_time"
+    const val EXTRA_ALERT_LABEL = "sahara_alert_label"
     private const val ALERT_NOTIFICATION_ID = 2001
 
     fun ensureChannel(context: Context) {
@@ -44,6 +45,7 @@ object AlertNotifier {
             putExtra(EXTRA_ALERT_CLASS_ID, d.classId)
             putExtra(EXTRA_ALERT_CONFIDENCE, d.confidence)
             putExtra(EXTRA_ALERT_TIME, d.timestampMs)
+            putExtra(EXTRA_ALERT_LABEL, d.label)
         }
         val pi = PendingIntent.getActivity(
             context, d.classId, open, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
@@ -101,5 +103,9 @@ object AlertNotifier {
         }
 
     fun displayName(label: String): String =
-        label.split('_').joinToString(" ") { it.replaceFirstChar(Char::uppercase) }
+        if (label.startsWith(com.sahara.app.core.CustomSoundMatcher.LABEL_PREFIX)) {
+            "Custom sound: " + label.removePrefix(com.sahara.app.core.CustomSoundMatcher.LABEL_PREFIX)
+        } else {
+            label.split('_').joinToString(" ") { it.replaceFirstChar(Char::uppercase) }
+        }
 }

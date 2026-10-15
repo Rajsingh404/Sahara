@@ -93,6 +93,7 @@ def step_eval() -> None:
 def step_export(sync_assets: bool) -> None:
     sh("src/export/quantize.py", desc="FP32 + INT8 head")
     sh("src/export/validate_tflite.py", desc="Validate TFLite heads")
+    sh("src/personalization/export_center.py", desc="Custom-sound centring vector")
     if not (REPO / "models/exported/yamnet.tflite").exists():
         sh("app/tool/export_yamnet_tflite.py", desc="YAMNet TFLite")
     if sync_assets:

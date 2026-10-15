@@ -5,6 +5,8 @@ import 'package:sahara/app.dart';
 import 'package:sahara/app_state.dart';
 import 'package:sahara/audio/sahara_service.dart';
 import 'package:sahara/detection/detection_event.dart';
+import 'package:sahara/detection/sound_class.dart';
+import 'package:sahara/personalization/custom_sounds_screen.dart';
 
 import 'fake_api.dart';
 
@@ -88,5 +90,39 @@ void main() {
     api.controller.add(const StateChanged(false, 'Microphone unavailable'));
     await settleEvents(tester);
     expect(find.text('Microphone unavailable'), findsOneWidget);
+  });
+
+  testWidgets('custom sound enrolment needs 5 samples and a name, then lists the sound', (tester) async {
+    final (api, _) = await pumpApp(tester);
+    tester
+        .state<NavigatorState>(find.byType(Navigator).first)
+        .push(MaterialPageRoute<void>(builder: (_) => const CustomSoundsScreen()));
+    await tester.pumpAndSettle();
+    expect(find.text('No custom sounds yet'), findsOneWidget);
+    await tester.tap(find.text('Add a sound'));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField), 'Pressure cooker');
+    FilledButton recordButton() => tester.widget<FilledButton>(find.byType(FilledButton));
+    OutlinedButton saveButton() => tester.widget<OutlinedButton>(find.widgetWithText(OutlinedButton, 'Save sound'));
+    for (var i = 0; i < 5; i++) {
+      expect(saveButton().onPressed, isNull, reason: 'save stays off below 5 samples');
+      await tester.tap(find.text('Record sample'));
+      await tester.pumpAndSettle();
+    }
+    expect(recordButton().onPressed, isNotNull);
+    expect(find.text('5 of 5-10 samples'), findsOneWidget);
+    await tester.tap(find.text('Save sound'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Pressure cooker'), findsOneWidget);
+    expect(api.calls.where((c) => c == 'record'), hasLength(5));
+    expect(api.calls, isNot(contains('cancelEnrolment')));
+  });
+
+  test('custom alert labels get their own display name', () {
+    final s = SoundClass.of('custom:Pressure cooker');
+    expect(s.name, 'Pressure cooker');
+    expect(s.safetyCritical, isFalse);
   });
 }

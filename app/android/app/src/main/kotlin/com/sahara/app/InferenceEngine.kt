@@ -29,7 +29,13 @@ class InferenceEngine private constructor(
     val hitsRequired: Map<String, Int>,
     private val classifier: Interpreter,
     private val yamnet: Interpreter?,
+    /** Mean background window (assets/personal_center.bin) for custom-sound matching, or null. */
+    val personalCenter: FloatArray?,
 ) : Closeable {
+
+    /** The 2-hop window vector of the last [predict] call (first 1,024 values of the head input). */
+    @Volatile var lastWindowVector: FloatArray? = null
+        private set
 
     private val headIsEmbeddingModel = yamnet != null
     private val classifierInputLen = classifier.getInputTensor(0).numElements()
@@ -42,7 +48,9 @@ class InferenceEngine private constructor(
     fun predict(window: FloatArray): FloatArray {
         val scores = if (headIsEmbeddingModel) {
             val embedding = embed(window)
-            runSingle(classifier, pool.add(embedding))
+            val headInput = pool.add(embedding)
+            lastWindowVector = headInput.copyOf(ModelConfig.EMBEDDING_DIM)
+            runSingle(classifier, headInput)
         } else {
             runSingle(classifier, tail(window, classifierInputLen))
         }
@@ -50,6 +58,34 @@ class InferenceEngine private constructor(
     }
 
     fun resetState() = pool.clear()
+
+    /**
+     * Window vectors of a recorded enrolment sample, formed exactly as live listening forms them
+     * (1 s ring buffer, 0.5 s hops, VAD, newest 15,600 samples, 2-embedding pool), each with the
+     * energy of its newest hop. The PCM is only read here; nothing is stored.
+     */
+    fun enrolmentVectors(pcm: ShortArray): List<Pair<FloatArray, Float>> {
+        if (yamnet == null) return emptyList()
+        val padded = if (pcm.size >= ModelConfig.WINDOW_SAMPLES) pcm
+        else ShortArray(ModelConfig.WINDOW_SAMPLES).also { System.arraycopy(pcm, 0, it, it.size - pcm.size, pcm.size) }
+        val window = com.sahara.app.core.AudioWindow(ModelConfig.WINDOW_SAMPLES)
+        val samplePool = EmbeddingPool(ModelConfig.EMBEDDING_DIM, ModelConfig.EMBEDDING_POOL)
+        val snapshot = FloatArray(ModelConfig.WINDOW_SAMPLES)
+        val out = mutableListOf<Pair<FloatArray, Float>>()
+        var start = 0
+        while (start + ModelConfig.HOP_SAMPLES <= padded.size) {
+            window.push(padded.copyOfRange(start, start + ModelConfig.HOP_SAMPLES))
+            start += ModelConfig.HOP_SAMPLES
+            if (!window.isFull) continue
+            window.snapshot(snapshot)
+            val energy = com.sahara.app.core.AudioWindow.meanSquare(
+                snapshot, snapshot.size - ModelConfig.HOP_SAMPLES, snapshot.size,
+            )
+            if (energy < ModelConfig.VAD_ENERGY_THRESHOLD) continue
+            out += samplePool.add(embed(snapshot)) to energy
+        }
+        return out
+    }
 
     private fun embed(window: FloatArray): FloatArray {
         val net = yamnet!!
@@ -128,6 +164,7 @@ class InferenceEngine private constructor(
         const val YAMNET_ASSET = "assets/yamnet.tflite"
         const val LABELS_ASSET = "assets/labels.txt"
         const val THRESHOLDS_ASSET = "assets/class_thresholds.json"
+        const val PERSONAL_CENTER_ASSET = "assets/personal_center.bin"
 
         fun readAssetText(context: Context, asset: String): String? = readAsset(context, asset)?.toString(Charsets.UTF_8)
 
@@ -168,7 +205,10 @@ class InferenceEngine private constructor(
                     }
                 } else null
                 ModelStatus.reason = null
-                InferenceEngine(labels, loadThresholds(context), loadHitsRequired(context), classifier, yamnet)
+                val center = com.sahara.app.core.CustomSoundMatcher.parseCenter(
+                    readAsset(context, PERSONAL_CENTER_ASSET), ModelConfig.EMBEDDING_DIM,
+                )
+                InferenceEngine(labels, loadThresholds(context), loadHitsRequired(context), classifier, yamnet, center)
             } catch (e: Exception) {
                 Log.e(TAG, "model load failed", e)
                 fail("model failed to load: ${e.message}")

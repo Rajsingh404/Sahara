@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../audio/sahara_service.dart';
 import '../detection/sound_class.dart';
+import '../personalization/custom_sounds_screen.dart';
 import 'app_scope.dart';
 import 'permissions.dart';
 
@@ -45,6 +46,15 @@ class SettingsScreen extends StatelessWidget {
                   onPressed: () => state.api.simulateAlert(i),
                 ),
             ],
+          ),
+          const Divider(),
+          const _SectionTitle('Custom sounds'),
+          ListTile(
+            leading: const Icon(Icons.graphic_eq),
+            title: const Text('Custom sounds (experimental)'),
+            subtitle: const Text('Teach the app a sound from your home, like a pressure cooker or a special bell.'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const CustomSoundsScreen())),
           ),
           const Divider(),
           const _SectionTitle('Privacy'),

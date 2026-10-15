@@ -33,6 +33,7 @@ class AudioCaptureService : Service() {
     private var worker: Thread? = null
     private var wakeLock: PowerManager.WakeLock? = null
     @Volatile private var policy: DetectionPolicy? = null
+    @Volatile private var matcher: com.sahara.app.core.CustomSoundMatcher? = null
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -67,6 +68,7 @@ class AudioCaptureService : Service() {
             stopSelf()
             return
         }
+        matcher = com.sahara.app.core.CustomSoundMatcher(engine.personalCenter)
         policy = DetectionPolicy(engine.labels, engine.thresholds, hitsPerClass = engine.hitsRequired)
             .also { applySettings(it) }
         running = true
@@ -156,6 +158,18 @@ class AudioCaptureService : Service() {
                     Log.i(STATS_TAG, "alert ${d.label} score=%.3f at=${d.timestampMs}".format(d.confidence))
                     AlertDispatcher.dispatch(this, d)
                 }
+                // User-enrolled sounds: same window vector, no extra model run.
+                val m = matcher
+                val vec = engine.lastWindowVector
+                if (m != null && vec != null) {
+                    for ((sound, sim) in m.match(vec, now)) {
+                        val d = com.sahara.app.core.Detection(
+                            com.sahara.app.core.CustomSoundMatcher.ALERT_CLASS_ID, "custom:${sound.name}", sim, now, false,
+                        )
+                        Log.i(STATS_TAG, "alert ${d.label} score=%.3f at=$now".format(sim))
+                        AlertDispatcher.dispatch(this, d)
+                    }
+                }
                 statWindows++
                 statTotalMs += lastInferenceMs
                 statMaxMs = maxOf(statMaxMs, lastInferenceMs)
@@ -194,6 +208,7 @@ class AudioCaptureService : Service() {
         val prefs = SaharaPrefs(this)
         prefs.enabledClasses?.let { p.enabled = it }
         p.sensitivity = prefs.sensitivity
+        matcher?.sounds = prefs.customSounds()
     }
 
     private fun emitScores(scores: FloatArray, energy: Float) {

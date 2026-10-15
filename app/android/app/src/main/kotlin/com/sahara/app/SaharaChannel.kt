@@ -48,7 +48,7 @@ class SaharaChannel(private val context: Context, messenger: BinaryMessenger) : 
         val id = intent?.getIntExtra(AlertNotifier.EXTRA_ALERT_CLASS_ID, -1) ?: -1
         if (id < 0) return
         val labels = InferenceEngine.loadLabels(context)
-        val label = labels.getOrNull(id) ?: return
+        val label = intent!!.getStringExtra(AlertNotifier.EXTRA_ALERT_LABEL) ?: labels.getOrNull(id) ?: return
         val alert = mapOf(
             "classId" to id,
             "label" to label,
@@ -122,6 +122,28 @@ class SaharaChannel(private val context: Context, messenger: BinaryMessenger) : 
                 AlertNotifier.cancel(context)
                 Wristband.get(context).sendStop()
                 result.success(true)
+            }
+            "listCustomSounds" -> result.success(prefs.customSounds().map { it.name })
+            "recordEnrolmentSample" -> {
+                if (!granted(Manifest.permission.RECORD_AUDIO)) {
+                    result.error("permission", "Microphone permission is required", null)
+                } else {
+                    val main = android.os.Handler(android.os.Looper.getMainLooper())
+                    Thread({
+                        val state = CustomEnrolment.recordSample(context)
+                        main.post { result.success(state) }
+                    }, "sahara-enrol").start()
+                }
+            }
+            "finishEnrolment" -> result.success(CustomEnrolment.finish(context, call.argument<String>("name") ?: ""))
+            "cancelEnrolment" -> {
+                CustomEnrolment.cancel(context)
+                result.success(true)
+            }
+            "deleteCustomSound" -> {
+                call.argument<String>("name")?.let { prefs.deleteCustomSound(it) }
+                AudioCaptureService.instance?.applySettings()
+                result.success(prefs.customSounds().map { it.name })
             }
             "consumeLaunchAlert" -> {
                 result.success(launchAlert)

@@ -64,6 +64,33 @@ class SaharaPrefs(context: Context) {
 
     fun clearHistory() = prefs.edit().remove(KEY_HISTORY).apply()
 
+    /** User-enrolled sounds: names and prototypes (1,024 floats each). Never any audio. */
+    @Synchronized
+    fun customSounds(): List<com.sahara.app.core.CustomSound> {
+        val arr = JSONArray(prefs.getString(KEY_CUSTOM, "[]"))
+        return (0 until arr.length()).map { i ->
+            val o = arr.getJSONObject(i)
+            com.sahara.app.core.CustomSound(o.getString("name"), com.sahara.app.core.CustomSoundMatcher.decode(o.getString("prototype")))
+        }
+    }
+
+    @Synchronized
+    fun saveCustomSound(sound: com.sahara.app.core.CustomSound) {
+        val kept = customSounds().filter { it.name != sound.name } + sound
+        val arr = JSONArray()
+        kept.forEach { arr.put(JSONObject().put("name", it.name).put("prototype", com.sahara.app.core.CustomSoundMatcher.encode(it.prototype))) }
+        prefs.edit().putString(KEY_CUSTOM, arr.toString()).apply()
+    }
+
+    @Synchronized
+    fun deleteCustomSound(name: String) {
+        val arr = JSONArray()
+        customSounds().filter { it.name != name }.forEach {
+            arr.put(JSONObject().put("name", it.name).put("prototype", com.sahara.app.core.CustomSoundMatcher.encode(it.prototype)))
+        }
+        prefs.edit().putString(KEY_CUSTOM, arr.toString()).apply()
+    }
+
     private fun toJson(d: Detection) = JSONObject()
         .put("classId", d.classId)
         .put("label", d.label)
@@ -78,6 +105,7 @@ class SaharaPrefs(context: Context) {
         private const val KEY_BAND_ADDRESS = "wristband_address"
         private const val KEY_BAND_NAME = "wristband_name"
         private const val KEY_HISTORY = "history"
+        private const val KEY_CUSTOM = "custom_sounds"
         private const val MAX_HISTORY = 100
     }
 }
