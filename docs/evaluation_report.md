@@ -142,14 +142,66 @@ FP32 head vs Keras on 18649 test windows: max |diff| 2.68e-07 (pass, limit 1e-4)
 
 End-to-end check (`app/tool/check_app_pipeline.py`): 90 test clips replayed through exactly what the app runs (16-bit PCM → 1 s ring buffer → VAD → `yamnet.tflite` → embedding pool → `sahara_classifier.tflite` → alert policy with the bundled settings) raise the same alerts as the evaluation pipeline in **90/90** clips; max score difference 0.0196. Source: `models/logs/20261005-195620_b_synthetic/app_pipeline_check.json`.
 
-## On-device measurements
+## On-device measurements (Phase 6)
 
-Not measured yet (Phase 6, needs the test phone): end-to-end latency, inference time per window, battery per hour, RAM.
+Samsung Galaxy S24 (SM-S921B), Android 16 (API 36), 2026-10-05 (`models/logs/phone/20261005_galaxy_s24.json`). Measured over adb in the Phase 6 session. Values transcribed from the session output; the raw logcat files were kept in a temporary folder that macOS has since cleared.
+
+| Check | Result |
+|---|---|
+| install and start | pass: both TFLite models load (XNNPACK); foreground service type microphone, ongoing notification |
+| screen off detection | pass for smoke_alarm and siren: alerted in every run with the display in DOZE (off); the full-screen alert turned the screen on |
+| swipe from recents | pass: app task removed, foreground service still running in the same process (pid 17134), inference continued |
+| no audio files | pass: 8 files in app private storage (Flutter engine data, graphics cache, 2 settings files), 0 audio files; no shared-storage folders |
+| settings file contents | alert history (label, confidence, time) and enabled classes only |
+| release internet permission | pass: release APK permissions = RECORD_AUDIO, FOREGROUND_SERVICE(_MICROPHONE), WAKE_LOCK, POST_NOTIFICATIONS, VIBRATE, USE_FULL_SCREEN_INTENT, Bluetooth; no INTERNET |
+| auto restart | pass: after an app update the listening service restarted by itself (once; another time it did not) |
+| 16kb alignment | fixed: tensorflow-lite 2.16.1 libtensorflowlite_jni.so was 4 KB aligned; LiteRT 1.4.2 is 16 KB aligned |
+
+Inference per window (YAMNet + head, CPU): 19.9–28.6 ms average with the screen on (max 48 ms), 47.2–48.7 ms with it off (max 75 ms); a window is processed every 500 ms. Memory (debug build): 128.9 MB PSS.
+
+Speaker playback (one held-out test clip per class (3 s silence + clip) played from the MacBook speakers at 70 % volume, phone next to the laptop; alerts from the app log):
+
+- 1 screen on voice recognition: alerted smoke_alarm 0.998, siren 0.960, appliance_beep 0.977; missed glass_break, doorbell, knocking, dog_bark, baby_cry.
+- 2 screen off voice recognition: alerted smoke_alarm 0.992, siren 0.971, appliance_beep 0.959; missed glass_break (peak 0.561), doorbell (no score >= 0.3), knocking (no score >= 0.3), dog_bark (no score >= 0.3), baby_cry (peak 0.695, threshold 0.63 but needs 3 windows).
+- 3 screen off mic source: alerted smoke_alarm 0.997, siren 0.990; missed appliance_beep (peak 0.858), glass_break (0.401), doorbell (0.401), knocking, dog_bark, baby_cry (0.808).
+
+Small laptop speakers reproduce high-pitched alarms well but barely reproduce knocks, barks and doorbells; real sound sources are needed to judge those classes. UNPROCESSED audio is not supported on the S24; VOICE_RECOGNITION did slightly better than MIC.
+
+Latency from the start of the played clip: smoke_alarm 8.94 s, siren 2.49 s, appliance_beep 1.04 s. Phone and Mac clocks were aligned over adb (tens of ms). The smoke alarm in its clip starts ~8.5 s in, so the phone alerted ~0.4 s after the pipeline expects; siren +1.5 s; appliance beep within the same window.
+
+Not measured yet: battery per hour (needs the phone unplugged and listening for about an hour (pending)); release memory and latency (phone disconnected before the release-build run (pending)); real world sources (doorbell, knocking, dog, glass and baby cry need real sounds (pending)); wristband latency (no wristband hardware (Phase 8)); custom sound enrolment on phone (built after the phone session (pending)).
+
+## Personalization (Phase 7)
+
+Few-shot prototypes over the same YAMNet window vectors (`src/personalization/`), centred on the mean background window; threshold set on the train side so validation background gives ≤ 1.0 alert/h; 20 random enrolments each. Sources: `models/logs/personalization/aryan_eval.json`, `custom_sounds_eval.json`.
+
+| Enrolled sound | Clips alerted (test) | Other names accepted | Background alerts/h | EER vs other names | EER vs background |
+|---|---:|---:|---:|---:|---:|
+| "Aryan" (team recordings), 5 samples | 19% | 29% | 2.15 | 0.61 | 0.08 |
+| "Aryan" (team recordings), 10 samples | 22% | 38% | 2.40 | 0.61 | 0.07 |
+
+| Household sound (FSD50K, 5 samples) | Test clips | Clips alerted | Background alerts/h | EER vs background |
+|---|---:|---:|---:|---:|
+| Toilet flush | 8 | 34% | 0.42 | 0.00 |
+| Hiss | 9 | 10% | 1.16 | 0.24 |
+| Drill | 8 | 19% | 1.26 | 0.21 |
+| Water tap and faucet | 15 | 21% | 1.66 | 0.27 |
+| Keys jangling | 8 | 10% | 0.97 | 0.39 |
+| Printer | 8 | 4% | 1.00 | 0.18 |
+| Cough | 14 | 15% | 0.59 | 0.14 |
+| Zipper (clothing) | 16 | 8% | 0.45 | 0.38 |
+
+**Finding.** A name is not distinguishable from other names: other names score higher than "Aryan" (mean similarity 0.63 vs 0.57); YAMNet describes kinds of sound, not words. A name call versus background does separate (EER 0.08). Household sounds separate from background to varying degrees (toilet flush perfectly), but at a strict 1 alert/h few test clips alert, partly because each "sound" here is a category recorded by many people; one user's own appliance repeats far more consistently. The app therefore offers custom sounds as experimental and for distinctive household sounds, not names.
+
+## Wristband (Phase 8)
+
+Not tested on hardware: no wristband parts were available. The firmware builds (`pio run`), and the app's BLE packet format is unit-tested against `docs/ble_protocol.md`; phone-to-buzz latency, current draw and battery life are not measured.
 
 ## Known limitations
 
 - Window-level metrics count 0.5 s windows, so long clips weigh more than short ones; clip detection is the closer proxy for what a user experiences.
 - The Indian team test set is small (a few clips per class) and split per label, so the same phone or room can appear in train and test; there are no team recordings of smoke_alarm, siren or glass_break.
+- knocking, appliance_beep and doorbell have the lowest test AP; their detection is limited by the model, not the alert settings (see the budget trade-off above).
 - Synthetic results are reported separately and never as real-world performance.
 - Safety-critical classes (smoke_alarm, siren, glass_break) alert on a single window; their false alarms are listed above.
 

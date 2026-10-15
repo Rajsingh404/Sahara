@@ -42,8 +42,10 @@ src/                    Python ML package (import as `src.*`)
   preprocessing/        audio utils, YAMNet features + .npy cache, augmentation, iNoise chunking, synthetic mixing
   models/               classifier_head.py (Dense head)
   training/             train.py, losses.py (weighted BCE)
-  evaluation/           metrics, confusion matrix, threshold search, false-alarm eval
+  evaluation/           metrics, policy.py (port of DetectionPolicy.kt), policy_tuning/tune_policy (alert settings
+                        against a false-alarm budget), evaluate.py, false_alarm_eval.py, team_cv.py
   export/               to_tflite.py, quantize.py, validate_tflite.py
+  personalization/      prototypes.py (few-shot custom sounds), evaluate.py, export_center.py
 scripts/                pipeline runners, env check, status
 tests/                  pytest suite for the ML pipeline
 models/                 checkpoints/, logs/, exported/ (contents git-ignored)
@@ -52,12 +54,14 @@ data/
   raw/, interim/, processed/   local only, git-ignored
 docs/                   dataset card, evaluation report, roadmap, architecture, reviews, paper
 
-app/                    Flutter app (Android) — to be scaffolded
-  assets/               sahara_classifier.tflite + labels.txt, written by the export step
+app/                    Flutter app (Android)
+  assets/               yamnet.tflite, sahara_classifier.tflite, labels.txt, class_thresholds.json,
+                        personal_center.bin (copied by app/tool/sync_assets.py)
   lib/                  audio/, detection/, alerts/, ble/ (uuids.dart), personalization/, ui/
-  android/app/src/main/kotlin/…   AudioCaptureService.kt, InferenceEngine.kt, SaharaChannel.kt
+  android/app/src/main/kotlin/…   AudioCaptureService.kt, InferenceEngine.kt, SaharaChannel.kt, CustomEnrolment.kt,
+                                  core/ (DetectionPolicy, EmbeddingPool, AudioWindow, CustomSoundMatcher, BlePacket)
 firmware/esp32_wristband/   PlatformIO project: include/ble_uuids.h, src/main.cpp, hardware/ (BOM, schematic)
-android/                empty legacy placeholder; native code goes in app/android/ once Flutter is scaffolded
+android/                empty legacy placeholder; native code lives in app/android/
 ```
 
 ## Conventions
@@ -82,19 +86,18 @@ Dev machine: macOS (Apple Silicon). Run commands from the repo root.
 ```bash
 /opt/homebrew/bin/python3.11 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 brew install ffmpeg sox
 python scripts/verify_env.py
 
 # Optional: stream datasets from Google Drive for Desktop instead of data/raw/
 export SAHARA_DRIVE_DATASETS="<path to My Drive/SAHARA/Datasets>"
 
-python src/data/download.py --dataset fsd50k          # also: audioset, desed, inoise, all
-python src/data/manifest_builder.py                   # build manifests from whatever raw data is present
-python src/preprocessing/build_features_cache.py      # YAMNet embeddings → .npy cache (--force --augment to augment)
-python src/training/train.py --batch-size 32 --epochs 30 --learning-rate 0.001
-python src/evaluation/confusion_matrix.py
-python src/export/to_tflite.py                        # FP32 TFLite; quantize.py / validate_tflite.py follow
+python src/data/download.py --dataset esc50           # also: fsd50k, audioset, desed, all
+python -m src.data.download_audioset_hf --classes smoke_alarm --splits eval bal_train   # AudioSet without YouTube
+python scripts/run_full_pipeline.py                   # data → synthetic → features → train → eval → export → report
+python scripts/run_full_pipeline.py --from train      # reuse data and features; --sync-assets copies models to the app
+python src/personalization/evaluate.py                # custom-sound (personalization) evaluation
 pytest -q
 ```
 
@@ -123,24 +126,32 @@ macOS prerequisites: Homebrew, Python 3.11, Flutter SDK, Android Studio (Android
 
 - Target: Android phone + ESP32 wristband. No network needed at runtime.
 - Must keep detecting with the screen off (Foreground Service, persistent notification).
-- Per-class thresholds start from `data/metadata/class_thresholds.json` (output of `threshold_search.py`).
-- TODO: minimum Android version / API level.
-- TODO: target test phone(s).
-- TODO: max `.tflite` size (MB).
-- TODO: end-to-end latency budget, sound onset → phone alert → wristband buzz (ms).
-- TODO: battery budget per hour of continuous listening.
-- TODO: false-alarm budget.
-- TODO: ESP32 board variant, haptic motor, battery capacity.
+- Per-class alert settings (threshold + windows needed) come from `data/metadata/class_thresholds.json`, written by
+  `src/evaluation/tune_policy.py` and copied to `app/assets/`.
+- Minimum Android version: API 26 (Android 8.0), `minSdk` in `app/android/app/build.gradle.kts`. Tested on API 36.
+- Test phone: Samsung Galaxy S24 (SM-S921B), Android 16, measured 2026-10-05 (`models/logs/phone/`).
+- Model size: no budget was set. Shipped: `yamnet.tflite` 12.6 MB + FP32 head 1.2 MB; arm64 release APK 35.9 MB.
+  The INT8 head (0.3 MB) passes validation but is not shipped (thresholds sit at 0.93–0.98, see the report).
+- Latency: no budget was set. Measured inference 20–29 ms per window (screen on), 47–49 ms (screen off) on the S24;
+  sound start → phone alert 1.0–2.5 s in a speaker test. Phone → wristband buzz: not measured (no hardware).
+- Battery per hour of listening: not measured yet (needs the phone unplugged for about an hour).
+- False-alarm budget: 4 alerts per hour on validation background audio (`FALSE_ALARM_BUDGET_PER_HOUR`), chosen in
+  Phase 4 because no target was given; test result 3.5/h on 3.4 h of busy background.
+- ESP32 board, haptic motor, battery: not chosen/measured (no hardware yet); the BOM in
+  `firmware/esp32_wristband/README.md` is the plan (about ₹870).
 - Audio input contract follows YAMNet: 16 kHz mono float waveform, 0.96 s frames with 0.48 s hop. Do not change this without retraining.
 
 ## Dataset layout
 
-Sources: FSD50K (primary), AudioSet (via yt-dlp), DESED (domestic hard negatives), iNoise Indian Noise Database, self-recorded Indian ambient clips, and synthetic mixes.
+Sources: FSD50K (Google Drive), AudioSet (YouTube via yt-dlp, and the Hugging Face mirror `agkphysics/AudioSet`
+via `download_audioset_hf.py`), ESC-50, DESED (background), self-recorded team clips, and train-only synthetic mixes.
+iNoise is supported but not downloaded (needs an IEEE DataPort login). Counts: `data/metadata/coverage.txt`.
 
 - Raw audio comes from `data/raw/<dataset>/` or, when `SAHARA_DRIVE_DATASETS` is set, from Google Drive for Desktop (streamed, cold fetch about 2.3 s). Only the `.npy` embedding cache (about 4 KB per clip) is written locally.
 - Synthetic mixing (`src/preprocessing/synthetic_mixing.py`) overlays clean clips on Indian background beds at varied SNR. Those rows are tagged `source_type: synthetic_mixed`.
 - The pipeline is dataset-agnostic. Add a source with a downloader in `src/data/`, its entry in `get_raw_dir()` and `label_map.py`; the manifest builder picks it up.
-- Self-recorded clips: WAVs under `data/raw/indian_ambient/background/` or `target_classes/`, plus rows in `data/raw/indian_ambient/metadata.csv`.
+- Self-recorded clips: `scripts/organise_recordings.py` builds `data/raw/indian_ambient/` from `data/recordings/label_map.csv`.
+  The team set is split per label (~40 % test), spread across recording conditions, not per person.
 - `source_type` values: `real`, `synthetic_mixed`, `self_recorded`.
 
 **Recording protocol:** 4–6 s clips with ambient padding around the event, including naturally short sounds (knocking, appliance_beep). Do not trim to the event; YAMNet windowing handles it.
@@ -149,13 +160,15 @@ Sources: FSD50K (primary), AudioSet (via yt-dlp), DESED (domestic hard negatives
 
 ## Current status (update as it changes)
 
-- Implemented: data pipeline, manifests, YAMNet embedding cache, weighted Dense head training, evaluation, threshold search, TFLite export scripts, iNoise + synthetic mixing.
-- `data/metadata/full_manifest.csv`: 4,494 FSD50K + 188 AudioSet target-class rows, 905 DESED background rows.
-- Baseline: about 171 AudioSet clips, mAP 0.618 (handoff figure). `docs/evaluation_report.md` currently shows macro AP 0.783 from a later small-sample run; confirm which is current before quoting either.
-- Pending: full retrain on the combined ~4,655 clips (Phase 2–3 result).
-- Not started: Flutter app, Kotlin service, ESP32 firmware, personalization.
-- Not yet collected: self-recorded Indian ambient dataset, personalization dev-set.
-- Next milestone: 50–60% completion review. Current roadmap phase: TODO.
+- Branch `feat/integration` (all four earlier PRs merged plus this work); not pushed.
+- Phases 0–5 and 7 done; Phase 6 mostly done; Phase 8 not started (no hardware); Phase 9 docs/CI done.
+- Selected model: `models/logs/20261005-195620_b_synthetic/` (in `models/logs/selected_run.txt`). Public test mAP 0.789,
+  false alarms 3.5/h, Indian 5-fold CV mAP 0.757. All numbers: `docs/evaluation_report.md` (generated, do not hand-edit).
+- Superseded figures (0.618, 0.651, 0.783, 0.913) are listed in the report; never quote them.
+- The classifier head always runs on the CPU (`classifier_head.HEAD_DEVICE`): Keras `predict()` on the Metal GPU
+  returns wrong scores on this Mac.
+- Pending on the phone: battery per hour, release-build memory/latency, real-sound tests, custom-sound enrolment.
+- Personalization works for distinctive household sounds, not names (see the report).
 
 ## Working with Claude
 

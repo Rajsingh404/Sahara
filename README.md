@@ -1,69 +1,81 @@
 # SAHARA
 
-**S**ound-based **A**lert & **H**aptic **A**ssistance for real-time **R**eal-world **A**wareness is an on-device safety-sound detector for Deaf and Hard-of-Hearing users. It targets smoke alarms, doorbells, sirens, knocks, dog barks, baby cries, glass breaks, and appliance beeps.
+**S**ound-based **A**lert & **H**aptic **A**ssistance for **R**eal-time **A**wareness: an Android app that listens
+continuously, on the phone and offline, for eight safety sounds and alerts Deaf and Hard-of-Hearing users with a
+full-screen alert, phone vibration and a custom ESP32 vibrating wristband. Focus: Indian homes and streets.
 
-This repository currently implements the offline data and baseline-training phase only: a frozen [YAMNet](https://tfhub.dev/google/yamnet/1) embedding backbone and trainable classifier head. Android, ESP32 BLE wearable, TFLite export, Indian ambient recordings, and personalization are intentionally out of scope for this milestone.
+Final-year B.Tech capstone, NMIMS MPSTME.
 
-## Current honest status
+**Sounds:** smoke alarm, doorbell, siren, knocking, dog bark, baby cry, glass breaking, appliance beep, plus
+user-enrolled custom sounds (experimental).
 
-- Environment, modular data pipeline, manifests, preprocessing, baseline classifier, evaluation utilities, documentation, and unit tests: implemented.
-- Baseline artifacts are present in `models/checkpoints/best_classifier.keras` and `docs/confusion_matrix.png`.
-- Current baseline used the locally available AudioSet subset because the full FSD50K audio is not available in this workspace. The reported metrics are therefore small-sample baseline results, not final project performance. See [docs/dataset_card.md](docs/dataset_card.md).
-- AudioSet has locally downloaded clips and DESED has background soundscapes. Re-running the downloader is resumable.
+## Status
 
-## Setup
+| Part | State |
+|---|---|
+| ML pipeline (`src/`, `scripts/`) | Done: verified data, phone-exact features, recorded runs, policy-aware tuning, evaluation, export |
+| Android app (`app/`) | Done and running on a Galaxy S24; battery and real-sound checks still pending |
+| Personalization (`src/personalization/`, `app/lib/personalization/`) | Done: evaluated; offered as experimental for household sounds (it cannot tell names apart) |
+| Wristband firmware (`firmware/esp32_wristband/`) | Builds; **not tested on hardware** (no parts yet) |
 
-Apple Silicon is required for the intended TensorFlow configuration.
+Results, with the run folder each number comes from: [docs/evaluation_report.md](docs/evaluation_report.md).
+Headline (test data, run `20261005-195620_b_synthetic`): public test mAP 0.789; false alarms on 3.4 h of busy
+background audio 3.5 per hour; smoke alarm 23/27 and siren 28/34 test clips alerted; Indian recordings 5-fold
+cross-validation mAP 0.757.
 
-```bash
-/opt/homebrew/bin/python3.11 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python scripts/verify_env.py
+## How it works
+
+Microphone → 1 s buffer every 0.5 s → YAMNet (TFLite) → small Dense head → per-class alert rules → full-screen alert,
+vibration and wristband. All on the phone; audio is never stored or uploaded. Diagrams and the shared contracts:
+[docs/architecture.md](docs/architecture.md).
+
+## Repository
+
+```
+src/          Python ML package: data/, preprocessing/, training/, evaluation/, export/, personalization/
+scripts/      run_full_pipeline.py, compare_runs.py, write_evaluation_report.py, organise_recordings.py, ...
+tests/        pytest suite
+app/          Flutter app (Android): lib/ (UI), android/ (Kotlin service, inference, BLE), assets/ (models), tool/
+firmware/     ESP32 wristband (PlatformIO)
+data/         metadata/ (manifests, thresholds, coverage) and recordings/ (team label map); audio stays local
+models/logs/  one folder per training run (config, metrics, test results); models themselves are not in git
+docs/         architecture, dataset card, evaluation report, BLE protocol, reviews
 ```
 
-`tensorflow-macos` and `tensorflow-metal` are pinned in `requirements.txt`. On macOS, install FFmpeg before downloading AudioSet clips:
+## One command per part
+
+macOS (Apple Silicon), from the repo root.
 
 ```bash
-brew install ffmpeg sox
-```
-
-## Pipeline
-
-```bash
-# Download or resume one source (all is supported too)
-python src/data/download.py --dataset fsd50k
-python src/data/download.py --dataset audioset --retry-failed
-python src/data/download.py --dataset desed
-
-# Build source-agnostic manifests from whatever raw data is present
-python src/data/manifest_builder.py
-
-# Cache YAMNet embeddings; unavailable/corrupt audio is logged and skipped
-python src/preprocessing/build_features_cache.py
-
-# Train and evaluate the classifier head
-# Optional raw-waveform augmentation is generated during cache construction:
-# python src/preprocessing/build_features_cache.py --force --augment
-python src/training/train.py --batch-size 32 --epochs 30 --learning-rate 0.001
-python src/evaluation/confusion_matrix.py
-
-# Run correctness tests
+# ML: data -> features -> train -> evaluate -> export -> report
+/opt/homebrew/bin/python3.11 -m venv .venv && source .venv/bin/activate
+pip install -r requirements-dev.txt && brew install ffmpeg sox
+export SAHARA_DRIVE_DATASETS="$HOME/Library/CloudStorage/GoogleDrive-<account>/My Drive/SAHARA/Datasets"   # FSD50K
+python scripts/run_full_pipeline.py            # add --sync-assets to copy the final models into app/assets/
 pytest -q
+
+# App (Flutter stable >= 3.47, JDK 17, Android SDK 35+)
+cd app && flutter pub get && flutter analyze && flutter test
+flutter build apk --release --split-per-abi     # or: flutter run (USB debugging on)
+
+# Wristband (brew install platformio)
+cd firmware/esp32_wristband && pio run          # pio run -t upload to flash
 ```
 
-Use `python src/data/clean.py` to inspect removable FSD50K archives after successful feature caching. It only deletes archives when `--apply` is supplied.
+Data sources and how to fetch each (FSD50K on Google Drive, AudioSet via `src/data/download_audioset_hf.py`,
+ESC-50, DESED, team recordings via `scripts/organise_recordings.py`): [docs/dataset_card.md](docs/dataset_card.md).
 
-## Dataset layout
+## Privacy
 
-`data/raw/indian_ambient/` is deliberately a field-recording placeholder. Add real WAV files under `background/` or `target_classes/` and rows to `metadata.csv`; `manifest_builder.py` will include them without code changes.
+Detection runs entirely on the phone. Audio lives about one second in memory and is overwritten; it is never written
+to storage, and the release app has no internet permission. The wristband only receives which sound was detected.
+Custom-sound enrolment keeps a short list of numbers per sound, not audio.
 
-Detailed data status and coverage: [docs/dataset_card.md](docs/dataset_card.md). Intended offline-training and on-device-inference design: [docs/architecture.md](docs/architecture.md).
+## Known limits
 
-## Next phase (not implemented)
+- Knocking, appliance beeps and doorbells are the weakest classes; the team has no recordings of smoke alarms,
+  sirens or glass breaking, so the Indian-context check covers five classes.
+- Custom sounds cannot recognise names or words.
+- Battery use, real-sound tests on the phone and the wristband on hardware are not measured yet.
 
-1. Record and validate Indian ambient audio.
-2. Rebuild embeddings with the full FSD50K set and retrain/evaluate on a substantially larger holdout.
-3. Export and validate TensorFlow Lite/INT8 inference.
-4. Build the native Kotlin Android foreground audio service and BLE client.
-5. Build ESP32 wristband firmware and the personalization module.
+Full list: [docs/evaluation_report.md](docs/evaluation_report.md#known-limitations).

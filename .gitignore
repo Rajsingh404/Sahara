@@ -90,3 +90,6 @@ models/logs/*/*
 !models/logs/personalization/
 models/logs/personalization/*
 !models/logs/personalization/*.json
+!models/logs/phone/
+models/logs/phone/*
+!models/logs/phone/*.json

@@ -189,15 +189,75 @@ def build(run: str | None = None) -> str:
                 f"pipeline in **{app_check['same_alerts']}/{app_check['clips']}** clips; max score difference "
                 f"{app_check['max_score_diff']:.4f}. Source: `{rel}/app_pipeline_check.json`.", ""]
 
-    out += ["## On-device measurements", "",
-            "Not measured yet (Phase 6, needs the test phone): end-to-end latency, inference time per window, "
-            "battery per hour, RAM.", ""]
+    out += ["## On-device measurements (Phase 6)", ""]
+    phone_files = sorted((MODELS_DIR / "logs" / "phone").glob("*.json"))
+    if phone_files:
+        ph = _load(phone_files[-1])
+        ms = ph["inference_ms_per_window"]
+        pb = ph["speaker_playback_test"]
+        out += [f"{ph['device']['model']}, Android {ph['device']['android']}, {ph['date']} "
+                f"(`{phone_files[-1].relative_to(REPO_ROOT)}`). {ph['provenance']}", "",
+                "| Check | Result |", "|---|---|"]
+        for k, v in ph["checks"].items():
+            out.append(f"| {k.replace('_', ' ')} | {v} |")
+        out += ["", f"Inference per window (YAMNet + head, CPU): {ms['screen_on']['avg_range'][0]}–"
+                f"{ms['screen_on']['avg_range'][1]} ms average with the screen on (max {ms['screen_on']['max']} ms), "
+                f"{ms['screen_off']['avg_range'][0]}–{ms['screen_off']['avg_range'][1]} ms with it off (max "
+                f"{ms['screen_off']['max']} ms); a window is processed every 500 ms. Memory (debug build): "
+                f"{ph['memory']['debug_build_total_pss_mb']} MB PSS.", "",
+                f"Speaker playback ({pb['method']}):", ""]
+        for run, r in pb["runs"].items():
+            out.append(f"- {run.replace('_', ' ')}: alerted {', '.join(r['alerted'])}; missed {', '.join(r['missed'])}.")
+        out += ["", pb["interpretation"], "",
+                "Latency from the start of the played clip: " + ", ".join(f"{k} {v} s" for k, v in pb["latency_s_from_clip_start_run2"].items())
+                + ". " + pb["latency_note"], "",
+                "Not measured yet: " + "; ".join(f"{k.replace('_', ' ')} ({v})" for k, v in ph["not_measured"].items()) + ".", ""]
+    else:
+        out += ["Not measured yet (needs the test phone).", ""]
+
+    out += ["## Personalization (Phase 7)", ""]
+    pers = MODELS_DIR / "logs" / "personalization"
+    aryan, custom = _load(pers / "aryan_eval.json"), _load(pers / "custom_sounds_eval.json")
+    if aryan and custom:
+        a5, a10 = aryan["shots"]["5"], aryan["shots"]["10"]
+        out += ["Few-shot prototypes over the same YAMNet window vectors (`src/personalization/`), centred on the mean "
+                "background window; threshold set on the train side so validation background gives ≤ "
+                f"{aryan['budget_per_hour']} alert/h; {aryan['rounds']} random enrolments each. Sources: "
+                "`models/logs/personalization/aryan_eval.json`, `custom_sounds_eval.json`.", "",
+                "| Enrolled sound | Clips alerted (test) | Other names accepted | Background alerts/h | EER vs other names | EER vs background |",
+                "|---|---:|---:|---:|---:|---:|"]
+        for k, v in (("5", a5), ("10", a10)):
+            sm = v["summary"]
+            out.append(f"| \"Aryan\" (team recordings), {k} samples | {sm['test_detection']['mean']:.0%} | "
+                       f"{sm['test_other_name_accepts']['mean']:.0%} | {sm['test_background_alerts_per_hour']['mean']:.2f} | "
+                       f"{sm['test_eer_name_vs_other_names']['mean']:.2f} | {sm['test_eer_name_vs_background_clips']['mean']:.2f} |")
+        out += ["", "| Household sound (FSD50K, 5 samples) | Test clips | Clips alerted | Background alerts/h | EER vs background |",
+                "|---|---:|---:|---:|---:|"]
+        for name, v in custom["sounds"].items():
+            out.append(f"| {name.replace('_', ' ')} | {v['test_clips']} | {v['detection']:.0%} | "
+                       f"{v['background_alerts_per_hour']:.2f} | {v['eer_vs_background_clips']:.2f} |")
+        out += ["", "**Finding.** A name is not distinguishable from other names: other names score higher than \"Aryan\" "
+                f"(mean similarity {a5['mean_scores']['other_names']:.2f} vs {a5['mean_scores']['aryan']:.2f}); YAMNet "
+                "describes kinds of sound, not words. A name call versus background does separate (EER "
+                f"{a5['summary']['test_eer_name_vs_background_clips']['mean']:.2f}). Household sounds separate from background to "
+                "varying degrees (toilet flush perfectly), but at a strict 1 alert/h few test clips alert, partly because each "
+                "\"sound\" here is a category recorded by many people; one user's own appliance repeats far more consistently. "
+                "The app therefore offers custom sounds as experimental and for distinctive household sounds, not names.", ""]
+    else:
+        out += ["Not run yet.", ""]
+
+    out += ["## Wristband (Phase 8)", "",
+            "Not tested on hardware: no wristband parts were available. The firmware builds (`pio run`), and the app's "
+            "BLE packet format is unit-tested against `docs/ble_protocol.md`; phone-to-buzz latency, current draw and "
+            "battery life are not measured.", ""]
 
     out += ["## Known limitations", "",
             "- Window-level metrics count 0.5 s windows, so long clips weigh more than short ones; clip detection is the closer "
             "proxy for what a user experiences.",
             "- The Indian team test set is small (a few clips per class) and split per label, so the same phone or room "
             "can appear in train and test; there are no team recordings of smoke_alarm, siren or glass_break.",
+            "- knocking, appliance_beep and doorbell have the lowest test AP; their detection is limited by the model, "
+            "not the alert settings (see the budget trade-off above).",
             "- Synthetic results are reported separately and never as real-world performance.",
             f"- Safety-critical classes ({', '.join(SAFETY_CRITICAL_CLASSES)}) alert on a single window; their false alarms "
             "are listed above.", ""]

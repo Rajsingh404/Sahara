@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-05",
+  "device": {"model": "Samsung Galaxy S24 (SM-S921B)", "android": "16 (API 36)", "abi": "arm64-v8a", "ram_gb": 7.4},
+  "app": {"build": "debug unless noted; release = app-arm64-v8a-release.apk", "model_run": "20261005-195620_b_synthetic"},
+  "provenance": "Measured over adb in the Phase 6 session. Values transcribed from the session output; the raw logcat files were kept in a temporary folder that macOS has since cleared.",
+  "checks": {
+    "install_and_start": "pass: both TFLite models load (XNNPACK); foreground service type microphone, ongoing notification",
+    "screen_off_detection": "pass for smoke_alarm and siren: alerted in every run with the display in DOZE (off); the full-screen alert turned the screen on",
+    "swipe_from_recents": "pass: app task removed, foreground service still running in the same process (pid 17134), inference continued",
+    "no_audio_files": "pass: 8 files in app private storage (Flutter engine data, graphics cache, 2 settings files), 0 audio files; no shared-storage folders",
+    "settings_file_contents": "alert history (label, confidence, time) and enabled classes only",
+    "release_internet_permission": "pass: release APK permissions = RECORD_AUDIO, FOREGROUND_SERVICE(_MICROPHONE), WAKE_LOCK, POST_NOTIFICATIONS, VIBRATE, USE_FULL_SCREEN_INTENT, Bluetooth; no INTERNET",
+    "auto_restart": "pass: after an app update the listening service restarted by itself (once; another time it did not)",
+    "16kb_alignment": "fixed: tensorflow-lite 2.16.1 libtensorflowlite_jni.so was 4 KB aligned; LiteRT 1.4.2 is 16 KB aligned"
+  },
+  "inference_ms_per_window": {
+    "screen_on": {"avg_range": [19.9, 28.6], "max": 48},
+    "screen_off": {"avg_range": [47.2, 48.7], "max": 75},
+    "budget_note": "a window is processed every 500 ms"
+  },
+  "memory": {"debug_build_total_pss_mb": 128.9, "debug_build_total_rss_mb": 214.1, "release_build": "not measured (phone disconnected)"},
+  "speaker_playback_test": {
+    "method": "one held-out test clip per class (3 s silence + clip) played from the MacBook speakers at 70 % volume, phone next to the laptop; alerts from the app log",
+    "runs": {
+      "1_screen_on_voice_recognition": {"alerted": ["smoke_alarm 0.998", "siren 0.960", "appliance_beep 0.977"], "missed": ["glass_break", "doorbell", "knocking", "dog_bark", "baby_cry"]},
+      "2_screen_off_voice_recognition": {"alerted": ["smoke_alarm 0.992", "siren 0.971", "appliance_beep 0.959"], "missed": ["glass_break (peak 0.561)", "doorbell (no score >= 0.3)", "knocking (no score >= 0.3)", "dog_bark (no score >= 0.3)", "baby_cry (peak 0.695, threshold 0.63 but needs 3 windows)"]},
+      "3_screen_off_mic_source": {"alerted": ["smoke_alarm 0.997", "siren 0.990"], "missed": ["appliance_beep (peak 0.858)", "glass_break (0.401)", "doorbell (0.401)", "knocking", "dog_bark", "baby_cry (0.808)"]}
+    },
+    "interpretation": "Small laptop speakers reproduce high-pitched alarms well but barely reproduce knocks, barks and doorbells; real sound sources are needed to judge those classes. UNPROCESSED audio is not supported on the S24; VOICE_RECOGNITION did slightly better than MIC.",
+    "latency_s_from_clip_start_run2": {"smoke_alarm": 8.94, "siren": 2.49, "appliance_beep": 1.04},
+    "pipeline_first_alert_s_same_clips": {"smoke_alarm": 8.5, "siren": 1.0, "appliance_beep": 1.5},
+    "latency_note": "Phone and Mac clocks were aligned over adb (tens of ms). The smoke alarm in its clip starts ~8.5 s in, so the phone alerted ~0.4 s after the pipeline expects; siren +1.5 s; appliance beep within the same window."
+  },
+  "not_measured": {
+    "battery_per_hour": "needs the phone unplugged and listening for about an hour (pending)",
+    "release_memory_and_latency": "phone disconnected before the release-build run (pending)",
+    "real_world_sources": "doorbell, knocking, dog, glass and baby cry need real sounds (pending)",
+    "wristband_latency": "no wristband hardware (Phase 8)",
+    "custom_sound_enrolment_on_phone": "built after the phone session (pending)"
+  }
+}

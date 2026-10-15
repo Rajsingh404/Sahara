@@ -2,7 +2,7 @@
 
 **Project**: SAHARA (Sound-based Alert & Haptic Assistance for Real-time Awareness)
 **Task**: multi-label detection of 8 safety sounds, plus `background`, for Deaf / Hard-of-Hearing users
-**Last updated**: 2026-10-04 (Phase 1 of the build plan, branch `feat/integration`)
+**Last updated**: 2026-10-15 (final dataset build used by run `20261005-195620_b_synthetic`)
 **Source of truth for counts**: `data/metadata/coverage.txt`, written by `python src/data/manifest_builder.py`
 
 Class order is fixed by `SOUND_CLASSES` in `src/config.py`:
@@ -15,22 +15,23 @@ Native-label mappings live only in `src/data/label_map.py`.
 
 | Class | AudioSet | ESC-50 | FSD50K | Team (Indian) | Synthetic (train only) | **Real total** | **Real test** |
 |---|---|---|---|---|---|---|---|
-| smoke_alarm | 14/3/3 | – | – | – | 42/0/0 | **20** | **3** ⚠ |
-| doorbell | 14/3/3 | – | 100/22/22 | 0/0/16 | 342/0/0 | 180 | 41 |
-| siren | 19/8/4 | 35/2/3 | 91/19/22 | – | 435/0/0 | 203 | 29 |
-| knocking | 14/0/0 | 26/11/3 | 254/59/60 | 14/0/0 | 924/0/0 | 441 | 63 |
-| dog_bark | 6/2/1 | 28/3/9 | 375/82/79 | 0/0/11 | 1227/0/0 | 596 | 100 |
-| baby_cry | 16/3/4 | 33/4/3 | – | 6/0/0 | 165/0/0 | **69** | **7** ⚠ |
-| glass_break | 54/10/11 | 30/5/5 | 355/78/77 | – | 1317/0/0 | 625 | 93 |
-| appliance_beep | 12/8/3 | 33/1/6 | 145/30/31 | 9/0/7 | 597/0/0 | 285 | 47 |
-| background | – | – | – | 37/0/23 | – | 665 (DESED 605) | 115 |
+| smoke_alarm | 129/27/27 | – | – | – | 387/0/0 | 183 | 27 |
+| doorbell | 67/11/14 | – | 99/24/21 | 10/0/6 | 528/0/0 | 252 | 41 |
+| siren | 24/4/6 | 25/4/11 | 95/20/17 | – | 432/0/0 | 206 | 34 |
+| knocking | 73/10/14 | 30/8/2 | 256/60/57 | 8/0/6 | 1101/0/0 | 524 | 79 |
+| dog_bark | 10/0/0 | 24/5/11 | 376/81/79 | 7/0/4 | 1251/0/0 | 597 | 94 |
+| baby_cry | 74/15/17 | 25/7/8 | – | 4/0/2 | 309/0/0 | 152 | 27 |
+| glass_break | 71/13/13 | 30/5/5 | 352/79/79 | – | 1359/0/0 | 647 | 97 |
+| appliance_beep | 177/37/47 | 30/5/5 | 147/33/26 | 10/0/6 | 1092/0/0 | 523 | 84 |
+| background | – | 1228/265/267 | 7008/1494/1498 | 36/0/24 | – | 12,425 (+ DESED 420/98/87) | 1,876 |
 
-Targets from the build plan: ≥ 150 real clips per class and ≥ 20 real clips in test.
-**smoke_alarm and baby_cry fall short.** Every other class meets both.
+Targets from the build plan: ≥ 150 real clips per class and ≥ 20 real clips in test. **Every class meets both.**
+(smoke_alarm and baby_cry were raised from 20 clips each with the Hugging Face AudioSet mirror; doorbell, knocking and
+appliance_beep from AudioSet's balanced/eval sets.)
 
-Manifest rows: 8,133 (train 7,192, val 443, test 498); 8,129 unique audio files
-(a few FSD50K clips carry two target labels and so have two rows).
-Real rows: FSD50K 1,901, DESED 605, ESC-50 240, AudioSet 215, team recordings 123. Synthetic rows: 5,049.
+Manifest rows: 21,968 (train 17,304, val 2,305, test 2,359); 21,940 unique audio files (a few clips carry two labels).
+Real rows: FSD50K 11,901 (of which 10,000 background), ESC-50 2,000 (1,760 background), AudioSet 880, DESED 605,
+team recordings 123. Synthetic rows: 6,459.
 
 ---
 
@@ -39,11 +40,12 @@ Real rows: FSD50K 1,901, DESED 605, ESC-50 240, AudioSet 215, team recordings 12
 | Source | Licence | Location | Role |
 |---|---|---|---|
 | FSD50K (Fonseca et al. 2021) | per clip: CC0 / CC BY / CC BY-NC | Google Drive for Desktop, `SAHARA_DRIVE_DATASETS/FSD50K` (streamed) | targets |
-| AudioSet (Gemmeke et al. 2017) | labels CC BY 4.0; audio from YouTube | `data/raw/audioset/<class>/` | targets |
-| ESC-50 (Piczak 2015) | CC BY-NC 3.0 (academic use) | `data/raw/esc50/` via `src/data/download_esc50.py` | targets |
+| AudioSet (Gemmeke et al. 2017) | labels CC BY 4.0; audio from YouTube | `data/raw/audioset/<class>/`: YouTube (yt-dlp) and the Hugging Face mirror `agkphysics/AudioSet` (`download_audioset_hf.py`) | targets |
+| ESC-50 (Piczak 2015) | CC BY-NC 3.0 (academic use) | `data/raw/esc50/` via `src/data/download_esc50.py` | 6 categories as targets, the other 44 as background |
+| FSD50K non-target sample | as FSD50K | Google Drive | 10,000 seeded background clips without any target-like label (`FSD50K_BACKGROUND_EXCLUDE`) |
 | DESED real soundscapes (Turpault et al. 2019) | per clip, see `desed/real/license_public_eval.tsv` | `data/raw/desed/real/` | background |
 | Team recordings (Advika, Mahi, Prachi, Raj; Sept 2026) | owned by the team | `data/raw/indian_ambient/`, built by `scripts/organise_recordings.py` | Indian-context targets + background |
-| Synthetic mixes | derived from the above | `data/raw/synthetic_mixed/` (local, 1.1 GB) | train-only augmentation |
+| Synthetic mixes | derived from the above | `data/raw/synthetic_mixed/` (local, 1.5 GB) and `synthetic_mixed_test/` (115 MB) | train-only augmentation; separate synthetic test set |
 | iNoise (IEEE DataPort) | IEEE DataPort open access | **not present**: needs a manual, logged-in download | background (planned) |
 
 Audio is never committed. `data/raw/` is git-ignored; only the manifests and `coverage.txt` are.
@@ -117,11 +119,12 @@ The large drops (glass_break, appliance_beep, background) are wrong labels remov
 
 ## Synthetic mixes
 
-`python src/preprocessing/synthetic_mixing.py`: each of the 1,683 real train-split target clips is mixed onto 3
-random train-split background beds (DESED 423, team background 37) at an SNR drawn uniformly from −5 to +10 dB,
-then peak-limited to 0.99. 5,049 mixes. `synthetic_metadata.csv` records the source clip, its recording id, the bed
-and the SNR. Only train-split beds are used, so no validation/test audio reaches training. iNoise beds will be added
-when iNoise is downloaded. Synthetic rows are always `source_type=synthetic_mixed` and are never reported as
+`python src/preprocessing/synthetic_mixing.py`: each of the 2,153 real train-split target clips is mixed onto 3 random
+train-split background beds (8,692 beds: FSD50K 7,008, ESC-50 1,228, DESED 420, team 36) at an SNR drawn uniformly
+from −5 to +10 dB, then peak-limited to 0.99: 6,459 mixes. `synthetic_metadata.csv` records the source clip, its
+recording id, the bed and the SNR. Only train-split beds are used, so no validation/test audio reaches training.
+A separate synthetic **test** set (`--split test`, 420 mixes of test clips on test beds) is never used for training and
+is reported only as synthetic. Synthetic rows are always `source_type=synthetic_mixed` and are never reported as
 real-world performance.
 
 ---
@@ -153,9 +156,8 @@ Every recorded class is now on both sides. smoke_alarm, siren and glass_break ha
 
 ## Known gaps
 
-1. **smoke_alarm (20 real clips, 3 in test) and baby_cry (69, 7 in test)** are below the ≥ 150 / ≥ 20 targets.
-   The AudioSet top-up was stopped by YouTube's bot check ("Sign in to confirm you're not a bot") after 4 parallel
-   downloads; see `data/raw/audioset/download_manifest.csv`. Neither class is in FSD50K, and ESC-50 has no smoke alarm.
-2. **iNoise is missing** everywhere (Mac, Drive, old zip). It needs a free IEEE DataPort login.
-3. **No team recordings of smoke_alarm, siren or glass_break.**
-4. FSD50K is streamed from Google Drive for Desktop; the first read of each file is slow (~2 s).
+1. **iNoise is missing** everywhere (Mac, Drive, old zip). It needs a free IEEE DataPort login.
+2. **No team recordings of smoke_alarm, siren or glass_break**; the Indian-context results cover five classes.
+3. The team set is small (123 clips); Indian results use 5-fold cross-validation over all of it (see the report).
+4. FSD50K is streamed from Google Drive for Desktop; the first read of each file is slow (~2 s), and a network drop
+   can stall a read (the pipeline skips reads that take over 2 minutes).
