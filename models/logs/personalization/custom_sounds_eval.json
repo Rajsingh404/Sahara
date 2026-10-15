@@ -1,0 +1,72 @@
+{
+  "shots": 5,
+  "rounds": 20,
+  "budget_per_hour": 1.0,
+  "sounds": {
+    "Toilet_flush": {
+      "enrol_pool": 42,
+      "test_clips": 8,
+      "threshold": 0.8357,
+      "detection": 0.3438,
+      "background_alerts_per_hour": 0.4222,
+      "eer_vs_background_clips": 0.0039
+    },
+    "Hiss": {
+      "enrol_pool": 38,
+      "test_clips": 9,
+      "threshold": 0.6182,
+      "detection": 0.1,
+      "background_alerts_per_hour": 1.1622,
+      "eer_vs_background_clips": 0.2414
+    },
+    "Drill": {
+      "enrol_pool": 29,
+      "test_clips": 8,
+      "threshold": 0.7487,
+      "detection": 0.1938,
+      "background_alerts_per_hour": 1.2605,
+      "eer_vs_background_clips": 0.2128
+    },
+    "Water_tap_and_faucet": {
+      "enrol_pool": 69,
+      "test_clips": 15,
+      "threshold": 0.7325,
+      "detection": 0.2133,
+      "background_alerts_per_hour": 1.6631,
+      "eer_vs_background_clips": 0.2669
+    },
+    "Keys_jangling": {
+      "enrol_pool": 44,
+      "test_clips": 8,
+      "threshold": 0.7325,
+      "detection": 0.1,
+      "background_alerts_per_hour": 0.97,
+      "eer_vs_background_clips": 0.3874
+    },
+    "Printer": {
+      "enrol_pool": 29,
+      "test_clips": 8,
+      "threshold": 0.666,
+      "detection": 0.0437,
+      "background_alerts_per_hour": 1.0032,
+      "eer_vs_background_clips": 0.1841
+    },
+    "Cough": {
+      "enrol_pool": 58,
+      "test_clips": 14,
+      "threshold": 0.8417,
+      "detection": 0.1536,
+      "background_alerts_per_hour": 0.5941,
+      "eer_vs_background_clips": 0.1429
+    },
+    "Zipper_(clothing)": {
+      "enrol_pool": 58,
+      "test_clips": 16,
+      "threshold": 0.7205,
+      "detection": 0.0781,
+      "background_alerts_per_hour": 0.4494,
+      "eer_vs_background_clips": 0.375
+    }
+  },
+  "mean_detection": 0.1533
+}

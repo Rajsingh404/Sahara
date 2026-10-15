@@ -87,3 +87,6 @@ models/logs/*/*
 !models/logs/*/false_alarms.json
 !models/logs/*/export_validation.json
 !models/logs/*/app_pipeline_check.json
+!models/logs/personalization/
+models/logs/personalization/*
+!models/logs/personalization/*.json
