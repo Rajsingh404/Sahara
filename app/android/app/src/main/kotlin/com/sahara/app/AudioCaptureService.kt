@@ -85,12 +85,26 @@ class AudioCaptureService : Service() {
         val minBuf = AudioRecord.getMinBufferSize(
             ModelConfig.SAMPLE_RATE, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT,
         )
+        // UNPROCESSED (raw mic, no speech-oriented processing) is closest to the training audio;
+        // fall back to VOICE_RECOGNITION, then MIC, where it is not supported.
+        val unprocessedOk = getSystemService(android.media.AudioManager::class.java)
+            ?.getProperty(android.media.AudioManager.PROPERTY_SUPPORT_AUDIO_SOURCE_UNPROCESSED) == "true"
+        // Debug builds only: `adb shell setprop debug.sahara.audio_source <n>` forces a source (tests).
+        val forced = if (applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE != 0) {
+            try {
+                Class.forName("android.os.SystemProperties").getMethod("get", String::class.java)
+                    .invoke(null, "debug.sahara.audio_source")?.toString()?.toIntOrNull()
+            } catch (_: Exception) { null }
+        } else null
         val record = try {
-            createRecord(MediaRecorder.AudioSource.VOICE_RECOGNITION, minBuf)
+            (forced?.let { createRecord(it, minBuf) })
+                ?: (if (unprocessedOk) createRecord(MediaRecorder.AudioSource.UNPROCESSED, minBuf) else null)
+                ?: createRecord(MediaRecorder.AudioSource.VOICE_RECOGNITION, minBuf)
                 ?: createRecord(MediaRecorder.AudioSource.MIC, minBuf)
         } catch (e: SecurityException) {
             null
         }
+        if (record != null) Log.i(STATS_TAG, "audio source ${record.audioSource} (unprocessed supported: $unprocessedOk)")
         if (record == null) {
             lastError = "Microphone unavailable"
             running = false
@@ -103,6 +117,10 @@ class AudioCaptureService : Service() {
         val hop = ShortArray(ModelConfig.HOP_SAMPLES)
         val snapshot = FloatArray(ModelConfig.WINDOW_SAMPLES)
         val silent = FloatArray(engine.labels.size)
+        var statWindows = 0
+        var statSilent = 0
+        var statTotalMs = 0L
+        var statMaxMs = 0L
         try {
             record.startRecording()
             while (running) {
@@ -122,13 +140,30 @@ class AudioCaptureService : Service() {
                 if (energy < ModelConfig.VAD_ENERGY_THRESHOLD) {
                     p.update(silent, now)
                     emitScores(silent, energy)
+                    statSilent++
                     continue
                 }
                 val started = SystemClock.elapsedRealtime()
                 val scores = engine.predict(snapshot)
                 lastInferenceMs = SystemClock.elapsedRealtime() - started
                 emitScores(scores, energy)
-                for (d in p.update(scores, now)) AlertDispatcher.dispatch(this, d)
+                if (applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE != 0) {
+                    val top = scores.indices.maxByOrNull { scores[it] } ?: 0
+                    if (scores[top] >= 0.3f) Log.d(STATS_TAG, "peak ${engine.labels[top]}=%.3f rms=%.4f".format(scores[top], kotlin.math.sqrt(energy)))
+                }
+                for (d in p.update(scores, now)) {
+                    // Labels and timings only, never audio: used to measure latency on the phone.
+                    Log.i(STATS_TAG, "alert ${d.label} score=%.3f at=${d.timestampMs}".format(d.confidence))
+                    AlertDispatcher.dispatch(this, d)
+                }
+                statWindows++
+                statTotalMs += lastInferenceMs
+                statMaxMs = maxOf(statMaxMs, lastInferenceMs)
+                if (statWindows == STATS_EVERY) {
+                    Log.i(STATS_TAG, "inference avg=%.1fms max=${statMaxMs}ms over $statWindows windows, $statSilent silent"
+                        .format(statTotalMs.toDouble() / statWindows))
+                    statWindows = 0; statSilent = 0; statTotalMs = 0; statMaxMs = 0
+                }
             }
         } catch (e: Exception) {
             Log.e(TAG, "capture loop stopped", e)
@@ -221,6 +256,8 @@ class AudioCaptureService : Service() {
             private set
         @Volatile var lastError: String? = null
         @Volatile var lastInferenceMs: Long = 0
+        private const val STATS_TAG = "SaharaStats"
+        private const val STATS_EVERY = 20
 
         val isRunning: Boolean get() = instance?.running == true
 

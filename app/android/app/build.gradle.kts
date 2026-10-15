@@ -55,7 +55,9 @@ kotlin {
 
 dependencies {
     // TensorFlow Lite runtime from Maven Central. Inference only; nothing leaves the device.
-    implementation("org.tensorflow:tensorflow-lite:2.16.1")
+    // LiteRT (TensorFlow Lite successor): same org.tensorflow.lite API, 16 KB-aligned native libs
+    // (Android 15+ / Google Play requirement; tensorflow-lite 2.16.1 shipped 4 KB-aligned).
+    implementation("com.google.ai.edge.litert:litert:1.4.2")
     testImplementation("junit:junit:4.13.2")
 }
 
