@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from src.config import (
     BATCH_SIZE,
     EPOCHS,
+    INDIAN_AMBIENT_SAMPLE_WEIGHT,
     LEARNING_RATE,
     MODELS_DIR,
     PROCESSED_DATA_DIR,
@@ -43,6 +44,21 @@ def _load_split(name: str) -> tuple[np.ndarray, np.ndarray]:
     return data["X"], data["y"]
 
 
+def is_indian_context(filepath: str) -> bool:
+    """Team recordings (data/raw/indian_ambient/ or the Drive Indian_Ambient folder)."""
+    path = str(filepath).replace("\\", "/").lower()
+    return "/indian_ambient/" in path
+
+
+def sample_weights(split: str) -> np.ndarray | None:
+    """Per-row loss weight: INDIAN_AMBIENT_SAMPLE_WEIGHT for Indian-context clips, 1 otherwise."""
+    path = PROCESSED_DATA_DIR / f"{split}_filepaths.npy"
+    if not path.exists():
+        return None
+    paths = np.load(path)
+    return np.array([INDIAN_AMBIENT_SAMPLE_WEIGHT if is_indian_context(p) else 1.0 for p in paths], dtype=np.float32)
+
+
 def train(
     batch_size: int = BATCH_SIZE,
     epochs: int = EPOCHS,
@@ -57,6 +73,13 @@ def train(
 
     y_train_oh = y_train if y_train.ndim == 2 else _to_multihot(y_train, num_classes)
     y_val_oh = y_val if y_val.ndim == 2 else _to_multihot(y_val, num_classes)
+
+    weights = sample_weights("train")
+    if weights is not None and len(weights) != len(X_train):
+        print(f"train_filepaths.npy has {len(weights)} rows for {len(X_train)} embeddings; ignoring it. Rebuild the cache.")
+        weights = None
+    if weights is not None:
+        print(f"Indian-context clips in train: {int((weights > 1).sum())} (weight {INDIAN_AMBIENT_SAMPLE_WEIGHT})")
 
     model = build_classifier_head()
     model.compile(
@@ -83,6 +106,7 @@ def train(
     history = model.fit(
         X_train,
         y_train_oh,
+        sample_weight=weights,
         validation_data=(X_val, y_val_oh),
         epochs=epochs,
         batch_size=batch_size,

@@ -14,6 +14,7 @@ from sklearn.metrics import confusion_matrix
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from src.config import MODELS_DIR, PROCESSED_DATA_DIR, REPO_ROOT, SOUND_CLASSES
 from src.evaluation.metrics import compute_metrics, print_metrics, write_evaluation_report
+from src.training.train import is_indian_context
 from src.training.losses import weighted_binary_crossentropy
 
 
@@ -45,10 +46,23 @@ def evaluate_and_plot(
 
     metrics = compute_metrics(y_true, y_pred)
     print_metrics(metrics)
-    write_evaluation_report(metrics, output_dir / "evaluation_report.md")
 
-    y_true_argmax = np.argmax(y_true, axis=1)
-    y_pred_argmax = np.argmax(y_pred, axis=1)
+    # The team's own recordings, reported on their own so the Indian-context result is visible
+    # instead of being averaged away by ~4,600 FSD50K/AudioSet clips.
+    indian = None
+    if "filepaths" in data.files:
+        mask = np.array([is_indian_context(p) for p in data["filepaths"]])
+        if mask.any():
+            indian = compute_metrics(y_true[mask], y_pred[mask])
+            indian["n_clips"] = int(mask.sum())
+            print(f"\nIndian-context test clips: {indian['n_clips']}")
+            print_metrics(indian)
+    write_evaluation_report(metrics, output_dir / "evaluation_report.md", indian=indian)
+
+    # Argmax confusion only makes sense for clips that carry a target class.
+    has_target = y_true.sum(axis=1) > 0
+    y_true_argmax = np.argmax(y_true[has_target], axis=1)
+    y_pred_argmax = np.argmax(y_pred[has_target], axis=1)
     cm = confusion_matrix(y_true_argmax, y_pred_argmax, labels=list(range(len(SOUND_CLASSES))))
 
     fig, ax = plt.subplots(figsize=(10, 8))

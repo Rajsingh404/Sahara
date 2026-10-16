@@ -66,3 +66,7 @@ app/android/.gradle/
 app/android/app/build/
 # Final model shipped with the app is allowed
 !app/assets/*.tflite
+
+# Generated app assets (app/tool/sync_assets.py, scripts/eval_name_call.py --export)
+app/assets/speaker_encoder.bin
+app/assets/yamnet_class_map.csv

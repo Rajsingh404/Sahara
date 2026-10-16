@@ -18,6 +18,9 @@ class AppState extends ChangeNotifier {
   List<double> liveScores = const [];
   double liveEnergy = 0;
   List<DetectionEvent> history = const [];
+
+  /// Latest "other sound" (YAMNet class outside the eight alerts), for the home screen.
+  DetectionEvent? lastOtherSound;
   bool loading = true;
 
   final _alerts = StreamController<DetectionEvent>.broadcast();
@@ -44,7 +47,12 @@ class AppState extends ChangeNotifier {
     switch (e) {
       case DetectionArrived(:final event):
         history = [event, ...history].take(100).toList();
-        _alerts.add(event);
+        // Other sounds are notices: they show in the history and the live card, never full screen.
+        if (event.isOtherSound) {
+          lastOtherSound = event;
+        } else {
+          _alerts.add(event);
+        }
       case ScoresArrived(:final scores, :final energy):
         liveScores = scores;
         liveEnergy = energy;
@@ -89,6 +97,36 @@ class AppState extends ChangeNotifier {
     status = status.copyWith(vibrate: value);
     notifyListeners();
     await api.updateSettings(vibrate: value);
+  }
+
+  Future<void> setNameCalls(bool value) async {
+    status = status.copyWith(nameCalls: value);
+    notifyListeners();
+    await api.updateSettings(nameCalls: value);
+  }
+
+  Future<void> setOtherSounds(bool value) async {
+    status = status.copyWith(otherSounds: value);
+    notifyListeners();
+    await api.updateSettings(otherSounds: value);
+  }
+
+  /// Records one enrolment sample for [name]. Returns null on success, else a message to show.
+  Future<String?> enrollCaller(String name) async {
+    try {
+      final caller = await api.enrollCaller(name);
+      final others = status.callers.where((c) => c.name != caller.name);
+      status = status.copyWith(callers: [...others, caller]);
+      notifyListeners();
+      return null;
+    } on PlatformException catch (e) {
+      return e.message ?? e.code;
+    }
+  }
+
+  Future<void> removeCaller(String name) async {
+    status = status.copyWith(callers: await api.removeCaller(name));
+    notifyListeners();
   }
 
   Future<void> clearHistory() async {

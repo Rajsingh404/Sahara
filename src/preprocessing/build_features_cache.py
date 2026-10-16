@@ -15,10 +15,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from src.config import (
     AUGMENTATION_ENABLED,
     AUGMENTATION_VARIANTS_PER_CLIP,
+    INCLUDE_BACKGROUND_NEGATIVES,
     METADATA_DIR,
     PROCESSED_DATA_DIR,
     SOUND_CLASSES,
 )
+from src.data.label_map import BACKGROUND_LABEL
 from src.preprocessing.augmentation import SaharaAugmenter
 from src.preprocessing.audio_utils import load_audio
 from src.preprocessing.features import embedding_cache_path, extract_yamnet_embedding_cached
@@ -33,6 +35,10 @@ def _label_to_index(label: str) -> int:
     if label in SOUND_CLASSES:
         return SOUND_CLASSES.index(label)
     return -1  # background / unknown
+
+
+def _cached(label: str) -> bool:
+    return label in SOUND_CLASSES or (INCLUDE_BACKGROUND_NEGATIVES and label == BACKGROUND_LABEL)
 
 
 def _multihot(labels: np.ndarray) -> np.ndarray:
@@ -94,15 +100,16 @@ def build_cache(
     start = time.time()
     PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Only cache target-class clips for baseline training.
-    target_rows = [row for row in rows if row["label"] in SOUND_CLASSES]
+    # Target-class clips, plus background clips as all-zero negatives so the head learns to stay
+    # quiet on everyday sound instead of always picking one of the eight classes.
+    target_rows = [row for row in rows if _cached(row["label"])]
 
     # If all three public .npy split caches align with their target manifest
     # rows, no audio or Hub work is required on a normal rerun.
     if not force and not augment:
         complete = True
         for split in splits:
-            expected = sum(1 for row in _load_manifest(METADATA_DIR / f"{split}_manifest.csv") if row["label"] in SOUND_CLASSES)
+            expected = sum(1 for row in _load_manifest(METADATA_DIR / f"{split}_manifest.csv") if _cached(row["label"]))
             path = PROCESSED_DATA_DIR / f"{split}_embeddings.npy"
             complete &= path.exists() and np.load(path, mmap_mode="r").shape[0] == expected
         if complete:
@@ -193,6 +200,8 @@ def build_cache(
         # experiments.  Labels are explicitly multi-hot over SOUND_CLASSES.
         np.save(PROCESSED_DATA_DIR / f"{split_name}_embeddings.npy", X[indices])
         np.save(PROCESSED_DATA_DIR / f"{split_name}_labels.npy", _multihot(y[indices]))
+        # Row-aligned source paths: train.py weights Indian-context clips, evaluation reports them apart.
+        np.save(PROCESSED_DATA_DIR / f"{split_name}_filepaths.npy", np.array([filepaths[i] for i in indices]))
 
     # Optional raw-waveform variants are training-only and get their own
     # embeddings; default remains off for reproducible baseline caching.
@@ -200,7 +209,7 @@ def build_cache(
         background_paths = [r["filepath"] for r in rows if r["label"] not in SOUND_CLASSES]
         augmenter = SaharaAugmenter(background_paths or None)
         train_rows = [r for r in split_map.get("train", []) if r["label"] in SOUND_CLASSES]
-        extra_x, extra_y = [], []
+        extra_x, extra_y, extra_paths = [], [], []
         for row in tqdm(train_rows, desc="Augmented train embeddings", unit="clip"):
             waveform = load_audio(row["filepath"])
             if waveform is None:
@@ -208,6 +217,7 @@ def build_cache(
             for _ in range(AUGMENTATION_VARIANTS_PER_CLIP):
                 extra_x.append(extract_yamnet_embedding_cached(row["filepath"] + ":aug", augmenter.augment(waveform)))
                 extra_y.append(_label_to_index(row["label"]))
+                extra_paths.append(row["filepath"])
         if extra_x:
             path = PROCESSED_DATA_DIR / "embeddings_train.npz"
             original = np.load(path)
@@ -216,6 +226,8 @@ def build_cache(
             np.savez_compressed(path, X=aug_x, y=aug_y)
             np.save(PROCESSED_DATA_DIR / "train_embeddings.npy", aug_x)
             np.save(PROCESSED_DATA_DIR / "train_labels.npy", _multihot(aug_y))
+            train_paths = np.load(PROCESSED_DATA_DIR / "train_filepaths.npy")
+            np.save(PROCESSED_DATA_DIR / "train_filepaths.npy", np.concatenate([train_paths, np.array(extra_paths)]))
 
     elapsed = time.time() - start
     print(f"\nCached {len(embeddings)} embeddings in {elapsed:.1f}s (skipped {skipped})")

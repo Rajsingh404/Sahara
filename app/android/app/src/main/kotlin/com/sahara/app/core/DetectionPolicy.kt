@@ -71,4 +71,19 @@ data class Detection(
     val confidence: Float,
     val timestampMs: Long,
     val safetyCritical: Boolean,
-)
+    /** Name calls: the caller's name (null = "Someone"). Other sounds: YAMNet's class name. */
+    val detail: String? = null,
+) {
+    companion object {
+        const val NAME_CALL = "name_call"
+        const val OTHER_SOUND = "other_sound"
+
+        fun nameCall(call: NameCall) =
+            Detection(ModelConfig.NAME_CALL_ID, NAME_CALL, call.nameScore, call.timestampMs, safetyCritical = false, detail = call.caller)
+
+        fun otherSound(s: OtherSound) =
+            Detection(ModelConfig.OTHER_SOUND_ID, OTHER_SOUND, s.score, s.timestampMs, safetyCritical = false, detail = s.name)
+    }
+
+    val isOtherSound: Boolean get() = label == OTHER_SOUND
+}

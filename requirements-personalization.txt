@@ -1,0 +1,9 @@
+# Name calls and caller identification (src/personalization/, scripts/eval_name_call.py).
+# Kept apart from requirements.txt: torch is only needed to read Resemblyzer's weights once.
+openwakeword==0.5.1   # bundles melspectrogram + embedding_model (.onnx/.tflite), CC BY-NC-SA 4.0 weights
+onnxruntime>=1.17
+resemblyzer==0.1.4    # GE2E speaker encoder weights (Apache-2.0)
+setuptools<81         # resemblyzer -> webrtcvad still imports pkg_resources
+torch>=2.2
+scikit-learn>=1.4
+librosa>=0.10

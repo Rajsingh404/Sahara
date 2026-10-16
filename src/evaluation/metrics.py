@@ -52,7 +52,7 @@ def print_metrics(metrics: dict) -> None:
     print(f"\nMacro avg: precision={m['precision']:.3f} recall={m['recall']:.3f} F1={m['f1']:.3f} mAP={m['mAP']:.3f}")
 
 
-def write_evaluation_report(metrics: dict, output_path) -> None:
+def write_evaluation_report(metrics: dict, output_path, indian: dict | None = None) -> None:
     """Persist the exact printed metrics for review and reproducibility."""
     lines = [
         "# SAHARA Baseline Evaluation", "",
@@ -66,6 +66,17 @@ def write_evaluation_report(metrics: dict, output_path) -> None:
     macro = metrics["macro"]
     lines.extend([
         f"| **Macro average** | **{macro['precision']:.3f}** | **{macro['recall']:.3f}** | **{macro['f1']:.3f}** | **{macro['mAP']:.3f}** |",
+    ])
+    if indian is not None:
+        lines.extend([
+            "", f"## Indian-context recordings ({indian['n_clips']} test clips, team recordings split by recorder)", "",
+            "| Class | Precision | Recall | F1 | AP |", "|---|---:|---:|---:|---:|",
+        ])
+        for name, values in indian["per_class"].items():
+            lines.append(f"| {name} | {values['precision']:.3f} | {values['recall']:.3f} | {values['f1']:.3f} | {values['ap']:.3f} |")
+        m = indian["macro"]
+        lines.append(f"| **Macro average** | **{m['precision']:.3f}** | **{m['recall']:.3f}** | **{m['f1']:.3f}** | **{m['mAP']:.3f}** |")
+    lines.extend([
         "", "## Error analysis", "",
         "The baseline remains sensitive to class imbalance. The small smoke-alarm and baby-cry subsets and acoustic overlap among alarm/beep-like events make thresholded recall unstable. Indian-context recordings and threshold calibration are deliberately deferred to the next phase.",
     ])
