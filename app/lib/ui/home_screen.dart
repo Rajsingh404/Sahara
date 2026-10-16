@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../detection/sound_class.dart';
 import 'app_scope.dart';
+import 'callers_screen.dart';
 import 'history_screen.dart';
 import 'permissions.dart';
 import 'settings_screen.dart';
@@ -48,6 +49,11 @@ class HomeScreen extends StatelessWidget {
                   Text('Sounds', style: Theme.of(context).textTheme.titleMedium),
                   const SizedBox(height: 8),
                   for (var i = 0; i < s.labels.length; i++) _SoundRow(index: i),
+                  const SizedBox(height: 16),
+                  Text('Personal', style: Theme.of(context).textTheme.titleMedium),
+                  const SizedBox(height: 8),
+                  const _NameCallTile(),
+                  const _OtherSoundTile(),
                   const SizedBox(height: 16),
                   Text(
                     'Sounds are analysed on this phone in one-second pieces that are immediately discarded. '
@@ -186,6 +192,69 @@ class _SoundRow extends StatelessWidget {
             ? LinearProgressIndicator(value: score.clamp(0.0, 1.0), color: sound.color)
             : Text(enabled ? (sound.safetyCritical ? 'Safety alert' : 'Alert on') : 'Off'),
         trailing: Switch(value: enabled, onChanged: (v) => state.setClassEnabled(label, v)),
+      ),
+    );
+  }
+}
+
+class _NameCallTile extends StatelessWidget {
+  const _NameCallTile();
+
+  @override
+  Widget build(BuildContext context) {
+    final state = AppScope.of(context);
+    final s = state.status;
+    final name = s.personal.name ?? 'your name';
+    final callers = s.callers.map((c) => c.name).join(', ');
+    return Card(
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: SoundClass.of(SoundClass.nameCall).color,
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.record_voice_over),
+        ),
+        title: Text('When someone calls $name'),
+        subtitle: Text(
+          !s.personal.nameReady
+              ? 'Not installed: ${s.personal.nameReason ?? 'name model missing'}'
+              : callers.isEmpty
+              ? 'Anyone calling is detected. Add family to see who is calling.'
+              : 'Recognises $callers. Anyone else shows as "Someone".',
+        ),
+        trailing: Switch(value: s.nameCalls && s.personal.nameReady, onChanged: s.personal.nameReady ? state.setNameCalls : null),
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const CallersScreen())),
+      ),
+    );
+  }
+}
+
+class _OtherSoundTile extends StatelessWidget {
+  const _OtherSoundTile();
+
+  @override
+  Widget build(BuildContext context) {
+    final state = AppScope.of(context);
+    final s = state.status;
+    final last = state.lastOtherSound;
+    return Card(
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: SoundClass.of(SoundClass.otherSound).color,
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.hearing),
+        ),
+        title: const Text('Other sounds'),
+        subtitle: Text(
+          !s.personal.otherSoundsReady
+              ? 'Not installed: ${s.personal.otherSoundsReason ?? 'YAMNet class scores missing'}'
+              : last != null
+              ? 'Last heard: ${last.title}'
+              : 'Quiet notices for hundreds of everyday sounds beyond the eight alerts.',
+        ),
+        trailing: Switch(
+          value: s.otherSounds && s.personal.otherSoundsReady,
+          onChanged: s.personal.otherSoundsReady ? state.setOtherSounds : null,
+        ),
       ),
     );
   }

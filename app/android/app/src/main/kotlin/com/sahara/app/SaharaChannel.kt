@@ -4,8 +4,12 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import com.sahara.app.core.DetectionPolicy
+import android.os.Handler
+import android.os.Looper
 import com.sahara.app.core.Detection
+import com.sahara.app.core.DetectionPolicy
+import com.sahara.app.core.ModelConfig
+import com.sahara.app.core.NameCall
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
@@ -22,6 +26,7 @@ class SaharaChannel(private val context: Context, messenger: BinaryMessenger) : 
     private var listener: SaharaEvents.Listener? = null
     private val prefs = SaharaPrefs(context)
     private var launchAlert: Map<String, Any?>? = null
+    private val main = Handler(Looper.getMainLooper())
 
     init {
         methods.setMethodCallHandler(this)
@@ -47,14 +52,15 @@ class SaharaChannel(private val context: Context, messenger: BinaryMessenger) : 
     fun handleIntent(intent: Intent?) {
         val id = intent?.getIntExtra(AlertNotifier.EXTRA_ALERT_CLASS_ID, -1) ?: -1
         if (id < 0) return
-        val labels = InferenceEngine.loadLabels(context)
-        val label = labels.getOrNull(id) ?: return
+        val label = intent!!.getStringExtra(AlertNotifier.EXTRA_ALERT_LABEL)
+            ?: InferenceEngine.loadLabels(context).getOrNull(id) ?: return
         val alert = mapOf(
             "classId" to id,
             "label" to label,
-            "confidence" to intent!!.getFloatExtra(AlertNotifier.EXTRA_ALERT_CONFIDENCE, 0f).toDouble(),
+            "confidence" to intent.getFloatExtra(AlertNotifier.EXTRA_ALERT_CONFIDENCE, 0f).toDouble(),
             "timestampMs" to intent.getLongExtra(AlertNotifier.EXTRA_ALERT_TIME, System.currentTimeMillis()),
             "safetyCritical" to (label in DetectionPolicy.DEFAULT_SAFETY_CRITICAL),
+            "detail" to intent.getStringExtra(AlertNotifier.EXTRA_ALERT_DETAIL),
         )
         intent.removeExtra(AlertNotifier.EXTRA_ALERT_CLASS_ID)
         if (listener != null) SaharaEvents.emit(mapOf("type" to "openAlert") + alert) else launchAlert = alert
@@ -80,10 +86,33 @@ class SaharaChannel(private val context: Context, messenger: BinaryMessenger) : 
                 call.argument<List<String>>("enabledClasses")?.let { prefs.enabledClasses = it.toSet() }
                 call.argument<Double>("sensitivity")?.let { prefs.sensitivity = it.toFloat() }
                 call.argument<Boolean>("vibrate")?.let { prefs.vibrate = it }
+                call.argument<Boolean>("nameCalls")?.let { prefs.nameCalls = it }
+                call.argument<Boolean>("otherSounds")?.let { prefs.otherSounds = it }
                 AudioCaptureService.instance?.applySettings()
                 result.success(prefs.settingsMap())
             }
             "getHistory" -> result.success(prefs.history())
+            "listCallers" -> result.success(prefs.callersList())
+            "enrollCaller" -> {
+                val name = call.argument<String>("name")?.trim().orEmpty()
+                when {
+                    name.isEmpty() -> result.error("args", "name is required", null)
+                    !granted(Manifest.permission.RECORD_AUDIO) -> result.error("permission", "Microphone permission is required", null)
+                    else -> Thread({
+                        val outcome = CallerEnrolment.enrol(context, name)
+                        main.post {
+                            when (outcome) {
+                                is CallerEnrolment.Result.Enrolled -> result.success(mapOf("name" to outcome.name, "samples" to outcome.samples))
+                                is CallerEnrolment.Result.Failed -> result.error(outcome.code, outcome.message, null)
+                            }
+                        }
+                    }, "sahara-enrol").start()
+                }
+            }
+            "removeCaller" -> {
+                call.argument<String>("name")?.let { CallerEnrolment.remove(context, it) }
+                result.success(prefs.callersList())
+            }
             "clearHistory" -> {
                 prefs.clearHistory()
                 result.success(true)
@@ -110,7 +139,10 @@ class SaharaChannel(private val context: Context, messenger: BinaryMessenger) : 
                 val labels = InferenceEngine.loadLabels(context)
                 val id = call.argument<Int>("classId") ?: 0
                 val label = labels.getOrNull(id)
-                if (label == null) {
+                if (id == ModelConfig.NAME_CALL_ID) {
+                    AlertDispatcher.dispatch(context, Detection.nameCall(NameCall(call.argument<String>("caller"), 0.99f, 1f, System.currentTimeMillis())))
+                    result.success(true)
+                } else if (label == null) {
                     result.error("args", "unknown class id $id", null)
                 } else {
                     val d = Detection(id, label, 0.99f, System.currentTimeMillis(), label in DetectionPolicy.DEFAULT_SAFETY_CRITICAL)
@@ -139,6 +171,8 @@ class SaharaChannel(private val context: Context, messenger: BinaryMessenger) : 
             "modelReady" to (ModelStatus.reason == null),
             "settings" to prefs.settingsMap(),
             "wristband" to Wristband.get(context).statusMap(),
+            "personal" to PersonalModels.status,
+            "callers" to prefs.callersList(),
             "inferenceMs" to AudioCaptureService.lastInferenceMs,
         )
     }
@@ -153,7 +187,7 @@ class SaharaChannel(private val context: Context, messenger: BinaryMessenger) : 
         fun modelCheck(context: Context) {
             if (checked) return
             checked = true
-            InferenceEngine.load(context)?.close()
+            InferenceEngine.load(context)?.use { PersonalModels.load(context, it.hasYamnetScores).close() }
         }
     }
 }

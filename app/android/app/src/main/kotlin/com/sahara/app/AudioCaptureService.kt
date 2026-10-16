@@ -18,13 +18,25 @@ import android.os.PowerManager
 import android.os.SystemClock
 import android.util.Log
 import com.sahara.app.core.AudioWindow
+import com.sahara.app.core.Detection
 import com.sahara.app.core.DetectionPolicy
 import com.sahara.app.core.ModelConfig
+import com.sahara.app.core.NameCall
+import java.util.concurrent.ArrayBlockingQueue
+import java.util.concurrent.CopyOnWriteArrayList
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 /**
  * Foreground service: continuous mic capture → VAD → on-device TFLite → thresholds → alert.
  *
- * Audio stays in a 1 s in-memory ring buffer and is overwritten every 0.5 s. Nothing is written
+ * Every 0.5 s hop runs three layers on the same audio:
+ * 1. the eight trained classes (full alerts, safety-critical ones first);
+ * 2. name calls: when YAMNet hears speech, the name spotter checks the last 2 s, and if the name
+ *    is there the caller is identified off the capture thread ("Raj is calling you" / "Someone");
+ * 3. other sounds: YAMNet's own 521 classes as low-priority notices when (1) is quiet.
+ *
+ * Audio stays in 1 s and 2 s in-memory ring buffers, overwritten every 0.5 s. Nothing is written
  * to disk or sent anywhere; only the class id of a detection leaves this service.
  */
 class AudioCaptureService : Service() {
@@ -33,6 +45,15 @@ class AudioCaptureService : Service() {
     private var worker: Thread? = null
     private var wakeLock: PowerManager.WakeLock? = null
     @Volatile private var policy: DetectionPolicy? = null
+    @Volatile private var personal: PersonalModels? = null
+    private val identifyThread = Executors.newSingleThreadExecutor { Thread(it, "sahara-caller-id") }
+    private val taps = CopyOnWriteArrayList<Tap>()
+
+    /** A request for the next [buffer].size samples of live audio (caller enrolment). */
+    private class Tap(val buffer: FloatArray) {
+        var filled = 0
+        val done = ArrayBlockingQueue<FloatArray>(1)
+    }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -67,7 +88,9 @@ class AudioCaptureService : Service() {
             stopSelf()
             return
         }
-        policy = DetectionPolicy(engine.labels, engine.thresholds).also { applySettings(it) }
+        policy = DetectionPolicy(engine.labels, engine.thresholds)
+        personal = PersonalModels.load(this, engine.hasYamnetScores)
+        applySettings()
         running = true
         lastError = null
         instance = this
@@ -99,8 +122,10 @@ class AudioCaptureService : Service() {
             return
         }
         val window = AudioWindow(ModelConfig.WINDOW_SAMPLES)
+        val speechWindow = AudioWindow(ModelConfig.NAME_WINDOW_SAMPLES)
         val hop = ShortArray(ModelConfig.HOP_SAMPLES)
         val snapshot = FloatArray(ModelConfig.WINDOW_SAMPLES)
+        val speechSnapshot = FloatArray(ModelConfig.NAME_WINDOW_SAMPLES)
         val silent = FloatArray(engine.labels.size)
         try {
             record.startRecording()
@@ -113,6 +138,8 @@ class AudioCaptureService : Service() {
                 }
                 if (!running) break
                 window.push(hop, read)
+                speechWindow.push(hop, read)
+                feedTaps(hop, read)
                 if (!window.isFull) continue
                 window.snapshot(snapshot)
                 val energy = AudioWindow.meanSquare(snapshot, snapshot.size - hop.size, snapshot.size)
@@ -124,10 +151,26 @@ class AudioCaptureService : Service() {
                     continue
                 }
                 val started = SystemClock.elapsedRealtime()
-                val scores = engine.predict(snapshot)
+                val prediction = engine.predict(snapshot)
+                val fired = p.update(prediction.scores, now)
+                for (d in fired) AlertDispatcher.dispatch(this, d)
+                personal?.let { extra ->
+                    extra.otherSounds?.update(prediction.yamnetScores ?: return@let, now, headFired = fired.isNotEmpty())
+                        ?.let { AlertDispatcher.dispatch(this, Detection.otherSound(it)) }
+                }
+                personal?.let { extra ->
+                    val names = extra.nameCalls ?: return@let
+                    if (!speechWindow.isFull || extra.speechScore(prediction.yamnetScores) < PersonalModels.SPEECH_GATE) return@let
+                    speechWindow.snapshot(speechSnapshot)
+                    val score = names.spot(speechSnapshot, now) ?: return@let
+                    val audio = speechSnapshot.copyOf()
+                    identifyThread.execute {
+                        val match = names.identify(audio)
+                        AlertDispatcher.dispatch(this, Detection.nameCall(NameCall(match?.name, score, match?.similarity ?: 0f, now)))
+                    }
+                }
                 lastInferenceMs = SystemClock.elapsedRealtime() - started
-                emitScores(scores, energy)
-                for (d in p.update(scores, now)) AlertDispatcher.dispatch(this, d)
+                emitScores(prediction.scores, energy)
             }
         } catch (e: Exception) {
             Log.e(TAG, "capture loop stopped", e)
@@ -136,6 +179,8 @@ class AudioCaptureService : Service() {
             try { record.stop() } catch (_: Exception) {}
             record.release()
             engine.close()
+            personal?.close()
+            personal = null
             if (running) {
                 // Loop died on an error: drop the foreground notification instead of lying about listening.
                 running = false
@@ -153,11 +198,44 @@ class AudioCaptureService : Service() {
         return if (r.state == AudioRecord.STATE_INITIALIZED) r else r.release().let { null }
     }
 
-    fun applySettings(p: DetectionPolicy? = policy) {
-        p ?: return
+    fun applySettings() {
         val prefs = SaharaPrefs(this)
-        prefs.enabledClasses?.let { p.enabled = it }
-        p.sensitivity = prefs.sensitivity
+        policy?.let { p ->
+            prefs.enabledClasses?.let { p.enabled = it }
+            p.sensitivity = prefs.sensitivity
+        }
+        personal?.nameCalls?.let {
+            it.enabled = prefs.nameCalls
+            it.sensitivity = prefs.sensitivity
+        }
+        personal?.otherSounds?.enabled = prefs.otherSounds
+    }
+
+    fun reloadCallers() {
+        personal?.nameCalls?.callers = SaharaPrefs(this).loadCallers()
+    }
+
+    /** Next [samples] of live audio, or null if the service stops or [timeoutMs] passes first. */
+    fun captureNext(samples: Int, timeoutMs: Long): FloatArray? {
+        val tap = Tap(FloatArray(samples))
+        taps += tap
+        return try {
+            tap.done.poll(timeoutMs, TimeUnit.MILLISECONDS)
+        } finally {
+            taps -= tap
+        }
+    }
+
+    private fun feedTaps(pcm: ShortArray, count: Int) {
+        for (t in taps) {
+            val n = minOf(count, t.buffer.size - t.filled)
+            for (k in 0 until n) t.buffer[t.filled + k] = pcm[k] / 32768f
+            t.filled += n
+            if (t.filled == t.buffer.size) {
+                taps -= t
+                t.done.offer(t.buffer)
+            }
+        }
     }
 
     private fun emitScores(scores: FloatArray, energy: Float) {
@@ -176,6 +254,7 @@ class AudioCaptureService : Service() {
         running = false
         worker?.join(1500)
         worker = null
+        identifyThread.shutdown()
         wakeLock?.let { if (it.isHeld) it.release() }
         wakeLock = null
         if (instance === this) instance = null

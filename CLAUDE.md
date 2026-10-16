@@ -28,7 +28,8 @@ Non-target audio uses the label `background`.
 | Model | Frozen YAMNet backbone + small trainable Dense head (transfer learning). |
 | Inference | TensorFlow Lite, on-device only. |
 | Wristband | Custom ESP32 over BLE, haptic motor. BOM under ₹1000. Not Wear OS. |
-| Personalization | Few-shot prototypical network over YAMNet embeddings for user-enrolled sounds. |
+| Personalization | Name calls: pretrained speech embeddings (openWakeWord) + a small "Aryan" head, and a pretrained speaker encoder (Resemblyzer GE2E, run in pure Kotlin) for enrolled callers. Planned: few-shot prototypes over YAMNet embeddings for user-enrolled sounds (`core/PrototypeBank.kt` is ready for it). |
+| Open set | YAMNet's own 521 AudioSet classes as low-priority "other sounds" when none of the 8 fires. |
 | Training | Python + TensorFlow (`tensorflow-macos` + `tensorflow-metal`, Apple Silicon). |
 
 ## Repo layout
@@ -44,6 +45,7 @@ src/                    Python ML package (import as `src.*`)
   training/             train.py, losses.py (weighted BCE)
   evaluation/           metrics, confusion matrix, threshold search, false-alarm eval
   export/               to_tflite.py, quantize.py, validate_tflite.py
+  personalization/      name calls: speech_embedding.py, name_head.py, speaker.py (see docs/name_call.md)
 scripts/                pipeline runners, env check, status
 tests/                  pytest suite for the ML pipeline
 models/                 checkpoints/, logs/, exported/ (contents git-ignored)
@@ -96,6 +98,10 @@ python src/training/train.py --batch-size 32 --epochs 30 --learning-rate 0.001
 python src/evaluation/confusion_matrix.py
 python src/export/to_tflite.py                        # FP32 TFLite; quantize.py / validate_tflite.py follow
 pytest -q
+
+# Name calls (docs/name_call.md): extra deps, then evaluate + export app/assets/name_head.json, speaker_encoder.bin
+pip install -r requirements-personalization.txt
+python scripts/eval_name_call.py --wav-dir data/interim/name_wav --report docs/name_call_eval.md --export app/assets
 ```
 
 ### App (Flutter)

@@ -26,7 +26,9 @@ from src.preprocessing.audio_utils import get_duration_sec
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
-MANIFEST_FIELDS = ["filepath", "label", "source_dataset", "source_type", "duration_sec", "recording_id"]
+# fixed_split: "train"/"test" when the source already decided the split (the team recordings are
+# split by recorder so one voice, phone and room never sit on both sides); empty otherwise.
+MANIFEST_FIELDS = ["filepath", "label", "source_dataset", "source_type", "duration_sec", "recording_id", "fixed_split"]
 AUDIO_SUFFIXES = {".wav", ".flac", ".mp3", ".ogg", ".m4a"}
 
 
@@ -273,6 +275,7 @@ def _scan_indian_ambient(root: Path) -> list[dict]:
                 logger.warning("indian_ambient: missing file %s", filepath)
                 continue
             session = row.get("timestamp", "") or row.get("notes", "") or filename
+            split = row.get("split", "").strip().lower()
             rows.append(
                 {
                     "filepath": str(filepath.resolve()),
@@ -280,6 +283,7 @@ def _scan_indian_ambient(root: Path) -> list[dict]:
                     "source_dataset": "indian_ambient",
                     "duration_sec": _duration_best_effort(filepath),
                     "recording_id": _recording_id("indian_ambient", filepath, session),
+                    "fixed_split": split if split in {"train", "val", "test"} else "",
                 }
             )
     logger.info("indian_ambient: %d manifest rows", len(rows))
@@ -392,10 +396,14 @@ def build_manifest(raw_dir: Path | None = None) -> list[dict]:
 def _stratified_split(rows: list[dict], train_frac: float, val_frac: float, seed: int) -> tuple[list, list, list]:
     rng = np.random.default_rng(seed)
     by_class_rec: dict[str, dict[str, list[dict]]] = defaultdict(lambda: defaultdict(list))
+    train, val, test = [], [], []
+    fixed = {"train": train, "val": val, "test": test}
     for row in rows:
+        if row.get("fixed_split") in fixed:
+            fixed[row["fixed_split"]].append(row)
+            continue
         by_class_rec[row["label"]][row["recording_id"]].append(row)
 
-    train, val, test = [], [], []
     for label, recordings in by_class_rec.items():
         rec_ids = list(recordings.keys())
         rng.shuffle(rec_ids)
@@ -424,6 +432,7 @@ def write_manifest(path: Path, rows: list[dict]) -> None:
     for r in rows:
         if "source_type" not in r:
             r["source_type"] = "synthetic_mixed" if r.get("source_dataset") == "synthetic_mixed" else "real"
+        r.setdefault("fixed_split", "")
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=MANIFEST_FIELDS)
         writer.writeheader()

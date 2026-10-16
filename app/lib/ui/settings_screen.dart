@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../audio/sahara_service.dart';
 import '../detection/sound_class.dart';
 import 'app_scope.dart';
+import 'callers_screen.dart';
 import 'permissions.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -29,6 +30,27 @@ class SettingsScreen extends StatelessWidget {
           ),
           SwitchListTile(title: const Text('Vibrate phone on alert'), value: s.vibrate, onChanged: state.setVibrate),
           const Divider(),
+          _SectionTitle('When someone calls ${s.personal.name ?? 'you'}'),
+          SwitchListTile(
+            title: const Text('Name-call alerts'),
+            subtitle: const Text('Works for anyone. Enrolled people are named.'),
+            value: s.nameCalls && s.personal.nameReady,
+            onChanged: s.personal.nameReady ? state.setNameCalls : null,
+          ),
+          ListTile(
+            leading: const Icon(Icons.people_outline),
+            title: const Text('People who call you'),
+            subtitle: Text(s.callers.isEmpty ? 'Nobody enrolled yet' : s.callers.map((c) => c.name).join(', ')),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const CallersScreen())),
+          ),
+          SwitchListTile(
+            title: const Text('Other sounds'),
+            subtitle: const Text('Quiet notices for sounds beyond the eight alerts. No vibration or wristband.'),
+            value: s.otherSounds && s.personal.otherSoundsReady,
+            onChanged: s.personal.otherSoundsReady ? state.setOtherSounds : null,
+          ),
+          const Divider(),
           const _SectionTitle('Wristband'),
           const _WristbandSection(),
           const Divider(),
@@ -44,6 +66,14 @@ class SettingsScreen extends StatelessWidget {
                   label: Text(SoundClass.of(s.labels[i]).name),
                   onPressed: () => state.api.simulateAlert(i),
                 ),
+              ActionChip(
+                avatar: const Icon(Icons.record_voice_over, size: 18),
+                label: const Text('Name call'),
+                onPressed: () => state.api.simulateAlert(
+                  nameCallClassId,
+                  caller: s.callers.isEmpty ? null : s.callers.first.name,
+                ),
+              ),
             ],
           ),
           const Divider(),
@@ -52,7 +82,8 @@ class SettingsScreen extends StatelessWidget {
             leading: Icon(Icons.lock_outline),
             title: Text('Everything stays on this phone'),
             subtitle: Text(
-              'Audio is held in memory for about one second, analysed, and overwritten. '
+              'Audio is held in memory for about two seconds, analysed, and overwritten. '
+              'For people who call you, only a short list of numbers describing their voice is kept, never the recording. '
               'The app has no internet permission in release builds. The wristband only receives which sound was detected.',
             ),
           ),

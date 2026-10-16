@@ -19,9 +19,11 @@ import java.nio.ByteOrder
  * - `sahara_classifier.tflite`: either the Dense head exported by src/export (input = 1024-d
  *   YAMNet embedding, output = 8 sigmoid scores, FP32 or INT8), or a combined waveform model.
  * - `yamnet.tflite`: YAMNet with an embeddings output. Needed only when the classifier is the head.
+ *   When it also has YAMNet's 521-class scores output (app/tool/export_yamnet_tflite.py), those
+ *   feed the open-set "other sounds" layer and the speech gate for name calls.
  * - `labels.txt`, `class_thresholds.json`.
  *
- * Audio never leaves this class except as 8 class scores.
+ * Audio never leaves this class except as class scores.
  */
 class InferenceEngine private constructor(
     val labels: List<String>,
@@ -34,45 +36,64 @@ class InferenceEngine private constructor(
     private val pool = EmbeddingPool(ModelConfig.EMBEDDING_DIM, ModelConfig.EMBEDDING_POOL)
     private val classifierInputLen = classifier.getInputTensor(0).numElements()
 
-    /** [window] is the latest audio, 16 kHz mono floats, oldest first. Returns one score per label. */
-    fun predict(window: FloatArray): FloatArray {
+    /** Scores for one window: the trained head's, and YAMNet's own 521 when the model exports them. */
+    class Prediction(val scores: FloatArray, val yamnetScores: FloatArray?)
+
+    /** [window] is the latest audio, 16 kHz mono floats, oldest first. */
+    fun predict(window: FloatArray): Prediction {
+        var yamnetScores: FloatArray? = null
         val scores = if (headIsEmbeddingModel) {
-            val embedding = embed(window)
+            val (embedding, yScores) = embed(window)
+            yamnetScores = yScores
             runSingle(classifier, pool.add(embedding))
         } else {
             runSingle(classifier, tail(window, classifierInputLen))
         }
-        return if (scores.size == labels.size) scores else scores.copyOf(labels.size)
+        return Prediction(if (scores.size == labels.size) scores else scores.copyOf(labels.size), yamnetScores)
     }
+
+    /** True when yamnet.tflite has the 521-class scores output (needed for "other sounds"). */
+    val hasYamnetScores: Boolean = yamnet?.let { y -> scoresIndex(y) >= 0 } ?: false
 
     fun resetState() = pool.clear()
 
-    private fun embed(window: FloatArray): FloatArray {
+    /** Mean YAMNet embedding over the window's frames, plus mean class scores when exported. */
+    private fun embed(window: FloatArray): Pair<FloatArray, FloatArray?> {
         val net = yamnet!!
         val inputLen = net.getInputTensor(0).numElements()
         val input = tail(window, inputLen)
         val outIndex = (0 until net.outputTensorCount).first { i ->
             net.getOutputTensor(i).shape().lastOrNull() == ModelConfig.EMBEDDING_DIM
         }
-        val outTensor = net.getOutputTensor(outIndex)
+        val scoresIdx = scoresIndex(net)
         val inBuf = floatBuffer(input)
-        val outBuf = ByteBuffer.allocateDirect(outTensor.numBytes()).order(ByteOrder.nativeOrder())
         val outputs = HashMap<Int, Any>()
         for (i in 0 until net.outputTensorCount) {
-            outputs[i] = if (i == outIndex) outBuf
-            else ByteBuffer.allocateDirect(net.getOutputTensor(i).numBytes()).order(ByteOrder.nativeOrder())
+            outputs[i] = ByteBuffer.allocateDirect(net.getOutputTensor(i).numBytes()).order(ByteOrder.nativeOrder())
         }
         net.runForMultipleInputsOutputs(arrayOf(inBuf), outputs)
-        outBuf.rewind()
-        val frames = FloatArray(outTensor.numElements())
-        outBuf.asFloatBuffer().get(frames)
-        // [frames, 1024] -> mean over frames.
-        val n = frames.size / ModelConfig.EMBEDDING_DIM
-        val mean = FloatArray(ModelConfig.EMBEDDING_DIM)
-        for (f in 0 until n) for (d in mean.indices) mean[d] += frames[f * ModelConfig.EMBEDDING_DIM + d]
+        val embedding = frameMean(outputs[outIndex] as ByteBuffer, net.getOutputTensor(outIndex).numElements(), ModelConfig.EMBEDDING_DIM)
+        val scores = if (scoresIdx >= 0) {
+            frameMean(outputs[scoresIdx] as ByteBuffer, net.getOutputTensor(scoresIdx).numElements(), ModelConfig.YAMNET_CLASSES)
+        } else null
+        return embedding to scores
+    }
+
+    /** [frames, dim] -> mean over frames. */
+    private fun frameMean(buf: ByteBuffer, elements: Int, dim: Int): FloatArray {
+        buf.rewind()
+        val frames = FloatArray(elements)
+        buf.asFloatBuffer().get(frames)
+        val n = frames.size / dim
+        val mean = FloatArray(dim)
+        for (f in 0 until n) for (d in mean.indices) mean[d] += frames[f * dim + d]
         for (d in mean.indices) mean[d] /= n.coerceAtLeast(1)
         return mean
     }
+
+    private fun scoresIndex(net: Interpreter): Int = (0 until net.outputTensorCount).firstOrNull { i ->
+        net.getOutputTensor(i).shape().lastOrNull() == ModelConfig.YAMNET_CLASSES
+    } ?: -1
 
     private fun runSingle(net: Interpreter, values: FloatArray): FloatArray {
         val inT = net.getInputTensor(0)
@@ -126,6 +147,8 @@ class InferenceEngine private constructor(
         const val THRESHOLDS_ASSET = "assets/class_thresholds.json"
 
         fun readAssetText(context: Context, asset: String): String? = readAsset(context, asset)?.toString(Charsets.UTF_8)
+
+        fun readAssetBytes(context: Context, asset: String): ByteArray? = readAsset(context, asset)
 
         fun loadLabels(context: Context): List<String> =
             readAssetText(context, LABELS_ASSET)?.let(AssetParsers::parseLabels).orEmpty()

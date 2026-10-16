@@ -66,3 +66,6 @@ app/android/.gradle/
 app/android/app/build/
 # Final model shipped with the app is allowed
 !app/assets/*.tflite
+
+# Generated with yamnet.tflite by app/tool/export_yamnet_tflite.py; copied in by sync_assets.py
+app/assets/yamnet_class_map.csv
