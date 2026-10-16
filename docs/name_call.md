@@ -61,8 +61,10 @@ python app/tool/export_yamnet_tflite.py          # now also exports YAMNet score
 python app/tool/sync_assets.py --yamnet models/exported/yamnet.tflite
 ```
 
-`name_head.json` and `other_sounds.json` are committed. `speaker_encoder.bin`, the `.tflite` files and the class map
-are generated (git-ignored). Any missing asset switches its feature off and the home screen says which.
+The name-call assets (`name_head.json`, `speaker_encoder.bin`, `melspectrogram.tflite`, `embedding_model.tflite`) and
+`other_sounds.json` are committed, so name calls work from a fresh checkout; see `app/assets/NOTICE.md` for their
+licences. Other sounds also need the re-exported `yamnet.tflite` and its class map. Any missing asset switches its
+feature off and the home screen says which.
 
 ## Licences
 

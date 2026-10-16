@@ -67,6 +67,5 @@ app/android/app/build/
 # Final model shipped with the app is allowed
 !app/assets/*.tflite
 
-# Generated app assets (app/tool/sync_assets.py, scripts/eval_name_call.py --export)
-app/assets/speaker_encoder.bin
+# Generated with yamnet.tflite by app/tool/export_yamnet_tflite.py; copied in by sync_assets.py
 app/assets/yamnet_class_map.csv
