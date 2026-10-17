@@ -8,11 +8,11 @@ Leave one recorder out: the head is trained on the other three recorders' clips 
 
 | Negatives | ROC AUC | Equal error rate |
 |---|---:|---:|
-| Background scenes (TV, kitchen, street...) | 0.906 | 18% |
-| Similar names (Arya, Aryanshi, other names) | 0.733 | 37% |
-| Both | 0.879 | 21% |
+| Background scenes (TV, kitchen, street...) | 0.895 | 21% |
+| Similar names (Arya, Aryanshi, other names) | 0.719 | 37% |
+| Both | 0.868 | 24% |
 
-At the equal-error threshold (0.69): 82% of calls caught, 17% of background pieces and 42% of similar names raise a false call.
+At the equal-error threshold (0.69): 76% of calls caught, 19% of background pieces and 47% of similar names raise a false call.
 
 False calls per background scene at that threshold:
 
@@ -23,31 +23,31 @@ False calls per background scene at that threshold:
 | kitchen | 17 | 0 |
 | rain | 18 | 2 |
 | temple | 15 | 0 |
-| tv | 21 | 8 |
+| tv | 21 | 10 |
 | washing_machine | 3 | 0 |
 
 ## 2. Who is calling (every caller enrolled)
 
-Leave one clip out, the rest enrol each caller: **30/38 = 79%** named correctly.
+Leave one clip out, the rest enrol each caller: **29/38 = 76%** named correctly.
 
 | Said by \ named as | advika | mahi | prachi | raj |
 |---|---|---|---|---|
 | advika | 5 | 1 | 2 | 1 |
 | mahi | 1 | 6 | 0 | 0 |
 | prachi | 1 | 0 | 10 | 1 |
-| raj | 0 | 0 | 1 | 9 |
+| raj | 0 | 0 | 2 | 8 |
 
 ## 3. A caller who is not enrolled
 
-Leave one caller out entirely. Below the accept threshold the app says "Someone is calling you". Naming the wrong person is worse than "Someone" (Aryan still learns he is being called), so the app defaults to 0.70.
+Leave one caller out entirely. Below the accept threshold the app says "Someone is calling you". Naming the wrong person is worse than "Someone" (the user still learns someone is calling), so the app defaults to 0.70.
 
 | Accept threshold | Enrolled callers named correctly | Unenrolled callers shown as "Someone" |
 |---:|---:|---:|
-| 0.60 | 29/38 | 16% |
+| 0.60 | 28/38 | 16% |
 | 0.65 | 28/38 | 39% |
-| 0.70 | 20/38 | 84% |
-| 0.75 | 9/38 | 97% |
-| 0.80 | 3/38 | 100% |
+| 0.70 | 19/38 | 82% |
+| 0.75 | 10/38 | 97% |
+| 0.80 | 2/38 | 100% |
 
 ## Caveats
 

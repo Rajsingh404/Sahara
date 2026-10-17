@@ -165,10 +165,8 @@ void handleAlert(const Event& ev) {
 
   switch (cmd) {
     case CMD_ALERT:
-      if (classId >= SOUND_CLASS_COUNT) {
-        Serial.printf("[alert] ignored unknown class %u\n", classId);
-        return;
-      }
+      // Ids >= SOUND_CLASS_COUNT: 0x20 is a name call; any other unknown id plays the gentle
+      // test pulse rather than nothing (docs/ble_protocol.md), never a safety pattern.
       haptics::play(patternForClass(classId), intensity);
       Serial.printf("[alert] %s at %u\n", patternForClass(classId).name, intensity);
       break;

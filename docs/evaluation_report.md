@@ -138,7 +138,7 @@ mAP 0.721 → 0.757. Team background (60 clips, 5.9 min): 4 → 3 false alarms.
 
 FP32 head vs Keras on 18649 test windows: max |diff| 2.68e-07 (pass, limit 1e-4). INT8 mAP 0.7764 vs Keras 0.7873: drop 0.0109 (pass, limit 0.02). Sizes (KiB): sahara_fp32.tflite 1159.4, sahara_int8.tflite 292.6, yamnet.tflite 12575.3. Source: `models/logs/20261005-195620_b_synthetic/export_validation.json`.
 
-**Shipped in `app/assets/`: the FP32 head** (1.2 MB) with `yamnet.tflite` (12.6 MB). The alert thresholds were tuned on full-precision scores and several sit at 0.93–0.98, where INT8's score changes (up to 0.054) could move alerts; the INT8 saving (~0.9 MB) is not worth that risk.
+**Shipped in `app/assets/`: the FP32 head** (1.2 MB) with `yamnet.tflite` (15.0 MB, embeddings and YAMNet scores). The alert thresholds were tuned on full-precision scores and several sit at 0.93–0.98, where INT8's score changes (up to 0.054) could move alerts; the INT8 saving (~0.9 MB) is not worth that risk.
 
 End-to-end check (`app/tool/check_app_pipeline.py`): 90 test clips replayed through exactly what the app runs (16-bit PCM → 1 s ring buffer → VAD → `yamnet.tflite` → embedding pool → `sahara_classifier.tflite` → alert policy with the bundled settings) raise the same alerts as the evaluation pipeline in **90/90** clips; max score difference 0.0196. Source: `models/logs/20261005-195620_b_synthetic/app_pipeline_check.json`.
 
@@ -193,9 +193,26 @@ Few-shot prototypes over the same YAMNet window vectors (`src/personalization/`)
 
 **Finding.** A name is not distinguishable from other names: other names score higher than "Aryan" (mean similarity 0.63 vs 0.57); YAMNet describes kinds of sound, not words. A name call versus background does separate (EER 0.08). Household sounds separate from background to varying degrees (toilet flush perfectly), but at a strict 1 alert/h few test clips alert, partly because each "sound" here is a category recorded by many people; one user's own appliance repeats far more consistently. The app therefore offers custom sounds as experimental and for distinctive household sounds, not names.
 
+## Name calls and caller ID
+
+A separate model, not YAMNet: pretrained speech embeddings (openWakeWord) with a small "Aryan" head spot the name for any voice; a pretrained speaker encoder (GE2E) then names an enrolled caller, or says "Someone". Leave-one-recorder-out on the team recordings (`docs/name_call_eval.md`, regenerated on this machine by `scripts/eval_name_call.py`; design in `docs/name_call.md`).
+
+| Negatives | ROC AUC | Equal error rate |
+|---|---:|---:|
+| Background scenes (TV, kitchen, street...) | 0.895 | 21% |
+| Similar names (Arya, Aryanshi, other names) | 0.719 | 37% |
+| Both | 0.868 | 24% |
+
+At the equal-error threshold (0.69): 76% of calls caught, 19% of background pieces and 47% of similar names raise a false call.
+
+Leave one clip out, the rest enrol each caller: **29/38 = 76%** named correctly.
+At the default accept threshold 0.70 (enrolled callers named correctly, unenrolled shown as "Someone"): `| 0.70 | 19/38 | 82% |`.
+
+Caveat: each recorder used their own phone and room, so caller identity is partly phone and room identity; re-run after the family enrols on the user's own phone.
+
 ## Wristband (Phase 8)
 
-Not tested on hardware: no wristband parts were available. The firmware builds (`pio run`), and the app's BLE packet format is unit-tested against `docs/ble_protocol.md`; phone-to-buzz latency, current draw and battery life are not measured.
+Not tested on hardware: no wristband parts were available. The firmware builds (`pio run`), including a name-call pattern for id 0x20, and the app's BLE packet format is unit-tested against `docs/ble_protocol.md`; phone-to-buzz latency, current draw and battery life are not measured.
 
 ## Known limitations
 

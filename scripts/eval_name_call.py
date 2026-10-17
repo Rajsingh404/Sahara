@@ -146,7 +146,7 @@ def main() -> None:
     try:
         from src.personalization.speaker import SpeakerEncoder
     except ImportError as exc:
-        lines += ["", f"## 2-3. Who is calling", "", f"Skipped: {exc}. `pip install resemblyzer` to run it."]
+        lines += ["", "## 2-3. Who is calling", "", f"Skipped: {exc}. `pip install resemblyzer` to run it."]
         encoder = None
     else:
         encoder = SpeakerEncoder()

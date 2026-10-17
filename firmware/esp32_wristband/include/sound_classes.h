@@ -15,3 +15,7 @@ enum SoundClass : uint8_t {
   SOUND_APPLIANCE_BEEP = 7,
   SOUND_CLASS_COUNT    = 8,
 };
+
+// Alert ids outside the trained classes (docs/ble_protocol.md). Not SOUND_* so that
+// scripts/check_classes.py, which compares SOUND_* names with src/config.py, ignores them.
+constexpr uint8_t ALERT_NAME_CALL = 0x20;  // "someone is calling you" (docs/name_call.md)

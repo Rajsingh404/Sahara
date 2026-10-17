@@ -23,6 +23,8 @@ internet permission. Architecture: [`docs/architecture.md`](../architecture.md).
 | App | Flutter UI + Kotlin foreground service, TFLite on device, full-screen alerts, vibration, BLE client, history, settings, custom sounds | `app/`; 15 Flutter + 34 Kotlin tests |
 | On a real phone | Galaxy S24, Android 16: listens with the screen off and after being swiped away; no audio files stored; 20–49 ms per window | `models/logs/phone/20261005_galaxy_s24.json` |
 | Personalization | Few-shot custom sounds, evaluated; offered as experimental | `models/logs/personalization/` |
+| Name calls | "Aryan" spotted in any voice; enrolled caller named, else "Someone"; own wristband pattern | `docs/name_call_eval.md` |
+| Other sounds | Quiet notice for sounds YAMNet knows outside the eight (cooker whistle, phone ringing...) | `OtherSoundsPolicy.kt` |
 | Engineering | One-command ML pipeline, every training run recorded, CI for Python, Flutter, Kotlin and firmware | `scripts/run_full_pipeline.py`, `.github/workflows/ci.yml` |
 
 ## 3. Measured results
@@ -36,9 +38,11 @@ Model `models/logs/20261005-195620_b_synthetic/`, selected on validation only; t
 | Test clips that raise the right alert | smoke alarm 23/27, siren 28/34, dog bark 76/90, baby cry 19/25, glass 47/97, doorbell 17/35, appliance beep 20/78, knocking 19/73 |
 | Indian team recordings, 5-fold cross-validation | mAP 0.721 without team data → **0.757** with it |
 | Phone app vs evaluated model | same alerts on 90/90 test clips (`app/tool/check_app_pipeline.py`) |
-| Model size on the phone | YAMNet 12.6 MB + head 1.2 MB; arm64 APK 35.9 MB |
+| Model size on the phone | YAMNet 15.0 MB + head 1.2 MB + name-call models 8.1 MB; arm64 APK 45.8 MB |
 | Inference on Galaxy S24 | 20–29 ms per window (screen on), 47–49 ms (screen off); one window every 500 ms |
 | Custom sounds | separates distinctive household sounds from background (toilet flush perfectly); cannot tell names apart |
+| Name calls (team recordings, leave one recorder out) | AUC 0.895 vs background, 0.719 vs similar names; 76% of calls caught at the equal-error threshold |
+| Caller ID | enrolled caller named 29/38 = 76%; unenrolled shown as "Someone" 82% at cosine 0.70 |
 
 Earlier figures (mAP 0.618, 0.651, 0.783, 0.913) are superseded and should not be quoted; the report explains why.
 
@@ -58,7 +62,9 @@ Setup: release APK installed, phone unlocked, laptop volume about 70 %, clips re
 6. **History (30 s).** Open the history screen: label, confidence and time only.
 7. **Custom sound (1 min, rehearse first).** Settings → Custom sounds → add a distinctive sound (a bell or whistle),
    record it 5 times, play it again. Explain it suits household sounds, not names.
-8. **Wristband.** Only if hardware is ready (see section 5); otherwise show the firmware build and the BLE protocol.
+8. **Name call (1 min, rehearse first).** Settings → People who call you → enrol one teammate (a few taps of them saying
+   "Aryan"); they call the name from across the room → alert naming them. Someone not enrolled → "Someone".
+9. **Wristband.** Only if hardware is ready (see section 5); otherwise show the firmware build and the BLE protocol.
 
 ## 5. Known limitations and what is left
 
@@ -66,6 +72,8 @@ Setup: release APK installed, phone unlocked, laptop volume about 70 %, clips re
 - **Indian context:** no team recordings of smoke alarms, sirens or glass breaking; the team background caused a few
   "siren" alerts in minutes of audio (too little to give a rate).
 - **Custom sounds** cannot recognise names; few-shot detection is modest at a strict false-alarm limit.
+- **Name calls** are trained for one name and confuse similar names about a third of the time; caller ID was
+  measured with each recorder on their own phone and room, so it may be optimistic. Not yet tried live on the phone.
 - **Not measured yet:** battery use per hour of listening; release-build memory; real-sound tests on the phone.
 - **Wristband (Phase 8):** firmware builds, but not tested on hardware (parts not yet available): latency to buzz,
   current draw and battery life are not measured.

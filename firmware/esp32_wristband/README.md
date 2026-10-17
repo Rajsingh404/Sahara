@@ -41,6 +41,8 @@ Without a motor wired, the on-board LED shows the pattern.
 | baby_cry (5) | Long, short, long wavering pulse. ×2 |
 | glass_break (6) | One hard hit, then a flutter. ×2 |
 | appliance_beep (7) | Three light ticks. ×1 |
+| name call (0x20) | Two medium buzzes then two short: "someone is calling you". ×2. Same rhythm as the phone. |
+| any other id | One gentle 300 ms pulse (never a safety pattern). |
 
 Timings are in `src/patterns.cpp`. The app's `intensity` byte scales every step. A new alert from the phone interrupts the one playing.
 

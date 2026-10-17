@@ -178,7 +178,7 @@ def build(run: str | None = None) -> str:
         out += ["Not run yet (Phase 5).", ""]
     app_check = _load(run_dir / "app_pipeline_check.json")
     if app_check:
-        out += ["**Shipped in `app/assets/`: the FP32 head** (1.2 MB) with `yamnet.tflite` (12.6 MB). The alert thresholds "
+        out += ["**Shipped in `app/assets/`: the FP32 head** (1.2 MB) with `yamnet.tflite` (15.0 MB, embeddings and YAMNet scores). The alert thresholds "
                 "were tuned on full-precision scores and several sit at 0.93–0.98, where INT8's score changes (up to "
                 f"{exp['int8_max_abs_diff']:.3f}) could move alerts; the INT8 saving (~0.9 MB) is not worth that risk."
                 if exp else "**Shipped in `app/assets/`: the FP32 head** with `yamnet.tflite`.",
@@ -246,10 +246,31 @@ def build(run: str | None = None) -> str:
     else:
         out += ["Not run yet.", ""]
 
+    out += ["## Name calls and caller ID", ""]
+    nc = REPO_ROOT / "docs" / "name_call_eval.md"
+    if nc.exists():
+        lines = nc.read_text(encoding="utf-8").splitlines()
+        table = [ln for ln in lines if ln.startswith("| Negatives") or ln.startswith("|---:") is False and ln.startswith("|---")
+                 or any(ln.startswith(f"| {k}") for k in ("Background scenes", "Similar names", "Both"))]
+        spot = next((ln for ln in lines if ln.startswith("At the equal-error threshold")), "")
+        named = next((ln for ln in lines if "named correctly" in ln and "Leave one clip out" in ln), "")
+        someone = next((ln for ln in lines if ln.startswith("| 0.70 |")), "")
+        out += ["A separate model, not YAMNet: pretrained speech embeddings (openWakeWord) with a small \"Aryan\" head spot "
+                "the name for any voice; a pretrained speaker encoder (GE2E) then names an enrolled caller, or says "
+                "\"Someone\". Leave-one-recorder-out on the team recordings (`docs/name_call_eval.md`, regenerated on this "
+                "machine by `scripts/eval_name_call.py`; design in `docs/name_call.md`).", "",
+                *table[:5], "", spot, "", named,
+                f"At the default accept threshold 0.70 (enrolled callers named correctly, unenrolled shown as \"Someone\"): "
+                f"`{someone}`." if someone else "", "",
+                "Caveat: each recorder used their own phone and room, so caller identity is partly phone and room identity; "
+                "re-run after the family enrols on the user's own phone.", ""]
+    else:
+        out += ["Not run yet.", ""]
+
     out += ["## Wristband (Phase 8)", "",
-            "Not tested on hardware: no wristband parts were available. The firmware builds (`pio run`), and the app's "
-            "BLE packet format is unit-tested against `docs/ble_protocol.md`; phone-to-buzz latency, current draw and "
-            "battery life are not measured.", ""]
+            "Not tested on hardware: no wristband parts were available. The firmware builds (`pio run`), including a "
+            "name-call pattern for id 0x20, and the app's BLE packet format is unit-tested against `docs/ble_protocol.md`; "
+            "phone-to-buzz latency, current draw and battery life are not measured.", ""]
 
     out += ["## Known limitations", "",
             "- Window-level metrics count 0.5 s windows, so long clips weigh more than short ones; clip detection is the closer "

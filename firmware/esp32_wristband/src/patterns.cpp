@@ -37,6 +37,12 @@ static const PatternStep kApplianceBeep[] = {
   {130, 80}, {0, 150}, {130, 80}, {0, 150}, {130, 80},
 };
 
+// Name call (0x20): two medium buzzes then two short ones, the same rhythm as the phone's
+// vibration for a name call (AlertNotifier.kt), so it never feels like a safety alarm.
+static const PatternStep kNameCall[] = {
+  {220, 400}, {0, 150}, {220, 400}, {0, 150}, {220, 150}, {0, 150}, {220, 150},
+};
+
 static const PatternStep kTest[] = {{255, 300}};  // Protocol: one 300 ms pulse.
 static const PatternStep kLinkLost[] = {{150, 600}, {0, 300}, {150, 600}};
 static const PatternStep kConnected[] = {{150, 80}, {0, 80}, {150, 80}};
@@ -55,11 +61,16 @@ static const Pattern kClassPatterns[SOUND_CLASS_COUNT] = {
 };
 
 const Pattern PATTERN_TEST             = {"test",             kTest,            COUNT(kTest),            1, 0};
+const Pattern PATTERN_NAME_CALL        = {"name_call",        kNameCall,        COUNT(kNameCall),        2, 800};
 const Pattern PATTERN_LINK_LOST        = {"link_lost",        kLinkLost,        COUNT(kLinkLost),        1, 0};
 const Pattern PATTERN_CONNECTED        = {"connected",        kConnected,       COUNT(kConnected),       1, 0};
 const Pattern PATTERN_LOW_BATTERY      = {"low_battery",      kLowBattery,      COUNT(kLowBattery),      1, 0};
 const Pattern PATTERN_CRITICAL_BATTERY = {"critical_battery", kCriticalBattery, COUNT(kCriticalBattery), 1, 0};
 
+// Trained classes get their own pattern, a name call its own, and any other id the gentle test
+// pulse (docs/ble_protocol.md: unknown ids play a non-critical default, never a safety pattern).
 const Pattern& patternForClass(uint8_t classId) {
-  return kClassPatterns[classId < SOUND_CLASS_COUNT ? classId : 0];
+  if (classId < SOUND_CLASS_COUNT) return kClassPatterns[classId];
+  if (classId == ALERT_NAME_CALL) return PATTERN_NAME_CALL;
+  return PATTERN_TEST;
 }

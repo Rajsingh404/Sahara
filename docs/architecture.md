@@ -16,6 +16,9 @@ flowchart LR
     head["sahara_classifier.tflite<br/>Dense 256→128→8 sigmoid"]
     policy["DetectionPolicy.kt<br/>per-class threshold + hits (1–3 of 3)<br/>10 s cooldown, sensitivity slider"]
     custom["CustomSoundMatcher.kt<br/>cosine vs enrolled prototypes"]
+    other["OtherSoundsPolicy.kt<br/>YAMNet's 521 scores ≥ 0.35,<br/>2 of 3 windows → quiet notice"]
+    name["NameSpotter.kt<br/>speech score ≥ 0.2 → openWakeWord<br/>embeddings → 'Aryan' head"]
+    who["SpeakerEncoder.kt + PrototypeBank<br/>GE2E, cosine ≥ 0.70 → caller,<br/>else 'Someone'"]
     alert["AlertDispatcher.kt"]
     screen["Full-screen alert +<br/>phone vibration (AlertNotifier)"]
     band["Wristband over BLE<br/>(Wristband.kt)"]
@@ -25,6 +28,8 @@ flowchart LR
     vad -- "silent: zero scores" --> policy
     vad -- "sound" --> yam --> pool --> head --> policy --> alert
     pool --> custom --> alert
+    yam -- "521 scores" --> other --> alert
+    yam -- "speech" --> name --> who --> alert
     alert --> screen
     alert --> band
     alert --> hist
@@ -87,6 +92,17 @@ flowchart LR
     rec --> wv --> top --> proto --> store --> live
 ```
 
+## 4. Name calls and caller ID
+
+A separate speech path, used only when YAMNet's speech score is at least 0.2: openWakeWord's melspectrogram and
+embedding models (ONNX, pretrained) turn the last 1.5 s into speech embeddings, and a small logistic head scores the
+name "Aryan" for any voice. When it fires, a pretrained GE2E speaker encoder (Resemblyzer weights, run in plain Kotlin)
+compares the voice with the callers the family enrolled (a few taps of them saying the name); a match at cosine ≥ 0.70
+names the caller, otherwise the alert says "Someone". The alert goes to the screen, vibration and the wristband
+(BLE id 0x20, its own pattern). Results: `docs/name_call_eval.md`; design: `docs/name_call.md`.
+
+## 5. Custom sounds: evaluation
+
 Evaluated in `src/personalization/` (see the report): it separates distinctive household sounds from background, but
 cannot tell names apart, so the app offers it as experimental and for household sounds only. On the wristband a custom
 sound uses the doorbell pattern; BLE protocol v1 has no custom-sound id.
@@ -99,4 +115,5 @@ sound uses the doorbell pattern; BLE protocol v1 has no custom-sound id.
 | Audio input | 16 kHz mono, YAMNet patch 15,600 samples (0.975 s), 0.96 s frames / 0.48 s hop inside YAMNet | `src/config.py` | `ModelConfig.kt` |
 | Inference cadence | 1 s buffer, 0.5 s hop, VAD 1e-4 on the newest hop, mean of last 2 non-silent embeddings | `src/config.py`, `windowing.py` | `ModelConfig.kt`, `AudioWindow.kt`, `EmbeddingPool.kt` |
 | Alert policy | threshold + hits (1–3 of 3) per class, 10 s cooldown, sensitivity ±2 log-odds | `class_thresholds.json`, `src/evaluation/policy.py` | `DetectionPolicy.kt` (shared fixture test) |
-| BLE | service `c7a10000-…`, 4-byte alert `[ver, cmd, class_id, intensity]` | `docs/ble_protocol.md` | `uuids.dart`, `BleUuids.kt`, `ble_uuids.h` |
+| BLE | service `c7a10000-…`, 4-byte alert `[ver, cmd, class_id, intensity]`; class ids 0–7, name call 0x20; other sounds are never sent | `docs/ble_protocol.md` | `uuids.dart`, `BleUuids.kt`, `ble_uuids.h`, `sound_classes.h` |
+| YAMNet export | outputs `embeddings` (1,024) and `scores` (521), class order of `yamnet_class_map.csv` | `app/tool/export_yamnet_tflite.py` | `InferenceEngine.kt`, `other_sounds.json` |

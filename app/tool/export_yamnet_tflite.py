@@ -15,6 +15,7 @@ the first Hub download):
 """
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
 
@@ -25,6 +26,10 @@ import tensorflow_hub as hub
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 from src.config import MODELS_DIR  # noqa: E402
+
+# Same TF-Hub cache as training (src/preprocessing/features.py): the default lives in a temp folder
+# that macOS cleans up, which leaves a broken half-deleted model behind.
+os.environ.setdefault("TFHUB_CACHE_DIR", str(MODELS_DIR / "tfhub_cache"))
 
 YAMNET_HANDLE = "https://tfhub.dev/google/yamnet/1"
 INPUT_SAMPLES = 15_600

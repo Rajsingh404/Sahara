@@ -136,7 +136,7 @@ macOS prerequisites: Homebrew, Python 3.11, Flutter SDK, Android Studio (Android
   `src/evaluation/tune_policy.py` and copied to `app/assets/`.
 - Minimum Android version: API 26 (Android 8.0), `minSdk` in `app/android/app/build.gradle.kts`. Tested on API 36.
 - Test phone: Samsung Galaxy S24 (SM-S921B), Android 16, measured 2026-10-05 (`models/logs/phone/`).
-- Model size: no budget was set. Shipped: `yamnet.tflite` 12.6 MB + FP32 head 1.2 MB; arm64 release APK 35.9 MB.
+- Model size: no budget was set. Shipped: `yamnet.tflite` 15.0 MB (embeddings + 521 scores) + FP32 head 1.2 MB + speech models 8.1 MB; arm64 release APK 45.8 MB.
   The INT8 head (0.3 MB) passes validation but is not shipped (thresholds sit at 0.93–0.98, see the report).
 - Latency: no budget was set. Measured inference 20–29 ms per window (screen on), 47–49 ms (screen off) on the S24;
   sound start → phone alert 1.0–2.5 s in a speaker test. Phone → wristband buzz: not measured (no hardware).
@@ -166,15 +166,18 @@ iNoise is supported but not downloaded (needs an IEEE DataPort login). Counts: `
 
 ## Current status (update as it changes)
 
-- Branch `feat/integration` (all four earlier PRs merged plus this work); not pushed.
+- Branch `feat/pr5-name-calls` (on top of `feat/integration`; PR #5 merged: name calls, caller ID, other sounds); not pushed.
 - Phases 0–5 and 7 done; Phase 6 mostly done; Phase 8 not started (no hardware); Phase 9 docs/CI done.
 - Selected model: `models/logs/20261005-195620_b_synthetic/` (in `models/logs/selected_run.txt`). Public test mAP 0.789,
   false alarms 3.5/h, Indian 5-fold CV mAP 0.757. All numbers: `docs/evaluation_report.md` (generated, do not hand-edit).
 - Superseded figures (0.618, 0.651, 0.783, 0.913) are listed in the report; never quote them.
 - The classifier head always runs on the CPU (`classifier_head.HEAD_DEVICE`): Keras `predict()` on the Metal GPU
   returns wrong scores on this Mac.
-- Pending on the phone: battery per hour, release-build memory/latency, real-sound tests, custom-sound enrolment.
-- Personalization works for distinctive household sounds, not names (see the report).
+- Pending on the phone: battery per hour, release-build memory/latency, real-sound tests, custom-sound and caller enrolment,
+  live name calls.
+- Custom sounds work for distinctive household sounds, not names; names use the separate name-call model
+  (reproduced here: 76% of calls caught at EER, caller named 76%; `docs/name_call_eval.md`).
+- BLE id 0x20 = name call (firmware plays its own pattern); other sounds never go over BLE.
 
 ## Working with Claude
 
