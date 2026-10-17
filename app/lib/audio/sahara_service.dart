@@ -35,6 +35,50 @@ class ScannedBand {
   final int rssi;
 }
 
+/// Someone enrolled to be recognised when they call the user.
+class Caller {
+  const Caller(this.name, this.samples);
+  final String name;
+
+  /// Enrolment recordings so far; three or more identify a caller best.
+  final int samples;
+
+  static List<Caller> listFrom(List? raw) =>
+      (raw ?? const []).cast<Map>().map((m) => Caller(m['name'] as String, (m['samples'] as num).toInt())).toList();
+}
+
+/// What the name-call and other-sounds layers can do with the bundled assets.
+class PersonalStatus {
+  const PersonalStatus({
+    this.nameReady = false,
+    this.name,
+    this.callerIdReady = false,
+    this.nameReason,
+    this.otherSoundsReady = false,
+    this.otherSoundsReason,
+  });
+
+  final bool nameReady;
+
+  /// The name the spotter listens for ("Aryan").
+  final String? name;
+  final bool callerIdReady;
+  final String? nameReason;
+  final bool otherSoundsReady;
+  final String? otherSoundsReason;
+
+  factory PersonalStatus.fromMap(Map<dynamic, dynamic>? m) => m == null
+      ? const PersonalStatus()
+      : PersonalStatus(
+          nameReady: m['nameReady'] as bool? ?? false,
+          name: m['name'] as String?,
+          callerIdReady: m['callerIdReady'] as bool? ?? false,
+          nameReason: m['nameCalls'] as String?,
+          otherSoundsReady: m['otherSoundsReady'] as bool? ?? false,
+          otherSoundsReason: m['otherSounds'] as String?,
+        );
+}
+
 /// Snapshot of the native side.
 class SaharaStatus {
   const SaharaStatus({
@@ -47,7 +91,11 @@ class SaharaStatus {
     this.enabledClasses,
     this.sensitivity = 0,
     this.vibrate = true,
+    this.nameCalls = true,
+    this.otherSounds = true,
     this.wristband = const WristbandInfo(),
+    this.personal = const PersonalStatus(),
+    this.callers = const [],
   });
 
   final bool listening;
@@ -61,7 +109,11 @@ class SaharaStatus {
   final Set<String>? enabledClasses;
   final double sensitivity;
   final bool vibrate;
+  final bool nameCalls;
+  final bool otherSounds;
   final WristbandInfo wristband;
+  final PersonalStatus personal;
+  final List<Caller> callers;
 
   bool isEnabled(String label) => enabledClasses?.contains(label) ?? true;
 
@@ -73,7 +125,10 @@ class SaharaStatus {
     Set<String>? enabledClasses,
     double? sensitivity,
     bool? vibrate,
+    bool? nameCalls,
+    bool? otherSounds,
     WristbandInfo? wristband,
+    List<Caller>? callers,
   }) => SaharaStatus(
     listening: listening ?? this.listening,
     error: clearError ? null : (error ?? this.error),
@@ -84,7 +139,11 @@ class SaharaStatus {
     enabledClasses: enabledClasses ?? this.enabledClasses,
     sensitivity: sensitivity ?? this.sensitivity,
     vibrate: vibrate ?? this.vibrate,
+    nameCalls: nameCalls ?? this.nameCalls,
+    otherSounds: otherSounds ?? this.otherSounds,
     wristband: wristband ?? this.wristband,
+    personal: personal,
+    callers: callers ?? this.callers,
   );
 
   factory SaharaStatus.fromMap(Map<dynamic, dynamic> m) {
@@ -100,7 +159,11 @@ class SaharaStatus {
       enabledClasses: enabled?.cast<String>().toSet(),
       sensitivity: (settings['sensitivity'] as num?)?.toDouble() ?? 0,
       vibrate: settings['vibrate'] as bool? ?? true,
+      nameCalls: settings['nameCalls'] as bool? ?? true,
+      otherSounds: settings['otherSounds'] as bool? ?? true,
       wristband: WristbandInfo.fromMap(m['wristband'] as Map?),
+      personal: PersonalStatus.fromMap(m['personal'] as Map?),
+      callers: Caller.listFrom(m['callers'] as List?),
     );
   }
 }
@@ -173,14 +236,25 @@ abstract class SaharaApi {
   Future<SaharaStatus> getStatus();
   Future<void> startListening();
   Future<void> stopListening();
-  Future<void> updateSettings({Set<String>? enabledClasses, double? sensitivity, bool? vibrate});
+  Future<void> updateSettings({
+    Set<String>? enabledClasses,
+    double? sensitivity,
+    bool? vibrate,
+    bool? nameCalls,
+    bool? otherSounds,
+  });
   Future<List<DetectionEvent>> getHistory();
+
+  /// Records ~2.5 s while [name] says the user's name, and enrols their voice.
+  /// Throws a PlatformException (code `too_quiet`, `mic`, `no_model`, `permission`) on failure.
+  Future<Caller> enrollCaller(String name);
+  Future<List<Caller>> removeCaller(String name);
   Future<void> clearHistory();
   Future<List<ScannedBand>> scanWristbands({Duration timeout = const Duration(seconds: 6)});
   Future<void> connectWristband(ScannedBand band);
   Future<void> forgetWristband();
   Future<bool> testWristband();
-  Future<void> simulateAlert(int classId);
+  Future<void> simulateAlert(int classId, {String? caller});
   Future<void> dismissAlert();
   Future<DetectionEvent?> consumeLaunchAlert();
 
@@ -216,12 +290,29 @@ class ChannelSaharaApi implements SaharaApi {
   Future<void> stopListening() => _methods.invokeMethod('stopListening');
 
   @override
-  Future<void> updateSettings({Set<String>? enabledClasses, double? sensitivity, bool? vibrate}) =>
-      _methods.invokeMethod('updateSettings', {
-        if (enabledClasses != null) 'enabledClasses': enabledClasses.toList(),
-        'sensitivity': ?sensitivity,
-        'vibrate': ?vibrate,
-      });
+  Future<void> updateSettings({
+    Set<String>? enabledClasses,
+    double? sensitivity,
+    bool? vibrate,
+    bool? nameCalls,
+    bool? otherSounds,
+  }) => _methods.invokeMethod('updateSettings', {
+    if (enabledClasses != null) 'enabledClasses': enabledClasses.toList(),
+    'sensitivity': ?sensitivity,
+    'vibrate': ?vibrate,
+    'nameCalls': ?nameCalls,
+    'otherSounds': ?otherSounds,
+  });
+
+  @override
+  Future<Caller> enrollCaller(String name) async {
+    final m = await _methods.invokeMethod<Map>('enrollCaller', {'name': name});
+    return Caller(m!['name'] as String, (m['samples'] as num).toInt());
+  }
+
+  @override
+  Future<List<Caller>> removeCaller(String name) async =>
+      Caller.listFrom(await _methods.invokeMethod<List>('removeCaller', {'name': name}));
 
   @override
   Future<List<DetectionEvent>> getHistory() async {
@@ -252,7 +343,8 @@ class ChannelSaharaApi implements SaharaApi {
   Future<bool> testWristband() async => await _methods.invokeMethod<bool>('testWristband') ?? false;
 
   @override
-  Future<void> simulateAlert(int classId) => _methods.invokeMethod('simulateAlert', {'classId': classId});
+  Future<void> simulateAlert(int classId, {String? caller}) =>
+      _methods.invokeMethod('simulateAlert', {'classId': classId, 'caller': ?caller});
 
   @override
   Future<void> dismissAlert() => _methods.invokeMethod('dismissAlert');

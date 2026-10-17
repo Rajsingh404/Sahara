@@ -44,7 +44,7 @@ class _AlertScreenState extends State<AlertScreen> {
       body: SafeArea(
         child: Semantics(
           liveRegion: true,
-          label: '${s.name} detected',
+          label: widget.event.isNameCall ? widget.event.title : '${s.name} detected',
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Column(
@@ -53,7 +53,7 @@ class _AlertScreenState extends State<AlertScreen> {
                 Icon(s.icon, size: 140, color: Colors.white),
                 const SizedBox(height: 24),
                 Text(
-                  s.name.toUpperCase(),
+                  widget.event.title.toUpperCase(),
                   textAlign: TextAlign.center,
                   style: const TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.w900),
                 ),
@@ -65,7 +65,9 @@ class _AlertScreenState extends State<AlertScreen> {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'Detected at $time · ${(widget.event.confidence * 100).round()}% confidence',
+                  widget.event.isNameCall
+                      ? 'Heard at $time'
+                      : 'Detected at $time · ${(widget.event.confidence * 100).round()}% confidence',
                   style: const TextStyle(color: Colors.white70, fontSize: 16),
                 ),
                 const Spacer(),

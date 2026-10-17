@@ -19,7 +19,25 @@ class SoundClass {
   final String advice;
   final bool safetyCritical;
 
+  /// Labels outside the trained head (see Detection.NAME_CALL / OTHER_SOUND in Kotlin).
+  static const nameCall = 'name_call';
+  static const otherSound = 'other_sound';
+
   static const _catalog = <String, SoundClass>{
+    nameCall: SoundClass(
+      label: nameCall,
+      name: 'Name call',
+      icon: Icons.record_voice_over,
+      color: Color(0xFF3949AB),
+      advice: 'Someone is calling your name. Look around.',
+    ),
+    otherSound: SoundClass(
+      label: otherSound,
+      name: 'Other sound',
+      icon: Icons.hearing,
+      color: Color(0xFF546E7A),
+      advice: 'A sound outside the main alerts.',
+    ),
     'smoke_alarm': SoundClass(
       label: 'smoke_alarm',
       name: 'Smoke alarm',
@@ -104,5 +122,5 @@ class SoundClass {
         advice: 'A sound was detected.',
       );
 
-  static Iterable<String> get knownLabels => _catalog.keys;
+  static Iterable<String> get knownLabels => _catalog.keys.where((k) => k != nameCall && k != otherSound);
 }

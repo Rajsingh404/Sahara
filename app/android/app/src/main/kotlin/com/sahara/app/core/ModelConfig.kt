@@ -27,4 +27,13 @@ object ModelConfig {
         EMBEDDING_DIM * WINDOW_POOLS.size -> WINDOW_POOLS
         else -> null
     }
+    /** YAMNet's AudioSet classes, the open-set "other sounds" layer. */
+    const val YAMNET_CLASSES = 521
+    /** Audio the name spotter and caller ID look at: 2 s, re-checked every hop. */
+    const val NAME_WINDOW_SAMPLES = 32_000
+    /** Enrolment clip: the caller says the name once (or twice) in this time. */
+    const val ENROL_SAMPLES = 40_000
+    /** Class ids outside the trained head, sent to the wristband (docs/ble_protocol.md). */
+    const val NAME_CALL_ID = 0x20
+    const val OTHER_SOUND_ID = 0x22
 }

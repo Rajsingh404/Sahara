@@ -28,7 +28,8 @@ Non-target audio uses the label `background`.
 | Model | Frozen YAMNet backbone + small trainable Dense head (transfer learning). |
 | Inference | TensorFlow Lite, on-device only. |
 | Wristband | Custom ESP32 over BLE, haptic motor. BOM under ₹1000. Not Wear OS. |
-| Personalization | Few-shot prototypical network over YAMNet embeddings for user-enrolled sounds. |
+| Personalization | Name calls: pretrained speech embeddings (openWakeWord) + a small "Aryan" head, and a pretrained speaker encoder (Resemblyzer GE2E, run in pure Kotlin) for enrolled callers. Custom household sounds: few-shot prototypes over YAMNet window vectors (`core/CustomSoundMatcher.kt`, experimental). |
+| Open set | YAMNet's own 521 AudioSet classes as low-priority "other sounds" when none of the 8 fires. |
 | Training | Python + TensorFlow (`tensorflow-macos` + `tensorflow-metal`, Apple Silicon). |
 
 ## Repo layout
@@ -45,7 +46,8 @@ src/                    Python ML package (import as `src.*`)
   evaluation/           metrics, policy.py (port of DetectionPolicy.kt), policy_tuning/tune_policy (alert settings
                         against a false-alarm budget), evaluate.py, false_alarm_eval.py, team_cv.py
   export/               to_tflite.py, quantize.py, validate_tflite.py
-  personalization/      prototypes.py (few-shot custom sounds), evaluate.py, export_center.py
+  personalization/      custom sounds: prototypes.py, evaluate.py, export_center.py;
+                        name calls + caller ID: speech_embedding.py, name_head.py, speaker.py (docs/name_call.md)
 scripts/                pipeline runners, env check, status
 tests/                  pytest suite for the ML pipeline
 models/                 checkpoints/, logs/, exported/ (contents git-ignored)
@@ -99,6 +101,10 @@ python scripts/run_full_pipeline.py                   # data → synthetic → f
 python scripts/run_full_pipeline.py --from train      # reuse data and features; --sync-assets copies models to the app
 python src/personalization/evaluate.py                # custom-sound (personalization) evaluation
 pytest -q
+
+# Name calls (docs/name_call.md): extra deps, then evaluate + export app/assets/name_head.json, speaker_encoder.bin
+pip install -r requirements-personalization.txt
+python scripts/eval_name_call.py --wav-dir data/interim/name_wav --report docs/name_call_eval.md --export app/assets
 ```
 
 ### App (Flutter)

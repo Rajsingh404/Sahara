@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sahara/alerts/alert_screen.dart';
 import 'package:sahara/app.dart';
@@ -124,5 +125,82 @@ void main() {
     final s = SoundClass.of('custom:Pressure cooker');
     expect(s.name, 'Pressure cooker');
     expect(s.safetyCritical, isFalse);
+  });
+
+  testWidgets('a name call says who is calling, or Someone', (tester) async {
+    final (api, _) = await pumpApp(tester);
+    api.controller.add(
+      DetectionArrived(
+        DetectionEvent(
+          classId: 0x20,
+          label: 'name_call',
+          confidence: 0.8,
+          time: DateTime(2026, 10, 16),
+          safetyCritical: false,
+          detail: 'Raj',
+        ),
+        opened: false,
+      ),
+    );
+    await settleEvents(tester);
+    expect(find.text('RAJ IS CALLING YOU'), findsOneWidget);
+    await tester.tap(find.text('Dismiss'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+
+    api.controller.add(
+      DetectionArrived(
+        DetectionEvent(
+          classId: 0x20,
+          label: 'name_call',
+          confidence: 0.8,
+          time: DateTime(2026, 10, 16),
+          safetyCritical: false,
+        ),
+        opened: false,
+      ),
+    );
+    await settleEvents(tester);
+    expect(find.text('SOMEONE IS CALLING YOU'), findsOneWidget);
+  });
+
+  testWidgets('other sounds are notices, not full-screen alerts', (tester) async {
+    final (api, state) = await pumpApp(tester);
+    api.controller.add(
+      DetectionArrived(
+        DetectionEvent(
+          classId: 0x22,
+          label: 'other_sound',
+          confidence: 0.5,
+          time: DateTime(2026, 10, 16),
+          safetyCritical: false,
+          detail: 'Cat',
+        ),
+        opened: false,
+      ),
+    );
+    await settleEvents(tester);
+    expect(find.byType(AlertScreen), findsNothing);
+    expect(state.history.single.title, 'Cat');
+    await tester.scrollUntilVisible(find.text('Last heard: Cat'), 200);
+    expect(find.text('Last heard: Cat'), findsOneWidget);
+  });
+
+  testWidgets('enrolling a caller adds them to the list', (tester) async {
+    // permission_handler: report every requested permission as granted (1).
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      const MethodChannel('flutter.baseflow.com/permissions/methods'),
+      (call) async => call.method == 'requestPermissions' ? {for (final p in (call.arguments as List)) p: 1} : 1,
+    );
+    final (api, state) = await pumpApp(tester);
+    await tester.scrollUntilVisible(find.text('When someone calls Aryan'), 200);
+    await tester.tap(find.text('When someone calls Aryan'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), 'Prachi');
+    await tester.tap(find.text('Record their voice'));
+    await tester.pumpAndSettle();
+    expect(api.calls, contains('enroll:Prachi'));
+    expect(state.status.callers.single.name, 'Prachi');
+    expect(find.text('1 recording'), findsOneWidget);
   });
 }

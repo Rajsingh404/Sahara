@@ -26,7 +26,7 @@ All multi-byte values are little-endian. Unknown versions or commands are ignore
 |---|---|---|
 | 0 | `version` | `0x01` |
 | 1 | `command` | `0x01` ALERT, `0x02` TEST, `0x03` STOP |
-| 2 | `class_id` | `0..7` index into `SOUND_CLASSES` (`src/config.py`); `0xFF` = none (TEST/STOP) |
+| 2 | `class_id` | `0..7` index into `SOUND_CLASSES` (`src/config.py`); `0x20` = name call; `0xFF` = none (TEST/STOP) |
 | 3 | `intensity` | `0..255` motor strength. The app sends `255` for safety-critical classes, otherwise `round(confidence × 255)` clamped to `128..255` |
 
 Class ids (fixed order, same as `src/config.py` and `app/assets/labels.txt`):
@@ -41,6 +41,10 @@ Class ids (fixed order, same as `src/config.py` and `app/assets/labels.txt`):
 | 5 | baby_cry | no | 1 long (800 ms) + 2 short |
 | 6 | glass_break | yes | 3 × (long 600 ms, gap 200 ms), repeated 3 times |
 | 7 | appliance_beep | no | 1 short + 1 medium |
+| 0x20 | name call ("someone is calling you", docs/name_call.md) | no | 2 medium (400 ms) + 2 short (150 ms) |
+
+"Other sounds" (YAMNet's open-set layer) never reach the band. Firmware that does not know `0x20` yet should play its
+default non-critical pattern rather than ignore it.
 
 - **ALERT**: play the pattern for `class_id` at `intensity`. A new ALERT interrupts the current pattern.
 - **TEST**: one 300 ms pulse at `intensity` (used by the app's "Test wristband" button).

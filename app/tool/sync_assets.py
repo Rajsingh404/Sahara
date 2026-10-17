@@ -8,10 +8,17 @@ Run from the repo root after `python src/export/to_tflite.py` (and optionally qu
 Writes:
     app/assets/labels.txt               SOUND_CLASSES from src/config.py, one per line, in model order
     app/assets/class_thresholds.json    copy of data/metadata/class_thresholds.json
-    app/assets/sahara_classifier.tflite sahara_int8.tflite if present, else sahara_fp32.tflite
+    app/assets/sahara_classifier.tflite sahara_fp32.tflite if present, else sahara_int8.tflite
     app/assets/yamnet.tflite            only with --yamnet (see export_yamnet_tflite.py)
     app/assets/personal_center.bin      custom-sound centring vector, if models/exported/ has it
                                         (src/personalization/export_center.py)
+    app/assets/yamnet_class_map.csv     next to the --yamnet model, for "other sounds"
+    app/assets/other_sounds.json        OTHER_SOUND_* from src/config.py
+    app/assets/melspectrogram.tflite    pretrained speech embeddings for name calls, from the
+    app/assets/embedding_model.tflite   openwakeword==0.5.1 wheel (or --speech-models DIR)
+
+name_head.json and speaker_encoder.bin (name calls and caller voices) come from
+`python scripts/eval_name_call.py --wav-dir ... --export app/assets`; see docs/name_call.md.
 
 Needs only the standard library (it parses src/config.py instead of importing TensorFlow).
 """
@@ -19,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import json
 import shutil
 from pathlib import Path
 
@@ -26,12 +34,43 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 ASSETS = REPO_ROOT / "app" / "assets"
 
 
-def sound_classes(config: Path = REPO_ROOT / "src" / "config.py") -> list[str]:
+def config_value(name: str, config: Path = REPO_ROOT / "src" / "config.py"):
     tree = ast.parse(config.read_text(encoding="utf-8"))
     for node in tree.body:
-        if isinstance(node, ast.Assign) and any(getattr(t, "id", None) == "SOUND_CLASSES" for t in node.targets):
-            return [ast.literal_eval(e) for e in node.value.elts]
-    raise SystemExit(f"SOUND_CLASSES not found in {config}")
+        if isinstance(node, ast.Assign) and any(getattr(t, "id", None) == name for t in node.targets):
+            return ast.literal_eval(node.value)
+    raise SystemExit(f"{name} not found in {config}")
+
+
+def sound_classes(config: Path = REPO_ROOT / "src" / "config.py") -> list[str]:
+    return list(config_value("SOUND_CLASSES", config))
+
+
+def write_other_sounds(target: Path = ASSETS / "other_sounds.json") -> None:
+    target.write_text(
+        json.dumps(
+            {
+                "_generated": "app/tool/sync_assets.py from OTHER_SOUND_* in src/config.py. Do not edit.",
+                "min_score": config_value("OTHER_SOUND_MIN_SCORE"),
+                "ignored": list(config_value("OTHER_SOUND_IGNORED")),
+                "covered_by_head": list(config_value("OTHER_SOUND_COVERED_BY_HEAD")),
+            },
+            indent=1,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+
+def speech_models_dir(explicit: Path | None) -> Path | None:
+    if explicit:
+        return explicit
+    try:
+        from importlib import resources
+
+        return Path(str(resources.files("openwakeword") / "resources" / "models"))
+    except ModuleNotFoundError:
+        return None
 
 
 def write_labels(target: Path = ASSETS / "labels.txt") -> list[str]:
@@ -49,6 +88,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--model", type=Path, help="classifier .tflite (default: newest export)")
     parser.add_argument("--yamnet", type=Path, help="YAMNet .tflite with an embeddings output")
+    parser.add_argument("--speech-models", type=Path, help="folder with melspectrogram.tflite + embedding_model.tflite")
     parser.add_argument("--labels-only", action="store_true", help="only write labels.txt and thresholds")
     args = parser.parse_args()
 
@@ -60,12 +100,15 @@ def main() -> None:
     if thresholds.exists():
         shutil.copyfile(thresholds, ASSETS / "class_thresholds.json")
         print(f"class_thresholds.json: copied from {thresholds.relative_to(REPO_ROOT)}")
+    write_other_sounds()
+    print("other_sounds.json: written from src/config.py")
     if args.labels_only:
         return
 
     exported = REPO_ROOT / "models" / "exported"
     model = args.model or next(
-        (p for p in (exported / "sahara_int8.tflite", exported / "sahara_fp32.tflite") if p.exists()), None
+        # FP32 first: the alert thresholds were tuned on full-precision scores (see the evaluation report).
+        (p for p in (exported / "sahara_fp32.tflite", exported / "sahara_int8.tflite") if p.exists()), None
     )
     if model is None:
         print("No exported classifier found. Run src/export/to_tflite.py first; the app will say the model is missing.")
@@ -81,8 +124,25 @@ def main() -> None:
     if args.yamnet:
         shutil.copyfile(args.yamnet, ASSETS / "yamnet.tflite")
         print(f"yamnet.tflite: {args.yamnet} ({args.yamnet.stat().st_size / 1024:.1f} KiB)")
+        class_map = args.yamnet.parent / "yamnet_class_map.csv"
+        if class_map.exists():
+            shutil.copyfile(class_map, ASSETS / "yamnet_class_map.csv")
+            print("yamnet_class_map.csv: copied (other sounds on)")
+        else:
+            print("yamnet_class_map.csv not found next to the model: other sounds stay off.")
     elif not (ASSETS / "yamnet.tflite").exists():
         print("yamnet.tflite missing: run app/tool/export_yamnet_tflite.py, then pass --yamnet.")
+
+    speech = speech_models_dir(args.speech_models)
+    if speech and (speech / "embedding_model.tflite").exists():
+        for name in ("melspectrogram.tflite", "embedding_model.tflite"):
+            shutil.copyfile(speech / name, ASSETS / name)
+        print(f"speech embedding models: copied from {speech} (CC BY-NC-SA 4.0, see docs/name_call.md)")
+    else:
+        print("speech embedding models missing: pip install openwakeword==0.5.1 or pass --speech-models; name calls stay off.")
+    for name in ("name_head.json", "speaker_encoder.bin"):
+        if not (ASSETS / name).exists():
+            print(f"{name} missing: run scripts/eval_name_call.py --export app/assets (docs/name_call.md).")
 
 
 if __name__ == "__main__":

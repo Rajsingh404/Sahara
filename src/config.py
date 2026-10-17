@@ -83,6 +83,29 @@ SOUND_CLASSES = [
     "glass_break", "appliance_beep",
 ]
 
+# Open-set layer: YAMNet's own 521 AudioSet classes, shown as low-priority "other sounds" when
+# none of SOUND_CLASSES fires. Mirrors app/android/.../core/OtherSoundsPolicy.kt.
+OTHER_SOUND_MIN_SCORE = 0.35
+# YAMNet classes never reported as "other sounds": constant or uninformative in a home.
+OTHER_SOUND_IGNORED = (
+    "Silence", "Speech", "Inside, small room", "Inside, large room or hall", "Outside, urban or manmade",
+    "Outside, rural or natural", "Environmental noise", "Static", "Noise", "Hum", "White noise", "Pink noise",
+    "Mains hum", "Music", "Narration, monologue", "Conversation", "Speech synthesizer", "Male speech, man speaking",
+    "Female speech, woman speaking", "Child speech, kid speaking", "Television", "Radio",
+)
+
+# YAMNet classes the trained head already covers: reported only through the head, never twice.
+OTHER_SOUND_COVERED_BY_HEAD = (
+    "Smoke detector, smoke alarm", "Fire alarm", "Doorbell", "Ding-dong", "Siren", "Civil defense siren",
+    "Police car (siren)", "Ambulance (siren)", "Fire engine, fire truck (siren)", "Emergency vehicle", "Knock",
+    "Dog", "Bark", "Yip", "Bow-wow", "Baby cry, infant cry", "Glass", "Shatter", "Breaking", "Beep, bleep",
+    "Microwave oven", "Alarm clock",
+)
+
+# Name calls: "someone is calling <name>", and who when the caller is enrolled. See
+# src/personalization/ and docs/name_call.md.
+NAME_CALL_WINDOW_EMBEDDINGS = 8  # 8 speech embeddings x 80 ms hop = 1.32 s of context
+
 # Synthetic mixing and iNoise chunking configuration
 SYNTHETIC_MIXES_PER_TARGET = 3
 SYNTHETIC_SNR_MIN_DB = -5.0

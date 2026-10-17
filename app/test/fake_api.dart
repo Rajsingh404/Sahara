@@ -34,6 +34,8 @@ class FakeSaharaApi implements SaharaApi {
     'thresholds': {for (final l in testLabels) l: 0.5},
     'settings': {'sensitivity': 0.0, 'vibrate': true},
     'wristband': {'state': 'disconnected'},
+    'personal': {'nameReady': true, 'name': 'Aryan', 'callerIdReady': true, 'otherSoundsReady': true},
+    'callers': [],
   });
 
   @override
@@ -41,9 +43,37 @@ class FakeSaharaApi implements SaharaApi {
   @override
   Future<void> stopListening() async => calls.add('stop');
   @override
-  Future<void> updateSettings({Set<String>? enabledClasses, double? sensitivity, bool? vibrate}) async {
+  Future<void> updateSettings({
+    Set<String>? enabledClasses,
+    double? sensitivity,
+    bool? vibrate,
+    bool? nameCalls,
+    bool? otherSounds,
+  }) async {
     calls.add('settings');
-    lastSettings = {'enabledClasses': enabledClasses, 'sensitivity': sensitivity, 'vibrate': vibrate};
+    lastSettings = {
+      'enabledClasses': enabledClasses,
+      'sensitivity': sensitivity,
+      'vibrate': vibrate,
+      'nameCalls': nameCalls,
+      'otherSounds': otherSounds,
+    };
+  }
+
+  final callers = <String, int>{};
+
+  @override
+  Future<Caller> enrollCaller(String name) async {
+    calls.add('enroll:$name');
+    callers[name] = (callers[name] ?? 0) + 1;
+    return Caller(name, callers[name]!);
+  }
+
+  @override
+  Future<List<Caller>> removeCaller(String name) async {
+    calls.add('remove:$name');
+    callers.remove(name);
+    return [for (final e in callers.entries) Caller(e.key, e.value)];
   }
 
   @override
@@ -59,7 +89,7 @@ class FakeSaharaApi implements SaharaApi {
   @override
   Future<bool> testWristband() async => true;
   @override
-  Future<void> simulateAlert(int classId) async => calls.add('simulate:$classId');
+  Future<void> simulateAlert(int classId, {String? caller}) async => calls.add('simulate:$classId');
   @override
   Future<void> dismissAlert() async => calls.add('dismiss');
   @override
