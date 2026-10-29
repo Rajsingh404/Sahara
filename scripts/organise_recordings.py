@@ -47,6 +47,9 @@ DRIVE_URL = (
 )
 DEFAULT_TEST_RECORDERS = ("mahi", "prachi")
 TEST_FRACTION = 0.4
+# Share of each ambient label moved from train to validation (test is never touched), so the alert thresholds can be
+# tuned on Indian audio. Off by default: tried 2026-10-30, it alerted on fewer Indian test clips (see the report).
+VAL_FRACTION = 0.0
 SPLIT_SEED = 42
 
 AMBIENT_FIELDS = [
@@ -169,6 +172,34 @@ def label_splits(rows: list[dict], test_fraction: float = TEST_FRACTION, seed: i
     return splits
 
 
+def val_splits(rows: list[dict], splits: dict[str, str], val_fraction: float = VAL_FRACTION,
+               seed: int = SPLIT_SEED) -> dict[str, str]:
+    """Move ~val_fraction of each ambient label (per upload and condition) from train to val; test clips stay put."""
+    import random
+
+    out = dict(splits)
+    strata: dict[tuple, dict[str, list[dict]]] = {}
+    for row in sorted(rows, key=lambda r: r["filename"]):
+        if row["dataset"] != "ambient" or splits[row["filename"]] != "train":
+            continue
+        key = (row["label"], row.get("upload") or "1", condition(row))
+        strata.setdefault(key, {}).setdefault(_duplicate_key(row), []).append(row)
+    for key in sorted(strata):
+        groups = list(strata[key].values())
+        n_label = sum(1 for r in rows if r["dataset"] == "ambient" and r["label"] == key[0]
+                      and (r.get("upload") or "1") == key[1] and condition(r) == key[2])
+        want = int(val_fraction * n_label + 0.5)
+        random.Random(f"{seed}-val-{'-'.join(key)}").shuffle(groups)
+        taken = 0
+        for group in groups[:-1]:  # the condition always keeps at least one clip in train
+            if taken >= want:
+                break
+            for row in group:
+                out[row["filename"]] = "val"
+            taken += len(group)
+    return out
+
+
 def recorder_splits(rows: list[dict], test_recorders: set[str]) -> dict[str, str]:
     return {r["filename"]: "test" if r["recorder"] in test_recorders else "train" for r in rows}
 
@@ -248,13 +279,13 @@ def summarise(rows: list[dict], splits: dict[str, str]) -> None:
     by_label = Counter((r["dataset"], r["label"]) for r in rows)
     by_split = Counter((r["dataset"], r["label"], splits[r["filename"]]) for r in rows)
     by_condition = Counter((r["dataset"], r["label"], condition(r), splits[r["filename"]]) for r in rows)
-    print("\nclips per label (train/test), and per recording condition:")
+    print("\nclips per label (train/val/test), and per recording condition:")
     for dataset, label in sorted(by_label):
-        tr, te = by_split[(dataset, label, "train")], by_split[(dataset, label, "test")]
-        print(f"  {dataset:8s} {label:15s} {by_label[(dataset, label)]:4d}  ({tr}/{te})")
+        tr, va, te = (by_split[(dataset, label, s)] for s in ("train", "val", "test"))
+        print(f"  {dataset:8s} {label:15s} {by_label[(dataset, label)]:4d}  ({tr}/{va}/{te})")
         for cond in sorted({c for d, lbl, c, _ in by_condition if (d, lbl) == (dataset, label)}):
-            ctr, cte = by_condition[(dataset, label, cond, "train")], by_condition[(dataset, label, cond, "test")]
-            print(f"      {cond:32s} {ctr:3d}/{cte}")
+            ctr, cva, cte = (by_condition[(dataset, label, cond, s)] for s in ("train", "val", "test"))
+            print(f"      {cond:32s} {ctr:3d}/{cva}/{cte}")
 
 
 def main() -> None:
@@ -287,6 +318,10 @@ def main() -> None:
         help="With --split-by recorder: comma-separated recorders held out as test (default: %(default)s).",
     )
     parser.add_argument(
+        "--val-fraction", type=float, default=VAL_FRACTION,
+        help="Share of each ambient label moved from train to validation (default %(default)s; 0 = none).",
+    )
+    parser.add_argument(
         "--metadata-only",
         action="store_true",
         help="Write metadata.csv files without copying audio.",
@@ -300,6 +335,8 @@ def main() -> None:
     if args.download:
         download(rows, args.source)
     splits = label_splits(rows) if args.split_by == "label" else recorder_splits(rows, test_recorders)
+    if args.val_fraction > 0:
+        splits = val_splits(rows, splits, args.val_fraction)
     missing = organise(rows, args.source, args.dest, splits, copy_audio=not args.metadata_only)
     summarise(rows, splits)
     if missing:

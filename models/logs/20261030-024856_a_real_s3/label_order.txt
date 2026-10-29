@@ -1,0 +1,8 @@
+smoke_alarm
+doorbell
+siren
+knocking
+dog_bark
+baby_cry
+glass_break
+appliance_beep

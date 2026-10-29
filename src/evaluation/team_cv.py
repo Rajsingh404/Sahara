@@ -40,7 +40,7 @@ from src.training.train import FINETUNE_REPLAY_RATIO, balanced_sample_weights, l
 
 def team_clips() -> list[dict]:
     clips: dict[str, dict] = {}
-    for split in ("train", "test"):
+    for split in ("train", "val", "test"):
         with (METADATA_DIR / f"{split}_manifest.csv").open(newline="", encoding="utf-8") as handle:
             for r in csv.DictReader(handle):
                 if r["source_type"] != "self_recorded":

@@ -10,6 +10,10 @@ classes independently):
 
 Search space per class: threshold in POLICY_THRESHOLD_GRID (0.05-0.95 by 0.01, then 0.96-0.999,
 since a confident model needs thresholds above 0.95) x hits_required in {1, 2, 3} (of 3 windows).
+Detection mixes the two kinds of validation audio: when a class has Indian team clips in validation, its detection is
+INDIAN_SHARE x (Indian clips alerted) + (1 - INDIAN_SHARE) x (public clips alerted), so a handful of Indian clips is not
+outvoted by a hundred public ones. False alarms pool all validation audio.
+
 Objective: maximise sum_c w_c * detection_c subject to sum_c false_alarms_c <= budget,
 with w_c = POSITIVE_CLASS_WEIGHTS (safety classes weigh 3). Solved by a Lagrangian sweep.
 """
@@ -33,6 +37,7 @@ from src.evaluation.streaming import HOP_MS, hop_scores
 from src.preprocessing.features import hop_cache_path, load_hop_cache
 
 HITS_OPTIONS = (1, 2, 3)
+INDIAN_SHARE = 0.5
 COOLDOWN_HOPS = COOLDOWN_MS // HOP_MS
 
 
@@ -58,15 +63,19 @@ class ClipScores:
     filepath: str
     labels: set[str]
     scores: np.ndarray  # [n_hops, 8], zeros on silent hops
+    indian: bool = False  # team recording (source_type self_recorded)
 
 
 def load_split_clip_scores(model, split: str = "val") -> list[ClipScores]:
     with (METADATA_DIR / f"{split}_manifest.csv").open(newline="", encoding="utf-8") as handle:
         rows = list(csv.DictReader(handle))
     clips: dict[str, set[str]] = {}
+    indian = set()
     for r in rows:
         if r["source_type"] == "synthetic_mixed":
             continue
+        if r["source_type"] == "self_recorded":
+            indian.add(r["filepath"])
         clips.setdefault(r["filepath"], set())
         if r["label"] in SOUND_CLASSES:
             clips[r["filepath"]].add(r["label"])
@@ -74,7 +83,7 @@ def load_split_clip_scores(model, split: str = "val") -> list[ClipScores]:
     for fp, labels in sorted(clips.items()):
         path = hop_cache_path(fp)
         if path.exists():
-            out.append(ClipScores(fp, labels, hop_scores(model, load_hop_cache(path))))
+            out.append(ClipScores(fp, labels, hop_scores(model, load_hop_cache(path)), fp in indian))
     return out
 
 
@@ -83,6 +92,9 @@ def class_curves(clips: list[ClipScores], grid: np.ndarray) -> dict[str, dict]:
     curves = {}
     for c_idx, c in enumerate(SOUND_CLASSES):
         pos = [cl.scores[:, c_idx] for cl in clips if c in cl.labels]
+        n_indian = sum(1 for cl in clips if c in cl.labels and cl.indian)
+        share = INDIAN_SHARE if 0 < n_indian < len(pos) else (1.0 if n_indian else 0.0)
+        is_indian = np.array([cl.indian for cl in clips if c in cl.labels])
         # Negative audio for this class, played back to back as one stream.
         neg = np.concatenate([cl.scores[:, c_idx] for cl in clips if c not in cl.labels] or [np.zeros(0)])
         hours = len(neg) * HOP_MS / 3_600_000
@@ -90,9 +102,12 @@ def class_curves(clips: list[ClipScores], grid: np.ndarray) -> dict[str, dict]:
         fa = np.zeros_like(det)
         for h_i, hits in enumerate(HITS_OPTIONS):
             for t_i, t in enumerate(grid):
-                det[h_i, t_i] = np.mean([count_alerts(s, t, hits) > 0 for s in pos]) if pos else 0.0
+                if pos:
+                    hit = np.array([count_alerts(s, t, hits) > 0 for s in pos])
+                    det[h_i, t_i] = (share * hit[is_indian].mean() if share else 0.0) + (
+                        (1 - share) * hit[~is_indian].mean() if share < 1 else 0.0)
                 fa[h_i, t_i] = count_alerts(neg, t, hits) / hours if hours else 0.0
-        curves[c] = {"detection": det, "fa_per_hour": fa, "clips": len(pos), "negative_hours": hours}
+        curves[c] = {"detection": det, "fa_per_hour": fa, "clips": len(pos), "indian_clips": n_indian, "negative_hours": hours}
     return curves
 
 

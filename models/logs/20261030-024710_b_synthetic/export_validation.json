@@ -1,0 +1,16 @@
+{
+  "run": "20261030-024710_b_synthetic",
+  "test_windows": 18697,
+  "fp32_max_abs_diff": 2.5331974029541016e-07,
+  "fp32_pass": true,
+  "keras_mAP": 0.7941,
+  "int8_mAP": 0.7801,
+  "int8_mAP_drop": 0.0139,
+  "int8_max_abs_diff": 0.09548872709274292,
+  "int8_pass": true,
+  "sizes_kib": {
+    "sahara_fp32.tflite": 1159.4,
+    "sahara_int8.tflite": 292.6,
+    "yamnet.tflite": 14662.0
+  }
+}

@@ -427,6 +427,7 @@ def _scan_synthetic_mixed(root: Path) -> list[dict]:
                     "source_type": "synthetic_mixed",
                     "duration_sec": float(r.get("duration_sec") or 0.0),
                     "recording_id": r["source_recording_id"],
+                    "bed": str(Path(r["source_background"]).resolve()) if r.get("source_background") else "",
                     "split": "train",
                 }
             )
@@ -507,7 +508,7 @@ def _stratified_split(rows: list[dict], train_frac: float, val_frac: float, seed
 def split_rows(rows: list[dict], train_frac: float, val_frac: float, seed: int) -> tuple[list, list, list]:
     """Rows with a fixed ``split`` (team recordings, synthetic mixes) keep it; the rest are split by group.
 
-    Synthetic mixes stay only if their source clip is in train, so a mix can never carry
+    Synthetic mixes stay only if their source clip and background bed are in train, so a mix can never carry
     a validation or test clip into training.
     """
     fixed = [r for r in rows if r.get("split")]
@@ -519,14 +520,15 @@ def split_rows(rows: list[dict], train_frac: float, val_frac: float, seed: int) 
         if row["source_type"] != "synthetic_mixed":
             splits[row["split"]].append(row)
     train_ids = {r["recording_id"] for r in train}
+    held_out = {str(Path(r["filepath"]).resolve()) for r in val + test}
     orphans = 0
     for row in synthetic:
-        if row["recording_id"] not in train_ids:
+        if row["recording_id"] not in train_ids or row.get("bed") in held_out:
             orphans += 1
             continue
         train.append(row)
     if orphans:
-        logger.warning("dropped %d synthetic rows whose source clip is not in train", orphans)
+        logger.warning("dropped %d synthetic rows whose source clip or bed is not in train", orphans)
     return train, val, test
 
 

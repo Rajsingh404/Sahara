@@ -1,0 +1,156 @@
+{
+  "run": "20261030-024710_b_synthetic",
+  "split": "test",
+  "thresholds": {
+    "smoke_alarm": 0.88,
+    "doorbell": 0.95,
+    "siren": 0.97,
+    "knocking": 0.66,
+    "dog_bark": 0.97,
+    "baby_cry": 0.65,
+    "glass_break": 0.96,
+    "appliance_beep": 0.85
+  },
+  "sets": {
+    "public": {
+      "clips": 1852,
+      "hours": 3.435,
+      "false_alarms": 11,
+      "false_alarms_per_hour": 3.2,
+      "per_class": {
+        "smoke_alarm": {
+          "count": 0,
+          "per_hour": 0.0
+        },
+        "doorbell": {
+          "count": 0,
+          "per_hour": 0.0
+        },
+        "siren": {
+          "count": 6,
+          "per_hour": 1.75
+        },
+        "knocking": {
+          "count": 0,
+          "per_hour": 0.0
+        },
+        "dog_bark": {
+          "count": 0,
+          "per_hour": 0.0
+        },
+        "baby_cry": {
+          "count": 1,
+          "per_hour": 0.29
+        },
+        "glass_break": {
+          "count": 2,
+          "per_hour": 0.58
+        },
+        "appliance_beep": {
+          "count": 2,
+          "per_hour": 0.58
+        }
+      },
+      "examples": [
+        {
+          "class": "glass_break",
+          "file": "o3nM5DO4wf8_7_17.wav",
+          "t_s": 661.0
+        },
+        {
+          "class": "baby_cry",
+          "file": "1-51805-A-33.wav",
+          "t_s": 948.0
+        },
+        {
+          "class": "siren",
+          "file": "13475.wav",
+          "t_s": 2694.0
+        },
+        {
+          "class": "siren",
+          "file": "167368.wav",
+          "t_s": 3350.0
+        },
+        {
+          "class": "siren",
+          "file": "202752.wav",
+          "t_s": 4040.0
+        },
+        {
+          "class": "siren",
+          "file": "202752.wav",
+          "t_s": 4055.0
+        },
+        {
+          "class": "glass_break",
+          "file": "20840.wav",
+          "t_s": 4161.0
+        },
+        {
+          "class": "appliance_beep",
+          "file": "218470.wav",
+          "t_s": 4443.5
+        },
+        {
+          "class": "appliance_beep",
+          "file": "65655.wav",
+          "t_s": 9153.5
+        },
+        {
+          "class": "siren",
+          "file": "7639.wav",
+          "t_s": 9405.0
+        },
+        {
+          "class": "siren",
+          "file": "7639.wav",
+          "t_s": 9416.0
+        }
+      ],
+      "hop_ms": 500
+    },
+    "indian_team": {
+      "clips": 24,
+      "hours": 0.038,
+      "false_alarms": 0,
+      "false_alarms_per_hour": 0.0,
+      "per_class": {
+        "smoke_alarm": {
+          "count": 0,
+          "per_hour": 0.0
+        },
+        "doorbell": {
+          "count": 0,
+          "per_hour": 0.0
+        },
+        "siren": {
+          "count": 0,
+          "per_hour": 0.0
+        },
+        "knocking": {
+          "count": 0,
+          "per_hour": 0.0
+        },
+        "dog_bark": {
+          "count": 0,
+          "per_hour": 0.0
+        },
+        "baby_cry": {
+          "count": 0,
+          "per_hour": 0.0
+        },
+        "glass_break": {
+          "count": 0,
+          "per_hour": 0.0
+        },
+        "appliance_beep": {
+          "count": 0,
+          "per_hour": 0.0
+        }
+      },
+      "examples": [],
+      "hop_ms": 500
+    }
+  }
+}

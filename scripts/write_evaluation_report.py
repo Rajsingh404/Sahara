@@ -298,6 +298,12 @@ def build(run: str | None = None) -> str:
             "cross-validation pool. The model was retrained with it and the retrain was not selected: on validation it "
             "scored 0.635 against 0.643, and on test it matched public mAP (0.790) with more false alarms (4.1/h). The "
             "Indian scores above rose because the test set changed, not the model.",
+            "- Tuning the alert thresholds on Indian audio was tried and not kept (2026-10-30, run "
+            "`20261030-024710_b_synthetic`, `organise_recordings.py --val-fraction 0.2`): 20 % of each team label moved "
+            "to validation, Indian clips counted for half of each class's detection. On the unchanged test set it alerted "
+            "on 15 of 41 Indian clips (18 now), 1 of 11 Indian knocks (2 now) and 21 of 27 smoke alarms (23 now), at 3.2 "
+            "false alarms/h. Six Indian knocks in validation are too few to set a threshold; more knock recordings are "
+            "the fix.",
             "- knocking, appliance_beep and doorbell have the lowest test AP; their detection is limited by the model, "
             "not the alert settings (see the budget trade-off above).",
             "- Synthetic results are reported separately and never as real-world performance.",
