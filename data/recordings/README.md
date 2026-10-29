@@ -63,7 +63,7 @@ standalone training set.
 - **Second upload (2026-10-30)**: 288 files; 189 were byte-identical to clips already here, 4 were exact copies of
   another new clip (microwave 12, 20, 28; baby cry 14) and were skipped, 95 were added. Who recorded them, and which
   name each "NotAryan" clip says, is not recorded. Several microwave, doorbell and baby cry files carry no recording
-  metadata (24 kHz stereo); confirm they were recorded, not downloaded.
+  metadata (24 kHz stereo); the team confirmed (2026-10-30) they recorded all of them.
 
 - **Aryan sort**: follows the team's final folder. Prachi's 15 clips are 12 positive / 3 negative; Mahi's "mahi 1–3"
   are positive (the team filed them under Aryan) and her "name 1–3" negative; Advika's "mahi" is negative.
@@ -72,6 +72,6 @@ standalone training set.
 - **Mahi washing machine**: the m4a clips are labelled `appliance_beep` on the assumption they contain the end-of-cycle
   beep; `washing-spinning.mp3` is `background`.
 - **mp3s with no recording metadata** (Advika baby cry 5–6 and microwave 7–9; Mahi dog 4, 7, 8, doorbell 1–2,
-  washing.mp3): confirm they were recorded by the team and not downloaded. `microwave 9.mp3` is 126 s long.
+  washing.mp3): confirmed recorded by the team (2026-10-30). `microwave 9.mp3` is 126 s long.
 - **Mahi dog barking**: several are exports of older phone videos (2022, 2024, earlier in 2026), and `dog5` is a screen
   recording.
