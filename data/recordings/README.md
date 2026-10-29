@@ -1,6 +1,7 @@
 # Team recordings
 
-Audio recorded by the four team members (Advika, Mahi, Prachi, Raj) in September 2026. The final Drive folder
+Audio recorded by the four team members (Advika, Mahi, Prachi, Raj) in September 2026, plus a second upload on
+2026-10-30 (95 new clips with no recorder given, filed as `team`, `upload` = 2). The final Drive folder
 (`Datasets/Indian_Ambient`, one sub-folder per class) is byte-identical to the earlier per-person upload; each clip's
 recorder comes from that upload and is kept in `original_path`. Audio never goes in git; this folder holds only the labels and generated metadata.
 
@@ -41,14 +42,14 @@ and always land on the same side.
 
 | Label | Train | Test | Conditions (train/test) |
 |---|---|---|---|
-| appliance_beep | 10 | 6 | Microwave·Advika 6/3, washing machine·Mahi 4/3 |
-| baby_cry | 4 | 2 | baby cry·Advika 4/2 |
-| knocking | 8 | 6 | door knocking·Advika 8/6 |
+| appliance_beep | 18 | 11 | Microwave·Advika 6/3, washing machine·Mahi 4/3, Microwave·team 8/5 |
+| baby_cry | 9 | 5 | baby cry·Advika 4/2, baby cry·team 5/3 |
+| knocking | 16 | 11 | door knocking·Advika 8/6, door knocking·team 8/5 |
 | dog_bark | 7 | 4 | dog barking·Mahi 7/4 |
-| doorbell | 10 | 6 | Doorbell·Mahi 4/2, Doorbell·Prachi 6/4 |
+| doorbell | 17 | 10 | Doorbell·Mahi 4/2, Doorbell·Prachi 6/4, doorbell·team 7/4 |
 | background | 36 | 24 | Hawker 6/4, Kitchen 6/5, Rain 6/4, TV 6/4, Temple 7/4, door/drawer 4/3, washing spin 1/0 |
 | aryan (positive) | 23 | 15 | every recorder on both sides |
-| not_aryan (negative) | 11 | 8 | every recorder on both sides |
+| not_aryan (negative) | 41 | 28 | every recorder on both sides; NotAryan·team 30/20 |
 
 Trade-off: a person's phone and room can now appear on both sides, so the Indian test set measures new clips in
 known conditions rather than an unseen person. The earlier rule is still available with
@@ -58,6 +59,11 @@ These clips are best used as an Indian-context evaluation and fine-tuning set on
 standalone training set.
 
 ## Open labelling questions
+
+- **Second upload (2026-10-30)**: 288 files; 189 were byte-identical to clips already here, 4 were exact copies of
+  another new clip (microwave 12, 20, 28; baby cry 14) and were skipped, 95 were added. Who recorded them, and which
+  name each "NotAryan" clip says, is not recorded. Several microwave, doorbell and baby cry files carry no recording
+  metadata (24 kHz stereo); confirm they were recorded, not downloaded.
 
 - **Aryan sort**: follows the team's final folder. Prachi's 15 clips are 12 positive / 3 negative; Mahi's "mahi 1–3"
   are positive (the team filed them under Aryan) and her "name 1–3" negative; Advika's "mahi" is negative.

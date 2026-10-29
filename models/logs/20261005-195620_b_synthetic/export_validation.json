@@ -1,16 +1,16 @@
 {
   "run": "20261005-195620_b_synthetic",
-  "test_windows": 18649,
+  "test_windows": 18697,
   "fp32_max_abs_diff": 2.682209014892578e-07,
   "fp32_pass": true,
-  "keras_mAP": 0.7873,
-  "int8_mAP": 0.7764,
-  "int8_mAP_drop": 0.0109,
-  "int8_max_abs_diff": 0.054111212491989136,
+  "keras_mAP": 0.7959,
+  "int8_mAP": 0.7843,
+  "int8_mAP_drop": 0.0116,
+  "int8_max_abs_diff": 0.07177424430847168,
   "int8_pass": true,
   "sizes_kib": {
     "sahara_fp32.tflite": 1159.4,
     "sahara_int8.tflite": 292.6,
-    "yamnet.tflite": 12575.3
+    "yamnet.tflite": 14662.0
   }
 }

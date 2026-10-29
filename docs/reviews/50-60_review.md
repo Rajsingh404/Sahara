@@ -16,7 +16,7 @@ internet permission. Architecture: [`docs/architecture.md`](../architecture.md).
 
 | Area | What is in place | Evidence |
 |---|---|---|
-| Data | 8 classes, each ≥ 150 real clips and ≥ 20 in test (smoke alarm 183/27 … dog bark 597/94); 12,425 background clips; 123 team recordings from Indian homes | `data/metadata/coverage.txt`, [`docs/dataset_card.md`](../dataset_card.md) |
+| Data | 8 classes, each ≥ 150 real clips and ≥ 20 in test (smoke alarm 183/27 … dog bark 597/94); 12,425 background clips; 168 team recordings from Indian homes | `data/metadata/coverage.txt`, [`docs/dataset_card.md`](../dataset_card.md) |
 | Data quality | Wrong label ids fixed (e.g. AudioSet "glass" was *Whoop*; 64 of 188 old clips mislabelled); splits with no recording on two sides | dataset card, `tests/test_dataset_split.py` |
 | Model | Frozen YAMNet + small Dense head, trained on exactly the 1 s windows the phone computes (parity test: max difference 0.0) | `tests/test_windowing.py` |
 | Alert rules | Per-class threshold and "windows needed", tuned on validation to ≤ 4 false alarms/hour | `data/metadata/class_thresholds.json` |
@@ -37,12 +37,12 @@ Model `models/logs/20261005-195620_b_synthetic/`, selected on validation only; t
 | False alarms on 3.4 h of busy background audio | **3.5 per hour** |
 | Alert tuning, same model, all 4.4 h of test audio | false alarms 43.7 → **6.1 per hour**; share of clips alerted 0.67 → 0.59 |
 | Test clips that raise the right alert | smoke alarm 23/27, siren 28/34, dog bark 76/90, baby cry 19/25, glass 47/97, doorbell 17/35, appliance beep 20/78, knocking 19/73 |
-| Indian team recordings, 5-fold cross-validation | mAP 0.721 without team data → **0.757** with it |
+| Indian team recordings, 5-fold cross-validation | mAP 0.797 without team data → **0.840** with it (168 clips) |
 | Phone app vs evaluated model | same alerts on 90/90 test clips (`app/tool/check_app_pipeline.py`) |
 | Model size on the phone | YAMNet 15.0 MB + head 1.2 MB + name-call models 8.1 MB; arm64 APK 45.8 MB |
 | Inference on Galaxy S24 | 20–29 ms per window (screen on), 47–49 ms (screen off); one window every 500 ms |
 | Custom sounds | separates distinctive household sounds from background (toilet flush perfectly); cannot tell names apart |
-| Name calls (team recordings, leave one recorder out) | AUC 0.895 vs background, 0.719 vs similar names; 76% of calls caught at the equal-error threshold |
+| Name calls (team recordings, leave one recorder out) | AUC 0.872 vs background, 0.743 vs 69 similar names; 79% of calls caught at the equal-error threshold |
 | Caller ID | enrolled caller named 29/38 = 76%; unenrolled shown as "Someone" 82% at cosine 0.70 |
 
 Earlier figures (mAP 0.618, 0.651, 0.783, 0.913) are superseded and should not be quoted; the report explains why.

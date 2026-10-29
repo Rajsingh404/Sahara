@@ -51,7 +51,7 @@ clips are the usual way to get many voices) and a retrain.
 `scripts/make_tts_name_clips.py` makes 1,781 clips of "Aryan" and near-miss names (Arya, Aryanshi, Ayaan, Rayan...)
 with 27 macOS voices, including Indian English and Hindi. `eval_name_call.py --tts-dir ... --tts-use both|pos|neg`
 adds them to training only; scoring stays on the team's real recordings (leave one recorder out). Every variant was
-worse than real recordings alone, so the shipped head does not use them:
+worse than real recordings alone, so the shipped head does not use them (measured on the first upload, 19 similar-name clips):
 
 | Training data | AUC vs background | AUC vs similar names | Calls caught at EER |
 |---|---:|---:|---:|
@@ -62,6 +62,20 @@ worse than real recordings alone, so the shipped head does not use them:
 
 The computer voices differ too much from people calling across a room on a phone microphone; the head partly learns
 "synthetic vs real" instead of the name. More **real** recordings of similar names are the way to improve this.
+
+## Real similar names (second upload, 2026-10-30)
+
+The team added 50 real similar-name clips. They have no named recorder, so each is scored in one leave-one-recorder-out
+fold and trained on in the others. Same 38 calls and 69 similar names in both rows:
+
+| Training data | AUC vs background | AUC vs similar names | AUC vs the 19 earlier similar names | Calls caught at EER | Similar names raising a call |
+|---|---:|---:|---:|---:|---:|
+| First upload only (earlier head) | 0.895 | 0.609 | 0.719 | 68% | 61% |
+| + 50 real similar names (shipped) | 0.872 | 0.743 | 0.755 | 79% | 36% |
+
+The earlier head was close to chance on the new clips (AUC 0.567). The gain on the 19 earlier clips, which share no
+session with the new ones, shows it is not just the new session being learned. Reproduce the first row with
+`eval_name_call.py --score-only-unattributed`.
 
 ## Rebuild the assets
 

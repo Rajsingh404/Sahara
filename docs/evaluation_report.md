@@ -16,10 +16,17 @@ Runs scored on the current validation set (`models/logs/runs_summary.csv`; 16 ea
 | Run | Policy score | Val mAP | Synthetic | Fine-tuned from | Features | Safety floor |
 |---|---:|---:|---|---|---|---|
 | `20261005-195620_b_synthetic` **(selected)** | 0.643 | 0.752 | True | – | processed | met |
+| `20261030-020836_b_synthetic` | 0.635 | 0.750 | True | – | processed | met |
+| `20261030-021250_e_ens5_real` | 0.622 | 0.749 | False | – | processed | met |
+| `20261030-021025_a_real_s2` | 0.618 | 0.747 | False | – | processed | met |
 | `20261005-195547_a_real` | 0.617 | 0.742 | False | – | processed | met |
+| `20261030-021200_a_real_s4` | 0.611 | 0.747 | False | – | processed | met |
+| `20261030-020933_a_real_s1` | 0.608 | 0.743 | False | – | processed | met |
+| `20261030-020801_a_real` | 0.604 | 0.747 | False | – | processed | met |
 | `20261005-195838_a_real_s4` | 0.600 | 0.746 | False | – | processed | met |
 | `20261005-195732_a_real_s2` | 0.598 | 0.743 | False | – | processed | met |
 | `20261005-195657_a_real_s1` | 0.596 | 0.742 | False | – | processed | met |
+| `20261030-021122_a_real_s3` | 0.586 | 0.745 | False | – | processed | met |
 | `20261005-195912_e_ens5_real` | 0.579 | 0.748 | False | – | processed | met |
 | `20261005-195803_a_real_s3` | 0.569 | 0.748 | False | – | processed | met |
 
@@ -74,18 +81,18 @@ Confusion matrix: `models/logs/20261005-195620_b_synthetic/confusion_test_public
 
 ### Indian team test set (team phone recordings, ~40 % of each label; self-recorded)
 
-mAP **0.764** over 5 classes present; 321 windows (257 background).
+mAP **0.879** over 5 classes present; 369 windows (257 background).
 
 | Class | AP | Precision | Recall | F1 | Positive windows | Clips detected |
 |---|---:|---:|---:|---:|---:|---:|
 | smoke_alarm | – | – | – | – | 0 | no test clips |
-| doorbell | 0.627 | 0.800 | 0.222 | 0.348 | 18 | 2/6 |
+| doorbell | 0.821 | 0.929 | 0.464 | 0.619 | 28 | 6/10 |
 | siren | – | – | – | – | 0 | no test clips |
-| knocking | 0.745 | 0.000 | 0.000 | 0.000 | 8 | 0/6 |
+| knocking | 0.869 | 1.000 | 0.059 | 0.111 | 17 | 2/11 |
 | dog_bark | 1.000 | 1.000 | 1.000 | 1.000 | 18 | 4/4 |
-| baby_cry | 0.654 | 1.000 | 0.500 | 0.667 | 8 | 1/2 |
+| baby_cry | 0.788 | 1.000 | 0.667 | 0.800 | 15 | 2/5 |
 | glass_break | – | – | – | – | 0 | no test clips |
-| appliance_beep | 0.796 | 1.000 | 0.583 | 0.737 | 12 | 1/6 |
+| appliance_beep | 0.917 | 1.000 | 0.588 | 0.741 | 34 | 4/11 |
 
 Wrong-class alerts while playing target clips: none.
 Confusion matrix: `models/logs/20261005-195620_b_synthetic/confusion_test_indian_team.png`.
@@ -129,26 +136,26 @@ All 2354 real test clips (4.41 h). False alarms count alerts for a class on any 
 
 ## Indian team recordings: 5-fold cross-validation
 
-All 123 team clips are tested once by a model that never heard them (`models/logs/20261005-195620_b_synthetic/team_cv.json`, mode `joint`, team weight ×10.0). *Without team data* = the same recipe trained on public data only.
+All 168 team clips are tested once by a model that never heard them (`models/logs/20261005-195620_b_synthetic/team_cv.json`, mode `joint`, team weight ×10.0). *Without team data* = the same recipe trained on public data only.
 
 | Class | AP without team data | AP with team data | Clips alerted without | Clips alerted with |
 |---|---:|---:|---:|---:|
 | smoke_alarm | – | – | no team clips | – |
-| doorbell | 0.463 | 0.626 | 3/16 | 3/16 |
+| doorbell | 0.577 | 0.662 | 9/27 | 9/27 |
 | siren | – | – | no team clips | – |
-| knocking | 0.587 | 0.577 | 0/14 | 0/14 |
+| knocking | 0.721 | 0.784 | 2/27 | 3/27 |
 | dog_bark | 0.933 | 0.934 | 8/11 | 10/11 |
-| baby_cry | 0.824 | 0.840 | 3/6 | 3/6 |
+| baby_cry | 0.912 | 0.931 | 9/14 | 9/14 |
 | glass_break | – | – | no team clips | – |
-| appliance_beep | 0.798 | 0.806 | 3/16 | 3/16 |
+| appliance_beep | 0.843 | 0.887 | 8/29 | 8/29 |
 
-mAP 0.721 → 0.757. Team background (60 clips, 5.9 min): 4 → 3 false alarms.
+mAP 0.797 → 0.840. Team background (60 clips, 5.9 min): 4 → 4 false alarms.
 
 ## Export (TFLite)
 
-FP32 head vs Keras on 18649 test windows: max |diff| 2.68e-07 (pass, limit 1e-4). INT8 mAP 0.7764 vs Keras 0.7873: drop 0.0109 (pass, limit 0.02). Sizes (KiB): sahara_fp32.tflite 1159.4, sahara_int8.tflite 292.6, yamnet.tflite 12575.3. Source: `models/logs/20261005-195620_b_synthetic/export_validation.json`.
+FP32 head vs Keras on 18697 test windows: max |diff| 2.68e-07 (pass, limit 1e-4). INT8 mAP 0.7843 vs Keras 0.7959: drop 0.0116 (pass, limit 0.02). Sizes (KiB): sahara_fp32.tflite 1159.4, sahara_int8.tflite 292.6, yamnet.tflite 14662.0. Source: `models/logs/20261005-195620_b_synthetic/export_validation.json`.
 
-**Shipped in `app/assets/`: the FP32 head** (1.2 MB) with `yamnet.tflite` (15.0 MB, embeddings and YAMNet scores). The alert thresholds were tuned on full-precision scores and several sit at 0.93–0.98, where INT8's score changes (up to 0.054) could move alerts; the INT8 saving (~0.9 MB) is not worth that risk.
+**Shipped in `app/assets/`: the FP32 head** (1.2 MB) with `yamnet.tflite` (15.0 MB, embeddings and YAMNet scores). The alert thresholds were tuned on full-precision scores and several sit at 0.93–0.98, where INT8's score changes (up to 0.072) could move alerts; the INT8 saving (~0.9 MB) is not worth that risk.
 
 End-to-end check (`app/tool/check_app_pipeline.py`): 90 test clips replayed through exactly what the app runs (16-bit PCM → 1 s ring buffer → VAD → `yamnet.tflite` → embedding pool → `sahara_classifier.tflite` → alert policy with the bundled settings) raise the same alerts as the evaluation pipeline in **90/90** clips; max score difference 0.0196. Source: `models/logs/20261005-195620_b_synthetic/app_pipeline_check.json`.
 
@@ -209,11 +216,11 @@ A separate model, not YAMNet: pretrained speech embeddings (openWakeWord) with a
 
 | Negatives | ROC AUC | Equal error rate |
 |---|---:|---:|
-| Background scenes (TV, kitchen, street...) | 0.895 | 21% |
-| Similar names (Arya, Aryanshi, other names) | 0.719 | 37% |
-| Both | 0.868 | 24% |
+| Background scenes (TV, kitchen, street...) | 0.872 | 19% |
+| Similar names (Arya, Aryanshi, other names) | 0.743 | 32% |
+| Both | 0.821 | 24% |
 
-At the equal-error threshold (0.69): 76% of calls caught, 19% of background pieces and 47% of similar names raise a false call.
+At the equal-error threshold (0.62): 79% of calls caught, 15% of background pieces and 36% of similar names raise a false call.
 
 Leave one clip out, the rest enrol each caller: **29/38 = 76%** named correctly.
 At the default accept threshold 0.70 (enrolled callers named correctly, unenrolled shown as "Someone"): `| 0.70 | 19/38 | 82% |`.
@@ -228,6 +235,7 @@ Not tested on hardware: no wristband parts were available. The firmware builds (
 
 - Window-level metrics count 0.5 s windows, so long clips weigh more than short ones; clip detection is the closer proxy for what a user experiences.
 - The Indian team test set is small (a few clips per class) and split per label, so the same phone or room can appear in train and test; there are no team recordings of smoke_alarm, siren or glass_break.
+- The team's second upload (2026-10-30: 45 sound clips, 50 similar-name clips) grew the Indian test set and the cross-validation pool. The model was retrained with it and the retrain was not selected: on validation it scored 0.635 against 0.643, and on test it matched public mAP (0.790) with more false alarms (4.1/h). The Indian scores above rose because the test set changed, not the model.
 - knocking, appliance_beep and doorbell have the lowest test AP; their detection is limited by the model, not the alert settings (see the budget trade-off above).
 - Synthetic results are reported separately and never as real-world performance.
 - Safety-critical classes (smoke_alarm, siren, glass_break) carry a 3x positive weight in the loss and a precision floor in model selection; how many windows each needs is tuned like every other class (see Alert settings), and their false alarms are listed above.
@@ -241,4 +249,5 @@ These earlier figures were produced before Phase 1–3 fixes, on small samples, 
 | mAP 0.618 | handoff notes / CLAUDE.md | ~171 AudioSet clips; no run record |
 | mAP 0.651 | `docs/dataset_card.md` (2026-08-28 baseline) | 64 of 188 AudioSet clips mislabelled; FSD50K `Alarm` as appliance_beep; test split could leak multi-label clips |
 | macro AP 0.783 | previous `docs/evaluation_report.md` | test classes of 3–7 clips at threshold 0.5; no run record |
+| Indian test mAP 0.764; team CV mAP 0.721 → 0.757 | earlier version of this report, README, paper | same model, measured before the team's second upload (21 Indian test clips, 123 CV clips); the set is larger now |
 | val mAP 0.913 and other Phase 3 runs of 2026-10-04 | Phase 3 summary | scored with Keras `predict()` on the Metal GPU, which returns wrong scores (see `src/models/classifier_head.py`); earlier dataset build |

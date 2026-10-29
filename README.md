@@ -17,14 +17,14 @@ whistle or a phone ringing), and **name calls**: someone calling the user's name
 | ML pipeline (`src/`, `scripts/`) | Done: verified data, phone-exact features, recorded runs, policy-aware tuning, evaluation, export |
 | Android app (`app/`) | Done and running on a Galaxy S24; battery and real-sound checks still pending |
 | Personalization (`src/personalization/`, `app/lib/personalization/`) | Done: evaluated; offered as experimental for household sounds (it cannot tell names apart) |
-| Name calls and caller ID (`app/android/.../speech/`, `scripts/eval_name_call.py`) | Done: evaluated on team recordings (76% of calls caught at the equal-error threshold; enrolled caller named 76%); not yet tried live on the phone |
+| Name calls and caller ID (`app/android/.../speech/`, `scripts/eval_name_call.py`) | Done: evaluated on team recordings (79% of calls caught at the equal-error threshold; enrolled caller named 76%); not yet tried live on the phone |
 | Other sounds (`OtherSoundsPolicy.kt`) | Done: quiet notice from YAMNet's own 521 classes, no vibration or wristband |
 | Wristband firmware (`firmware/esp32_wristband/`) | Builds; **not tested on hardware** (no parts yet) |
 
 Results, with the run folder each number comes from: [docs/evaluation_report.md](docs/evaluation_report.md).
 Headline (test data, run `20261005-195620_b_synthetic`): public test mAP 0.789; false alarms on 3.4 h of busy
-background audio 3.5 per hour; smoke alarm 23/27 and siren 28/34 test clips alerted; Indian recordings 5-fold
-cross-validation mAP 0.757.
+background audio 3.5 per hour; smoke alarm 23/27 and siren 28/34 test clips alerted; Indian recordings (168 clips) 5-fold
+cross-validation mAP 0.797 without them in training, 0.840 with them.
 
 ## How it works
 

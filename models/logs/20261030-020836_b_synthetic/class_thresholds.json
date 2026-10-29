@@ -1,0 +1,67 @@
+{
+  "smoke_alarm": {
+    "threshold": 0.84,
+    "hits_required": 2,
+    "val_clip_detection": 0.8889,
+    "val_false_alarms_per_hour": 0.458,
+    "val_clips": 27
+  },
+  "doorbell": {
+    "threshold": 0.91,
+    "hits_required": 1,
+    "val_clip_detection": 0.4286,
+    "val_false_alarms_per_hour": 0.229,
+    "val_clips": 35
+  },
+  "siren": {
+    "threshold": 0.93,
+    "hits_required": 1,
+    "val_clip_detection": 0.8929,
+    "val_false_alarms_per_hour": 1.152,
+    "val_clips": 28
+  },
+  "knocking": {
+    "threshold": 0.89,
+    "hits_required": 1,
+    "val_clip_detection": 0.4103,
+    "val_false_alarms_per_hour": 0.0,
+    "val_clips": 78
+  },
+  "dog_bark": {
+    "threshold": 0.98,
+    "hits_required": 1,
+    "val_clip_detection": 0.7442,
+    "val_false_alarms_per_hour": 0.234,
+    "val_clips": 86
+  },
+  "baby_cry": {
+    "threshold": 0.95,
+    "hits_required": 2,
+    "val_clip_detection": 0.6364,
+    "val_false_alarms_per_hour": 0.455,
+    "val_clips": 22
+  },
+  "glass_break": {
+    "threshold": 0.96,
+    "hits_required": 1,
+    "val_clip_detection": 0.4124,
+    "val_false_alarms_per_hour": 1.161,
+    "val_clips": 97
+  },
+  "appliance_beep": {
+    "threshold": 0.84,
+    "hits_required": 2,
+    "val_clip_detection": 0.2667,
+    "val_false_alarms_per_hour": 0.234,
+    "val_clips": 75
+  },
+  "_meta": {
+    "run": "20261030-020836_b_synthetic",
+    "split": "val",
+    "method": "policy-aware (src/evaluation/policy_tuning.py)",
+    "false_alarm_budget_per_hour": 4.0,
+    "val_total_false_alarms_per_hour": 3.923,
+    "val_clips": 2303,
+    "val_negative_hours_max": 4.4
+  }
+}

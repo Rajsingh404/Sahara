@@ -16,22 +16,22 @@ Native-label mappings live only in `src/data/label_map.py`.
 | Class | AudioSet | ESC-50 | FSD50K | Team (Indian) | Synthetic (train only) | **Real total** | **Real test** |
 |---|---|---|---|---|---|---|---|
 | smoke_alarm | 129/27/27 | – | – | – | 387/0/0 | 183 | 27 |
-| doorbell | 67/11/14 | – | 99/24/21 | 10/0/6 | 528/0/0 | 252 | 41 |
+| doorbell | 67/11/14 | – | 99/24/21 | 17/0/10 | 528/0/0 | 263 | 45 |
 | siren | 24/4/6 | 25/4/11 | 95/20/17 | – | 432/0/0 | 206 | 34 |
-| knocking | 73/10/14 | 30/8/2 | 256/60/57 | 8/0/6 | 1101/0/0 | 524 | 79 |
+| knocking | 73/10/14 | 30/8/2 | 256/60/57 | 16/0/11 | 1101/0/0 | 537 | 84 |
 | dog_bark | 10/0/0 | 24/5/11 | 376/81/79 | 7/0/4 | 1251/0/0 | 597 | 94 |
-| baby_cry | 74/15/17 | 25/7/8 | – | 4/0/2 | 309/0/0 | 152 | 27 |
+| baby_cry | 74/15/17 | 25/7/8 | – | 9/0/5 | 309/0/0 | 160 | 30 |
 | glass_break | 71/13/13 | 30/5/5 | 352/79/79 | – | 1359/0/0 | 647 | 97 |
-| appliance_beep | 177/37/47 | 30/5/5 | 147/33/26 | 10/0/6 | 1092/0/0 | 523 | 84 |
+| appliance_beep | 177/37/47 | 30/5/5 | 147/33/26 | 18/0/11 | 1092/0/0 | 536 | 89 |
 | background | – | 1228/265/267 | 7008/1494/1498 | 36/0/24 | – | 12,425 (+ DESED 420/98/87) | 1,876 |
 
 Targets from the build plan: ≥ 150 real clips per class and ≥ 20 real clips in test. **Every class meets both.**
 (smoke_alarm and baby_cry were raised from 20 clips each with the Hugging Face AudioSet mirror; doorbell, knocking and
 appliance_beep from AudioSet's balanced/eval sets.)
 
-Manifest rows: 21,968 (train 17,304, val 2,305, test 2,359); 21,940 unique audio files (a few clips carry two labels).
+Manifest rows: 22,013 (train 17,332, val 2,305, test 2,376); 21,985 unique audio files (a few clips carry two labels).
 Real rows: FSD50K 11,901 (of which 10,000 background), ESC-50 2,000 (1,760 background), AudioSet 880, DESED 605,
-team recordings 123. Synthetic rows: 6,459.
+team recordings 168. Synthetic rows: 6,459 (built before the team's second upload, so its 45 clips are not in any mix).
 
 ---
 
@@ -131,23 +131,24 @@ real-world performance.
 
 ## Team recordings (Indian context)
 
-180 clips recorded on phones in September 2026. `data/recordings/label_map.csv` (Drive file ids) is the source of
+275 clips recorded on phones: 180 in September 2026 and 95 in a second upload on 2026-10-30 (recorder not given, filed as `team`). `data/recordings/label_map.csv` (Drive file ids) is the source of
 truth; `scripts/organise_recordings.py --source <Drive Indian_Ambient folder> --dest data/raw` rebuilds the layout.
 
 Split **per label** (not per person; every recording has its own conditions): ~40 % of each label goes to test,
-spread across the label's recording conditions (Drive folder × recorder); identical clips stay together.
+spread across the label's recording conditions (Drive folder × recorder); identical clips stay together. Each upload
+is split on its own (`upload` column), so new clips never move an earlier one.
 Details: `data/recordings/README.md`.
 
 | Label | Train | Test |
 |---|---|---|
-| appliance_beep | 10 | 6 |
-| baby_cry | 4 | 2 |
-| knocking | 8 | 6 |
+| appliance_beep | 18 | 11 |
+| baby_cry | 9 | 5 |
+| knocking | 16 | 11 |
 | dog_bark | 7 | 4 |
-| doorbell | 10 | 6 |
+| doorbell | 17 | 10 |
 | background | 36 | 24 |
 | smoke_alarm, siren, glass_break | 0 | 0 |
-| "Aryan" positive / negative (personalization) | 23 / 11 | 15 / 8 |
+| "Aryan" positive / negative (personalization) | 23 / 41 | 15 / 28 |
 
 Used as an Indian-context fine-tuning set (train side) and evaluation set (test side), not as the main training set.
 Every recorded class is now on both sides. smoke_alarm, siren and glass_break have no team recordings yet.
@@ -158,6 +159,6 @@ Every recorded class is now on both sides. smoke_alarm, siren and glass_break ha
 
 1. **iNoise is missing** everywhere (Mac, Drive, old zip). It needs a free IEEE DataPort login.
 2. **No team recordings of smoke_alarm, siren or glass_break**; the Indian-context results cover five classes.
-3. The team set is small (123 clips); Indian results use 5-fold cross-validation over all of it (see the report).
+3. The team set is small (168 clips); Indian results use 5-fold cross-validation over all of it (see the report).
 4. FSD50K is streamed from Google Drive for Desktop; the first read of each file is slow (~2 s), and a network drop
    can stall a read (the pipeline skips reads that take over 2 minutes).

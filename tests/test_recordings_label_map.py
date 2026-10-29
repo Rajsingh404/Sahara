@@ -12,7 +12,7 @@ _spec = importlib.util.spec_from_file_location(
 organise_recordings = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(organise_recordings)
 
-RECORDERS = {"advika", "mahi", "prachi", "raj"}
+RECORDERS = {"advika", "mahi", "prachi", "raj", "team"}  # "team": second upload, recorder not given
 
 
 def test_label_map_rows_are_valid():
@@ -75,3 +75,11 @@ def test_label_split_keeps_identical_audio_together():
 def test_label_split_is_reproducible():
     rows = organise_recordings.load_label_map()
     assert organise_recordings.label_splits(rows) == organise_recordings.label_splits(rows)
+
+
+def test_later_uploads_never_move_earlier_clips():
+    rows = organise_recordings.load_label_map()
+    first = [r for r in rows if (r.get("upload") or "1") == "1"]
+    assert len(first) < len(rows)
+    alone, together = organise_recordings.label_splits(first), organise_recordings.label_splits(rows)
+    assert all(together[f] == side for f, side in alone.items())

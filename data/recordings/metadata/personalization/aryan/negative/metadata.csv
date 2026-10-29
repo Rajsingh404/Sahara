@@ -1,20 +1,70 @@
 filename,label,recorder,split,recording_device,timestamp,duration_sec,notes,source_path
-aryan_neg__advika__01.m4a,not_aryan,advika,train,iPhone_VoiceMemos,2026-09-17_advika,4.03,confirmed by the team's final sort,NotAryan/arya.m4a
-aryan_neg__advika__02.m4a,not_aryan,advika,train,iPhone_VoiceMemos,2026-09-17_advika,4.63,confirmed by the team's final sort,NotAryan/aryanshi.m4a
+aryan_neg__advika__01.m4a,not_aryan,advika,test,iPhone_VoiceMemos,2026-09-17_advika,4.03,confirmed by the team's final sort,NotAryan/arya.m4a
+aryan_neg__advika__02.m4a,not_aryan,advika,test,iPhone_VoiceMemos,2026-09-17_advika,4.63,confirmed by the team's final sort,NotAryan/aryanshi.m4a
 aryan_neg__advika__03.m4a,not_aryan,advika,train,iPhone_VoiceMemos,2026-09-17_advika,3.07,confirmed by the team's final sort,NotAryan/mahi.m4a
-aryan_neg__mahi__01.m4a,not_aryan,mahi,test,phone_m4a,2026-09-17_mahi,2.28,confirmed by the team's final sort,NotAryan/name 2.m4a
-aryan_neg__mahi__02.m4a,not_aryan,mahi,test,phone_m4a,2026-09-17_mahi,3.14,confirmed by the team's final sort,NotAryan/name 3.m4a
+aryan_neg__mahi__01.m4a,not_aryan,mahi,train,phone_m4a,2026-09-17_mahi,2.28,confirmed by the team's final sort,NotAryan/name 2.m4a
+aryan_neg__mahi__02.m4a,not_aryan,mahi,train,phone_m4a,2026-09-17_mahi,3.14,confirmed by the team's final sort,NotAryan/name 3.m4a
 aryan_neg__mahi__03.m4a,not_aryan,mahi,test,phone_m4a,2026-09-17_mahi,1.94,confirmed by the team's final sort,NotAryan/name.m4a
-aryan_neg__prachi__01.m4a,not_aryan,prachi,test,phone_m4a,2026-10-04_prachi,8.09,sorted by the team in the final folder,NotAryan/Copy of New Recording 2.m4a
+aryan_neg__prachi__01.m4a,not_aryan,prachi,train,phone_m4a,2026-10-04_prachi,8.09,sorted by the team in the final folder,NotAryan/Copy of New Recording 2.m4a
 aryan_neg__prachi__02.m4a,not_aryan,prachi,test,phone_m4a,2026-09-18_prachi,3.99,sorted by the team in the final folder,NotAryan/Copy of New Recording 3.m4a
-aryan_neg__prachi__03.m4a,not_aryan,prachi,test,phone_m4a,2026-09-18_prachi,2.20,sorted by the team in the final folder,NotAryan/Copy of New Recording 6.m4a
+aryan_neg__prachi__03.m4a,not_aryan,prachi,train,phone_m4a,2026-09-18_prachi,2.20,sorted by the team in the final folder,NotAryan/Copy of New Recording 6.m4a
 aryan_neg__raj__01.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.05,,NotAryan/Not aryan 10.m4a
-aryan_neg__raj__02.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.56,,NotAryan/Not aryan 2.m4a
+aryan_neg__raj__02.m4a,not_aryan,raj,test,phone_m4a,2026-09-30_raj,3.56,,NotAryan/Not aryan 2.m4a
 aryan_neg__raj__03.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,4.07,,NotAryan/Not aryan 3.m4a
-aryan_neg__raj__04.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,4.33,,NotAryan/Not aryan 4.m4a
-aryan_neg__raj__05.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,4.42,,NotAryan/Not aryan 5.m4a
+aryan_neg__raj__04.m4a,not_aryan,raj,test,phone_m4a,2026-09-30_raj,4.33,,NotAryan/Not aryan 4.m4a
+aryan_neg__raj__05.m4a,not_aryan,raj,test,phone_m4a,2026-09-30_raj,4.42,,NotAryan/Not aryan 5.m4a
 aryan_neg__raj__06.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.39,,NotAryan/Not aryan 6.m4a
 aryan_neg__raj__07.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.22,,NotAryan/Not aryan 7.m4a
 aryan_neg__raj__08.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.99,,NotAryan/Not aryan 8.m4a
 aryan_neg__raj__09.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.14,,NotAryan/Not aryan 9.m4a
-aryan_neg__raj__10.m4a,not_aryan,raj,train,phone_m4a,2026-09-30_raj,3.82,,NotAryan/Not aryan.m4a
+aryan_neg__raj__10.m4a,not_aryan,raj,test,phone_m4a,2026-09-30_raj,3.82,,NotAryan/Not aryan.m4a
+aryan_neg__team__01.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.37,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 2.m4a
+aryan_neg__team__02.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,3.31,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 3.m4a
+aryan_neg__team__03.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,4.16,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 4.m4a
+aryan_neg__team__04.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,3.39,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 5.m4a
+aryan_neg__team__05.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,3.99,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 6.m4a
+aryan_neg__team__06.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,5.10,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 7.m4a
+aryan_neg__team__07.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,3.39,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 8.m4a
+aryan_neg__team__08.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,2.88,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 9.m4a
+aryan_neg__team__09.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,3.31,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 10.m4a
+aryan_neg__team__10.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.54,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 11.m4a
+aryan_neg__team__11.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,4.25,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 12.m4a
+aryan_neg__team__12.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,4.50,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 13.m4a
+aryan_neg__team__13.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,3.39,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 14.m4a
+aryan_neg__team__14.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.71,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 15.m4a
+aryan_neg__team__15.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,2.62,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 16.m4a
+aryan_neg__team__16.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,2.62,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 17.m4a
+aryan_neg__team__17.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.45,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 18.m4a
+aryan_neg__team__18.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,3.48,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 19.m4a
+aryan_neg__team__19.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.79,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 20.m4a
+aryan_neg__team__20.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.71,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 21.m4a
+aryan_neg__team__21.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.54,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 22.m4a
+aryan_neg__team__22.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,3.99,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 23.m4a
+aryan_neg__team__23.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,3.73,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 24.m4a
+aryan_neg__team__24.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,3.90,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 25.m4a
+aryan_neg__team__25.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,3.65,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 26.m4a
+aryan_neg__team__26.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,3.56,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 27.m4a
+aryan_neg__team__27.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,3.56,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 28.m4a
+aryan_neg__team__28.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,2.79,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 29.m4a
+aryan_neg__team__29.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,4.25,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 30.m4a
+aryan_neg__team__30.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,3.65,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 31.m4a
+aryan_neg__team__31.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,3.56,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 32.m4a
+aryan_neg__team__32.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.71,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 33.m4a
+aryan_neg__team__33.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,3.65,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 34.m4a
+aryan_neg__team__34.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.71,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 35.m4a
+aryan_neg__team__35.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.71,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 36.m4a
+aryan_neg__team__36.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,3.39,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 37.m4a
+aryan_neg__team__37.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.62,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 38.m4a
+aryan_neg__team__38.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,3.65,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 39.m4a
+aryan_neg__team__39.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.62,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 40.m4a
+aryan_neg__team__40.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,3.05,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 41.m4a
+aryan_neg__team__41.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,2.79,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 42.m4a
+aryan_neg__team__42.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,3.82,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 43.m4a
+aryan_neg__team__43.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,3.22,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 44.m4a
+aryan_neg__team__44.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.97,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 45.m4a
+aryan_neg__team__45.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.71,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 46.m4a
+aryan_neg__team__46.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,2.62,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 47.m4a
+aryan_neg__team__47.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.28,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 48.m4a
+aryan_neg__team__48.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.28,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 49.m4a
+aryan_neg__team__49.m4a,not_aryan,team,train,phone_m4a,2026-10-29_team,2.37,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording 50.m4a
+aryan_neg__team__50.m4a,not_aryan,team,test,phone_m4a,2026-10-29_team,4.93,"second upload (2026-10-29), recorder not given; which name is said is not recorded",NotAryan/Copy of New Recording.m4a

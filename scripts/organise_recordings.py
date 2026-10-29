@@ -136,10 +136,11 @@ def label_splits(rows: list[dict], test_fraction: float = TEST_FRACTION, seed: i
     import random
 
     splits: dict[str, str] = {}
+    # Each upload is split on its own, so adding clips never moves an earlier clip between train and test.
     by_label: dict[tuple, list[dict]] = {}
     for row in rows:
-        by_label.setdefault((row["dataset"], row["label"]), []).append(row)
-    for (dataset, label), label_rows in sorted(by_label.items()):
+        by_label.setdefault((row["dataset"], row["label"], row.get("upload") or "1"), []).append(row)
+    for (dataset, label, upload), label_rows in sorted(by_label.items()):
         n = len(label_rows)
         target = int(test_fraction * n + 0.5)
         if n >= 2:
@@ -155,7 +156,7 @@ def label_splits(rows: list[dict], test_fraction: float = TEST_FRACTION, seed: i
         alloc = {c: int(q) for c, q in quota.items()}
         for c in sorted(quota, key=lambda c: (-(quota[c] - alloc[c]), c))[: max(0, target - sum(alloc.values()))]:
             alloc[c] += 1
-        rng = random.Random(f"{seed}-{dataset}-{label}")
+        rng = random.Random(f"{seed}-{dataset}-{label}" + ("" if upload == "1" else f"-{upload}"))
         for c in sorted(strata):
             gs = strata[c]
             rng.shuffle(gs)

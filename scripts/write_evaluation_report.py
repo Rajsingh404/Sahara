@@ -294,6 +294,10 @@ def build(run: str | None = None) -> str:
             "proxy for what a user experiences.",
             "- The Indian team test set is small (a few clips per class) and split per label, so the same phone or room "
             "can appear in train and test; there are no team recordings of smoke_alarm, siren or glass_break.",
+            "- The team's second upload (2026-10-30: 45 sound clips, 50 similar-name clips) grew the Indian test set and the "
+            "cross-validation pool. The model was retrained with it and the retrain was not selected: on validation it "
+            "scored 0.635 against 0.643, and on test it matched public mAP (0.790) with more false alarms (4.1/h). The "
+            "Indian scores above rose because the test set changed, not the model.",
             "- knocking, appliance_beep and doorbell have the lowest test AP; their detection is limited by the model, "
             "not the alert settings (see the budget trade-off above).",
             "- Synthetic results are reported separately and never as real-world performance.",
@@ -309,6 +313,7 @@ def build(run: str | None = None) -> str:
             "| mAP 0.618 | handoff notes / CLAUDE.md | ~171 AudioSet clips; no run record |",
             "| mAP 0.651 | `docs/dataset_card.md` (2026-08-28 baseline) | 64 of 188 AudioSet clips mislabelled; FSD50K `Alarm` as appliance_beep; test split could leak multi-label clips |",
             "| macro AP 0.783 | previous `docs/evaluation_report.md` | test classes of 3–7 clips at threshold 0.5; no run record |",
+            "| Indian test mAP 0.764; team CV mAP 0.721 → 0.757 | earlier version of this report, README, paper | same model, measured before the team's second upload (21 Indian test clips, 123 CV clips); the set is larger now |",
             "| val mAP 0.913 and other Phase 3 runs of 2026-10-04 | Phase 3 summary | scored with Keras `predict()` on the Metal GPU, which returns wrong scores (see `src/models/classifier_head.py`); earlier dataset build |",
             ""]
     return "\n".join(out)
