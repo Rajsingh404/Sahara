@@ -95,7 +95,7 @@ flowchart LR
 ## 4. Name calls and caller ID
 
 A separate speech path, used only when YAMNet's speech score is at least 0.2: openWakeWord's melspectrogram and
-embedding models (ONNX, pretrained) turn the last 1.5 s into speech embeddings, and a small logistic head scores the
+embedding models (pretrained) turn the last 2 s into speech embeddings, and a small logistic head scores the
 name "Aryan" for any voice. When it fires, a pretrained GE2E speaker encoder (Resemblyzer weights, run in plain Kotlin)
 compares the voice with the callers the family enrolled (a few taps of them saying the name); a match at cosine ≥ 0.70
 names the caller, otherwise the alert says "Someone". The alert goes to the screen, vibration and the wristband

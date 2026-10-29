@@ -1,0 +1,452 @@
+%%%%%%%%%%%%%%%%%%%% sahara.tex (Springer SVProc) %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Every number comes from the selected run folder
+% (models/logs/20261005-195620_b_synthetic/), docs/evaluation_report.md,
+% docs/name_call_eval.md or docs/dataset_card.md. Red [TBD ...] markers are
+% details nobody has supplied or measured yet; PLACEHOLDERS.md lists them.
+% Do not submit while any remain.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{svproc}
+
+\usepackage{url}
+\def\UrlFont{\rmfamily}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,fit,backgrounds,calc}
+
+\newcommand{\TBD}[1]{\textcolor{red}{\textbf{[TBD: #1]}}}
+\newcommand{\tbd}{\textcolor{red}{\textbf{TBD}}}
+\newcommand{\INR}{Rs.\,}
+
+\begin{document}
+\mainmatter
+
+\title{SAHARA: Safety-Weighted, Privacy-Preserving On-Device Sound Awareness for Deaf and Hard-of-Hearing Users in Indian Homes}
+\titlerunning{SAHARA: Safety-Weighted On-Device Sound Awareness}
+
+\author{Raj Singh \and Prachi Teotia \and Advika \TBD{surname} \and Mahi \TBD{surname} \and \TBD{guide name}}
+\authorrunning{R. Singh et al.}
+\tocauthor{Raj Singh, Prachi Teotia, Advika, Mahi}
+
+\institute{\TBD{Department}, Mukesh Patel School of Technology Management and Engineering, SVKM's NMIMS, Mumbai, India,\\
+\email{\TBD{corresponding e-mail}}}
+
+\maketitle
+
+\begin{abstract}
+Deaf and hard-of-hearing (DHH) people miss safety-critical sounds such as smoke alarms and sirens, yet sound-recognition aids rarely report how often they alert falsely, often rely on the cloud, and are seldom tested outside Western homes. We present SAHARA, a fully on-device Android system that runs a frozen YAMNet encoder with a 296k-parameter head and drives a \INR 870 ESP32 haptic wristband. Each class's threshold and temporal rule are tuned jointly against an explicit false-alarm budget, with safety classes weighted three times. SAHARA also shows open-set notices from YAMNet's 521 classes and alerts users when their name is called, naming enrolled callers. On held-out public data it reaches 0.789 mAP at 3.5 false alarms per hour of background audio, and tuning cuts false alarms from 43.7 to 6.1 per hour. On 123 recordings from Indian homes, cross-validated mAP rises from 0.721 to 0.757 when they join training.
+\keywords{assistive technology, deaf and hard of hearing, sound event detection, on-device machine learning, haptic feedback, keyword spotting}
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+More than 430 million people worldwide live with disabling hearing loss \cite{who2021}, and the 2011 Census of India recorded over five million people with a hearing disability \cite{census2011}. For them, everyday acoustic events carry information that hearing people take for granted: a doorbell signals a visitor, a microwave beep signals that food is ready, a smoke alarm or approaching siren signals danger, and a family member calling their name signals that someone needs them. Surveys of DHH users consistently rank alarms and safety sounds as the most important to be notified about, and they prefer glanceable, wearable and private notifications \cite{bragg2016,findlater2019}.
+
+Deep audio embeddings trained on AudioSet \cite{gemmeke2017} have made sound recognition on phones and watches practical \cite{jain2020homesound,jain2020soundwatch,jain2022protosound,laput2018}. Three gaps remain for real-world assistive deployment. First, systems are usually evaluated with symmetric, threshold-free metrics such as accuracy or mean average precision, yet what users experience is a stream of alerts: a missed fire alarm can be fatal, and frequent false alerts lead users to ignore or disable the aid \cite{jain2020homesound}. Second, many prototypes stream audio or features to a server, which is unacceptable for an always-listening device in the home. Third, public benchmarks come mostly from Western acoustic environments; Indian homes add pressure-cooker whistles, temple bells, street hawkers, ceiling fans and monsoon rain, and their doorbells are often melodic chimes.
+
+This paper presents SAHARA (Sound-based Alert and Haptic Assistance for Real-time Awareness), an end-to-end system that addresses these gaps. Our contributions are:
+\begin{enumerate}
+\item \textbf{Alerting tuned to a false-alarm budget.} Each class's score threshold and the number of recent windows that must exceed it are chosen jointly on validation data to maximise a safety-weighted share of events alerted, subject to a total budget of 4 false alarms per hour. On the same model this cuts false alarms on test audio from 43.7 to 6.1 per hour (Sect.~\ref{sec:asym}).
+\item \textbf{Privacy by construction.} All inference runs on the phone. Audio stays in a one-second ring buffer in RAM, the release build has no Internet permission, and the wristband receives only a class identifier and an intensity byte (Sect.~\ref{sec:system}).
+\item \textbf{Personal and open-set awareness.} A speech-embedding spotter alerts the user when their name is called by any voice, and a speaker encoder names enrolled callers or reports ``someone''. YAMNet's 521 AudioSet classes provide low-priority notices for sounds outside the trained set (Sect.~\ref{sec:personal}).
+\item \textbf{SAHARA-IN}, 123 clips recorded in Indian homes and streets plus 57 name-call clips, with results reported separately from public data (Sect.~\ref{sec:data}).
+\item \textbf{An open, low-cost wristband}: an ESP32 BLE peripheral with a coin vibration motor, a bill of materials of about \INR 870 and battery-aware firmware (Sect.~\ref{sec:band}).
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Related Work}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Sound Awareness for DHH Users.} Early work studied how to visualise non-speech sound \cite{matthews2006} and how DHH users want to be notified \cite{bragg2016,findlater2019}. Jain et al. deployed HomeSound, an in-home sound awareness system, and found that false alerts quickly erode trust \cite{jain2020homesound}; SoundWatch moved recognition to a smartwatch and analysed the trade-offs between accuracy, latency and battery life \cite{jain2020soundwatch}. ProtoSound personalises recognition from a few user-recorded examples with prototypical networks \cite{jain2022protosound,snell2017}, and Goodman et al. studied user-driven personalisation \cite{goodman2021}. These systems report accuracy on clips rather than alerts per hour of real audio, and they were evaluated in North American homes.
+
+\paragraph{Audio Embeddings and On-Device Inference.} VGGish \cite{hershey2017}, PANNs \cite{kong2020} and YAMNet \cite{yamnet}, a MobileNetV1 \cite{howard2017} trained on AudioSet, provide transferable embeddings. Ubicoustics showed that such models transfer to real-world activity recognition with little data \cite{laput2018}. We use YAMNet because it is small enough for continuous inference on Android phones and has a mature TensorFlow Lite path \cite{jacob2018}.
+
+\paragraph{Keyword Spotting and Speaker Recognition.} Speech embeddings pretrained for keyword spotting let a small head learn a new word from few examples, including synthesised speech \cite{lin2020}; openWakeWord packages such embeddings for custom wake words \cite{openwakeword}. Generalised end-to-end (GE2E) training gives compact speaker embeddings for verification \cite{wan2018}. We combine the two so that a name call is detected for any voice and attributed only to people the family has enrolled.
+
+\paragraph{Datasets and Detection Metrics.} FSD50K \cite{fonseca2022}, AudioSet \cite{gemmeke2017}, ESC-50 \cite{piczak2015} and DESED \cite{turpault2019} are standard sources of domestic sound events; Mesaros et al. give a tutorial on sound event detection and its metrics \cite{mesaros2021}. Cost-sensitive learning is well established \cite{elkan2001}; we carry the cost asymmetry past the loss into the alert rule itself.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{System Overview}\label{sec:system}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  node distance=4.5mm and 3.5mm,
+  box/.style={draw, rounded corners=2pt, align=center, font=\sffamily\scriptsize, text width=21mm, minimum height=9mm, inner sep=2pt, fill=white},
+  arr/.style={-{Stealth[length=1.8mm]}, semithick}]
+\node[box] (mic) {Microphone\\16\,kHz PCM16};
+\node[box, right=of mic] (ring) {Ring buffer (RAM)\\1\,s window, 0.5\,s hop};
+\node[box, right=of ring] (vad) {Energy VAD\\skip if $\overline{x^2} < 10^{-4}$};
+\node[box, right=of vad] (yam) {YAMNet (frozen)\\1024-d embedding\\+ 521 scores};
+\node[box, below=of yam] (pool) {Mean of last 2\\embeddings};
+\node[box, left=of pool] (head) {Head 256--128--8\\sigmoid scores};
+\node[box, left=of head] (pol) {Per-class threshold\\+ $k_c$ of 3 windows\\10\,s cooldown};
+\node[box, left=of pol] (alert) {Phone alert\\full screen, vibration};
+\node[box, below=of pool] (other) {Open-set notice\\521 classes, quiet};
+\node[box, left=of other] (name) {Name spotter\\(speech embeddings)};
+\node[box, left=of name] (who) {Speaker encoder\\caller or ``someone''};
+\node[box, below=of alert, fill=black!15] (band) {ESP32 wristband\\class-coded vibration};
+\draw[arr] (mic) -- (ring); \draw[arr] (ring) -- (vad); \draw[arr] (vad) -- (yam);
+\draw[arr] (yam) -- (pool); \draw[arr] (pool) -- (head); \draw[arr] (head) -- (pol); \draw[arr] (pol) -- (alert);
+\draw[arr] (yam.east) -- ++(3mm,0) |- (other.east);
+\draw[arr] (yam.east) -- ++(3mm,0) |- ($(other.south)+(0,-3mm)$) -| node[font=\sffamily\tiny, pos=0.25, below]{speech score $\ge 0.2$} (name.south);
+\draw[arr] (name) -- (who); \draw[arr] (who) -- (alert); \draw[arr] (alert) -- node[font=\sffamily\tiny, right]{4-byte BLE} (band);
+\end{tikzpicture}
+\caption{SAHARA pipeline. The \textit{white} blocks run on the phone inside an Android foreground service and the \textit{shaded} block is the wristband. Only a class identifier and an intensity byte cross the Bluetooth link; open-set notices never reach the wristband}
+\label{fig:arch}
+\end{figure}
+
+Figure~\ref{fig:arch} shows the pipeline. A native Kotlin foreground service captures 16\,kHz mono audio, so detection continues with the screen off and after the app is swiped away. Samples enter a 1\,s ring buffer that advances every 0.5\,s. A mean-square energy gate ($10^{-4}$) on the newest hop skips silent audio. Each remaining window (the 0.975\,s YAMNet patch) is embedded by a frozen YAMNet into a 1024-dimensional vector, and the same pass yields YAMNet's 521 AudioSet scores. The mean of the two most recent non-silent embeddings feeds a classifier head (Dense 256, ReLU, dropout; Dense 128, ReLU, dropout; Dense 8, sigmoid) that scores eight classes independently: smoke alarm, doorbell, siren, knocking, dog bark, baby cry, glass break and appliance beep. The head has $1024\times256+256+256\times128+128+128\times8+8 = 296{,}328$ parameters (1.2\,MB in 32-bit floats). The training pipeline computes exactly the same window vectors as the phone; a test asserts a maximum difference of 0.0. A Flutter interface shows a full-screen alert, keeps a history of labels, confidences and times, and offers a sensitivity slider that shifts every threshold by up to $\pm2$ in log-odds.
+
+\paragraph{Privacy.} Audio exists only as samples in the ring buffer and is overwritten every 0.5\,s. Nothing is written to storage, the release manifest has no \texttt{INTERNET} permission, and neither audio, embeddings nor scores cross the Bluetooth link. Enrolment for name calls and custom sounds keeps only embedding vectors, never audio. On a Galaxy S24 we confirmed that app storage holds no audio files after listening.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Safety-Weighted Alerting}\label{sec:asym}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We call $\mathcal{S}=\{$smoke alarm, siren, glass break$\}$ the safety-critical classes. Each class $c$ has a weight $w_c=3$ for $c\in\mathcal{S}$, $1.5$ for baby cry and appliance beep, and $1$ otherwise. The weights enter twice: in training and in alert tuning.
+
+\subsection{Training}
+The head is trained on window vectors with a positive-weighted binary cross-entropy
+\begin{equation}
+\mathcal{L} = -\frac{1}{C}\sum_{c=1}^{C}\Big[w_c\,y_c\log\hat{y}_c + (1-y_c)\log(1-\hat{y}_c)\Big]\,,
+\end{equation}
+so a missed positive costs up to three times as much as a false positive \cite{elkan2001}. Sample weights balance the classes (inverse square root of frequency), give background windows eight times their balanced weight, and give the SAHARA-IN recordings ten times theirs, because they are few but closest to real use. Adam (learning rate $3\times10^{-4}$, batch 128) runs with early stopping on validation mAP. Among candidate runs (real data only, with synthetic mixtures, five seeds, an ensemble) we select on validation alone, by the tuned alert score defined next, subject to a precision of at least 0.70 for the safety classes.
+
+\subsection{Alert Rule}\label{sec:policy}
+Per-window scores are noisy. Class $c$ fires at step $t$ when its current window is a hit ($s_{c,t}\ge\theta_c$), at least $k_c\in\{1,2,3\}$ of its last three windows are hits, and it has not fired within a 10\,s cooldown.
+
+\paragraph{False Alarms.} If each background window were a false hit independently with probability $p$, the per-step false-alarm probability would be
+\begin{equation}
+F_k(p)=p\sum_{j=k-1}^{2}\binom{2}{j}p^{j}(1-p)^{2-j}\,,
+\end{equation}
+so $F_1=p$, $F_2\approx 2p^2$ and $F_3=p^3$ (Fig.~\ref{fig:kofn}). Overlapping windows are positively correlated, so the real reduction is smaller; this is why we measure false alarms on continuous audio instead of relying on the bound.
+
+\paragraph{Latency.} With window $W=1$\,s, hop $H=0.5$\,s and $m=2$ pooled embeddings, and assuming windows lying inside a sustained event score above threshold, the worst-case decision latency is
+\begin{equation}
+L_c \le W + mH + (k_c-1)H + \tau\,,
+\end{equation}
+where $\tau$ is the inference time per window: $2.0\,\mathrm{s}+\tau$ for $k_c=1$ and $3.0\,\mathrm{s}+\tau$ for $k_c=3$.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/kofn.pdf}
+\caption{Analytical per-decision false-alarm probability of the $k$-of-3 rule against the per-window false-positive rate $p$, assuming independent windows}
+\label{fig:kofn}
+\end{figure}
+
+\subsection{Tuning Against a False-Alarm Budget}
+A fixed threshold of 0.5 and a fixed $k$ ignore how each class actually behaves in a stream. We instead replay every validation clip through the exact alert rule, one class at a time, and for every candidate $(\theta_c,k_c)$ (thresholds 0.05--0.999, $k_c\in\{1,2,3\}$) measure the detection rate $D_c$, the share of the class's clips that raise its alert, and the false-alarm rate $A_c$, the alerts per hour on validation audio that does not contain it, including other classes' clips. We then solve
+\begin{equation}
+\max_{\{\theta_c,k_c\}}\ \sum_c w_c\,D_c(\theta_c,k_c)\quad\text{subject to}\quad\sum_c A_c(\theta_c,k_c)\le B\,,
+\end{equation}
+with a Lagrangian sweep. Figure~\ref{fig:budget} shows the trade-off; we chose $B=4$ per hour, past which extra alerts buy little detection. The tuned rules differ by class: knocking, doorbell, siren, dog bark and glass break fire on one window at high thresholds (0.86--0.98), smoke alarm and appliance beep need two windows, and baby cry, whose cries are long, needs three windows at a lower threshold (0.63).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/budget.pdf}
+\caption{Mean share of validation clips alerted against the total false-alarm budget, each point tuned separately. The leftmost point reaches zero false alarms and is drawn at 0.1}
+\label{fig:budget}
+\end{figure}
+
+\subsection{Class-Coded Haptics}
+Each alert reaches the wristband as four bytes: protocol version, command, class identifier and intensity. Safety-critical classes always use full intensity (255); for the others the intensity is the confidence scaled to $[128,255]$. The firmware maps each class to a distinct rhythm, so the user can identify the event without looking: smoke alarm uses the ``temporal-three'' pattern of fire alarms \cite{iso8201}, a siren is a rising and falling swell, a doorbell is a strong then soft ``ding-dong'', knocking is four quick taps, and a name call is two medium and two short buzzes. A new alert interrupts the current one.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Name Calls and Open-Set Notices}\label{sec:personal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Why Not More Trained Classes.} The eight classes are the sounds a DHH user must not miss, and each has curated data, its own tuned rule and a place in the false-alarm budget. Every added class needs data and adds false alarms that erode trust in the others. SAHARA therefore keeps the trained set fixed and adds two layers that cannot delay or suppress a safety alert.
+
+\paragraph{Open-Set Notices.} YAMNet's 521 AudioSet scores are already computed in each pass. When the top class that is neither covered by the head (doorbell, siren, knock, bark, baby cry and so on) nor uninformative (speech, silence, music, television) scores at least 0.35 in two of three windows, the app posts a quiet notice such as ``Water tap'' or ``Cat'', with a 30\,s cooldown per sound. Notices do not vibrate, do not reach the wristband and are suppressed while a trained class fires. They inform; they make no safety promise.
+
+\paragraph{Name Calls for Any Voice.} When YAMNet's speech score is at least 0.2, a second model checks whether the user's name was said. Pretrained speech embeddings \cite{lin2020,openwakeword} turn the last 2\,s into one 96-dimensional vector every 80\,ms, and a standardised logistic regression over eight consecutive vectors scores the name. We first tried MFCC features with dynamic time warping, which performed at chance; embeddings pretrained on many speakers are what let the spotter generalise to voices it never heard. The head is trained on the team's 38 recordings of the name ``Aryan'', each also mixed with Indian background at 5--20\,dB, against 19 recordings of similar names (Arya, Aryanshi and others) and the SAHARA-IN background scenes.
+
+\paragraph{Who Is Calling.} When the spotter fires, a GE2E speaker encoder \cite{wan2018} (a three-layer LSTM, pretrained weights, reimplemented in Kotlin) embeds the same audio into 256 numbers and compares it by cosine similarity with the mean embedding of each enrolled caller, recorded once by tapping a button while that person says the name. At or above 0.70 the alert reads ``Raj is calling you''; below it, or with nobody enrolled, ``Someone is calling you''. Naming the wrong person is worse than ``someone'', because with ``someone'' the user still learns that they are being called.
+
+\paragraph{Custom Sounds.} Users can also enrol a household sound from five to ten three-second recordings; its prototype is the mean of centred, normalised YAMNet window vectors, matched by cosine similarity. Our evaluation found that it separates distinctive household sounds from background but cannot distinguish names, because YAMNet describes kinds of sound rather than words, which motivated the separate name-call model.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Wristband Hardware}\label{sec:band}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The wristband is an ESP32-WROOM-32 Bluetooth Low Energy peripheral with a 10\,mm coin vibration motor driven through a logic-level MOSFET with PWM, a 500\,mAh LiPo cell, a protected TP4056 charger and a low-dropout 3.3\,V regulator. Its bill of materials totals about \INR 870 at 2026 Indian retail prices (Table~\ref{tab:bom}). To save power, the firmware clocks the CPU at 80\,MHz, transmits at $+3$\,dBm and requests a 30--50\,ms connection interval with slave latency 2, which targets an alert delivery delay below about 150\,ms. Below 20\,\% charge it lowers motor strength and transmit power, and at 3.4\,V it enters deep sleep. When the phone disconnects, two long buzzes tell the user that alerts have stopped, so a silent wristband never looks the same as a quiet room.
+
+\begin{table}[t]
+\caption{Wristband bill of materials (approximate Indian retail prices, 2026)}
+\label{tab:bom}
+\centering
+\begin{tabular}{@{}lr@{}}
+\toprule
+Component & Price (\INR) \\
+\midrule
+ESP32 DevKit V1 (WROOM-32) & 350 \\
+3.7\,V LiPo cell, 500\,mAh & 180 \\
+TP4056 USB-C charger with protection & 35 \\
+3.3\,V low-dropout regulator & 20 \\
+10\,mm coin vibration motor & 40 \\
+AO3400 MOSFET, diodes, resistors, LED, switch & 31 \\
+Perfboard, wiring, headers & 60 \\
+Strap and enclosure & 150 \\
+\midrule
+Total & $\approx$870 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data and Evaluation Protocol}\label{sec:data}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Public Data}
+Target clips come from FSD50K \cite{fonseca2022}, AudioSet \cite{gemmeke2017} and ESC-50 \cite{piczak2015}; background comes from 10,000 FSD50K clips without any target-like label, the 44 non-target ESC-50 categories and DESED real soundscapes \cite{turpault2019} (Table~\ref{tab:data}). We verified every label identifier against the official vocabularies. This removed serious errors in an earlier build: four AudioSet identifiers pointed to the wrong classes (``glass break'' was \textit{Whoop}), 64 of 188 AudioSet clips did not carry their class's label, and FSD50K's generic \textit{Alarm}, mostly telephones and car alarms, had been mapped to appliance beep. Every class now has at least 150 real clips and at least 20 in the test split.
+
+Splits are 70/15/15, grouped by upstream recording: AudioSet and DESED clips share YouTube identifiers, and FSD50K and ESC-50 share Freesound identifiers, so the same recording never sits in training in one dataset and in test in another.
+
+\subsection{Synthetic Mixtures}
+Each training target clip is mixed onto three random training-split background beds at an SNR drawn uniformly from $[-5, 10]$\,dB, giving 6,459 training mixtures. A separate set of 420 test mixtures uses only test clips and test beds. Synthetic results are always reported separately from real ones.
+
+\subsection{SAHARA-IN Field Recordings}
+Four team members recorded 123 clips on their own phones in Mumbai homes and streets: 63 target clips (16 appliance beep, 16 doorbell, 14 knocking, 11 dog bark, 6 baby cry) and 60 background clips (street hawkers, a temple, a kitchen, television, monsoon rain, and hard negatives such as drawers, doors and a washing machine spinning without beeping). Because every recording was made under different conditions, we split by label rather than by recorder: about 40\,\% of each label, spread across its recording conditions, is held out for test. With so few clips, we also report five-fold cross-validation over all 123, in which every clip is scored by a model that never heard it. A further 57 clips (38 of the name ``Aryan'', 19 of similar names) serve the name-call model, which is evaluated leave-one-recorder-out. SAHARA-IN has no smoke-alarm, siren or glass-break recordings, which are hard to record safely.
+
+\begin{table}[t]
+\caption{Real clips per class and source, from the committed manifests; $^\dagger$ marks the safety-critical classes. Background also includes 605 DESED clips}
+\label{tab:data}
+\centering
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Class & AudioSet & ESC-50 & FSD50K & SAHARA-IN & Total (test) \\
+\midrule
+Smoke alarm$^\dagger$ & 183 & -- & -- & -- & 183 (27) \\
+Doorbell & 92 & -- & 144 & 16 & 252 (41) \\
+Siren$^\dagger$ & 34 & 40 & 132 & -- & 206 (34) \\
+Knocking & 97 & 40 & 373 & 14 & 524 (79) \\
+Dog bark & 10 & 40 & 536 & 11 & 597 (94) \\
+Baby cry & 106 & 40 & -- & 6 & 152 (27) \\
+Glass break$^\dagger$ & 97 & 40 & 510 & -- & 647 (97) \\
+Appliance beep & 261 & 40 & 206 & 16 & 523 (84) \\
+Background & -- & 1,760 & 10,000 & 60 & 12,425 (1,876) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Metrics}
+We report per-class average precision (AP) over 0.5\,s windows and its mean (mAP), and, closer to what a user experiences, the share of test clips that raise the correct alert under the deployed rule and the false alarms per hour when background audio is played as one continuous stream. Model selection and alert tuning use only the validation split; the test split was used once.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Detection on Held-Out Data}
+Table~\ref{tab:sets} summarises the selected model; Table~\ref{tab:perclass} and Fig.~\ref{fig:ap} give the public test set per class. The model reaches 0.789 mAP and, played as a stream through the deployed rule, raises 3.5 false alarms per hour on 3.4 hours of public test background (mostly siren). The safety classes transfer well: 23 of 27 smoke-alarm and 28 of 34 siren clips raise an alert. Glass break has high AP (0.843) but alerts on only 47 of 97 clips, because the budget forced a threshold of 0.98. Knocking (0.635) and appliance beep (0.576) are the weakest; their brief, varied sounds limit the model rather than the rule (Fig.~\ref{fig:budget}). On synthetic mixtures at $-5$ to 10\,dB, mAP falls to 0.724 and clip detection drops sharply for doorbell (to 9 of 41), knocking (2 of 79) and appliance beep (8 of 84), showing that loud background is the main remaining challenge.
+
+\begin{table}[t]
+\caption{Selected model on each test set}
+\label{tab:sets}
+\centering
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Test set & mAP & False alarms/h \\
+\midrule
+Public held-out split (8 classes) & 0.789 & 3.5 (3.4\,h) \\
+Synthetic mixtures, $-5$ to 10\,dB (8 classes) & 0.724 & -- \\
+SAHARA-IN held-out split (5 classes) & 0.764 & see text \\
+SAHARA-IN 5-fold CV, trained without / with it & 0.721 / 0.757 & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Public test set per class: window AP, and test clips that raise the correct alert under the deployed rule ($\theta_c$, $k_c$ of 3)}
+\label{tab:perclass}
+\centering
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Class & $\theta_c$ & $k_c$ & AP & Clips alerted \\
+\midrule
+Smoke alarm$^\dagger$ & 0.87 & 2 & 0.920 & 23/27 \\
+Doorbell & 0.93 & 1 & 0.748 & 17/35 \\
+Siren$^\dagger$ & 0.86 & 1 & 0.872 & 28/34 \\
+Knocking & 0.89 & 1 & 0.635 & 19/73 \\
+Dog bark & 0.92 & 1 & 0.906 & 76/90 \\
+Baby cry & 0.63 & 3 & 0.813 & 19/25 \\
+Glass break$^\dagger$ & 0.98 & 1 & 0.843 & 47/97 \\
+Appliance beep & 0.87 & 2 & 0.576 & 20/78 \\
+\midrule
+Mean & & & 0.789 & 0.60 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/test_ap.pdf}
+\caption{Per-class test AP and share of test clips alerted under the deployed rule (public test set); $^\dagger$ marks safety-critical classes. The gap between the bars is the price of the 4-per-hour false-alarm budget}
+\label{fig:ap}
+\end{figure}
+
+\subsection{Indian Conditions}
+In five-fold cross-validation over SAHARA-IN, adding the recordings to training (weighted ten times) raises mAP from 0.721 to 0.757, with the largest gain for doorbell (AP 0.463 to 0.626), whose Indian melodic chimes differ most from public data; dog barks alerted rises from 8 to 10 of 11. The team's background recordings produced 3 false alarms in 5.9 minutes (4 without the team data); on the held-out split, two of three were ``siren'', triggered by street and temple sounds. This is too little audio for a reliable hourly rate, but it marks Indian street sound as the main false-alarm risk. Knocking transfers poorly (0 of 14 clips alerted at the deployed threshold), consistent with its weak public result.
+
+\subsection{What the Alert Tuning Buys}
+Table~\ref{tab:ablation} replays all 2,354 real test clips (4.4\,h) through three rules on the same model. False alarms here count alerts for a class on any audio without it, including other classes' clips, so they are higher than the background-only figure above. The fixed design of a 0.5 threshold with 2-of-3 smoothing (1 window for safety classes) produces 43.7 false alarms per hour, more than one every two minutes, which no user would tolerate. Tuning brings this to 6.1 per hour while still alerting on 59\,\% of clips and 72\,\% of safety-class clips. The tuning makes this trade-off explicit and puts it under the designer's control instead of hiding it inside a threshold-free metric.
+
+\begin{table}[t]
+\caption{Same model, three alert rules, on all real test audio}
+\label{tab:ablation}
+\centering
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Alert rule & Clips alerted & Safety clips & False alarms/h \\
+\midrule
+$\theta=0.5$, 1 window & 0.748 & 0.844 & 57.7 \\
+$\theta=0.5$, 1 (safety) or 2 of 3 windows & 0.672 & 0.844 & 43.7 \\
+Tuned $(\theta_c,k_c)$, 4/h budget (SAHARA) & 0.588 & 0.720 & 6.1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Name Calls and Callers}
+Table~\ref{tab:name} reports the name-call model, leave one recorder out: the spotter is trained without any of the held-out person's clips or background scenes, then scored on them, so every tested voice is new. Similar names are the hardest case. For caller identity, leaving one clip out while the rest enrol each caller names the right person in 29 of 38 calls; with one caller left out entirely, 82\,\% of their calls are reported as ``someone'' at the 0.70 threshold. Each team member recorded on their own phone and in their own room, so these caller figures partly measure phone and room identity and are likely optimistic.
+
+\begin{table}[t]
+\caption{Name-call detection, leave one recorder out (38 calls of ``Aryan'')}
+\label{tab:name}
+\centering
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Negatives & ROC AUC & Equal error rate \\
+\midrule
+Background scenes (TV, kitchen, street, temple) & 0.895 & 21\,\% \\
+Similar names (Arya, Aryanshi, others) & 0.719 & 37\,\% \\
+Both & 0.868 & 24\,\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{On-Device Cost}
+Table~\ref{tab:device} reports the deployment on a Samsung Galaxy S24 (Android 16). The app path was verified against the evaluation pipeline: 90 test clips replayed through the app's exact code raise the same alerts in 90 of 90 cases. Laptop-speaker playback triggered smoke alarm and siren alerts with the screen on and off, but small speakers barely reproduce knocks, barks and doorbells, so those classes still need real-source tests.
+
+\begin{table}[t]
+\caption{On-device cost (Samsung Galaxy S24, Android 16)}
+\label{tab:device}
+\centering
+\begin{tabular}{@{}lr@{}}
+\toprule
+Measure & Value \\
+\midrule
+Head parameters & 296,328 \\
+Model files, YAMNet / head / name-call (MB) & 15.0 / 1.2 / 8.1 \\
+INT8 head size, test mAP change & 0.29\,MB, $-0.011$ \\
+Release APK, arm64 (MB) & 45.8 \\
+Inference per window, screen on / off (ms) & 20--29 / 47--49 (hop 500) \\
+Memory, debug build (MB PSS) & 128.9 \\
+Phone battery drain while listening (\%/h) & \tbd \\
+Phone alert to wristband vibration (ms) & \tbd \\
+Wristband current, idle (mA) & \tbd \\
+Wristband battery life, 500\,mAh (h) & \tbd \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion and Limitations}\label{sec:limits}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Detection Versus False Alarms.} At 4 false alarms per hour the model alerts on about 60\,\% of events; Fig.~\ref{fig:budget} shows that relaxing the budget to 16 per hour raises this only to 69\,\%. Better detection of brief sounds such as knocks and beeps therefore needs a stronger model or more data, not a looser rule.
+
+\paragraph{Small Field Set.} SAHARA-IN covers five classes with a few clips each and has no smoke alarms, sirens or glass breaks. Its label-based split can place recordings from the same phone or room on both sides, which the cross-validation shares; results on it indicate transfer but are not precise estimates.
+
+\paragraph{Name Calls.} The spotter is trained for one name and confuses similar names about a third of the time. Adding 1,781 synthetic clips of the name and of near-miss names from 27 text-to-speech voices, including Indian English and Hindi, lowered the AUC against similar names from 0.719 to 0.615, so more real recordings of near-miss names are the remedy. Caller identification must be re-measured once a family enrols on the user's own phone. The speech-embedding models are licensed for non-commercial use only.
+
+\paragraph{No User Study Yet.} We have not yet evaluated SAHARA with DHH participants, measured battery drain over a day, or built the wristband in hardware. A field deployment with DHH users in Mumbai, measuring missed events, alert fatigue and recognition of the haptic patterns, is planned \cite{findlater2019,jain2020homesound}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+SAHARA shows that an assistive sound-awareness system can run entirely on a phone and a \INR 870 wristband, retain no audio, and be tuned for the number that decides whether users keep it switched on: false alarms per hour. Tuning each class's threshold and temporal rule against an explicit budget cut false alarms seven-fold on the same model, and recordings from Indian homes improved transfer to Indian conditions. A separate speech path lets users know when they are called by name, and by whom. We release the code, the alert-tuning method, the Bluetooth protocol, the firmware and the SAHARA-IN protocol.
+
+\paragraph{Acknowledgements.} \TBD{thank the guide and department; mention any funding}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% References: Springer basic style, sorted alphabetically.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{27}
+
+\bibitem{bragg2016}
+Bragg,~D., Huynh,~N., Ladner,~R.E.: A personalizable mobile sound detector app design for deaf and hard-of-hearing users. In: Proceedings of the 18th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS). ACM, New York (2016)
+
+\bibitem{elkan2001}
+Elkan,~C.: The foundations of cost-sensitive learning. In: Proceedings of the 17th International Joint Conference on Artificial Intelligence (IJCAI), pp.~973--978 (2001)
+
+\bibitem{findlater2019}
+Findlater,~L., Chinh,~B., Jain,~D., Froehlich,~J., Kushalnagar,~R., Lin,~A.C.: Deaf and hard-of-hearing individuals' preferences for wearable and mobile sound awareness technologies. In: Proceedings of the CHI Conference on Human Factors in Computing Systems. ACM, New York (2019)
+
+\bibitem{fonseca2022}
+Fonseca,~E., Favory,~X., Pons,~J., Font,~F., Serra,~X.: FSD50K: an open dataset of human-labeled sound events. IEEE/ACM Trans. Audio Speech Lang. Process. 30, 829--852 (2022)
+
+\bibitem{gemmeke2017}
+Gemmeke,~J.F., et~al.: Audio Set: an ontology and human-labeled dataset for audio events. In: IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), pp.~776--780 (2017)
+
+\bibitem{goodman2021}
+Goodman,~S.M., et~al.: Toward user-driven sound recognizer personalization with people who are d/Deaf or hard of hearing. Proc. ACM Interact. Mob. Wearable Ubiquitous Technol. 5(2) (2021)
+
+\bibitem{hershey2017}
+Hershey,~S., et~al.: CNN architectures for large-scale audio classification. In: IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), pp.~131--135 (2017)
+
+\bibitem{howard2017}
+Howard,~A.G., et~al.: MobileNets: efficient convolutional neural networks for mobile vision applications. arXiv:1704.04861 (2017)
+
+\bibitem{iso8201}
+International Organization for Standardization: ISO 8201:2017 Alarm systems -- Audible emergency evacuation signal -- Requirements. Geneva (2017)
+
+\bibitem{jacob2018}
+Jacob,~B., et~al.: Quantization and training of neural networks for efficient integer-arithmetic-only inference. In: IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pp.~2704--2713 (2018)
+
+\bibitem{jain2020homesound}
+Jain,~D., et~al.: HomeSound: an iterative field deployment of an in-home sound awareness system for deaf or hard of hearing users. In: Proceedings of the CHI Conference on Human Factors in Computing Systems. ACM, New York (2020)
+
+\bibitem{jain2020soundwatch}
+Jain,~D., Ngo,~H., Patel,~P., Goodman,~S., Findlater,~L., Froehlich,~J.: SoundWatch: exploring smartwatch-based deep learning approaches to support sound awareness for deaf and hard of hearing users. In: Proceedings of the 22nd International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS). ACM, New York (2020)
+
+\bibitem{jain2022protosound}
+Jain,~D., et~al.: ProtoSound: a personalized and scalable sound recognition system for deaf and hard-of-hearing users. In: Proceedings of the CHI Conference on Human Factors in Computing Systems. ACM, New York (2022)
+
+\bibitem{kong2020}
+Kong,~Q., Cao,~Y., Iqbal,~T., Wang,~Y., Wang,~W., Plumbley,~M.D.: PANNs: large-scale pretrained audio neural networks for audio pattern recognition. IEEE/ACM Trans. Audio Speech Lang. Process. 28, 2880--2894 (2020)
+
+\bibitem{laput2018}
+Laput,~G., Ahuja,~K., Goel,~M., Harrison,~C.: Ubicoustics: plug-and-play acoustic activity recognition. In: Proceedings of the 31st Annual ACM Symposium on User Interface Software and Technology (UIST). ACM, New York (2018)
+
+\bibitem{lin2020}
+Lin,~J., Kilgour,~K., Roblek,~D., Sharifi,~M.: Training keyword spotters with limited and synthesized speech data. In: IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), pp.~7474--7478 (2020)
+
+\bibitem{matthews2006}
+Matthews,~T., Fong,~J., Ho-Ching,~F.W.-L., Mankoff,~J.: Evaluating non-speech sound visualizations for the deaf. Behav. Inf. Technol. 25(4), 333--351 (2006)
+
+\bibitem{mesaros2021}
+Mesaros,~A., Heittola,~T., Virtanen,~T., Plumbley,~M.D.: Sound event detection: a tutorial. IEEE Signal Process. Mag. 38(5), 67--83 (2021)
+
+\bibitem{census2011}
+Office of the Registrar General and Census Commissioner, India: Census of India 2011: Data on Disability. New Delhi (2011)
+
+\bibitem{piczak2015}
+Piczak,~K.J.: ESC: dataset for environmental sound classification. In: Proceedings of the 23rd ACM International Conference on Multimedia, pp.~1015--1018 (2015)
+
+\bibitem{yamnet}
+Plakal,~M., Ellis,~D.: YAMNet. TensorFlow Model Garden (2020). \url{https://github.com/tensorflow/models/tree/master/research/audioset/yamnet}
+
+\bibitem{openwakeword}
+Scripka,~D.: openWakeWord. GitHub (2023). \url{https://github.com/dscripka/openWakeWord}
+
+\bibitem{snell2017}
+Snell,~J., Swersky,~K., Zemel,~R.: Prototypical networks for few-shot learning. In: Advances in Neural Information Processing Systems (NeurIPS), vol.~30 (2017)
+
+\bibitem{turpault2019}
+Turpault,~N., Serizel,~R., Parag~Shah,~A., Salamon,~J.: Sound event detection in domestic environments with weakly labeled data and soundscape synthesis. In: Proceedings of the Detection and Classification of Acoustic Scenes and Events Workshop (DCASE) (2019)
+
+\bibitem{wan2018}
+Wan,~L., Wang,~Q., Papir,~A., Lopez~Moreno,~I.: Generalized end-to-end loss for speaker verification. In: IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), pp.~4879--4883 (2018)
+
+\bibitem{who2021}
+World Health Organization: World Report on Hearing. WHO, Geneva (2021)
+
+\end{thebibliography}
+\end{document}

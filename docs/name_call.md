@@ -46,6 +46,23 @@ Caveats: each recorder used their own phone and room, so identity is partly chan
 own phone and re-run the evaluation. The spotter knows one name; another user needs their own clips (synthetic TTS
 clips are the usual way to get many voices) and a retrain.
 
+## Tried and rejected: synthetic voices
+
+`scripts/make_tts_name_clips.py` makes 1,781 clips of "Aryan" and near-miss names (Arya, Aryanshi, Ayaan, Rayan...)
+with 27 macOS voices, including Indian English and Hindi. `eval_name_call.py --tts-dir ... --tts-use both|pos|neg`
+adds them to training only; scoring stays on the team's real recordings (leave one recorder out). Every variant was
+worse than real recordings alone, so the shipped head does not use them:
+
+| Training data | AUC vs background | AUC vs similar names | Calls caught at EER |
+|---|---:|---:|---:|
+| Real recordings only (shipped) | 0.895 | 0.719 | 76% |
+| + synthetic, both kinds | 0.835 | 0.615 | 71% |
+| + synthetic similar names only | 0.865 | 0.686 | 74% |
+| + synthetic "Aryan" only | 0.825 | 0.547 | 76% |
+
+The computer voices differ too much from people calling across a room on a phone microphone; the head partly learns
+"synthetic vs real" instead of the name. More **real** recordings of similar names are the way to improve this.
+
 ## Rebuild the assets
 
 ```bash

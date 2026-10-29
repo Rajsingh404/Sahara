@@ -34,7 +34,8 @@ Model `models/logs/20261005-195620_b_synthetic/`, selected on validation only; t
 | Measure | Result |
 |---|---|
 | Public test set mAP (FSD50K, AudioSet, ESC-50) | **0.789** |
-| False alarms on 3.4 h of busy background audio | **3.5 per hour** (was 45 per hour before alert tuning) |
+| False alarms on 3.4 h of busy background audio | **3.5 per hour** |
+| Alert tuning, same model, all 4.4 h of test audio | false alarms 43.7 → **6.1 per hour**; share of clips alerted 0.67 → 0.59 |
 | Test clips that raise the right alert | smoke alarm 23/27, siren 28/34, dog bark 76/90, baby cry 19/25, glass 47/97, doorbell 17/35, appliance beep 20/78, knocking 19/73 |
 | Indian team recordings, 5-fold cross-validation | mAP 0.721 without team data → **0.757** with it |
 | Phone app vs evaluated model | same alerts on 90/90 test clips (`app/tool/check_app_pipeline.py`) |

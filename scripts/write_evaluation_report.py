@@ -108,7 +108,7 @@ def build(run: str | None = None) -> str:
         out += ["Not run yet.", ""]
     else:
         out += ["Window metrics use the tuned thresholds. *Clip detection* plays each test clip through the app's alert "
-                "policy (2 of 3 windows, 1 hit for safety-critical classes, 10 s cooldown) and counts clips that raise "
+                "policy (each class's tuned threshold and windows needed, above; 10 s cooldown) and counts clips that raise "
                 "the right alert. Source: `" + f"{rel}/test_metrics.json" + "`.", ""]
         for name, title in SET_TITLES.items():
             s = test["sets"].get(name)
@@ -146,6 +146,23 @@ def build(run: str | None = None) -> str:
             main = ", ".join("%s %d" % (c, v["count"]) for c, v in top if v["count"]) or "–"
             out.append(f"| {name} | {r['clips']} | {r['hours']:.2f} | {r['false_alarms']} | "
                        f"{_f(r['false_alarms_per_hour'], 1)} | {main} |")
+        out.append("")
+
+    out += ["## What the alert tuning buys (same model, real test split)", ""]
+    abl = _load(run_dir / "policy_ablation.json")
+    if not abl:
+        out += ["Not run yet (`python scripts/policy_ablation.py`).", ""]
+    else:
+        labels = {"A_threshold_0.5_one_window": "Threshold 0.5, alert on 1 window",
+                  "B_threshold_0.5_fixed_k": "Threshold 0.5, 1 window for safety classes, 2 of 3 for the rest",
+                  "C_tuned_shipped": "Tuned per class at 4 false alarms/h on validation (shipped)"}
+        out += [f"All {abl['clips']} real test clips ({abl['audio_hours']} h). False alarms count alerts for a class on any "
+                "test audio without it, including other classes' clips, so they run higher than the background-only "
+                f"figures below. Source: `{rel}/policy_ablation.json` (`scripts/policy_ablation.py`).", "",
+                "| Alert rule | Mean share of clips alerted | Safety classes | False alarms/h |", "|---|---:|---:|---:|"]
+        for k, r in abl["rules"].items():
+            out.append(f"| {labels.get(k, k)} | {r['mean_detection']:.3f} | {r['safety_detection']:.3f} | "
+                       f"{r['total_fa_per_hour']:.1f} |")
         out.append("")
 
     out += ["## Indian team recordings: 5-fold cross-validation", ""]
@@ -280,8 +297,9 @@ def build(run: str | None = None) -> str:
             "- knocking, appliance_beep and doorbell have the lowest test AP; their detection is limited by the model, "
             "not the alert settings (see the budget trade-off above).",
             "- Synthetic results are reported separately and never as real-world performance.",
-            f"- Safety-critical classes ({', '.join(SAFETY_CRITICAL_CLASSES)}) alert on a single window; their false alarms "
-            "are listed above.", ""]
+            f"- Safety-critical classes ({', '.join(SAFETY_CRITICAL_CLASSES)}) carry a 3x positive weight in the loss and a "
+            "precision floor in model selection; how many windows each needs is tuned like every other class (see Alert "
+            "settings), and their false alarms are listed above.", ""]
 
     out += ["## Superseded results (do not quote)", "",
             "These earlier figures were produced before Phase 1–3 fixes, on small samples, with no recorded run folder or "

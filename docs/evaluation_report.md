@@ -52,7 +52,7 @@ Detection vs false-alarm budget on validation (same model; how the budget was ch
 
 ## Test results
 
-Window metrics use the tuned thresholds. *Clip detection* plays each test clip through the app's alert policy (2 of 3 windows, 1 hit for safety-critical classes, 10 s cooldown) and counts clips that raise the right alert. Source: `models/logs/20261005-195620_b_synthetic/test_metrics.json`.
+Window metrics use the tuned thresholds. *Clip detection* plays each test clip through the app's alert policy (each class's tuned threshold and windows needed, above; 10 s cooldown) and counts clips that raise the right alert. Source: `models/logs/20261005-195620_b_synthetic/test_metrics.json`.
 
 ### Public test set (FSD50K, AudioSet, ESC-50 targets; DESED, ESC-50, FSD50K background)
 
@@ -116,6 +116,16 @@ Test-split background clips played back to back through VAD → pool → head �
 |---|---:|---:|---:|---:|---|
 | public | 1852 | 3.44 | 12 | 3.5 | siren 7, baby_cry 2, glass_break 2 |
 | indian_team | 24 | 0.04 | 3 | 79.7 | siren 2, doorbell 1 |
+
+## What the alert tuning buys (same model, real test split)
+
+All 2354 real test clips (4.41 h). False alarms count alerts for a class on any test audio without it, including other classes' clips, so they run higher than the background-only figures below. Source: `models/logs/20261005-195620_b_synthetic/policy_ablation.json` (`scripts/policy_ablation.py`).
+
+| Alert rule | Mean share of clips alerted | Safety classes | False alarms/h |
+|---|---:|---:|---:|
+| Threshold 0.5, alert on 1 window | 0.748 | 0.844 | 57.7 |
+| Threshold 0.5, 1 window for safety classes, 2 of 3 for the rest | 0.672 | 0.844 | 43.7 |
+| Tuned per class at 4 false alarms/h on validation (shipped) | 0.588 | 0.720 | 6.1 |
 
 ## Indian team recordings: 5-fold cross-validation
 
@@ -220,7 +230,7 @@ Not tested on hardware: no wristband parts were available. The firmware builds (
 - The Indian team test set is small (a few clips per class) and split per label, so the same phone or room can appear in train and test; there are no team recordings of smoke_alarm, siren or glass_break.
 - knocking, appliance_beep and doorbell have the lowest test AP; their detection is limited by the model, not the alert settings (see the budget trade-off above).
 - Synthetic results are reported separately and never as real-world performance.
-- Safety-critical classes (smoke_alarm, siren, glass_break) alert on a single window; their false alarms are listed above.
+- Safety-critical classes (smoke_alarm, siren, glass_break) carry a 3x positive weight in the loss and a precision floor in model selection; how many windows each needs is tuned like every other class (see Alert settings), and their false alarms are listed above.
 
 ## Superseded results (do not quote)
 
