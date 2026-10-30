@@ -1,0 +1,29 @@
+<html><head><link rel=stylesheet href=common.css><style>
+body{width:950px;height:455px;display:flex;flex-direction:column;gap:10px}
+.l{display:flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;flex:1}
+.h{flex:0 0 190px;background:var(--red);color:#fff;padding:10px 14px;display:flex;flex-direction:column;justify-content:center}
+.l:nth-child(2) .h{background:var(--dark)}.l:nth-child(3) .h{background:#6f2a2c}.l:nth-child(4) .h{background:#3a3533}
+.h b{font-size:17px}.h span{font-size:12.5px;opacity:.85;margin-top:2px}
+.b{flex:1;display:flex;gap:8px;align-items:center;padding:8px 12px;flex-wrap:wrap}
+.t{background:#f3efec;border-radius:8px;padding:6px 10px;font-size:14px}
+.t b{display:block;font-size:14.5px}.t span{font-size:12px;color:var(--mut)}
+.k{background:var(--pink)}
+</style></head><body>
+<div class=l><div class=h><b>Data</b><span>collect, label, mix</span></div><div class=b>
+<div class=t><b>AudioSet · FSD50K · ESC-50</b><span>public clips, labels re-verified</span></div>
+<div class="t k"><b>SAHARA-IN</b><span>329 + 107 Mumbai clips</span></div>
+<div class=t><b>yt-dlp · librosa · Scaper</b><span>download, 16 kHz audio, 6,834 mixes</span></div></div></div>
+<div class=l><div class=h><b>Model & algorithm</b><span>train and tune (Python)</span></div><div class=b>
+<div class="t k"><b>YAMNet (frozen)</b><span>TF Hub, 1024-d embeddings</span></div>
+<div class=t><b>Dense head 256-128-8</b><span>TensorFlow / Keras, cost-weighted loss</span></div>
+<div class="t k"><b>Budget tuning</b><span>per-class θ and k-of-3, ≤ 4 FA/h</span></div>
+<div class=t><b>Name spotter + GE2E</b><span>who is calling</span></div></div></div>
+<div class=l><div class=h><b>Android app</b><span>on-device inference</span></div><div class=b>
+<div class=t><b>Kotlin foreground service</b><span>mic capture, energy gate</span></div>
+<div class="t k"><b>TensorFlow Lite</b><span>YAMNet 15.0 · head 1.2 · name 8.1 MB</span></div>
+<div class=t><b>Flutter UI</b><span>alerts, history, settings, calibration</span></div></div></div>
+<div class=l><div class=h><b>Wearable</b><span>haptic channel</span></div><div class=b>
+<div class=t><b>ESP32 + vibration motor</b><span>band designed, Rs. 870</span></div>
+<div class="t k"><b>Bluetooth LE</b><span>4-byte message: class + intensity</span></div>
+<div class=t><b>9 haptic patterns</b><span>smoke alarm uses ISO 8201 rhythm</span></div></div></div>
+</body></html>

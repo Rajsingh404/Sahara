@@ -1,0 +1,22 @@
+<html><head><link rel=stylesheet href=common.css><style>
+body{width:950px;height:455px}
+.aim{background:var(--pink);border-left:6px solid var(--red);border-radius:10px;padding:14px 18px;margin-bottom:14px}
+.aim b{color:var(--red);font-size:15px;letter-spacing:.5px}.aim p{font-size:19px;line-height:1.3;margin-top:4px}
+.g{display:grid;grid-template-columns:1fr 1fr;grid-gap:10px 14px}
+.t{border:1.5px solid var(--line);border-radius:10px;display:flex;align-items:center;gap:12px;padding:8px 12px;height:86px}
+.n{flex:0 0 34px;height:34px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;font-size:17px;text-align:center;line-height:34px}
+.o{flex:1}.o h{display:block;font-weight:700;font-size:16px}.o p{font-size:13px;color:var(--mut);margin-top:2px;line-height:1.2}
+.r{flex:0 0 142px;text-align:right;border-left:1.5px dashed var(--line);padding-left:10px}
+.r b{display:block;color:var(--red);font-size:20px;line-height:1.05}.r span{font-size:11.5px;color:var(--mut)}
+.hd{display:flex;justify-content:space-between;font-size:12.5px;color:var(--mut);margin:0 4px 4px;font-weight:700;letter-spacing:.4px}
+</style></head><body>
+<div class=aim><b>AIM</b><p>Build a real-time, fully on-device system that turns safety-critical household sounds and name calls into visual and vibration alerts for Deaf and Hard-of-Hearing users in India.</p></div>
+<div class=g>
+<div class=hd><span>OBJECTIVE</span><span>WHAT WE ACHIEVED</span></div><div class=hd><span>OBJECTIVE</span><span>WHAT WE ACHIEVED</span></div>
+<div class=t><div class=n>1</div><div class=o><h>Detect 8 household sounds</h><p>real time, on the phone</p></div><div class=r><b>0.778 mAP</b><span>public held-out test</span></div></div>
+<div class=t><div class=n>2</div><div class=o><h>≤ 4 false alarms per hour</h><p>missed safety sounds count 3×</p></div><div class=r><b>3.5 / h</b><span>on 3.4 h of background</span></div></div>
+<div class=t><div class=n>3</div><div class=o><h>Run fully offline</h><p>no audio stored, no Internet permission</p></div><div class=r><b>20–29 ms</b><span>per window, Galaxy S24</span></div></div>
+<div class=t><div class=n>4</div><div class=o><h>Name-call alerts</h><p>and who is calling</p></div><div class=r><b>0.872 AUC</b><span>29 / 38 callers named</span></div></div>
+<div class=t><div class=n>5</div><div class=o><h>Indian field dataset</h><p>SAHARA-IN, Mumbai homes and streets</p></div><div class=r><b>329 + 107</b><span>sound + name-call clips</span></div></div>
+<div class=t><div class=n>6</div><div class=o><h>Class-coded vibration</h><p>phone + low-cost ESP32 band</p></div><div class=r><b>9 patterns</b><span>band designed, Rs. 870</span></div></div>
+</div></body></html>

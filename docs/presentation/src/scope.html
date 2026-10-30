@@ -1,0 +1,28 @@
+<html><head><link rel=stylesheet href=common.css><style>
+body{width:950px;height:375px;display:flex;gap:16px}
+.col{border:1.5px solid var(--line);border-radius:12px;padding:14px 16px}
+.col>h{display:block;font-size:18px;font-weight:700;margin-bottom:10px}
+.in>h{color:var(--red)}.out>h{color:var(--mut)}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);grid-gap:8px;margin-bottom:12px}
+.ch{border-radius:9px;background:#f3efec;padding:7px 8px;font-size:14px;display:flex;align-items:center;gap:7px;font-weight:700}
+.ch.s{background:var(--red);color:#fff}.ch i{font-style:normal;font-size:20px}
+ul{list-style:none}li{font-size:14.5px;line-height:1.3;padding:5px 0 5px 24px;position:relative;border-top:1px solid #f0ebe7}
+li:before{content:'✓';position:absolute;left:2px;color:var(--red);font-weight:700}
+.out li:before{content:'✕';color:var(--mut)}
+.k{font-size:12px;color:var(--mut);margin:-4px 0 8px}
+</style></head><body>
+<div class="col in" style="flex:1.55"><h>In scope</h>
+<div class=chips>
+<div class="ch s"><i>🔥</i>Smoke alarm</div><div class="ch s"><i>🚨</i>Siren</div><div class="ch s"><i>💥</i>Glass break</div>
+<div class=ch><i>🔔</i>Doorbell</div><div class=ch><i>🚪</i>Knocking</div><div class=ch><i>🐕</i>Dog bark</div>
+<div class=ch><i>👶</i>Baby cry</div><div class=ch><i>📟</i>Appliance beep</div><div class=ch><i>🗣️</i>Your name</div></div>
+<div class=k>Red = safety-critical (missed alerts weighted 3×)</div>
+<ul><li>Android app: background listening, full-screen alert, history, settings</li>
+<li>100 % on-device inference; no audio stored, no Internet permission</li>
+<li>ESP32 wristband: BLE protocol, firmware and haptic patterns (designed)</li>
+<li>Personalisation: custom sounds, 3-recording home calibration, 5 sensitivity steps</li></ul></div>
+<div class="col out" style="flex:1"><h>Out of scope (this iteration)</h>
+<ul><li>Speech-to-text captioning of conversations</li><li>iOS and Wear OS versions</li>
+<li>Building and field-testing the wristband hardware</li><li>Clinical / long-term study with DHH users</li>
+<li>Outdoor, traffic and industrial settings</li><li>Cloud services of any kind</li></ul></div>
+</body></html>
