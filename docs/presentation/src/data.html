@@ -1,0 +1,18 @@
+<html><head><link rel=stylesheet href=common.css><style>
+body{width:580px;height:370px}
+.lg{display:flex;gap:16px;font-size:13.5px;margin:0 0 10px 120px}.lg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.r{display:flex;align-items:center;height:33px}
+.n{width:120px;font-size:15px;text-align:right;padding-right:10px}
+.n.s{font-weight:700;color:var(--dark)}
+.bar{display:flex;height:21px;border-radius:4px;overflow:hidden}
+.v{font-size:14px;font-weight:700;margin-left:7px}
+.f{font-size:12.5px;color:var(--mut);margin:8px 0 0 120px}
+</style></head><body><div class=lg id=lg></div><div id=c></div>
+<div class=f>* safety-critical class · plus 12,425 background clips (not shown) · <b style="color:var(--red)">SAHARA-IN = our Mumbai recordings</b></div>
+<script>
+const S=[['AudioSet','#3a3533'],['ESC-50','#8f8782'],['FSD50K','#d9d1cb'],['SAHARA-IN','#be2f2c']];
+const D=[['Glass break*',97,40,510,20,1],['Dog bark',10,40,536,11],['Knocking',97,40,373,67],['Appliance beep',261,40,206,59],['Doorbell',92,0,144,58],['Siren*',34,40,132,20,1],['Smoke alarm*',183,0,0,20,1],['Baby cry',106,40,0,14]];
+lg.innerHTML=S.map(s=>`<span><i style="background:${s[1]}"></i>${s[0]}</span>`).join('');
+const sc=380/670;
+c.innerHTML=D.map(d=>{const t=d[1]+d[2]+d[3]+d[4];return `<div class=r><div class="n ${d[5]?'s':''}">${d[0]}</div><div class=bar>${[1,2,3,4].map(i=>d[i]?`<div style="width:${d[i]*sc}px;background:${S[i-1][1]}"></div>`:'').join('')}</div><span class=v>${t}</span></div>`}).join('');
+</script></body></html>

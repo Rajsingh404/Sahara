@@ -1,0 +1,23 @@
+<html><head><link rel=stylesheet href=common.css><style>
+body{width:960px;height:300px;display:flex;gap:22px}
+.p{border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+.p>h{display:block;font-size:17px;font-weight:700;color:var(--dark);margin-bottom:10px}
+.g{display:grid;grid-gap:10px}
+.t{background:var(--pink);border-radius:9px;padding:10px 12px;height:116px}
+.t b{display:block;font-size:31px;color:var(--red);line-height:1.05;white-space:nowrap}
+.t span{display:block;font-size:13.5px;line-height:1.25;margin-top:6px}
+.w{background:#fff;border:1.5px solid var(--line)}
+</style></head><body>
+<div class=p style="width:390px"><h>Name call: “Aryan”</h><div class=g style="grid-template-columns:1fr 1fr">
+<div class=t><b>0.872</b><span>ROC AUC against everyday background scenes</span></div>
+<div class="t w"><b>0.743</b><span>ROC AUC against similar-sounding names</span></div>
+<div class="t w"><b>29 / 38</b><span>enrolled callers named correctly</span></div>
+<div class=t><b>82 %</b><span>unknown voices shown as “Someone”</span></div></div></div>
+<div class=p style="width:548px"><h>On a Samsung Galaxy S24, fully offline</h><div class=g style="grid-template-columns:1fr 1fr 1fr">
+<div class=t><b>20–29 ms</b><span>inference per 0.5 s window (screen on)</span></div>
+<div class=t><b>1.0–2.5 s</b><span>from sound to phone alert</span></div>
+<div class="t w"><b>54 / 54</b><span>same alerts in the app as in the Python pipeline</span></div>
+<div class="t w"><b>24.3 MB</b><span>models: YAMNet 15.0 · head 1.2 · name 8.1</span></div>
+<div class="t w"><b>45.8 MB</b><span>release APK</span></div>
+<div class="t w"><b>128.9 MB</b><span>memory in use</span></div></div></div>
+</body></html>

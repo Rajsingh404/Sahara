@@ -1,0 +1,18 @@
+<html><head><link rel=stylesheet href=common.css><style>
+body{width:500px;height:380px;position:relative}
+.h{font-size:16px;font-weight:700;margin-bottom:8px}.h span{font-weight:400;color:var(--mut);font-size:13.5px}
+.r{display:flex;align-items:center;height:34px;position:relative}
+.n{width:118px;font-size:15px;text-align:right;padding-right:10px}.n.s{font-weight:700;color:var(--dark)}
+.bar{height:22px;border-radius:0 4px 4px 0}
+.v{font-size:14.5px;font-weight:700;margin-left:4px;padding:0 3px;background:#fff;position:relative;z-index:2}
+.a{font-size:13px;color:var(--mut);position:absolute;right:0}
+#m{position:absolute;z-index:1;border-left:2px dashed #222;top:40px;height:286px}
+#ml{position:absolute;top:330px;font-size:13px;font-weight:700}
+</style></head><body><div class=h>Average precision per class <span>· public held-out test</span></div><div id=c></div><div id=m></div><div id=ml></div>
+<div style="position:absolute;right:0;top:4px;font-size:12.5px;color:var(--mut)">clips alerted</div>
+<script>
+const D=[['Smoke alarm*',.916,'22/27',1],['Dog bark',.908,'67/90'],['Siren*',.875,'28/34',1],['Glass break*',.827,'56/97',1],['Baby cry',.817,'17/25'],['Doorbell',.711,'13/35'],['Knocking',.604,'21/73'],['Appliance beep',.567,'17/78']];
+const W=290;
+c.innerHTML=D.map(d=>`<div class=r><div class="n ${d[3]?'s':''}">${d[0]}</div><div class=bar style="width:${d[1]*W}px;background:${d[3]?'#be2f2c':'#8f8782'}"></div><span class=v>${d[1].toFixed(3).slice(1)}</span><span class=a>${d[2]}</span></div>`).join('');
+m.style.left=(118+.778*W)+'px';ml.style.left=(118+.778*W-40)+'px';ml.textContent='mean AP 0.778';
+</script></body></html>

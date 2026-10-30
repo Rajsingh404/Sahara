@@ -1,0 +1,34 @@
+<html><head><link rel=stylesheet href=common.css><style>
+body{width:962px;height:250px;position:relative}
+.b{position:absolute;width:140px;height:78px;border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:9px 10px 0 12px;border-left:5px solid var(--red)}
+.b h{display:block;font-weight:700;font-size:15.5px;line-height:1.1}
+.b p{font-size:12.5px;color:var(--mut);line-height:1.2;margin-top:4px}
+.k{background:var(--pink)}
+.d{border-style:dashed;border-left-style:solid;border-left-color:var(--mut)}
+.n{position:absolute;top:-10px;right:-8px;width:21px;height:21px;border-radius:50%;background:var(--red);color:#fff;font-size:12px;font-weight:700;text-align:center;line-height:21px}
+.lab{position:absolute;font-size:12px;color:var(--dark);font-weight:700}
+.band{position:absolute;left:0;top:0;width:962px;height:20px;font-size:12.5px;color:var(--mut);letter-spacing:.3px}
+svg{position:absolute;left:0;top:0}
+</style></head><body>
+<div class=band><b style="color:var(--red)">ON THE PHONE</b> · Kotlin foreground service · works with the screen off · no audio stored, no Internet permission</div>
+<svg width=962 height=250><defs><marker id=a markerWidth=8 markerHeight=8 refX=7 refY=4 orient=auto><path d="M0,0 L8,4 L0,8 z" fill="#992730"/></marker></defs>
+<g stroke="#992730" stroke-width=2 fill=none marker-end="url(#a)">
+<path d="M140,69 H160"/><path d="M302,69 H322"/><path d="M464,69 H484"/><path d="M626,69 H646"/><path d="M788,69 H808"/>
+<path d="M556,108 V158"/>
+<path d="M880,108 V133 H718 V158"/>
+<path d="M626,197 H646"/>
+<path d="M788,197 H808"/>
+<path d="M500,108 V122 H394 V158"/>
+</g></svg>
+<div class=b style="left:0;top:30px"><span class=n>1</span><h>Microphone</h><p>16 kHz mono PCM</p></div>
+<div class=b style="left:162px;top:30px"><span class=n>2</span><h>Ring buffer</h><p>1 s window in RAM, 0.5 s hop</p></div>
+<div class=b style="left:324px;top:30px"><span class=n>3</span><h>Energy gate</h><p>skips silent windows to save battery</p></div>
+<div class="b k" style="left:486px;top:30px"><span class=n>4</span><h>YAMNet (frozen)</h><p>1024-d embedding + 521 class scores</p></div>
+<div class="b k" style="left:648px;top:30px"><span class=n>5</span><h>Trained head</h><p>256-128-8, scores the 8 sounds</p></div>
+<div class=b style="left:810px;top:30px"><span class=n>6</span><h>Alert rule</h><p>θ + k-of-3 per class, 10 s cooldown</p></div>
+<div class="b" style="left:324px;top:158px;border-left-color:var(--mut)"><h>Open-set notice</h><p>other loud sounds, shown quietly</p></div>
+<div class="b k" style="left:486px;top:158px"><h>Name spotter</h><p>+ speaker encoder: “Raj is calling you”</p></div>
+<div class=b style="left:648px;top:158px;background:var(--red);border-color:var(--red)"><h style="color:#fff">Phone alert</h><p style="color:#fde">full-screen notice + class-coded vibration</p></div>
+<div class="b d" style="left:810px;top:158px"><h>ESP32 wristband</h><p>same vibration patterns (designed, Rs. 870)</p></div>
+<div class=lab style="left:791px;top:175px">BLE</div>
+</body></html>
