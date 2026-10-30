@@ -1,0 +1,234 @@
+{
+  "name": "x_max_s2",
+  "git_sha": "6ff54fb364963a17337eed421bb8de91778ade10-dirty",
+  "created": "2026-10-30T20:25:52",
+  "args": {
+    "batch_size": 128,
+    "epochs": 40,
+    "learning_rate": 0.0003,
+    "features_dir": "/Users/rajsingh/Desktop/Sahara/data/processed_max",
+    "include_synthetic": false,
+    "balance_power": 0.5,
+    "finetune_from": null,
+    "finetune_replay_ratio": null,
+    "patience": 8,
+    "seed": 2,
+    "background_weight": 8.0,
+    "class_boost": {},
+    "hard_negatives_from": null,
+    "hard_negative_weight": 1.0,
+    "hard_negative_threshold": 0.5,
+    "team_weight": 10.0
+  },
+  "manifest_sha256": {
+    "full": "290372a915eeea6b",
+    "train": "a43bfe7a4dd60fd6",
+    "val": "d8a11bbc343d3432",
+    "test": "ef8e9155064104ba"
+  },
+  "features_sha256": {
+    "train": "af61c8d990036ae1",
+    "val": "81890ad214eb7040",
+    "test": "93c63d40bbc2a566"
+  },
+  "features_summary": {
+    "mode": "window",
+    "augment": false,
+    "failed_to_load": 0,
+    "splits": {
+      "train": {
+        "clips": 17783,
+        "windows": 111288,
+        "background_windows": 81139,
+        "positive_windows": {
+          "smoke_alarm": 2605,
+          "doorbell": 2824,
+          "siren": 3321,
+          "knocking": 4301,
+          "dog_bark": 5037,
+          "baby_cry": 1817,
+          "glass_break": 4171,
+          "appliance_beep": 6117
+        },
+        "windows_by_source_type": {
+          "real": 86653,
+          "self_recorded": 977,
+          "synthetic_mixed": 23658
+        },
+        "clips_missing_from_cache": 0
+      },
+      "val": {
+        "clips": 2303,
+        "windows": 18832,
+        "background_windows": 17558,
+        "positive_windows": {
+          "smoke_alarm": 131,
+          "doorbell": 102,
+          "siren": 147,
+          "knocking": 156,
+          "dog_bark": 249,
+          "baby_cry": 91,
+          "glass_break": 152,
+          "appliance_beep": 252
+        },
+        "windows_by_source_type": {
+          "real": 18832
+        },
+        "clips_missing_from_cache": 0
+      },
+      "test": {
+        "clips": 2435,
+        "windows": 18949,
+        "background_windows": 17250,
+        "positive_windows": {
+          "smoke_alarm": 171,
+          "doorbell": 155,
+          "siren": 197,
+          "knocking": 242,
+          "dog_bark": 250,
+          "baby_cry": 126,
+          "glass_break": 202,
+          "appliance_beep": 367
+        },
+        "windows_by_source_type": {
+          "real": 18328,
+          "self_recorded": 621
+        },
+        "clips_missing_from_cache": 0
+      }
+    },
+    "seconds": 21.2
+  },
+  "config": {
+    "REPO_ROOT": "/Users/rajsingh/Desktop/Sahara",
+    "DATA_DIR": "/Users/rajsingh/Desktop/Sahara/data",
+    "RAW_DATA_DIR": "/Users/rajsingh/Desktop/Sahara/data/raw",
+    "INTERIM_DATA_DIR": "/Users/rajsingh/Desktop/Sahara/data/interim",
+    "PROCESSED_DATA_DIR": "/Users/rajsingh/Desktop/Sahara/data/processed_max",
+    "METADATA_DIR": "/Users/rajsingh/Desktop/Sahara/data/metadata",
+    "MODELS_DIR": "/Users/rajsingh/Desktop/Sahara/models",
+    "_DRIVE_DATASETS": "/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets",
+    "DRIVE_DATASETS_DIR": "/Users/rajsingh/Library/CloudStorage/GoogleDrive-singhraj04.jan@gmail.com/My Drive/SAHARA/Datasets",
+    "_LOCAL_ONLY": "{'synthetic_mixed', 'indian_ambient', 'esc50', 'inoise_chunks'}",
+    "SAMPLE_RATE": 16000,
+    "YAMNET_EMBEDDING_DIM": 1024,
+    "SOUND_CLASSES": [
+      "smoke_alarm",
+      "doorbell",
+      "siren",
+      "knocking",
+      "dog_bark",
+      "baby_cry",
+      "glass_break",
+      "appliance_beep"
+    ],
+    "OTHER_SOUND_MIN_SCORE": 0.35,
+    "OTHER_SOUND_IGNORED": [
+      "Silence",
+      "Speech",
+      "Inside, small room",
+      "Inside, large room or hall",
+      "Outside, urban or manmade",
+      "Outside, rural or natural",
+      "Environmental noise",
+      "Static",
+      "Noise",
+      "Hum",
+      "White noise",
+      "Pink noise",
+      "Mains hum",
+      "Music",
+      "Narration, monologue",
+      "Conversation",
+      "Speech synthesizer",
+      "Male speech, man speaking",
+      "Female speech, woman speaking",
+      "Child speech, kid speaking",
+      "Television",
+      "Radio"
+    ],
+    "OTHER_SOUND_COVERED_BY_HEAD": [
+      "Smoke detector, smoke alarm",
+      "Fire alarm",
+      "Doorbell",
+      "Ding-dong",
+      "Siren",
+      "Civil defense siren",
+      "Police car (siren)",
+      "Ambulance (siren)",
+      "Fire engine, fire truck (siren)",
+      "Emergency vehicle",
+      "Knock",
+      "Dog",
+      "Bark",
+      "Yip",
+      "Bow-wow",
+      "Baby cry, infant cry",
+      "Glass",
+      "Shatter",
+      "Breaking",
+      "Beep, bleep",
+      "Microwave oven",
+      "Alarm clock"
+    ],
+    "NAME_CALL_WINDOW_EMBEDDINGS": 8,
+    "SYNTHETIC_MIXES_PER_TARGET": 3,
+    "SYNTHETIC_SNR_MIN_DB": -5.0,
+    "SYNTHETIC_SNR_MAX_DB": 10.0,
+    "INOISE_CHUNK_DURATION_SEC": 5.0,
+    "FSD50K_BACKGROUND_SAMPLE": 10000,
+    "AUDIOSET_TARGET_PER_CLASS": 200,
+    "BATCH_SIZE": 32,
+    "EPOCHS": 30,
+    "LEARNING_RATE": 0.001,
+    "VALIDATION_SPLIT": 0.15,
+    "TEST_SPLIT": 0.15,
+    "RANDOM_SEED": 42,
+    "AUGMENTATION_ENABLED": false,
+    "AUGMENTATION_VARIANTS_PER_CLIP": 1,
+    "POSITIVE_CLASS_WEIGHTS": {
+      "smoke_alarm": 3.0,
+      "doorbell": 1.0,
+      "siren": 3.0,
+      "knocking": 1.0,
+      "dog_bark": 1.0,
+      "baby_cry": 1.5,
+      "glass_break": 3.0,
+      "appliance_beep": 1.5
+    },
+    "SAFETY_CRITICAL_CLASSES": [
+      "smoke_alarm",
+      "siren",
+      "glass_break"
+    ],
+    "SAFETY_PRECISION_FLOOR": 0.7,
+    "FALSE_ALARM_RATE_LIMIT": 0.1,
+    "FALSE_ALARM_BUDGET_PER_HOUR": 4.0,
+    "SENSITIVITY_PROFILE_BUDGETS": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ],
+    "THRESHOLD_GRID_START": 0.05,
+    "THRESHOLD_GRID_END": 0.95,
+    "THRESHOLD_GRID_STEP": 0.01,
+    "VAD_ENERGY_THRESHOLD": 0.0001,
+    "INFERENCE_WINDOW_SEC": 1.0,
+    "INFERENCE_HOP_SEC": 0.5,
+    "WINDOW_SAMPLES": 16000,
+    "HOP_SAMPLES": 8000,
+    "YAMNET_PATCH_SAMPLES": 15600,
+    "EMBEDDING_POOL": 2,
+    "WINDOW_POOLS": [
+      2
+    ],
+    "WINDOW_POOL_OP": "max",
+    "HEAD_INPUT_DIM": 1024,
+    "EVENT_TOPK_FRACTION": 0.3,
+    "EVENT_TOPK_MAX": 8,
+    "EVENT_MIN_RELATIVE_SCORE": 0.25,
+    "EVENT_SCORE_FLOOR": 0.05
+  }
+}

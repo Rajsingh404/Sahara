@@ -161,7 +161,9 @@ THRESHOLD_GRID_END = 0.95
 THRESHOLD_GRID_STEP = 0.01
 VAD_ENERGY_THRESHOLD = 1e-4
 INFERENCE_WINDOW_SEC = 1.0
-INFERENCE_HOP_SEC = 0.5
+# How often the phone runs YAMNet. SAHARA_HOP_SEC overrides it for experiments (with their own
+# SAHARA_PROCESSED_DIR, since the hop cache depends on it); mirrors ModelConfig.HOP_SAMPLES.
+INFERENCE_HOP_SEC = float(os.environ.get("SAHARA_HOP_SEC", "0.5"))
 
 # What the phone computes (mirrors app/.../core/ModelConfig.kt; change both together).
 WINDOW_SAMPLES = int(INFERENCE_WINDOW_SEC * SAMPLE_RATE)  # 16,000-sample ring buffer

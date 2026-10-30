@@ -350,6 +350,11 @@ def build(run: str | None = None) -> str:
             "on 15 of 41 Indian clips (18 now), 1 of 11 Indian knocks (2 now) and 21 of 27 smoke alarms (23 now), at 3.2 "
             "false alarms/h. Six Indian knocks in validation are too few to set a threshold; more knock recordings are "
             "the fix. (Measured before the third upload added 40 knocks.)",
+            "- Max-pooling the two hop embeddings instead of averaging them (`SAHARA_WINDOW_POOL_OP=max`, runs "
+            "`*_x_max_s*`, 2026-10-30) was tried for brief sounds and not kept: validation policy score 0.609 ± 0.007 over "
+            "five seeds against 0.614 ± 0.015 for the mean, knocking unchanged, team CV mAP 0.818 against 0.822. A brief "
+            "sound is diluted inside YAMNet's 0.96 s patch, not between patches; a finer hop and fine-tuning YAMNet's "
+            "last layers are the next steps and were not run.",
             "- knocking, appliance_beep and doorbell have the lowest test AP; their detection is limited by the model, "
             "not the alert settings (see the budget trade-off above).",
             "- Synthetic results are reported separately and never as real-world performance.",
