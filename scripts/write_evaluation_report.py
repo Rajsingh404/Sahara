@@ -156,6 +156,8 @@ def build(run: str | None = None) -> str:
         labels = {"A_threshold_0.5_one_window": "Threshold 0.5, alert on 1 window",
                   "B_threshold_0.5_fixed_k": "Threshold 0.5, 1 window for safety classes, 2 of 3 for the rest",
                   "C_tuned_shipped": "Tuned per class at 4 false alarms/h on validation (shipped)"}
+        labels.update({k: f"Sensitivity step: tuned at {k[1:].split('_')[0]} false alarms/h"
+                       for k in abl["rules"] if k.startswith("S")})
         out += [f"All {abl['clips']} real test clips ({abl['audio_hours']} h). False alarms count alerts for a class on any "
                 "test audio without it, including other classes' clips, so they run higher than the background-only "
                 f"figures below. Source: `{rel}/policy_ablation.json` (`scripts/policy_ablation.py`).", "",
@@ -184,6 +186,47 @@ def build(run: str | None = None) -> str:
                 f"{cv['base']['background_false_alarms']} → {cv['finetuned']['background_false_alarms']} false alarms.", ""]
     else:
         out += ["Not run yet.", ""]
+    cvs = _load(run_dir / "team_cv_session.json")
+    if cvs:
+        out += ["### Held out by recording session", "",
+                "The cross-validation above deals clips into folds at random, so other clips from the same sitting "
+                "(same phone, room and often the same doorbell or appliance) are in training. Here whole sessions are held "
+                "out (`scripts/organise_recordings.py: session_group`: the named recorder, or the file-name series of "
+                f"unattributed uploads), so every clip is scored by a model that never heard that phone or place "
+                f"(`{rel}/team_cv_session.json`). Smoke alarm, siren and glass break come from one session, so for them "
+                "this measures a model with no Indian examples of the class at all.", "",
+                "| Class | AP without team data | AP with team data | Clips alerted without | Clips alerted with |",
+                "|---|---:|---:|---:|---:|"]
+        for c in SOUND_CLASSES:
+            b, f = cvs["base"]["per_class"].get(c), cvs["finetuned"]["per_class"].get(c)
+            if b:
+                out.append(f"| {c} | {b['ap']:.3f} | {f['ap']:.3f} | {b['detected']}/{b['clips']} | {f['detected']}/{f['clips']} |")
+        out += ["", f"mAP {cvs['base']['mAP']:.3f} → {cvs['finetuned']['mAP']:.3f}. Across sessions the team data does not "
+                "raise mAP; the gain in the random-fold table comes mostly from hearing the same sitting. It helps doorbells "
+                "and catches more beeps and cries in new homes, but the Indian held-out test split shares sessions with "
+                "training and overstates transfer to a new home. Calibrating to each home is the remedy this points to.", ""]
+
+    cal = _load(run_dir / "home_calibration.json")
+    if cal:
+        sm = cal["summary"]
+        out += ["## Home calibration (sessions the model never heard)", "",
+                f"The app's *Calibrate for this home* lowers one sound's threshold from {cal['calibration_recordings']} "
+                "recordings made where it happens, never below that sound's threshold in the most permissive sensitivity "
+                "step (`src/evaluation/home_calibration.py`, `HomeCalibration.kt`). Measured with session-held-out models: "
+                f"{cal['calibration_recordings']} clips of a held-out session play the calibration recordings and the rest "
+                f"are the sounds to catch, over {cal['draws']} random draws; false alarms are that class's alerts on the "
+                f"public test background. Source: `{rel}/home_calibration.json` (`scripts/eval_home_calibration.py`).", "",
+                "| Session | Class | Clips | Caught, shipped | Caught, calibrated | Class FA/h, shipped | Class FA/h, calibrated |",
+                "|---|---|---:|---:|---:|---:|---:|"]
+        for key, r in cal["per_session_class"].items():
+            s, c = key.split("|")
+            out.append(f"| {s} | {c} | {r['clips']} | {r['detection_shipped']:.2f} | {r['detection_calibrated']:.2f} | "
+                       f"{r['fa_per_hour_shipped']:.2f} | {r['fa_per_hour_calibrated']:.2f} |")
+        out += ["", f"Across {sm['sessions_x_classes']} session × class pairs (weighted by clips): {sm['detection_shipped']:.0%} "
+                f"caught at the shipped thresholds, {sm['detection_calibrated']:.0%} after calibration, for "
+                f"{sm['added_fa_per_hour_mean']:.1f} extra false alarms per hour per calibrated class. Doorbells, beeps and "
+                "cries gain most; knocking, glass break and smoke alarm do not, because in those homes the model's scores "
+                "stay below even the most permissive tested threshold.", ""]
 
     out += ["## Export (TFLite)", ""]
     if exp:

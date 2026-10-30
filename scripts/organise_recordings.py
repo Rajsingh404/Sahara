@@ -128,6 +128,26 @@ def condition(row: dict) -> str:
     return f"{row['source_path'].split('/')[0].strip()}|{row['recorder']}"
 
 
+_GENERIC_NAMES = {"", "new recording", "recording", "audio", "voice"}
+
+
+def session_group(row: dict) -> str:
+    """Best guess at the sitting (person, phone, place) a clip came from, for splits that never put one
+    sitting on both sides. Named recorders are one group each. Clips with no recorder are grouped by their
+    file-name series: phone recorders number takes in sequence ("Juhu Tara Road 61", "New Recording 7",
+    Voice Memos naming them after the place), so one series is one phone at one place. A generic name is
+    split further by Drive folder. Inferred from names only: it can merge two people or split one."""
+    import re
+
+    if row["recorder"] != "team":
+        return row["recorder"]
+    name = row["source_path"].split("/")[-1].rsplit(".", 1)[0].strip()
+    name = re.sub(r"^copy of\s+", "", name, flags=re.I)
+    name = re.sub(r"[\W\d_]+$", "", name).strip().lower()
+    folder = row["source_path"].split("/")[0].strip().lower()
+    return f"u{row.get('upload') or '1'}:{name}" + (f"@{folder}" if name in _GENERIC_NAMES else "")
+
+
 def _duplicate_key(row: dict) -> str:
     # Clips with identical audio are marked in label_map.csv (`same_audio_as`, e.g. 'door bang 2'
     # is 'door bang' re-saved); they must land on the same side.

@@ -4,6 +4,7 @@ Rules compared (all with the app's 10 s cooldown and 3-window memory):
   A  threshold 0.5, alert on 1 window                                  (no smoothing, no tuning)
   B  threshold 0.5, 1 window for safety classes, 2 of 3 for the rest   (the original fixed design)
   C  per-class threshold and windows tuned on validation at 4 false alarms/h (shipped)
+  S<b>  the app's sensitivity steps: the same tuning at each budget b in alert_profiles.csv
 
 Per class: share of test clips that raise their alert, and false alarms per hour on the test audio
 that does not contain the class (background and other classes' clips, played back to back).
@@ -14,6 +15,7 @@ Writes models/logs/<run>/policy_ablation.json.
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import sys
 from pathlib import Path
@@ -21,7 +23,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from src.config import SAFETY_CRITICAL_CLASSES, SOUND_CLASSES  # noqa: E402
+from src.config import METADATA_DIR, SAFETY_CRITICAL_CLASSES, SOUND_CLASSES  # noqa: E402
 from src.evaluation import policy_tuning as pt  # noqa: E402
 from src.evaluation.streaming import HOP_MS, load_head, load_hits, load_thresholds, selected_run_dir  # noqa: E402
 
@@ -55,6 +57,14 @@ def main() -> None:
         "B_threshold_0.5_fixed_k": {c: (0.5, 1 if c in SAFETY_CRITICAL_CLASSES else 2) for c in SOUND_CLASSES},
         "C_tuned_shipped": {c: (float(thr[c]), int(hits[c])) for c in SOUND_CLASSES},
     }
+    profiles = METADATA_DIR / "alert_profiles.csv"
+    if profiles.exists():
+        steps: dict[str, dict] = {}
+        with profiles.open(newline="") as handle:
+            for r in csv.DictReader(handle):
+                steps.setdefault(f"S{float(r['budget_per_hour']):g}_sensitivity_step", {})[r["class"]] = (
+                    float(r["threshold"]), int(r["hits_required"]))
+        rules.update(steps)
     hours = sum(len(cl.scores) for cl in clips) * HOP_MS / 3_600_000
     out = {"run": run_dir.name, "split": "test", "clips": len(clips), "audio_hours": round(hours, 2),
            "rules": {name: score(clips, r) for name, r in rules.items()}}

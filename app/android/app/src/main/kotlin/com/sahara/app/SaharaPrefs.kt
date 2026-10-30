@@ -34,6 +34,14 @@ class SaharaPrefs(context: Context) {
         get() = prefs.getBoolean(KEY_OTHER_SOUNDS, true)
         set(value) = prefs.edit().putBoolean(KEY_OTHER_SOUNDS, value).apply()
 
+    /** Home calibration: per class, the threshold fitted to this home's own recordings ("label=0.91;..."). */
+    var calibratedThresholds: Map<String, Float>
+        get() = (prefs.getString(KEY_CALIBRATED, "") ?: "").split(';').mapNotNull { e ->
+            val (k, v) = e.split('=').takeIf { it.size == 2 } ?: return@mapNotNull null
+            v.toFloatOrNull()?.let { k to it }
+        }.toMap()
+        set(value) = prefs.edit().putString(KEY_CALIBRATED, value.entries.joinToString(";") { "${it.key}=${it.value}" }).apply()
+
     var wristbandAddress: String?
         get() = prefs.getString(KEY_BAND_ADDRESS, null)
         set(value) = prefs.edit().putString(KEY_BAND_ADDRESS, value).apply()
@@ -50,6 +58,7 @@ class SaharaPrefs(context: Context) {
         "wristbandName" to wristbandName,
         "nameCalls" to nameCalls,
         "otherSounds" to otherSounds,
+        "calibrated" to calibratedThresholds.mapValues { it.value.toDouble() },
     )
 
     /**
@@ -158,6 +167,7 @@ class SaharaPrefs(context: Context) {
         private const val KEY_NAME_CALLS = "name_calls"
         private const val KEY_OTHER_SOUNDS = "other_sounds"
         private const val KEY_CALLERS = "callers"
+        private const val KEY_CALIBRATED = "calibrated_thresholds"
         private const val MAX_HISTORY = 100
         const val VOICE_DIM = 256
     }

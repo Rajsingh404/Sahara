@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../audio/sahara_service.dart';
 import '../detection/sound_class.dart';
 import '../personalization/custom_sounds_screen.dart';
+import '../personalization/home_calibration_screen.dart';
 import 'app_scope.dart';
 import 'callers_screen.dart';
 import 'permissions.dart';
@@ -30,6 +31,15 @@ class SettingsScreen extends StatelessWidget {
             onChanged: state.setSensitivity,
           ),
           SwitchListTile(title: const Text('Vibrate phone on alert'), value: s.vibrate, onChanged: state.setVibrate),
+          ListTile(
+            leading: const Icon(Icons.home_outlined),
+            title: const Text('Calibrate for this home'),
+            subtitle: Text(s.calibrated.isEmpty
+                ? 'Record your own doorbell, door and appliances so they are caught more reliably.'
+                : '${s.calibrated.length} sound(s) calibrated for this home'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const HomeCalibrationScreen())),
+          ),
           const Divider(),
           _SectionTitle('When someone calls ${s.personal.name ?? 'you'}'),
           SwitchListTile(
@@ -100,12 +110,14 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
+  // Each step is an alert setting tuned for that many false alarms an hour (alert_profiles.csv,
+  // SENSITIVITY_PROFILE_BUDGETS in src/config.py); fewer false alarms also means more missed sounds.
   static String _sensitivityLabel(double v) => switch (v) {
-    <= -0.75 => 'Fewest alerts',
-    < -0.25 => 'Fewer alerts',
-    < 0.25 => 'Balanced',
-    < 0.75 => 'More alerts',
-    _ => 'Most alerts',
+    <= -0.75 => 'Fewest alerts · about 1 false alarm an hour',
+    < -0.25 => 'Fewer alerts · about 2 false alarms an hour',
+    < 0.25 => 'Balanced · about 4 false alarms an hour (recommended)',
+    < 0.75 => 'More alerts · about 8 false alarms an hour',
+    _ => 'Most alerts · about 16 false alarms an hour',
   };
 }
 

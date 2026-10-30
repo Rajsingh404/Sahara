@@ -1,7 +1,9 @@
 """Tune each class's alert threshold and hits-required against a false-alarm budget (validation only).
 
-Writes data/metadata/class_thresholds.json (the app reads `threshold` and `hits_required` per class)
-and models/logs/<run>/policy_tuning.json with the full detection / false-alarm trade-off.
+Writes data/metadata/class_thresholds.json (the app reads `threshold` and `hits_required` per class),
+data/metadata/alert_profiles.csv (the same tuning at each SENSITIVITY_PROFILE_BUDGETS budget: one row per
+budget and class, read by the app's sensitivity slider) and models/logs/<run>/policy_tuning.json with the
+full detection / false-alarm trade-off.
 See src/evaluation/policy_tuning.py for the method.
 
     python src/evaluation/tune_policy.py [--run <run folder>] [--budget 2.0]
@@ -14,7 +16,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from src.config import FALSE_ALARM_BUDGET_PER_HOUR, METADATA_DIR
+from src.config import FALSE_ALARM_BUDGET_PER_HOUR, METADATA_DIR, SENSITIVITY_PROFILE_BUDGETS
 from src.evaluation import policy_tuning as pt
 from src.evaluation.streaming import load_head, selected_run_dir
 
@@ -33,6 +35,14 @@ def run(run: str | None = None, budget: float = FALSE_ALARM_BUDGET_PER_HOUR) -> 
     text = json.dumps(payload, indent=2) + "\n"
     (METADATA_DIR / "class_thresholds.json").write_text(text, encoding="utf-8")
     (run_dir / "class_thresholds.json").write_text(text, encoding="utf-8")
+    lines = ["budget_per_hour,val_false_alarms_per_hour,val_mean_detection,class,threshold,hits_required"]
+    for b in SENSITIVITY_PROFILE_BUDGETS:
+        s = pt.choose_settings(curves, pt.grid(), b)
+        fa = round(sum(v["val_false_alarms_per_hour"] for v in s.values()), 3)
+        det = round(sum(v["val_clip_detection"] for v in s.values()) / len(s), 4)
+        lines += [f"{b},{fa},{det},{c},{v['threshold']},{v['hits_required']}" for c, v in s.items()]
+    for out in (METADATA_DIR / "alert_profiles.csv", run_dir / "alert_profiles.csv"):
+        out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     (run_dir / "policy_tuning.json").write_text(json.dumps({"budget_per_hour": budget, "tradeoff": pt.tradeoff(curves)},
                                                            indent=2, default=list))
     print(f"{run_dir.name}: budget {budget}/h on validation -> total {payload['_meta']['val_total_false_alarms_per_hour']}/h")

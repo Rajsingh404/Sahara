@@ -51,6 +51,29 @@ def team_clips() -> list[dict]:
     return sorted(clips.values(), key=lambda c: c["filepath"])
 
 
+def session_groups() -> dict[str, str]:
+    """Recording filename -> inferred session (scripts/organise_recordings.py: session_group)."""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
+    from organise_recordings import load_label_map, session_group
+
+    return {r["filename"]: session_group(r) for r in load_label_map() if r["dataset"] == "ambient"}
+
+
+def assign_session_folds(clips: list[dict], k: int) -> dict[str, int]:
+    """Whole sessions per fold (largest first, into the emptiest fold), so no sitting is on both sides."""
+    groups = session_groups()
+    by_group: dict[str, list[dict]] = defaultdict(list)
+    for c in clips:
+        by_group[groups[Path(c["filepath"]).name]].append(c)
+    load, folds = [0] * k, {}
+    for g in sorted(by_group, key=lambda g: (-len(by_group[g]), g)):
+        f = load.index(min(load))
+        load[f] += len(by_group[g])
+        for c in by_group[g]:
+            folds[c["filepath"]] = f
+    return folds
+
+
 def assign_folds(clips: list[dict], k: int, seed: int = RANDOM_SEED) -> dict[str, int]:
     """Per label, deal clips round-robin into k folds after a seeded shuffle."""
     by_label: dict[str, list[dict]] = defaultdict(list)
@@ -131,7 +154,7 @@ def evaluate(model_for, clips: list[dict], thresholds: dict, hits: dict) -> dict
 
 
 def run(run: str | None = None, k: int = 5, mode: str = "finetune", team_weight: float = 1.0,
-        finetune_epochs: int | None = None) -> dict:
+        finetune_epochs: int | None = None, group_by: str = "clip") -> dict:
     """mode="finetune": base + per-fold fine-tune; mode="joint": per fold, train from scratch on public
     + other-fold team windows. Team windows are weighted x``team_weight`` in both modes."""
     run_dir = out_dir = selected_run_dir(run)
@@ -156,7 +179,7 @@ def run(run: str | None = None, k: int = 5, mode: str = "finetune", team_weight:
     print(f"base: {int(public.sum())} public windows, {base_epochs} epochs")
 
     clips = team_clips()
-    folds = assign_folds(clips, k)
+    folds = assign_session_folds(clips, k) if group_by == "session" else assign_folds(clips, k)
     rng = np.random.default_rng(RANDOM_SEED)
     public_idx = np.flatnonzero(public)
     finetune_epochs = finetune_epochs or int(json.loads((run_dir / "metrics.json").read_text()).get("best_epoch") or 2)
@@ -189,11 +212,12 @@ def run(run: str | None = None, k: int = 5, mode: str = "finetune", team_weight:
         "base": evaluate(lambda c: base, clips, thresholds, hits),
         "finetuned": evaluate(lambda c: models[folds[c["filepath"]]], clips, thresholds, hits),
     }
-    out = {"run": out_dir.name, "folds": k, "team_clips": len(clips), "mode": mode, "team_weight": team_weight,
+    out = {"run": out_dir.name, "folds": k, "group_by": group_by, "team_clips": len(clips), "mode": mode,
+           "team_weight": team_weight,
            "finetune_epochs": finetune_epochs if mode == "finetune" else None,
            "note": "Base model trained on public data only; fine-tuned scores are out-of-fold.", **results}
     out["recipe_from"] = run_dir.name
-    (out_dir / "team_cv.json").write_text(json.dumps(out, indent=2))
+    (out_dir / ("team_cv.json" if group_by == "clip" else f"team_cv_{group_by}.json")).write_text(json.dumps(out, indent=2))
     print(f"mode {mode}, team weight x{team_weight}")
     for name in ("base", "finetuned"):
         r = results[name]
@@ -210,5 +234,7 @@ if __name__ == "__main__":
     parser.add_argument("--mode", choices=("finetune", "joint"), default="finetune")
     parser.add_argument("--team-weight", type=float, default=1.0)
     parser.add_argument("--finetune-epochs", type=int)
+    parser.add_argument("--group-by", choices=("clip", "session"), default="clip",
+                        help="session: hold out whole recording sessions, so no sitting is on both sides.")
     args = parser.parse_args()
-    run(args.run, args.folds, args.mode, args.team_weight, args.finetune_epochs)
+    run(args.run, args.folds, args.mode, args.team_weight, args.finetune_epochs, args.group_by)

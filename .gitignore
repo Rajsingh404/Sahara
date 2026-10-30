@@ -93,3 +93,6 @@ models/logs/personalization/*
 !models/logs/phone/
 models/logs/phone/*
 !models/logs/phone/*.json
+
+# Experiment feature arrays (SAHARA_PROCESSED_DIR)
+data/processed_*/

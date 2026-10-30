@@ -97,6 +97,10 @@ class InferenceEngine private constructor(
         return out
     }
 
+    /** The head's scores for each voiced window of a recording (home calibration). Nothing is stored. */
+    fun recordingScores(pcm: ShortArray): List<FloatArray> =
+        enrolmentVectors(pcm).map { (vector, _) -> runSingle(classifier, vector) }
+
     /** Mean YAMNet embedding over the window's frames, plus mean class scores when exported. */
     private fun embed(window: FloatArray): Pair<FloatArray, FloatArray?> {
         val net = yamnet!!
@@ -186,6 +190,7 @@ class InferenceEngine private constructor(
         const val LABELS_ASSET = "assets/labels.txt"
         const val THRESHOLDS_ASSET = "assets/class_thresholds.json"
         const val PERSONAL_CENTER_ASSET = "assets/personal_center.bin"
+        const val PROFILES_ASSET = "assets/alert_profiles.csv"
 
         fun readAssetText(context: Context, asset: String): String? = readAsset(context, asset)?.toString(Charsets.UTF_8)
 
@@ -196,6 +201,9 @@ class InferenceEngine private constructor(
 
         fun loadThresholds(context: Context): Map<String, Float> =
             readAssetText(context, THRESHOLDS_ASSET)?.let(AssetParsers::parseThresholds).orEmpty()
+
+        fun loadAlertProfiles(context: Context): List<AssetParsers.AlertProfile> =
+            readAssetText(context, PROFILES_ASSET)?.let(AssetParsers::parseAlertProfiles).orEmpty()
 
         fun loadHitsRequired(context: Context): Map<String, Int> =
             readAssetText(context, THRESHOLDS_ASSET)?.let(AssetParsers::parseHitsRequired).orEmpty()

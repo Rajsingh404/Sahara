@@ -90,7 +90,8 @@ class AudioCaptureService : Service() {
             return
         }
         matcher = com.sahara.app.core.CustomSoundMatcher(engine.personalCenter)
-        policy = DetectionPolicy(engine.labels, engine.thresholds, hitsPerClass = engine.hitsRequired)
+        policy = DetectionPolicy(engine.labels, engine.thresholds, hitsPerClass = engine.hitsRequired,
+            profiles = InferenceEngine.loadAlertProfiles(this))
         personal = PersonalModels.load(this, engine.hasYamnetScores)
         applySettings()
         running = true
@@ -253,6 +254,7 @@ class AudioCaptureService : Service() {
         policy?.let { p ->
             prefs.enabledClasses?.let { p.enabled = it }
             p.sensitivity = prefs.sensitivity
+            p.calibrated = prefs.calibratedThresholds
         }
         matcher?.sounds = prefs.customSounds()
         personal?.nameCalls?.let {

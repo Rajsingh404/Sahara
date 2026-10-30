@@ -8,6 +8,7 @@ Run from the repo root after `python src/export/to_tflite.py` (and optionally qu
 Writes:
     app/assets/labels.txt               SOUND_CLASSES from src/config.py, one per line, in model order
     app/assets/class_thresholds.json    copy of data/metadata/class_thresholds.json
+    app/assets/alert_profiles.csv       copy of data/metadata/alert_profiles.csv (sensitivity slider)
     app/assets/sahara_classifier.tflite sahara_fp32.tflite if present, else sahara_int8.tflite
     app/assets/yamnet.tflite            only with --yamnet (see export_yamnet_tflite.py)
     app/assets/personal_center.bin      custom-sound centring vector, if models/exported/ has it
@@ -100,6 +101,10 @@ def main() -> None:
     if thresholds.exists():
         shutil.copyfile(thresholds, ASSETS / "class_thresholds.json")
         print(f"class_thresholds.json: copied from {thresholds.relative_to(REPO_ROOT)}")
+    profiles = REPO_ROOT / "data" / "metadata" / "alert_profiles.csv"
+    if profiles.exists():
+        shutil.copyfile(profiles, ASSETS / "alert_profiles.csv")
+        print(f"alert_profiles.csv: copied from {profiles.relative_to(REPO_ROOT)}")
     write_other_sounds()
     print("other_sounds.json: written from src/config.py")
     if args.labels_only:

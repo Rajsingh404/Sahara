@@ -19,6 +19,7 @@ import numpy as np
 
 from src.config import (
     EMBEDDING_POOL,
+    WINDOW_POOL_OP,
     WINDOW_POOLS,
     EVENT_MIN_RELATIVE_SCORE,
     EVENT_SCORE_FLOOR,
@@ -48,7 +49,8 @@ def device_window_vectors(
             continue
         pool.append(i)
         members = list(pool)
-        vectors.append(np.concatenate([emb[members[-p:]].mean(axis=0) for p in pools]))
+        combine = np.max if WINDOW_POOL_OP == "max" else np.mean
+        vectors.append(np.concatenate([combine(emb[members[-p:]], axis=0) for p in pools]))
         short = members[-min(EMBEDDING_POOL, max(pools)):]
         pooled_scores.append(scores[short].mean(axis=0))
         pooled_energy.append(energy[short].max())

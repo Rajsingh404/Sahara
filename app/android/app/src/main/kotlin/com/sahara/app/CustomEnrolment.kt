@@ -85,8 +85,8 @@ object CustomEnrolment {
     )
 
     @SuppressLint("MissingPermission") // the UI only offers enrolment once the microphone is granted
-    private fun record(): ShortArray? {
-        val n = ModelConfig.SAMPLE_RATE * SAMPLE_SECONDS
+    internal fun record(seconds: Int = SAMPLE_SECONDS): ShortArray? {
+        val n = ModelConfig.SAMPLE_RATE * seconds
         val minBuf = AudioRecord.getMinBufferSize(ModelConfig.SAMPLE_RATE, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)
         for (source in intArrayOf(MediaRecorder.AudioSource.VOICE_RECOGNITION, MediaRecorder.AudioSource.MIC)) {
             val r = try {

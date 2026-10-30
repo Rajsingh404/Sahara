@@ -8,6 +8,7 @@ import 'package:sahara/audio/sahara_service.dart';
 import 'package:sahara/detection/detection_event.dart';
 import 'package:sahara/detection/sound_class.dart';
 import 'package:sahara/personalization/custom_sounds_screen.dart';
+import 'package:sahara/personalization/home_calibration_screen.dart';
 
 import 'fake_api.dart';
 
@@ -119,6 +120,31 @@ void main() {
     expect(find.text('Pressure cooker'), findsOneWidget);
     expect(api.calls.where((c) => c == 'record'), hasLength(5));
     expect(api.calls, isNot(contains('cancelEnrolment')));
+  });
+
+  testWidgets('home calibration takes 3 recordings of a sound, then saves', (tester) async {
+    final (api, _) = await pumpApp(tester);
+    tester
+        .state<NavigatorState>(find.byType(Navigator).first)
+        .push(MaterialPageRoute<void>(builder: (_) => const HomeCalibrationScreen()));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Doorbell'));
+    await tester.pumpAndSettle();
+    FilledButton saveButton() => tester.widget<FilledButton>(find.widgetWithText(FilledButton, 'Save'));
+    for (var i = 0; i < 3; i++) {
+      expect(saveButton().onPressed, isNull, reason: 'save stays off below 3 recordings');
+      await tester.tap(find.text('Record Doorbell'));
+      await tester.pumpAndSettle();
+    }
+    await tester.tap(find.text('Record home sound'));
+    await tester.pumpAndSettle();
+    expect(find.text('3 of 3 recordings'), findsOneWidget);
+    await tester.tap(find.widgetWithText(FilledButton, 'Save'));
+    await tester.pumpAndSettle();
+    expect(api.calls.where((c) => c == 'calibrate:doorbell'), hasLength(3));
+    expect(api.calls, contains('calibrate:doorbell:background'));
+    expect(api.calls, contains('finishCalibration'));
+    expect(api.calls, isNot(contains('cancelCalibration')));
   });
 
   test('custom alert labels get their own display name', () {

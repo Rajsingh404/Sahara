@@ -168,6 +168,28 @@ class SaharaChannel(private val context: Context, messenger: BinaryMessenger) : 
                 }
             }
             "finishEnrolment" -> result.success(CustomEnrolment.finish(context, call.argument<String>("name") ?: ""))
+            "recordCalibrationSample" -> {
+                if (!granted(Manifest.permission.RECORD_AUDIO)) {
+                    result.error("permission", "Microphone permission is required", null)
+                } else {
+                    val label = call.argument<String>("label") ?: ""
+                    val background = call.argument<Boolean>("background") ?: false
+                    val main = android.os.Handler(android.os.Looper.getMainLooper())
+                    Thread({
+                        val state = HomeCalibrationSession.recordSample(context, label, background)
+                        main.post { result.success(state) }
+                    }, "sahara-calibrate").start()
+                }
+            }
+            "finishCalibration" -> result.success(HomeCalibrationSession.finish(context))
+            "cancelCalibration" -> {
+                HomeCalibrationSession.cancel(context)
+                result.success(true)
+            }
+            "clearCalibration" -> {
+                HomeCalibrationSession.clear(context, call.argument<String>("label"))
+                result.success(prefs.calibratedThresholds.mapValues { it.value.toDouble() })
+            }
             "cancelEnrolment" -> {
                 CustomEnrolment.cancel(context)
                 result.success(true)

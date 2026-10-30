@@ -140,6 +140,11 @@ All 2435 real test clips (4.55 h). False alarms count alerts for a class on any 
 | Threshold 0.5, alert on 1 window | 0.766 | 0.838 | 49.1 |
 | Threshold 0.5, 1 window for safety classes, 2 of 3 for the rest | 0.688 | 0.838 | 34.1 |
 | Tuned per class at 4 false alarms/h on validation (shipped) | 0.538 | 0.692 | 6.1 |
+| Sensitivity step: tuned at 1 false alarms/h | 0.466 | 0.589 | 2.5 |
+| Sensitivity step: tuned at 2 false alarms/h | 0.502 | 0.605 | 3.4 |
+| Sensitivity step: tuned at 4 false alarms/h | 0.538 | 0.692 | 6.1 |
+| Sensitivity step: tuned at 8 false alarms/h | 0.613 | 0.716 | 13.1 |
+| Sensitivity step: tuned at 16 false alarms/h | 0.669 | 0.719 | 20.6 |
 
 ## Indian team recordings: 5-fold cross-validation
 
@@ -157,6 +162,49 @@ All 329 team clips are tested once by a model that never heard them (`models/log
 | appliance_beep | 0.858 | 0.932 | 9/59 | 19/59 |
 
 mAP 0.621 → 0.822. Team background (60 clips, 5.9 min): 1 → 3 false alarms.
+
+### Held out by recording session
+
+The cross-validation above deals clips into folds at random, so other clips from the same sitting (same phone, room and often the same doorbell or appliance) are in training. Here whole sessions are held out (`scripts/organise_recordings.py: session_group`: the named recorder, or the file-name series of unattributed uploads), so every clip is scored by a model that never heard that phone or place (`models/logs/20261030-185320_a_real_s3/team_cv_session.json`). Smoke alarm, siren and glass break come from one session, so for them this measures a model with no Indian examples of the class at all.
+
+| Class | AP without team data | AP with team data | Clips alerted without | Clips alerted with |
+|---|---:|---:|---:|---:|
+| smoke_alarm | 0.385 | 0.405 | 6/20 | 5/20 |
+| doorbell | 0.521 | 0.691 | 5/58 | 8/58 |
+| siren | 0.657 | 0.613 | 10/20 | 10/20 |
+| knocking | 0.482 | 0.262 | 4/67 | 7/67 |
+| dog_bark | 0.932 | 0.932 | 7/11 | 8/11 |
+| baby_cry | 0.925 | 0.927 | 2/14 | 5/14 |
+| glass_break | 0.208 | 0.087 | 2/20 | 1/20 |
+| appliance_beep | 0.858 | 0.879 | 9/59 | 12/59 |
+
+mAP 0.621 → 0.600. Across sessions the team data does not raise mAP; the gain in the random-fold table comes mostly from hearing the same sitting. It helps doorbells and catches more beeps and cries in new homes, but the Indian held-out test split shares sessions with training and overstates transfer to a new home. Calibrating to each home is the remedy this points to.
+
+## Home calibration (sessions the model never heard)
+
+The app's *Calibrate for this home* lowers one sound's threshold from 3 recordings made where it happens, never below that sound's threshold in the most permissive sensitivity step (`src/evaluation/home_calibration.py`, `HomeCalibration.kt`). Measured with session-held-out models: 3 clips of a held-out session play the calibration recordings and the rest are the sounds to catch, over 20 random draws; false alarms are that class's alerts on the public test background. Source: `models/logs/20261030-185320_a_real_s3/home_calibration.json` (`scripts/eval_home_calibration.py`).
+
+| Session | Class | Clips | Caught, shipped | Caught, calibrated | Class FA/h, shipped | Class FA/h, calibrated |
+|---|---|---:|---:|---:|---:|---:|
+| u3:juhu tara road | glass_break | 20 | 0.06 | 0.06 | 1.46 | 1.75 |
+| u3:juhu tara road | knocking | 40 | 0.00 | 0.00 | 0.29 | 0.58 |
+| u3:juhu tara road | siren | 20 | 0.51 | 0.55 | 1.75 | 1.75 |
+| u3:juhu tara road | smoke_alarm | 20 | 0.25 | 0.25 | 0.29 | 0.29 |
+| advika | appliance_beep | 9 | 0.11 | 0.49 | 0.00 | 1.16 |
+| advika | baby_cry | 6 | 0.00 | 0.62 | 0.00 | 3.99 |
+| advika | knocking | 14 | 0.21 | 0.21 | 0.87 | 1.75 |
+| u2:baby cry | baby_cry | 8 | 0.62 | 0.82 | 0.00 | 2.75 |
+| u2:doorbell | doorbell | 11 | 0.43 | 0.51 | 0.00 | 1.22 |
+| prachi | doorbell | 10 | 0.18 | 0.46 | 0.00 | 0.79 |
+| u2:knock | knocking | 10 | 0.23 | 0.23 | 0.29 | 0.87 |
+| u2:microwave | appliance_beep | 13 | 0.28 | 0.60 | 0.29 | 1.43 |
+| mahi | appliance_beep | 7 | 0.00 | 0.00 | 0.29 | 1.46 |
+| mahi | dog_bark | 11 | 0.72 | 0.82 | 0.00 | 0.70 |
+| mahi | doorbell | 6 | 0.20 | 0.83 | 0.00 | 0.87 |
+| u3:new recording@doorbell | doorbell | 31 | 0.00 | 0.42 | 0.00 | 0.87 |
+| u3:new recording@appliance beep | appliance_beep | 30 | 0.22 | 0.50 | 0.00 | 0.87 |
+
+Across 17 session × class pairs (weighted by clips): 19% caught at the shipped thresholds, 35% after calibration, for 1.0 extra false alarms per hour per calibrated class. Doorbells, beeps and cries gain most; knocking, glass break and smoke alarm do not, because in those homes the model's scores stay below even the most permissive tested threshold.
 
 ## Export (TFLite)
 

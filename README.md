@@ -24,7 +24,8 @@ whistle or a phone ringing), and **name calls**: someone calling the user's name
 Results, with the run folder each number comes from: [docs/evaluation_report.md](docs/evaluation_report.md).
 Headline (test data, run `20261030-185320_a_real_s3`): public test mAP 0.778; false alarms on 3.4 h of busy
 background audio 3.5 per hour; smoke alarm 22/27 and siren 28/34 test clips alerted; Indian held-out test mAP 0.831
-(previous model 0.698); Indian recordings (329 clips) 5-fold cross-validation mAP 0.621 without them in training, 0.822 with them.
+(previous model 0.698); Indian recordings (329 clips) 5-fold cross-validation mAP 0.621 without them in training, 0.822 with them; with whole
+recording sessions held out, 0.600, so the gain is in homes the model has heard (see the report).
 
 ## How it works
 

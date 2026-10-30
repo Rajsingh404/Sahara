@@ -26,13 +26,15 @@ object HapticPatterns {
         Detection.NAME_CALL to p(2, 800, 220 to 400, 0 to 150, 220 to 400, 0 to 150, 220 to 150, 0 to 150, 220 to 150),
     )
 
-    /** Anything else (custom sounds): one gentle pulse, never a safety pattern; the band does the same. */
+    /** Any other label: one pulse, never a safety pattern; the band does the same for unknown ids. */
     val DEFAULT: Pattern = p(1, 0, 255 to 300)
 
     // Below this a phone motor, like the band's coin motor, is barely felt; non-zero steps are raised to it.
     private const val MIN_LEVEL = 90
 
-    fun forLabel(label: String): Pattern = BY_CLASS[label] ?: DEFAULT
+    /** Custom sounds reach the band as the doorbell's id (CustomSoundMatcher.ALERT_CLASS_ID), so they feel like it here too. */
+    fun forLabel(label: String): Pattern =
+        BY_CLASS[label] ?: if (label.startsWith(CustomSoundMatcher.LABEL_PREFIX)) BY_CLASS.getValue("doorbell") else DEFAULT
 
     /** Timings and amplitudes for VibrationEffect.createWaveform, repeats and gaps unrolled. */
     fun waveform(pattern: Pattern): Pair<LongArray, IntArray> {

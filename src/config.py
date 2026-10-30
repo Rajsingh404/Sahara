@@ -28,7 +28,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = REPO_ROOT / "data"
 RAW_DATA_DIR = DATA_DIR / "raw"
 INTERIM_DATA_DIR = DATA_DIR / "interim"
-PROCESSED_DATA_DIR = DATA_DIR / "processed"
+# SAHARA_PROCESSED_DIR lets an experiment build its window arrays without touching the shipped ones.
+PROCESSED_DATA_DIR = Path(os.environ.get("SAHARA_PROCESSED_DIR") or DATA_DIR / "processed")
 METADATA_DIR = DATA_DIR / "metadata"
 MODELS_DIR = REPO_ROOT / "models"
 
@@ -152,6 +153,9 @@ FALSE_ALARM_RATE_LIMIT = 0.10
 # Total alerts per hour allowed on validation audio that holds none of the alerted sounds, summed
 # over the 8 classes (src/evaluation/tune_policy.py). Chosen in Phase 4, see docs/evaluation_report.md.
 FALSE_ALARM_BUDGET_PER_HOUR = 4.0
+# The app's sensitivity slider: one alert setting tuned at each of these budgets (alert_profiles.csv).
+# The middle one is FALSE_ALARM_BUDGET_PER_HOUR, the default.
+SENSITIVITY_PROFILE_BUDGETS = (1.0, 2.0, 4.0, 8.0, 16.0)
 THRESHOLD_GRID_START = 0.05
 THRESHOLD_GRID_END = 0.95
 THRESHOLD_GRID_STEP = 0.01
@@ -168,6 +172,9 @@ EMBEDDING_POOL = 2  # short pool: mean of the last 2 non-silent hop embeddings
 # 2,048 values) was tried in Phase 4 and did not beat (2,) across seeds, so the head input stays
 # 1,024. The app picks the pools from the head's input size (ModelConfig.kt).
 WINDOW_POOLS = (2,)
+# How each pool combines its hop embeddings: "mean" (shipped) or "max" (element-wise; keeps a brief
+# sound such as a knock from being averaged away). Mirrors EmbeddingPool.kt. SAHARA_WINDOW_POOL_OP overrides.
+WINDOW_POOL_OP = os.environ.get("SAHARA_WINDOW_POOL_OP", "mean")
 HEAD_INPUT_DIM = YAMNET_EMBEDDING_DIM * len(WINDOW_POOLS)
 
 # Event-window selection for weakly labelled target clips (windowing.py). A clip is labelled

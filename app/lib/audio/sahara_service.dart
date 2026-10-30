@@ -96,6 +96,7 @@ class SaharaStatus {
     this.wristband = const WristbandInfo(),
     this.personal = const PersonalStatus(),
     this.callers = const [],
+    this.calibrated = const {},
   });
 
   final bool listening;
@@ -114,6 +115,9 @@ class SaharaStatus {
   final WristbandInfo wristband;
   final PersonalStatus personal;
   final List<Caller> callers;
+
+  /// Home calibration: per sound, the threshold fitted to this home (empty = none).
+  final Map<String, double> calibrated;
 
   bool isEnabled(String label) => enabledClasses?.contains(label) ?? true;
 
@@ -144,6 +148,7 @@ class SaharaStatus {
     wristband: wristband ?? this.wristband,
     personal: personal,
     callers: callers ?? this.callers,
+    calibrated: calibrated,
   );
 
   factory SaharaStatus.fromMap(Map<dynamic, dynamic> m) {
@@ -164,6 +169,8 @@ class SaharaStatus {
       wristband: WristbandInfo.fromMap(m['wristband'] as Map?),
       personal: PersonalStatus.fromMap(m['personal'] as Map?),
       callers: Caller.listFrom(m['callers'] as List?),
+      calibrated: ((settings['calibrated'] as Map?) ?? const {})
+          .map((k, v) => MapEntry(k as String, (v as num).toDouble())),
     );
   }
 }
@@ -264,6 +271,31 @@ abstract class SaharaApi {
   Future<String?> finishEnrolment(String name);
   Future<void> cancelEnrolment();
   Future<List<String>> deleteCustomSound(String name);
+
+  // Home calibration: record a sound where it happens; only a threshold per sound is kept.
+  Future<CalibrationState> recordCalibrationSample(String label, {bool background = false});
+  /// Returns (before, after) thresholds when saved, or throws a [StateError] with the reason.
+  Future<(double, double)> finishCalibration();
+  Future<void> cancelCalibration();
+  Future<Map<String, double>> clearCalibration([String? label]);
+}
+
+class CalibrationState {
+  const CalibrationState({this.samples = 0, this.needed = 3, this.background = false, this.error});
+
+  final int samples;
+  final int needed;
+  final bool background;
+  final String? error;
+
+  bool get canFinish => samples >= needed;
+
+  factory CalibrationState.fromMap(Map<dynamic, dynamic> m) => CalibrationState(
+    samples: (m['samples'] as num?)?.toInt() ?? 0,
+    needed: (m['needed'] as num?)?.toInt() ?? 3,
+    background: m['background'] == true,
+    error: m['error'] as String?,
+  );
 }
 
 class ChannelSaharaApi implements SaharaApi {
@@ -376,4 +408,25 @@ class ChannelSaharaApi implements SaharaApi {
   @override
   Future<List<String>> deleteCustomSound(String name) async =>
       (await _methods.invokeMethod<List>('deleteCustomSound', {'name': name}) ?? const []).cast<String>();
+
+  @override
+  Future<CalibrationState> recordCalibrationSample(String label, {bool background = false}) async =>
+      CalibrationState.fromMap(await _methods.invokeMethod<Map>(
+            'recordCalibrationSample', {'label': label, 'background': background}) ??
+          const {});
+
+  @override
+  Future<(double, double)> finishCalibration() async {
+    final m = await _methods.invokeMethod<Map>('finishCalibration') ?? const {};
+    if (m['saved'] != true) throw StateError(m['error'] as String? ?? 'Could not save');
+    return ((m['before'] as num).toDouble(), (m['after'] as num).toDouble());
+  }
+
+  @override
+  Future<void> cancelCalibration() => _methods.invokeMethod('cancelCalibration');
+
+  @override
+  Future<Map<String, double>> clearCalibration([String? label]) async =>
+      ((await _methods.invokeMethod<Map>('clearCalibration', {'label': label})) ?? const {})
+          .map((k, v) => MapEntry(k as String, (v as num).toDouble()));
 }

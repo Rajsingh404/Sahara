@@ -93,6 +93,30 @@ class DetectionPolicyTest {
         assertEquals(0.9986f, p.thresholdFor(i), 1e-3f)
     }
 
+    @Test
+    fun sensitivityPicksTunedProfiles() {
+        val csv = """
+            budget_per_hour,val_false_alarms_per_hour,val_mean_detection,class,threshold,hits_required
+            1.0,0.9,0.48,doorbell,0.99,2
+            4.0,3.9,0.57,doorbell,0.9,1
+            16.0,15.9,0.71,doorbell,0.6,1
+        """.trimIndent()
+        val profiles = AssetParsers.parseAlertProfiles(csv)
+        assertEquals(listOf(1f, 4f, 16f), profiles.map { it.budgetPerHour })
+        val p = DetectionPolicy(labels, thresholds, profiles = profiles)
+        val i = labels.indexOf("doorbell")
+        assertEquals(0.9f, p.thresholdFor(i), 1e-6f)
+        assertEquals(1, p.hitsFor(i))
+        p.sensitivity = -1f
+        assertEquals(0.99f, p.thresholdFor(i), 1e-6f)
+        assertEquals(2, p.hitsFor(i))
+        p.sensitivity = 1f
+        assertEquals(0.6f, p.thresholdFor(i), 1e-6f)
+        assertEquals(16f, p.activeProfile!!.budgetPerHour)
+        // A class missing from the profiles keeps its own threshold.
+        assertEquals(0.5f, p.thresholdFor(labels.indexOf("siren")), 1e-3f)
+    }
+
     @Test(expected = IllegalArgumentException::class)
     fun rejectsWrongScoreCount() {
         DetectionPolicy(labels, thresholds).update(FloatArray(3), 0)

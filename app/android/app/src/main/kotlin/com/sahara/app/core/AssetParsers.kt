@@ -20,6 +20,33 @@ object AssetParsers {
         return result
     }
 
+    /** One sensitivity step: alert settings tuned at [budgetPerHour] false alarms per hour (validation). */
+    data class AlertProfile(
+        val budgetPerHour: Float,
+        val valFalseAlarmsPerHour: Float,
+        val valMeanDetection: Float,
+        val thresholds: Map<String, Float>,
+        val hits: Map<String, Int>,
+    )
+
+    /**
+     * alert_profiles.csv (tune_policy.py): `budget_per_hour,val_false_alarms_per_hour,val_mean_detection,
+     * class,threshold,hits_required`, one row per budget and class. Sorted by budget; absent -> empty.
+     */
+    fun parseAlertProfiles(csv: String): List<AlertProfile> {
+        val rows = csv.lineSequence().drop(1).map { it.trim().split(',') }.filter { it.size == 6 }
+            .mapNotNull { r -> r[0].toFloatOrNull()?.let { it to r } }
+        return rows.groupBy({ it.first }, { it.second }).map { (budget, rs) ->
+            AlertProfile(
+                budgetPerHour = budget,
+                valFalseAlarmsPerHour = rs.first()[1].toFloat(),
+                valMeanDetection = rs.first()[2].toFloat(),
+                thresholds = rs.associate { it[3] to it[4].toFloat() },
+                hits = rs.associate { it[3] to it[5].toInt() },
+            )
+        }.sortedBy { it.budgetPerHour }
+    }
+
     /** Reads `{"class": {..., "hits_required": 2, ...}}` (tune_policy.py output). Absent -> empty. */
     fun parseHitsRequired(json: String): Map<String, Int> {
         val nested = Regex("\"([A-Za-z0-9_]+)\"\\s*:\\s*\\{[^{}]*?\"hits_required\"\\s*:\\s*([0-9]+)")

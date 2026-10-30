@@ -116,6 +116,35 @@ class FakeSaharaApi implements SaharaApi {
     return null;
   }
 
+  int calibrationSamples = 0;
+
+  @override
+  Future<CalibrationState> recordCalibrationSample(String label, {bool background = false}) async {
+    calls.add('calibrate:$label${background ? ':background' : ''}');
+    if (!background) calibrationSamples++;
+    return CalibrationState(samples: calibrationSamples, background: background);
+  }
+
+  @override
+  Future<(double, double)> finishCalibration() async {
+    calls.add('finishCalibration');
+    if (calibrationSamples < 3) throw StateError('Record the sound 3 times');
+    calibrationSamples = 0;
+    return (0.95, 0.88);
+  }
+
+  @override
+  Future<void> cancelCalibration() async {
+    calls.add('cancelCalibration');
+    calibrationSamples = 0;
+  }
+
+  @override
+  Future<Map<String, double>> clearCalibration([String? label]) async {
+    calls.add('clearCalibration:${label ?? 'all'}');
+    return {};
+  }
+
   @override
   Future<void> cancelEnrolment() async {
     calls.add('cancelEnrolment');

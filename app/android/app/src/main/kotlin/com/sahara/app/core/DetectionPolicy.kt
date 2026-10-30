@@ -22,6 +22,8 @@ class DetectionPolicy(
     private val windowCount: Int = 3,
     private val cooldownMs: Long = 10_000L,
     private val hitsPerClass: Map<String, Int> = emptyMap(),
+    /** Sensitivity steps tuned at different false-alarm budgets (alert_profiles.csv), lowest budget first. */
+    private val profiles: List<AssetParsers.AlertProfile> = emptyList(),
 ) {
     private val base = FloatArray(labels.size) { i -> baseThresholds[labels[i]] ?: DEFAULT_THRESHOLD }
     private val history = Array(labels.size) { ArrayDeque<Boolean>() }
@@ -31,22 +33,40 @@ class DetectionPolicy(
     var enabled: Set<String> = labels.toSet()
 
     /**
-     * -1.0 (fewer alerts) .. +1.0 (more alerts). Shifts every threshold by up to 2 in log-odds
-     * (0.5 -> 0.12..0.88, 0.99 -> 0.93..0.9986), which stays meaningful for thresholds near 1.
+     * -1.0 (fewer alerts) .. +1.0 (more alerts). With [profiles], picks the nearest tuned step (0 = the
+     * middle one, the default budget), so every position has a measured detection / false-alarm trade-off.
+     * Without them, shifts every threshold by up to 2 in log-odds (0.5 -> 0.12..0.88, 0.99 -> 0.93..0.9986).
      */
     var sensitivity: Float = 0f
         set(value) {
             field = value.coerceIn(-1f, 1f)
         }
 
+    /** Per-class thresholds from home calibration (HomeCalibration); they can only lower a threshold. */
+    var calibrated: Map<String, Float> = emptyMap()
+
+    /** The tuned step in use, or null without profiles. */
+    val activeProfile: AssetParsers.AlertProfile?
+        get() = if (profiles.isEmpty()) null
+        else profiles[Math.round((sensitivity + 1f) / 2f * (profiles.size - 1)).coerceIn(0, profiles.size - 1)]
+
     fun thresholdFor(index: Int): Float {
+        val own = uncalibratedThreshold(index)
+        return calibrated[labels[index]]?.let { minOf(own, it) } ?: own
+    }
+
+    private fun uncalibratedThreshold(index: Int): Float {
+        activeProfile?.let { profile ->
+            // A class the profiles do not cover keeps its own threshold: no tuned step to move it to.
+            return (profile.thresholds[labels[index]] ?: base[index]).coerceIn(MIN_THRESHOLD, MAX_THRESHOLD)
+        }
         val t = base[index].toDouble().coerceIn(1e-4, 1 - 1e-4)
         val logit = ln(t / (1 - t)) - SENSITIVITY_LOGIT_RANGE * sensitivity
         return (1.0 / (1.0 + exp(-logit))).toFloat().coerceIn(MIN_THRESHOLD, MAX_THRESHOLD)
     }
 
     fun hitsFor(index: Int): Int =
-        (hitsPerClass[labels[index]] ?: if (labels[index] in safetyCritical) 1 else hitsRequired).coerceIn(1, windowCount)
+        (activeProfile?.hits?.get(labels[index]) ?: hitsPerClass[labels[index]] ?: if (labels[index] in safetyCritical) 1 else hitsRequired).coerceIn(1, windowCount)
 
     fun update(scores: FloatArray, nowMs: Long): List<Detection> {
         require(scores.size == labels.size) { "expected ${labels.size} scores, got ${scores.size}" }
