@@ -7,15 +7,15 @@ body{width:950px;height:375px;display:flex;gap:16px}
 .ch{border-radius:9px;background:#f3efec;padding:7px 8px;font-size:14px;display:flex;align-items:center;gap:7px;font-weight:700}
 .ch.s{background:var(--red);color:#fff}.ch i{font-style:normal;font-size:20px}
 ul{list-style:none}li{font-size:14.5px;line-height:1.3;padding:5px 0 5px 24px;position:relative;border-top:1px solid #f0ebe7}
-li:before{content:'✓';position:absolute;left:2px;color:var(--red);font-weight:700}
-.out li:before{content:'✕';color:var(--mut)}
+li:before{content:'';position:absolute;left:4px;top:11px;width:7px;height:7px;background:var(--red)}
+.out li:before{background:#b9b1ab}
 .k{font-size:12px;color:var(--mut);margin:-4px 0 8px}
 </style></head><body>
 <div class="col in" style="flex:1.55"><h>In scope</h>
 <div class=chips>
-<div class="ch s"><i>🔥</i>Smoke alarm</div><div class="ch s"><i>🚨</i>Siren</div><div class="ch s"><i>💥</i>Glass break</div>
-<div class=ch><i>🔔</i>Doorbell</div><div class=ch><i>🚪</i>Knocking</div><div class=ch><i>🐕</i>Dog bark</div>
-<div class=ch><i>👶</i>Baby cry</div><div class=ch><i>📟</i>Appliance beep</div><div class=ch><i>🗣️</i>Your name</div></div>
+<div class="ch s">Smoke alarm</div><div class="ch s">Siren</div><div class="ch s">Glass break</div>
+<div class=ch>Doorbell</div><div class=ch>Knocking</div><div class=ch>Dog bark</div>
+<div class=ch>Baby cry</div><div class=ch>Appliance beep</div><div class=ch>Your name</div></div>
 <div class=k>Red = safety-critical (missed alerts weighted 3×)</div>
 <ul><li>Android app: background listening, full-screen alert, history, settings</li>
 <li>100 % on-device inference; no audio stored, no Internet permission</li>
