@@ -1,6 +1,6 @@
-% SAHARA, IEEE conference version (5 pages). Numbers come from docs/evaluation_report.md and
+% SAHARA, IEEE conference version (ICEI 2026 IEEE template, A4, 6 pages max). Numbers come from docs/evaluation_report.md and
 % docs/name_call_eval.md (run models/logs/20261030-185320_a_real_s3). Build: pdflatex sahara_ieee.tex (twice)
-\documentclass[conference]{IEEEtran}
+\documentclass[conference,a4paper]{IEEEtran}
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
@@ -140,6 +140,8 @@ Background & -- & 1{,}760 & 10{,}000 & 60 & 12{,}425 (1{,}876) \\
 \end{table}
 
 \textit{Mixed sources.} The sources differ in device, level, length and labeling (human-verified FSD50K, weak AudioSet labels, curated ESC-50, synthetic DESED, phone recordings). To limit the bias, every clip goes through the phone's resampling, windowing and YAMNet embedding, weak labels are narrowed to the windows holding the event, splits are grouped by source recording, and public, Indian and synthetic results are always reported apart.
+
+\textit{Processing timeline.} We downloaded the public corpora and built the first manifests in August 2026. In September the team made the first SAHARA-IN upload (recorded on 16--17 September) and we generated the synthetic mixtures. In early October we audited every label identifier, rebuilt the splits so that no source recording leaks across them, cached window-level YAMNet embeddings and added the budget-tuned alert rule. The second and third uploads (95 and 161 clips, the third bringing the team's first smoke alarms, sirens and glass breaks) came on 29--30 October; we then retrained the head and ran the session-held-out and home-calibration experiments reported below.
 
 \textit{Metrics.} We report average precision (AP) per class over 0.5\,s windows and its mean (mAP), together with precision, recall and F1 at the tuned thresholds. We also report the fraction of test clips for which the shipped rule raises the correct alert, and false alarms per hour with all background audio streamed back to back. Thresholds, alert rules and the model itself were chosen on validation data only.
 
