@@ -336,6 +336,25 @@ The four team members recorded 329 clips on their own phones in Mumbai homes and
 \subsection{Processing and Synthetic Mixtures}
 All audio is resampled to 16\,kHz mono, cut into the same one-second windows the phone sees, embedded once by YAMNet and cached (22,521 unique clips). For weakly labelled target clips only the windows where YAMNet's own score for the class is highest are kept as positives; the rest of the clip is dropped rather than used as background. Each training target clip is also mixed onto three random training-split backgrounds at an SNR drawn from $-5$ to 10\,dB, giving 6,834 training mixtures; a separate set of 564 test mixtures uses only test clips and is always reported apart from real data.
 
+\subsection{Handling Heterogeneous Sources and Processing Timeline}
+The sources differ in recording device, level, length and labelling: FSD50K is human-verified, AudioSet has weak clip-level labels, ESC-50 is curated, DESED soundscapes are partly synthetic and SAHARA-IN was recorded on phones. Four measures limit the resulting bias: every clip passes through the same resampling, windowing and YAMNet embedding as the phone; weak labels are reduced to the windows that contain the event; splits are grouped by source recording; and results are reported separately for public, Indian and synthetic test data rather than pooled. Table~\ref{tab:timeline} gives the order in which the data were collected and processed.
+
+\begin{table}[h]
+\caption{Data collection and processing timeline (2026)}
+\label{tab:timeline}
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+When & Step\\
+\midrule
+August & Public data downloaded (FSD50K, AudioSet, ESC-50, DESED); dataset pipeline and manifest builder\\
+September & SAHARA-IN first upload (team recordings, 16--17 September); synthetic mixing pipeline\\
+Early October & Label identifiers audited and fixed; leak-free grouped splits; window-level YAMNet cache; budget-tuned alerting; phone tests\\
+29--30 October & SAHARA-IN uploads 2 and 3 (95 and 161 clips, including the first smoke alarms, sirens and glass breaks); retraining; session-held-out evaluation; home calibration\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
 \section{Training and Safety-Weighted Alerting}
 \subsection{Training}
 Smoke alarm, siren and glass break are safety-critical with class weight $w_c=3$; baby cry and appliance beep have $1.5$ and the rest $1$. The head is trained with a positive-weighted binary cross-entropy
@@ -765,7 +784,7 @@ Velcro strap and 3D-printed enclosure & 1 & 150\\
 \chapter*{Appendix D: List of Papers Presented and Published}
 \addcontentsline{toc}{chapter}{Appendix D: List of Papers Presented and Published}
 \begin{enumerate}
-\item M. Mayani, A. Mishra, P. Teotia, R. Singh, and P. Rumao, ``SAHARA: A Real-Time, On-Device Sound Event Detection and Dual-Channel Alert System for the Deaf and Hard-of-Hearing, with India-Specific Acoustic Adaptation,'' submitted to the International Conference on Emerging Innovations (ICEI 2026), submission no.\ 525. Revised version with full experimental results prepared in response to the reviewers' comments.
+\item M. Mayani, A. Mishra, P. Teotia, R. Singh, and P. Rumao, ``SAHARA: A Real-Time, On-Device Sound Event Detection and Dual-Channel Alert System for the Deaf and Hard-of-Hearing, with India-Specific Acoustic Adaptation,'' submitted to the IEEE International Conference on Engineering Informatics (ICEI 2026), Symbiosis Institute of Technology, Pune, submission no.\ 525. Revised version with full experimental results prepared in response to the reviewers' comments.
 \end{enumerate}
 
 \end{document}

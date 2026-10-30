@@ -137,6 +137,25 @@ Background & -- & 1{,}760 & 10{,}000 & 60 & 12{,}425 (1{,}876) \\
 \end{tabular}}
 \end{table}
 
+\textit{Heterogeneous sources.} The sources differ in recording device, level, length and labelling (human-verified FSD50K, weak AudioSet clip labels, curated ESC-50, synthetic DESED soundscapes, phone recordings). We limit the resulting bias in four ways: every clip passes through the same resampling, windowing and YAMNet embedding as the phone; weak labels are reduced to the windows that contain the event; splits are grouped by source recording so no recording appears in two splits; and results are reported separately for public, Indian and synthetic test data rather than pooled. Table~\ref{tab:timeline} gives the order in which the data were collected and processed.
+
+\begin{table}[t]
+\caption{Data collection and processing timeline (2026).}
+\label{tab:timeline}
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lp{6.3cm}@{}}
+\toprule
+When & Step \\
+\midrule
+Aug & Public data downloaded (FSD50K, AudioSet, ESC-50, DESED); manifest builder \\
+Sep & SAHARA-IN first upload (team recordings, 16--17 Sep); synthetic mixing \\
+Early Oct & Label identifiers audited and fixed; leak-free grouped splits; window-level YAMNet cache; budget-tuned alerting \\
+29--30 Oct & SAHARA-IN uploads 2 and 3 (95 and 161 clips, incl.\ first smoke alarms, sirens, glass breaks); retraining; session-held-out evaluation; home calibration \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \textit{Metrics.} We report per-class AP over 0.5\,s windows, its mean (mAP), precision, recall and F1 at the tuned thresholds, the share of test clips that raise the correct alert under the deployed rule, and false alarms per hour with background audio played as one continuous stream. The test split was used once.
 
 \section{Results}
