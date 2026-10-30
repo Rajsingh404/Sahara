@@ -168,8 +168,9 @@ iNoise is supported but not downloaded (needs an IEEE DataPort login). Counts: `
 
 - Branch `feat/pr5-name-calls` (on top of `feat/integration`; PR #5 merged: name calls, caller ID, other sounds); not pushed.
 - Phases 0–5 and 7 done; Phase 6 mostly done; Phase 8 not started (no hardware); Phase 9 docs/CI done.
-- Selected model: `models/logs/20261005-195620_b_synthetic/` (in `models/logs/selected_run.txt`). Public test mAP 0.789,
-  false alarms 3.5/h, Indian 5-fold CV mAP 0.840 (168 clips). All numbers: `docs/evaluation_report.md` (generated, do not hand-edit).
+- Selected model: `models/logs/20261030-185320_a_real_s3/` (in `models/logs/selected_run.txt`; chosen on validation among
+  runs trained on the current data). Public test mAP 0.778, false alarms 3.5/h, Indian test mAP 0.831, Indian 5-fold CV
+  mAP 0.621 → 0.822 (329 clips). All numbers: `docs/evaluation_report.md` (generated, do not hand-edit).
 - Superseded figures (0.618, 0.651, 0.783, 0.913) are listed in the report; never quote them.
 - The classifier head always runs on the CPU (`classifier_head.HEAD_DEVICE`): Keras `predict()` on the Metal GPU
   returns wrong scores on this Mac.

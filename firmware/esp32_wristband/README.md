@@ -1,5 +1,7 @@
 # SAHARA wristband firmware
 
+**Status: designed, not yet built.** The firmware compiles; the hardware below has not been assembled or measured. An interactive concept of the band (patterns, parts, wiring, power estimate) is in [`docs/wristband_concept.html`](../../docs/wristband_concept.html).
+
 ESP32 BLE peripheral. The phone app sends a sound class id; the band plays a distinct vibration pattern and flashes its LED. The protocol is in [`docs/ble_protocol.md`](../../docs/ble_protocol.md); the UUIDs are in `include/ble_uuids.h`.
 
 ## Build and flash (macOS)

@@ -6,8 +6,10 @@ weighted share of validation clips that raise the right alert when the threshold
 tuned to FALSE_ALARM_BUDGET_PER_HOUR (src/evaluation/policy_tuning.py; weights =
 POSITIVE_CLASS_WEIGHTS, safety classes 3). It replaced validation mAP in Phase 4 because it measures
 what the app does: alerts per clip under a false-alarm limit, not window ranking.
-Only runs scored on the current validation set (same val_sha256) are compared; runs from an
-earlier dataset build are listed but never selected.
+Only runs scored on the current validation set (same val_sha256) are compared, and only runs trained on
+the current training features are selected: a run that never saw the newest team recordings cannot use
+them, and validation is public audio only, so it cannot tell such runs apart on Indian audio (2026-10-30).
+Older runs are listed with their scores but never selected.
 Writes models/logs/runs_summary.csv and models/logs/selected_run.txt.
 
     python scripts/compare_runs.py
@@ -27,7 +29,8 @@ from src.config import (
     SAFETY_CRITICAL_CLASSES,
     SOUND_CLASSES,
 )
-from src.training.train import validation_fingerprint
+from src.config import PROCESSED_DATA_DIR
+from src.training.train import _sha256, validation_fingerprint
 
 
 def policy_score(run_dir: Path, current_val: str, budget: float = FALSE_ALARM_BUDGET_PER_HOUR) -> dict:
@@ -57,6 +60,7 @@ def policy_score(run_dir: Path, current_val: str, budget: float = FALSE_ALARM_BU
 def main() -> Path | None:
     logs = MODELS_DIR / "logs"
     current_val = validation_fingerprint()
+    current_train = _sha256(PROCESSED_DATA_DIR / "train_embeddings.npy")
     rows = []
     for metrics_path in sorted(logs.glob("*/metrics.json")):
         m = json.loads(metrics_path.read_text())
@@ -73,6 +77,7 @@ def main() -> Path | None:
             "finetune_from": Path(cfg["args"]["finetune_from"]).name if cfg["args"]["finetune_from"] else "",
             "features": Path(cfg["args"]["features_dir"]).name,
             "same_val_data": m.get("val_sha256") == current_val,
+            "same_train_data": (cfg.get("features_sha256") or {}).get("train") == current_train,
         }
         if row["same_val_data"] and (metrics_path.parent / "model.keras").exists():
             ps = policy_score(metrics_path.parent, current_val)
@@ -93,11 +98,13 @@ def main() -> Path | None:
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
         writer.writerows(rows)
-    eligible = [r for r in rows if r["safety_floor_met"] and r["policy_score"] is not None]
+    eligible = [r for r in rows if r["safety_floor_met"] and r["policy_score"] is not None and r["same_train_data"]]
     best = max(eligible, key=lambda r: r["policy_score"]) if eligible else None
     print(f"policy score = weighted clip detection on validation at {FALSE_ALARM_BUDGET_PER_HOUR} false alarms/hour")
     for r in sorted(rows, key=lambda r: (r["policy_score"] is None, -(r["policy_score"] or 0), -r["val_mAP"])):
         mark = "  <= selected" if best and r["run"] == best["run"] else ""
+        if r["same_val_data"] and not r["same_train_data"]:
+            mark = "  (trained on older data, not selected)"
         if not r["same_val_data"]:
             mark = "  (different validation data, not compared)"
         ps = f"{r['policy_score']:.3f}" if r["policy_score"] is not None else "  -  "

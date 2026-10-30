@@ -89,4 +89,33 @@ ax.set_ylabel("Per-decision false alarm")
 ax.grid(which="major", lw=0.3, color="#dddddd")
 ax.legend(fontsize=6, frameon=False, loc="lower right")
 save(fig, "kofn")
+
+# Fig. 5: the wristband's haptic patterns, parsed from the firmware (one time scale for all).
+import re  # noqa: E402
+
+src = (ROOT / "firmware/esp32_wristband/src/patterns.cpp").read_text()
+steps = {m[1]: [(int(a), int(b)) for a, b in re.findall(r"\{(\d+),\s*(\d+)\}", m[2])]
+         for m in re.finditer(r"static const PatternStep k(\w+)\[\] = \{(.*?)\};", src, re.S)}
+reps = {m[1]: (int(m[2]), int(m[3])) for m in re.finditer(r'\{"\w+",\s*k(\w+),\s*COUNT\(k\w+\),\s*(\d+),\s*(\d+)\}', src)}
+ROWS = [("SmokeAlarm", "Smoke alarm"), ("Siren", "Siren"), ("GlassBreak", "Glass break"), ("Doorbell", "Doorbell"),
+        ("Knocking", "Knocking"), ("DogBark", "Dog bark"), ("BabyCry", "Baby cry"), ("ApplianceBeep", "Appliance beep"),
+        ("NameCall", "Name call")]
+fig, ax = plt.subplots(figsize=(4.6, 2.5))
+for row, (key, label) in enumerate(ROWS):
+    n, gap = reps[key]
+    t, y = 0, len(ROWS) - 1 - row
+    for r in range(n):
+        for level, ms in steps[key]:
+            if level:
+                ax.add_patch(plt.Rectangle((t / 1000, y), ms / 1000, 0.8 * level / 255,
+                                           color=INK if row < 3 else DARK, lw=0))
+            t += ms
+        t += gap if r < n - 1 else 0
+ax.set_yticks([len(ROWS) - 1 - i + 0.4 for i in range(len(ROWS))], [label for _, label in ROWS], fontsize=7)
+ax.set_xlim(0, 10.6)
+ax.set_ylim(-0.1, len(ROWS))
+ax.set_xlabel("Time (s); bar height = motor strength")
+ax.tick_params(axis="y", length=0)
+ax.spines["left"].set_visible(False)
+save(fig, "haptics")
 print("ok")

@@ -1,7 +1,7 @@
 {
-  "clips": 90,
-  "max_score_diff": 0.01961207389831543,
-  "same_alerts": 90,
+  "clips": 54,
+  "max_score_diff": 0.010239958763122559,
+  "same_alerts": 54,
   "head_input": 1024,
   "pools": [
     2

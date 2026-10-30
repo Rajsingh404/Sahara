@@ -31,17 +31,17 @@ All multi-byte values are little-endian. Unknown versions or commands are ignore
 
 Class ids (fixed order, same as `src/config.py` and `app/assets/labels.txt`):
 
-| id | class | safety-critical | haptic pattern (firmware) |
+| id | class | safety-critical | haptic pattern (phone and band) |
 |---|---|---|---|
-| 0 | smoke_alarm | yes | 3 × (long 600 ms, gap 200 ms), repeated 3 times |
-| 1 | doorbell | no | 2 short (150 ms) |
-| 2 | siren | yes | 3 × (long 600 ms, gap 200 ms), repeated 3 times |
-| 3 | knocking | no | 3 short (100 ms) |
-| 4 | dog_bark | no | 2 medium (300 ms) |
-| 5 | baby_cry | no | 1 long (800 ms) + 2 short |
-| 6 | glass_break | yes | 3 × (long 600 ms, gap 200 ms), repeated 3 times |
-| 7 | appliance_beep | no | 1 short + 1 medium |
-| 0x20 | name call ("someone is calling you", docs/name_call.md) | no | 2 medium (400 ms) + 2 short (150 ms) |
+| 0 | smoke_alarm | yes | Three long buzzes, the fire-alarm "temporal three" rhythm, ×3 |
+| 1 | doorbell | no | Short strong, then longer soft ("ding-dong"), ×2 |
+| 2 | siren | yes | Rising and falling swell, ×3 |
+| 3 | knocking | no | Four quick taps, ×2 |
+| 4 | dog_bark | no | Two sharp pulses, ×2 |
+| 5 | baby_cry | no | Long, short, long, ×2 |
+| 6 | glass_break | yes | One hard hit, then a flutter, ×2 |
+| 7 | appliance_beep | no | Three light ticks, ×1 |
+| 0x20 | name call ("someone is calling you", docs/name_call.md) | no | Two medium buzzes, then two short, ×2 |
 
 "Other sounds" (YAMNet's open-set layer) never reach the band. Firmware that does not know `0x20` yet should play its
 default non-critical pattern rather than ignore it.
@@ -52,7 +52,8 @@ default non-critical pattern rather than ignore it.
 
 Example: siren alert = `01 01 02 FF`; test = `01 02 FF C8`; stop = `01 03 FF 00`.
 
-The patterns column is a suggestion; the firmware owns the exact timings. The app only sends ids.
+Exact timings live in `firmware/esp32_wristband/src/patterns.cpp`; the phone plays the same patterns from
+`app/android/.../core/HapticPatterns.kt`, and `tests/test_haptic_patterns.py` fails if the two differ. The app only sends ids.
 
 ## Status characteristic (band → phone), 4 bytes
 

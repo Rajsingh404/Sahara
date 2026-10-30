@@ -153,30 +153,49 @@
       "source_type": "real"
     },
     "indian_team": {
-      "mAP": 0.879,
+      "mAP": 0.6979,
       "classes_in_mAP": [
+        "smoke_alarm",
         "doorbell",
+        "siren",
         "knocking",
         "dog_bark",
         "baby_cry",
+        "glass_break",
         "appliance_beep"
       ],
       "per_class": {
+        "smoke_alarm": {
+          "ap": 0.3987,
+          "precision": 0.75,
+          "recall": 0.2432,
+          "f1": 0.3673,
+          "threshold": 0.87,
+          "positive_windows": 37
+        },
         "doorbell": {
-          "ap": 0.8212,
-          "precision": 0.9286,
-          "recall": 0.4643,
-          "f1": 0.619,
+          "ap": 0.7567,
+          "precision": 0.9375,
+          "recall": 0.2632,
+          "f1": 0.411,
           "threshold": 0.93,
-          "positive_windows": 28
+          "positive_windows": 57
+        },
+        "siren": {
+          "ap": 0.5181,
+          "precision": 0.8235,
+          "recall": 0.359,
+          "f1": 0.5,
+          "threshold": 0.86,
+          "positive_windows": 39
         },
         "knocking": {
-          "ap": 0.8687,
+          "ap": 0.5689,
           "precision": 1.0,
-          "recall": 0.0588,
-          "f1": 0.1111,
+          "recall": 0.0114,
+          "f1": 0.0225,
           "threshold": 0.89,
-          "positive_windows": 17
+          "positive_windows": 88
         },
         "dog_bark": {
           "ap": 1.0,
@@ -187,36 +206,56 @@
           "positive_windows": 18
         },
         "baby_cry": {
-          "ap": 0.7879,
+          "ap": 0.7713,
           "precision": 1.0,
           "recall": 0.6667,
           "f1": 0.8,
           "threshold": 0.63,
           "positive_windows": 15
         },
+        "glass_break": {
+          "ap": 0.6227,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "threshold": 0.98,
+          "positive_windows": 39
+        },
         "appliance_beep": {
-          "ap": 0.9172,
+          "ap": 0.9469,
           "precision": 1.0,
-          "recall": 0.5882,
-          "f1": 0.7407,
+          "recall": 0.5493,
+          "f1": 0.7091,
           "threshold": 0.87,
-          "positive_windows": 34
+          "positive_windows": 71
         }
       },
-      "windows": 369,
+      "windows": 621,
       "background_windows": 257,
       "background_windows_with_any_alert_score": 4,
       "clip_detection_with_app_policy": {
+        "smoke_alarm": {
+          "clips": 8,
+          "detected": 2,
+          "recall": 0.25,
+          "median_first_alert_s_from_clip_start": 4.75
+        },
         "doorbell": {
-          "clips": 10,
-          "detected": 6,
-          "recall": 0.6,
-          "median_first_alert_s_from_clip_start": 1.25
+          "clips": 22,
+          "detected": 7,
+          "recall": 0.3182,
+          "median_first_alert_s_from_clip_start": 1.5
+        },
+        "siren": {
+          "clips": 8,
+          "detected": 4,
+          "recall": 0.5,
+          "median_first_alert_s_from_clip_start": 1.0
         },
         "knocking": {
-          "clips": 11,
+          "clips": 27,
           "detected": 2,
-          "recall": 0.1818,
+          "recall": 0.0741,
           "median_first_alert_s_from_clip_start": 2.0
         },
         "dog_bark": {
@@ -231,19 +270,28 @@
           "recall": 0.4,
           "median_first_alert_s_from_clip_start": 2.5
         },
-        "appliance_beep": {
-          "clips": 11,
-          "detected": 4,
-          "recall": 0.3636,
-          "median_first_alert_s_from_clip_start": 2.5
+        "glass_break": {
+          "clips": 8,
+          "detected": 0,
+          "recall": 0.0,
+          "median_first_alert_s_from_clip_start": null
         },
-        "_wrong_class_alerts": {},
-        "_clips": 41
+        "appliance_beep": {
+          "clips": 23,
+          "detected": 10,
+          "recall": 0.4348,
+          "median_first_alert_s_from_clip_start": 2.25
+        },
+        "_wrong_class_alerts": {
+          "smoke_alarm": 3,
+          "siren": 2
+        },
+        "_clips": 105
       },
       "source_type": "self_recorded"
     },
     "synthetic": {
-      "mAP": 0.724,
+      "mAP": 0.7028,
       "classes_in_mAP": [
         "smoke_alarm",
         "doorbell",
@@ -256,39 +304,39 @@
       ],
       "per_class": {
         "smoke_alarm": {
-          "ap": 0.7407,
-          "precision": 0.8367,
-          "recall": 0.6308,
-          "f1": 0.7193,
+          "ap": 0.6479,
+          "precision": 0.8302,
+          "recall": 0.5269,
+          "f1": 0.6447,
           "threshold": 0.87,
-          "positive_windows": 130
+          "positive_windows": 167
         },
         "doorbell": {
-          "ap": 0.6426,
+          "ap": 0.636,
           "precision": 1.0,
-          "recall": 0.1533,
-          "f1": 0.2658,
+          "recall": 0.1236,
+          "f1": 0.22,
           "threshold": 0.93,
-          "positive_windows": 137
+          "positive_windows": 178
         },
         "siren": {
-          "ap": 0.8091,
-          "precision": 1.0,
-          "recall": 0.478,
-          "f1": 0.6468,
+          "ap": 0.7658,
+          "precision": 0.9775,
+          "recall": 0.4372,
+          "f1": 0.6042,
           "threshold": 0.86,
-          "positive_windows": 159
+          "positive_windows": 199
         },
         "knocking": {
-          "ap": 0.5546,
+          "ap": 0.5361,
           "precision": 1.0,
-          "recall": 0.0134,
-          "f1": 0.0264,
+          "recall": 0.0098,
+          "f1": 0.0194,
           "threshold": 0.89,
-          "positive_windows": 224
+          "positive_windows": 306
         },
         "dog_bark": {
-          "ap": 0.8608,
+          "ap": 0.8474,
           "precision": 1.0,
           "recall": 0.4539,
           "f1": 0.6244,
@@ -296,56 +344,56 @@
           "positive_windows": 293
         },
         "baby_cry": {
-          "ap": 0.784,
-          "precision": 0.9859,
-          "recall": 0.614,
-          "f1": 0.7568,
+          "ap": 0.7817,
+          "precision": 0.9747,
+          "recall": 0.6311,
+          "f1": 0.7662,
           "threshold": 0.63,
-          "positive_windows": 114
+          "positive_windows": 122
         },
         "glass_break": {
-          "ap": 0.7236,
-          "precision": 0.9643,
-          "recall": 0.2328,
-          "f1": 0.375,
+          "ap": 0.7189,
+          "precision": 0.9655,
+          "recall": 0.2059,
+          "f1": 0.3394,
           "threshold": 0.98,
-          "positive_windows": 232
+          "positive_windows": 272
         },
         "appliance_beep": {
-          "ap": 0.6768,
-          "precision": 0.9714,
-          "recall": 0.0932,
-          "f1": 0.17,
+          "ap": 0.6885,
+          "precision": 0.975,
+          "recall": 0.0922,
+          "f1": 0.1685,
           "threshold": 0.87,
-          "positive_windows": 365
+          "positive_windows": 423
         }
       },
-      "windows": 1654,
+      "windows": 1960,
       "background_windows": 0,
       "background_windows_with_any_alert_score": 0,
       "clip_detection_with_app_policy": {
         "smoke_alarm": {
-          "clips": 27,
-          "detected": 17,
-          "recall": 0.6296,
+          "clips": 35,
+          "detected": 19,
+          "recall": 0.5429,
           "median_first_alert_s_from_clip_start": 4.5
         },
         "doorbell": {
-          "clips": 41,
-          "detected": 9,
-          "recall": 0.2195,
-          "median_first_alert_s_from_clip_start": 1.5
+          "clips": 57,
+          "detected": 10,
+          "recall": 0.1754,
+          "median_first_alert_s_from_clip_start": 1.25
         },
         "siren": {
-          "clips": 34,
-          "detected": 18,
-          "recall": 0.5294,
-          "median_first_alert_s_from_clip_start": 1.75
+          "clips": 42,
+          "detected": 22,
+          "recall": 0.5238,
+          "median_first_alert_s_from_clip_start": 2.0
         },
         "knocking": {
-          "clips": 79,
+          "clips": 100,
           "detected": 2,
-          "recall": 0.0253,
+          "recall": 0.02,
           "median_first_alert_s_from_clip_start": 5.75
         },
         "dog_bark": {
@@ -355,31 +403,31 @@
           "median_first_alert_s_from_clip_start": 1.0
         },
         "baby_cry": {
-          "clips": 27,
-          "detected": 13,
-          "recall": 0.4815,
+          "clips": 30,
+          "detected": 15,
+          "recall": 0.5,
           "median_first_alert_s_from_clip_start": 2.0
         },
         "glass_break": {
-          "clips": 97,
-          "detected": 33,
-          "recall": 0.3402,
-          "median_first_alert_s_from_clip_start": 1.5
+          "clips": 105,
+          "detected": 34,
+          "recall": 0.3238,
+          "median_first_alert_s_from_clip_start": 1.25
         },
         "appliance_beep": {
-          "clips": 84,
-          "detected": 8,
-          "recall": 0.0952,
-          "median_first_alert_s_from_clip_start": 2.0
+          "clips": 101,
+          "detected": 9,
+          "recall": 0.0891,
+          "median_first_alert_s_from_clip_start": 2.5
         },
         "_wrong_class_alerts": {
           "doorbell": 1,
           "glass_break": 3,
-          "siren": 3,
-          "smoke_alarm": 4,
+          "siren": 4,
+          "smoke_alarm": 5,
           "appliance_beep": 1
         },
-        "_clips": 483
+        "_clips": 564
       },
       "source_type": "synthetic_mixed"
     }

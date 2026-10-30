@@ -13,6 +13,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import com.sahara.app.core.Detection
+import com.sahara.app.core.HapticPatterns
 
 /** Phone-side visual + haptic alert: heads-up / full-screen notification and a vibration pattern. */
 object AlertNotifier {
@@ -116,19 +117,16 @@ object AlertNotifier {
     }
 
     /** Per-class phone vibration; safety-critical classes get a long repeated pattern. */
-    fun pattern(classLabel: String, safetyCritical: Boolean): LongArray = when {
-        safetyCritical -> longArrayOf(0, 600, 200, 600, 200, 600, 400, 600, 200, 600, 200, 600)
-        classLabel == "doorbell" -> longArrayOf(0, 150, 150, 150)
-        classLabel == "knocking" -> longArrayOf(0, 100, 100, 100, 100, 100)
-        classLabel == "dog_bark" -> longArrayOf(0, 300, 200, 300)
-        classLabel == "baby_cry" -> longArrayOf(0, 800, 200, 150, 150, 150)
-        classLabel == Detection.NAME_CALL -> longArrayOf(0, 400, 150, 400, 150, 150, 150, 150)
-        else -> longArrayOf(0, 150, 150, 400)
-    }
-
     private fun vibrate(context: Context, d: Detection) {
-        val effect = VibrationEffect.createWaveform(pattern(d.label, d.safetyCritical), -1)
         val v = vibrator(context) ?: return
+        // Same pattern as the wristband for this sound (core/HapticPatterns.kt).
+        val pattern = HapticPatterns.forLabel(d.label)
+        val effect = if (v.hasAmplitudeControl()) {
+            val (timings, amplitudes) = HapticPatterns.waveform(pattern)
+            VibrationEffect.createWaveform(timings, amplitudes, -1)
+        } else {
+            VibrationEffect.createWaveform(HapticPatterns.onOff(pattern), -1)
+        }
         if (Build.VERSION.SDK_INT >= 33) {
             v.vibrate(effect, VibrationAttributes.createForUsage(VibrationAttributes.USAGE_ALARM))
         } else {

@@ -2,7 +2,7 @@
 
 **S**ound-based **A**lert & **H**aptic **A**ssistance for **R**eal-time **A**wareness: an Android app that listens
 continuously, on the phone and offline, for eight safety sounds and alerts Deaf and Hard-of-Hearing users with a
-full-screen alert, phone vibration and a custom ESP32 vibrating wristband. Focus: Indian homes and streets.
+full-screen alert and phone vibration, plus a designed (not yet built) ESP32 vibrating wristband. Focus: Indian homes and streets.
 
 Final-year B.Tech capstone, NMIMS MPSTME.
 
@@ -19,12 +19,12 @@ whistle or a phone ringing), and **name calls**: someone calling the user's name
 | Personalization (`src/personalization/`, `app/lib/personalization/`) | Done: evaluated; offered as experimental for household sounds (it cannot tell names apart) |
 | Name calls and caller ID (`app/android/.../speech/`, `scripts/eval_name_call.py`) | Done: evaluated on team recordings (79% of calls caught at the equal-error threshold; enrolled caller named 76%); not yet tried live on the phone |
 | Other sounds (`OtherSoundsPolicy.kt`) | Done: quiet notice from YAMNet's own 521 classes, no vibration or wristband |
-| Wristband firmware (`firmware/esp32_wristband/`) | Builds; **not tested on hardware** (no parts yet) |
+| Wristband firmware (`firmware/esp32_wristband/`) | Builds; **designed, not built** (future work). Interactive concept: [`docs/wristband_concept.html`](docs/wristband_concept.html) |
 
 Results, with the run folder each number comes from: [docs/evaluation_report.md](docs/evaluation_report.md).
-Headline (test data, run `20261005-195620_b_synthetic`): public test mAP 0.789; false alarms on 3.4 h of busy
-background audio 3.5 per hour; smoke alarm 23/27 and siren 28/34 test clips alerted; Indian recordings (168 clips) 5-fold
-cross-validation mAP 0.797 without them in training, 0.840 with them.
+Headline (test data, run `20261030-185320_a_real_s3`): public test mAP 0.778; false alarms on 3.4 h of busy
+background audio 3.5 per hour; smoke alarm 22/27 and siren 28/34 test clips alerted; Indian held-out test mAP 0.831
+(previous model 0.698); Indian recordings (329 clips) 5-fold cross-validation mAP 0.621 without them in training, 0.822 with them.
 
 ## How it works
 
@@ -77,8 +77,8 @@ Custom-sound enrolment keeps a short list of numbers per sound, not audio.
 
 ## Known limits
 
-- Knocking, appliance beeps and doorbells are the weakest classes; the team has no recordings of smoke alarms,
-  sirens or glass breaking, so the Indian-context check covers five classes.
+- Knocking, appliance beeps and doorbells are the weakest classes. The team set has only 20 recordings each of smoke
+  alarm, siren and glass break (8 of each in test), so Indian results are indicative, not precise.
 - Custom sounds cannot recognise names or words; name calls use a separate model trained for one name ("Aryan") and
   confuse similar names (Arya, Aryanshi) about a third of the time.
 - The speech models (openWakeWord) are CC BY-NC-SA 4.0: fine for this academic project, not for commercial use.

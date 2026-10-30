@@ -1,0 +1,584 @@
+<title>SAHARA Band</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one wide "bench" stage (phone → radio → band) up top, then a reading column of spec sections. */
+:root {
+  --paper: #edf1ee;
+  --surface: #f8faf8;
+  --ink: #14211c;
+  --muted: #586761;
+  --line: #c9d3ce;
+  --signal: #0b7a70;   /* Bluetooth / data */
+  --buzz: #b86e00;     /* vibration */
+  --buzz-soft: #f3dfbd;
+  --led: #2f6bff;
+  --warn-bg: #fff3d6;
+  --warn-ink: #6b4a00;
+  --strap: #2b3833;
+  --pod: #dfe6e2;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #0f1614; --surface: #16201d; --ink: #e3ebe7; --muted: #93a39c; --line: #2a3833;
+  --signal: #3fc2b4; --buzz: #f0a940; --buzz-soft: #3a2c12; --led: #6f9bff;
+  --warn-bg: #2e2510; --warn-ink: #f2d38a; --strap: #050807; --pod: #26322e; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --paper: #0f1614; --surface: #16201d; --ink: #e3ebe7; --muted: #93a39c; --line: #2a3833;
+  --signal: #3fc2b4; --buzz: #f0a940; --buzz-soft: #3a2c12; --led: #6f9bff;
+  --warn-bg: #2e2510; --warn-ink: #f2d38a; --strap: #050807; --pod: #26322e; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font: 400 1rem/1.6 var(--body); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 56px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; line-height: 1.02; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; line-height: 1.15; }
+h3 { font-size: 1.05rem; font-weight: 700; }
+p { margin: 0; max-width: 65ch; }
+.eyebrow { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--mono); }
+.muted { color: var(--muted); }
+section { display: grid; gap: 18px; }
+
+.status { display: flex; gap: 10px; align-items: flex-start; background: var(--warn-bg); color: var(--warn-ink);
+  border-radius: 10px; padding: 12px 14px; font-size: 0.92rem; max-width: 70ch; }
+.status b { white-space: nowrap; }
+
+header.top { display: grid; gap: 14px; }
+
+/* Stage */
+.stage { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px; display: grid; gap: 20px; }
+.picker { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: 500 0.88rem/1 var(--body); border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+  border-radius: 999px; padding: 9px 13px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chip .s { font-size: 0.7rem; font-family: var(--mono); color: var(--buzz); }
+.chip[aria-pressed="true"] .s { color: var(--buzz-soft); }
+.chip:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btn { font: 600 0.9rem/1 var(--body); border-radius: 10px; padding: 10px 14px; cursor: pointer; border: 1px solid var(--ink);
+  background: var(--ink); color: var(--paper); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+
+.flow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px; align-items: center; }
+@media (max-width: 820px) { .flow { grid-template-columns: minmax(0, 1fr); } }
+.panel-label { font: 500 0.7rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+
+/* phone */
+.phone { width: 100%; max-width: 230px; aspect-ratio: 9 / 17; margin: 0 auto; border-radius: 30px; border: 7px solid var(--strap);
+  background: var(--paper); position: relative; overflow: hidden; display: grid; place-items: center; }
+.phone .idle { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 14px; display: grid; gap: 8px; }
+.listen { width: 46px; height: 46px; border-radius: 50%; margin: 0 auto; border: 2px solid var(--signal); position: relative; }
+.listen::after { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 2px solid var(--signal); opacity: 0.35;
+  animation: ping 2s ease-out infinite; }
+@keyframes ping { from { transform: scale(0.7); opacity: 0.5 } to { transform: scale(1.3); opacity: 0 } }
+.alert { position: absolute; inset: 0; background: var(--ink); color: var(--paper); display: grid; align-content: center;
+  justify-items: center; text-align: center; gap: 8px; padding: 16px; }
+.alert .k { font: 500 0.68rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--buzz-soft); }
+.alert .t { font: 800 1.45rem/1.1 var(--display); }
+.alert .d { font-size: 0.8rem; opacity: 0.8; }
+.alert.safety { background: #a3261b; color: #fff; }
+
+/* packet */
+.packet { display: grid; gap: 10px; }
+.bytes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.byte { border: 1px solid var(--line); border-radius: 8px; padding: 8px 4px; text-align: center; background: var(--paper); transition: border-color .2s, background .2s; }
+.byte .h { font: 500 1.15rem/1.2 var(--mono); }
+.byte .n { font-size: 0.68rem; color: var(--muted); }
+.byte.on { border-color: var(--signal); }
+.wire { height: 26px; position: relative; overflow: hidden; }
+.wire::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 2px dashed var(--line); }
+.dot { position: absolute; top: 50%; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%; background: var(--signal); left: -12px; opacity: 0; }
+.dot.go { animation: fly 0.45s linear forwards; }
+@keyframes fly { 0% { left: -12px; opacity: 1 } 100% { left: calc(100% + 12px); opacity: 1 } }
+.note { font-size: 0.82rem; color: var(--muted); }
+
+/* band */
+.bandbox { display: grid; justify-items: center; gap: 6px; }
+#band { width: 100%; max-width: 230px; height: auto; overflow: visible; }
+
+/* timeline */
+.timeline { display: grid; gap: 6px; }
+.tl-head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 0.85rem; }
+.tl-wrap { overflow-x: auto; }
+#tl { width: 100%; min-width: 520px; height: 96px; display: block; }
+
+/* reading sections */
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; }
+@media (max-width: 820px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+.steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; counter-reset: s; }
+.steps li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.steps li::before { counter-increment: s; content: counter(s); font: 700 1rem/1.4 var(--display); color: var(--signal); }
+.steps b { display: block; }
+
+.patterns { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 12px; }
+.pat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: grid; gap: 6px; text-align: left;
+  font: inherit; color: inherit; cursor: pointer; }
+.pat:hover { border-color: var(--buzz); }
+.pat .top { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.pat .id { font: 500 0.75rem/1 var(--mono); color: var(--muted); }
+.pat svg { width: 100%; height: 40px; display: block; }
+.pat .desc { font-size: 0.85rem; color: var(--muted); }
+.tag { font: 500 0.66rem/1 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: #fff; background: #a3261b; padding: 3px 6px; border-radius: 4px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+tfoot td { font-weight: 600; border-bottom: 0; }
+.tbl { overflow-x: auto; }
+pre { margin: 0; overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px;
+  font: 400 0.8rem/1.5 var(--mono); }
+
+#exploded { width: 100%; max-width: 520px; height: auto; display: block; }
+.estimate { font: 500 0.66rem/1 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--warn-ink); background: var(--warn-bg); padding: 3px 6px; border-radius: 4px; }
+
+.state { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 820px) { .state { grid-template-columns: minmax(0, 1fr); } }
+.state > div { border-top: 3px solid var(--line); padding-top: 10px; display: grid; gap: 8px; align-content: start; }
+.state > div.done { border-color: var(--signal); }
+.state > div.next { border-color: var(--buzz); }
+.state ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 0.92rem; }
+
+@media (prefers-reduced-motion: reduce) { .listen::after { animation: none } .dot.go { animation-duration: 0.01s } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">SAHARA · wristband concept</span>
+    <h1>A sound you can feel on your wrist</h1>
+    <p class="muted" style="font-size:.9rem;order:9">Turn your volume up: each sound plays first, then the phone alerts and you hear the band's motor hum in its pattern. Sounds are synthesised in the browser, so they are stand-ins for the real thing.</p>
+    <p>The phone listens. When it hears a doorbell, a smoke alarm or someone calling Aryan, it sends four bytes over Bluetooth, and the band on the wrist buzzes a pattern that tells the sound apart without looking at a screen.</p>
+    <div class="status" role="note"><b>Concept.</b><span>The band is designed but not yet built. Its firmware compiles for the ESP32 and the phone app already sends the alerts. The motor, battery and enclosure have not been assembled or measured.</span></div>
+  </header>
+
+  <section class="stage" aria-label="Interactive demo">
+    <div class="row" style="justify-content: space-between">
+      <h2 style="font-size:1.25rem">Pick a sound</h2>
+      <div class="row">
+        <button class="btn ghost" id="sound" type="button" aria-pressed="true">Sound on</button>
+        <button class="btn" id="tour" type="button">Play the tour</button>
+        <button class="btn ghost" id="feel" type="button" title="Uses your phone's vibration motor, on Android browsers">Feel it on this phone</button>
+      </div>
+    </div>
+    <div class="picker" id="picker" role="group" aria-label="Sounds"></div>
+
+    <div class="flow">
+      <div>
+        <div class="panel-label">Phone · SAHARA app</div>
+        <div class="phone" id="phone">
+          <div class="idle"><div class="listen" aria-hidden="true"></div><div>Listening<br><span class="mono" style="font-size:.72rem">audio stays in RAM, 1 s</span></div></div>
+          <div class="alert" id="alert" hidden><span class="k" id="alertK"></span><span class="t" id="alertT"></span><span class="d" id="alertD"></span></div>
+        </div>
+      </div>
+      <div class="packet">
+        <div class="panel-label">Bluetooth LE · Alert characteristic c7a10001</div>
+        <div class="bytes" id="bytes">
+          <div class="byte"><div class="h">01</div><div class="n">version</div></div>
+          <div class="byte"><div class="h">01</div><div class="n">ALERT</div></div>
+          <div class="byte"><div class="h" id="bId">--</div><div class="n">class id</div></div>
+          <div class="byte"><div class="h" id="bInt">--</div><div class="n">intensity</div></div>
+        </div>
+        <div class="wire" aria-hidden="true"><div class="dot" id="dot"></div></div>
+        <p class="note" id="packetNote">Only a class id and a strength cross the link. No audio, no scores and no caller names.</p>
+      </div>
+      <div class="bandbox">
+        <div class="panel-label">Wristband · SAHARA-Band</div>
+        <svg id="band" viewBox="0 0 220 260" role="img" aria-label="Wristband top view">
+          <rect x="70" y="0" width="80" height="260" rx="14" fill="var(--strap)"/>
+          <g id="pod">
+            <rect x="38" y="62" width="144" height="136" rx="30" fill="var(--pod)" stroke="var(--line)" stroke-width="2"/>
+            <circle cx="110" cy="130" r="34" fill="none" stroke="var(--line)" stroke-width="2" stroke-dasharray="4 5"/>
+            <circle id="motorRing" cx="110" cy="130" r="22" fill="var(--buzz)" opacity="0.15"/>
+            <text x="110" y="134" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--muted)">motor</text>
+            <circle id="led" cx="160" cy="84" r="6" fill="var(--line)"/>
+            <rect x="94" y="186" width="32" height="6" rx="3" fill="var(--line)"/>
+          </g>
+        </svg>
+        <span class="note mono" id="bandState">connected · idle</span>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-head"><span><b id="tlName">Choose a sound</b> <span class="muted" id="tlMeta"></span></span><span class="muted mono" style="font-size:.8rem">motor strength over time · from firmware patterns.cpp</span></div>
+      <div class="tl-wrap"><svg id="tl" viewBox="0 0 1000 96" preserveAspectRatio="none" role="img" aria-label="Vibration pattern timeline"></svg></div>
+    </div>
+  </section>
+
+  <section class="cols">
+    <div style="display:grid; gap:14px; align-content:start">
+      <span class="eyebrow">From sound to buzz</span>
+      <h2>What happens in the second after the doorbell rings</h2>
+      <p class="muted">Everything up to step 4 runs today on a Samsung Galaxy S24. Steps 5 and 6 are the band.</p>
+    </div>
+    <ol class="steps">
+      <li><span><b>Hear</b>The phone keeps the last second of 16 kHz audio in a RAM ring buffer. Nothing is written to disk and the release app has no internet permission.</span></li>
+      <li><span><b>Recognise</b>YAMNet turns each window into an embedding; a small trained head scores the 8 sounds. A separate spotter listens for the name "Aryan" and checks the caller's voice against enrolled family members.</span></li>
+      <li><span><b>Decide</b>Each sound has its own threshold and needs 1 or 2 of the last 3 windows, tuned to about 4 false alarms an hour. A 10 s cooldown stops repeats.</span></li>
+      <li><span><b>Send</b>The app writes 4 bytes to the band: version, command, class id, strength. Safety sounds always go at full strength (255); others at the model's confidence, never below 128.</span></li>
+      <li><span><b>Buzz</b>The band plays that sound's pattern on a coin motor and blinks its LED. A newer alert interrupts the one playing; the button stops it.</span></li>
+      <li><span><b>Stay quiet otherwise</b>Between alerts the band idles at 80 MHz with low radio power, checks its battery every 30 s and tells the wearer with two long buzzes if the phone disconnects.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <span class="eyebrow">Haptic vocabulary</span>
+    <h2>Nine patterns you can tell apart blind</h2>
+    <p class="muted">Every bar below is drawn to the same time scale from the firmware's timing tables. Fire alarms use the same three-pulse rhythm as real evacuation alarms (ISO 8201). Tap a card to play it.</p>
+    <div class="patterns" id="patterns"></div>
+  </section>
+
+  <section class="cols">
+    <div style="display:grid; gap:14px; align-content:start">
+      <span class="eyebrow">Inside the band</span>
+      <h2>Off-the-shelf parts, about ₹870</h2>
+      <p class="muted">The development build uses an ESP32 DevKit. A smaller final band can use an ESP32-C3 SuperMini (about ₹250) with the same code and different pin numbers.</p>
+      <svg id="exploded" viewBox="0 0 520 380" role="img" aria-label="Exploded view of the band's layers">
+        <g font-family="Instrument Sans, Arial, sans-serif" font-size="13" fill="var(--ink)">
+          <g transform="translate(0,0)"><ellipse cx="170" cy="40" rx="120" ry="26" fill="var(--pod)" stroke="var(--line)" stroke-width="2"/><circle cx="235" cy="36" r="5" fill="var(--led)"/></g>
+          <g transform="translate(0,82)"><ellipse cx="170" cy="40" rx="112" ry="24" fill="var(--signal)" opacity="0.25" stroke="var(--signal)" stroke-width="2"/><rect x="120" y="30" width="60" height="20" rx="3" fill="var(--signal)" opacity="0.7"/></g>
+          <g transform="translate(0,160)"><ellipse cx="170" cy="40" rx="104" ry="22" fill="var(--buzz)" opacity="0.18" stroke="var(--buzz)" stroke-width="2"/><circle cx="170" cy="40" r="15" fill="var(--buzz)" opacity="0.7"/></g>
+          <g transform="translate(0,236)"><ellipse cx="170" cy="40" rx="104" ry="22" fill="var(--muted)" opacity="0.25" stroke="var(--muted)" stroke-width="2"/><rect x="118" y="30" width="104" height="20" rx="5" fill="var(--muted)" opacity="0.6"/></g>
+          <g transform="translate(0,310)"><rect x="110" y="18" width="120" height="44" rx="10" fill="var(--strap)"/></g>
+          <g stroke="var(--line)" stroke-width="1.5"><line x1="292" y1="40" x2="330" y2="40"/><line x1="284" y1="122" x2="330" y2="122"/><line x1="276" y1="200" x2="330" y2="200"/><line x1="276" y1="276" x2="330" y2="276"/><line x1="232" y1="350" x2="330" y2="350"/></g>
+          <text x="338" y="36" font-weight="600">Lid</text><text x="338" y="52" fill="var(--muted)" font-size="11">3D-printed, LED window</text>
+          <text x="338" y="118" font-weight="600">ESP32 board</text><text x="338" y="134" fill="var(--muted)" font-size="11">BLE radio, PWM, ADC</text>
+          <text x="338" y="196" font-weight="600">Coin motor 1027</text><text x="338" y="212" fill="var(--muted)" font-size="11">10 mm, via AO3400 MOSFET</text>
+          <text x="338" y="272" font-weight="600">LiPo 500 mAh</text><text x="338" y="288" fill="var(--muted)" font-size="11">TP4056 USB-C charger, 3.3 V LDO</text>
+          <text x="338" y="346" font-weight="600">Strap</text><text x="338" y="362" fill="var(--muted)" font-size="11">velcro, motor side to skin</text>
+        </g>
+      </svg>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Part</th><th class="num">Qty</th><th class="num">≈ ₹</th></tr></thead>
+        <tbody>
+          <tr><td>ESP32 DevKit V1 (WROOM-32)</td><td class="num">1</td><td class="num">350</td></tr>
+          <tr><td>3.7 V LiPo, 500 mAh (502540)</td><td class="num">1</td><td class="num">180</td></tr>
+          <tr><td>TP4056 USB-C charger, with protection</td><td class="num">1</td><td class="num">35</td></tr>
+          <tr><td>3.3 V LDO regulator (AP2112K / ME6211)</td><td class="num">1</td><td class="num">20</td></tr>
+          <tr><td>Coin vibration motor, 10 mm, 3 V</td><td class="num">1</td><td class="num">40</td></tr>
+          <tr><td>AO3400 logic-level N-MOSFET</td><td class="num">1</td><td class="num">10</td></tr>
+          <tr><td>1N4148 diodes</td><td class="num">2</td><td class="num">4</td></tr>
+          <tr><td>Resistors (100k ×3, 100 Ω, 330 Ω)</td><td class="num">5</td><td class="num">5</td></tr>
+          <tr><td>LED, slide switch</td><td class="num">2</td><td class="num">12</td></tr>
+          <tr><td>Perfboard, wire, headers</td><td class="num">–</td><td class="num">60</td></tr>
+          <tr><td>Velcro strap, printed enclosure</td><td class="num">1</td><td class="num">150</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total</td><td></td><td class="num">≈ 870</td></tr></tfoot>
+      </table>
+      <p class="note" style="margin-top:8px">Typical prices from Indian electronics shops (Robu, Robocraze, Amazon.in), 2026.</p>
+    </div>
+  </section>
+
+  <section class="cols">
+    <div style="display:grid; gap:12px; align-content:start">
+      <span class="eyebrow">Wiring</span>
+      <h2>One cell, one motor, one board</h2>
+      <p class="muted">The motor runs straight from the cell through the MOSFET, so its current never sags the 3.3 V rail. A 20 kHz PWM drives it above the range of hearing. A resistor divider lets the board read its own battery.</p>
+    </div>
+    <pre>LiPo + ──┬── TP4056 B+     TP4056 OUT+ ── switch ── LDO IN
+         │                 LDO OUT 3.3 V ── ESP32 3V3
+         │
+         ├── 100k ──┬── 100k ── GND
+         │          └── GPIO34        battery sense
+         │
+         └── motor + ; motor − ── MOSFET drain
+                         MOSFET source ── GND
+                         MOSFET gate ── 100 Ω ── GPIO25
+                         (1N4148 across the motor)
+
+GPIO2  ── 330 Ω ── LED ── GND
+GPIO0  ── button        dismiss / wake from sleep</pre>
+  </section>
+
+  <section class="cols">
+    <div style="display:grid; gap:12px; align-content:start">
+      <span class="eyebrow">Power</span>
+      <h2>How long it should last</h2>
+      <p class="muted">These are design estimates from part datasheets, not measurements. The first job after building the band is to measure them.</p>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>State</th><th class="num">Current</th><th>Design choice</th></tr></thead>
+        <tbody>
+          <tr><td>Connected, idle (DevKit)</td><td class="num">30–50 mA <span class="estimate">est.</span></td><td>80 MHz CPU, +3 dBm radio, 30–50 ms connection interval</td></tr>
+          <tr><td>Motor buzzing</td><td class="num">+60–80 mA <span class="estimate">est.</span></td><td>Only for a second or two per alert</td></tr>
+          <tr><td>Low battery (≤ 20 %)</td><td class="num">lower</td><td>Motor at 70 %, LED off, radio 0 dBm</td></tr>
+          <tr><td>Critical (≤ 3.4 V)</td><td class="num">deep sleep</td><td>One long buzz first; the button wakes it</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px">500 mAh ÷ 30–50 mA ≈ <b>10–15 hours</b> per charge on the DevKit build <span class="estimate">est.</span> A C3 board without the USB-serial chip should do better.</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Where it stands</span>
+    <h2>Built, designed, next</h2>
+    <div class="state">
+      <div class="done"><h3>Built and working</h3><ul>
+        <li>Phone app: detection, name calls, caller ID, alerts</li>
+        <li>App side of the Bluetooth link, with auto-reconnect</li>
+        <li>Band firmware: compiles for the ESP32 DevKit</li>
+        <li>Protocol shared by app and firmware (4 bytes, v1)</li>
+      </ul></div>
+      <div><h3>Designed, not built</h3><ul>
+        <li>Circuit and wiring above</li>
+        <li>Parts list, about ₹870</li>
+        <li>Enclosure and strap</li>
+        <li>Battery-saving behaviour (in firmware, untested on a cell)</li>
+      </ul></div>
+      <div class="next"><h3>Next steps</h3><ul>
+        <li>Assemble on perfboard and flash</li>
+        <li>Measure phone alert → buzz delay (target under 150 ms)</li>
+        <li>Measure idle current and real battery life</li>
+        <li>Test with deaf and hard-of-hearing users: can they tell the nine patterns apart?</li>
+      </ul></div>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  // Patterns: [level 0-255, ms] steps, repeats, gap between repeats (ms). Copied from firmware/esp32_wristband/src/patterns.cpp.
+  const P = [
+    { id: 0, key: "smoke", name: "Smoke alarm", safety: true, steps: [[255,500],[0,500],[255,500],[0,500],[255,500]], rep: 3, gap: 1500, feel: "Three long buzzes, the fire-alarm rhythm", line: "Leave the room safely" },
+    { id: 1, key: "door", name: "Doorbell", steps: [[255,150],[0,120],[160,350]], rep: 2, gap: 700, feel: "Ding-dong: short strong, longer soft", line: "Someone is at the door", conf: 0.91 },
+    { id: 2, key: "siren", name: "Siren", safety: true, steps: [[100,150],[150,150],[200,150],[255,300],[200,150],[150,150],[100,150]], rep: 3, gap: 300, feel: "Rising and falling swell", line: "Emergency vehicle nearby" },
+    { id: 3, key: "knock", name: "Knocking", steps: [[255,60],[0,100],[255,60],[0,100],[255,60],[0,100],[255,60]], rep: 2, gap: 600, feel: "Four quick taps", line: "Someone is knocking", conf: 0.93 },
+    { id: 4, key: "dog", name: "Dog bark", steps: [[220,120],[0,150],[220,120]], rep: 2, gap: 600, feel: "Two sharp pulses", line: "A dog is barking", conf: 0.72 },
+    { id: 5, key: "baby", name: "Baby crying", steps: [[180,400],[0,150],[120,250],[0,150],[180,400]], rep: 2, gap: 600, feel: "Long, short, long", line: "The baby is crying", conf: 0.88 },
+    { id: 6, key: "glass", name: "Glass breaking", safety: true, steps: [[255,400],[0,120],[200,40],[0,40],[200,40],[0,40],[200,40],[0,40],[200,40]], rep: 2, gap: 800, feel: "One hard hit, then a flutter", line: "Something broke" },
+    { id: 7, key: "beep", name: "Appliance beep", steps: [[130,80],[0,150],[130,80],[0,150],[130,80]], rep: 1, gap: 0, feel: "Three light ticks", line: "Microwave or washing machine", conf: 0.80 },
+    { id: 0x20, key: "raj", name: "Raj is calling you", short: "Raj calls Aryan", steps: [[220,400],[0,150],[220,400],[0,150],[220,150],[0,150],[220,150]], rep: 2, gap: 800, feel: "Two medium, two short", line: "Voice matched an enrolled family member", conf: 0.86, kicker: "Name call" },
+    { id: 0x20, key: "someone", name: "Someone is calling you", short: "Unknown voice", steps: [[220,400],[0,150],[220,400],[0,150],[220,150],[0,150],[220,150]], rep: 2, gap: 800, feel: "Same pattern: the band never knows who", line: "Voice not enrolled", conf: 0.78, kicker: "Name call" },
+  ];
+  const hex = n => n.toString(16).toUpperCase().padStart(2, "0");
+  const intensity = p => p.safety ? 255 : Math.min(255, Math.max(128, Math.round(p.conf * 255)));
+  const total = p => p.rep * p.steps.reduce((s, x) => s + x[1], 0) + (p.rep - 1) * p.gap;
+  const timeline = p => { const out = []; for (let r = 0; r < p.rep; r++) { out.push(...p.steps); if (r < p.rep - 1 && p.gap) out.push([0, p.gap]); } return out; };
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const $ = id => document.getElementById(id);
+  const NS = "http://www.w3.org/2000/svg";
+
+  // Picker chips
+  const picker = $("picker");
+  P.forEach((p, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.setAttribute("aria-pressed", "false");
+    b.innerHTML = `${p.short || p.name}${p.safety ? ' <span class="s">safety</span>' : ""}`;
+    b.addEventListener("click", () => { stopTour(); play(i); });
+    picker.appendChild(b);
+  });
+
+  // Pattern cards, one shared time scale
+  const maxMs = Math.max(...P.filter(p => p.key !== "someone").map(total));
+  const cards = $("patterns");
+  P.filter(p => p.key !== "someone").forEach(p => {
+    const i = P.indexOf(p);
+    const c = document.createElement("button");
+    c.type = "button"; c.className = "pat";
+    const name = p.id === 0x20 ? "Name call" : p.name;
+    c.innerHTML = `<div class="top"><h3>${name}</h3><span class="row" style="gap:6px">${p.safety ? '<span class="tag">safety</span>' : ""}<span class="id">id 0x${hex(p.id)}</span></span></div>`;
+    const svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 300 40"); svg.setAttribute("preserveAspectRatio", "none");
+    drawBars(svg, p, 300, 40, maxMs);
+    c.appendChild(svg);
+    const d = document.createElement("div"); d.className = "desc";
+    d.textContent = `${p.feel} · ${(total(p) / 1000).toFixed(1)} s`;
+    c.appendChild(d);
+    c.addEventListener("click", () => { stopTour(); play(i); document.querySelector(".stage").scrollIntoView({ behavior: reduced ? "auto" : "smooth" }); });
+    cards.appendChild(c);
+  });
+
+  function drawBars(svg, p, W, H, scaleMs) {
+    svg.innerHTML = "";
+    const base = document.createElementNS(NS, "line");
+    Object.entries({ x1: 0, x2: W, y1: H - 0.5, y2: H - 0.5, stroke: "var(--line)", "stroke-width": 1 }).forEach(([k, v]) => base.setAttribute(k, v));
+    svg.appendChild(base);
+    let t = 0;
+    for (const [lvl, ms] of timeline(p)) {
+      if (lvl > 0) {
+        const r = document.createElementNS(NS, "rect");
+        const h = (lvl / 255) * (H - 4);
+        r.setAttribute("x", (t / scaleMs) * W); r.setAttribute("width", Math.max(1, (ms / scaleMs) * W));
+        r.setAttribute("y", H - h); r.setAttribute("height", h); r.setAttribute("fill", "var(--buzz)");
+        svg.appendChild(r);
+      }
+      t += ms;
+    }
+    return t;
+  }
+
+  // Sound: each event is synthesised (no audio files), then the motor's hum follows the pattern.
+  let soundOn = true, ac = null, master = null, hum = null;
+  const soundBtn = $("sound");
+  soundBtn.addEventListener("click", () => {
+    soundOn = !soundOn; soundBtn.setAttribute("aria-pressed", soundOn); soundBtn.textContent = soundOn ? "Sound on" : "Sound off";
+    if (!soundOn) silence();
+  });
+  function audio() {
+    if (!ac) { const A = window.AudioContext || window.webkitAudioContext; if (!A) return null; ac = new A(); }
+    if (ac.state === "suspended") ac.resume();
+    return ac;
+  }
+  function silence() {
+    if (master) { try { master.gain.setTargetAtTime(0, ac.currentTime, 0.02); const m = master; setTimeout(() => m.disconnect(), 200); } catch (e) {} }
+    master = null; hum = null;
+    try { speechSynthesis.cancel(); } catch (e) {}
+  }
+  function env(g, t0, a, peak, d) { g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(peak, t0 + a); g.gain.exponentialRampToValueAtTime(0.0001, t0 + a + d); }
+  function tone(t0, dur, f, { type = "sine", peak = 0.3, f2, a = 0.005 } = {}) {
+    const o = ac.createOscillator(), g = ac.createGain(); o.type = type;
+    o.frequency.setValueAtTime(f, t0); if (f2) o.frequency.exponentialRampToValueAtTime(f2, t0 + dur);
+    env(g, t0, a, peak, dur); o.connect(g).connect(master); o.start(t0); o.stop(t0 + a + dur + 0.05); return o;
+  }
+  let noiseBuf = null;
+  function noise(t0, dur, { peak = 0.4, type = "lowpass", f = 1000, q = 1 } = {}) {
+    if (!noiseBuf) { noiseBuf = ac.createBuffer(1, ac.sampleRate, ac.sampleRate); const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; }
+    const s = ac.createBufferSource(), fl = ac.createBiquadFilter(), g = ac.createGain();
+    s.buffer = noiseBuf; fl.type = type; fl.frequency.value = f; fl.Q.value = q;
+    env(g, t0, 0.002, peak, dur); s.connect(fl).connect(g).connect(master); s.start(t0); s.stop(t0 + dur + 0.05);
+  }
+  // Returns how long the sound lasts, in seconds.
+  const SOUNDS = {
+    smoke(t) { for (let k = 0; k < 3; k++) tone(t + k * 0.8, 0.5, 3100, { type: "square", peak: 0.06, a: 0.01 }); return 2.4; },
+    door(t) { tone(t, 0.9, 659, { peak: 0.35 }); tone(t, 0.9, 1318, { peak: 0.06 }); tone(t + 0.5, 1.3, 523, { peak: 0.35 }); tone(t + 0.5, 1.3, 1046, { peak: 0.06 }); return 1.7; },
+    siren(t) {
+      const o = ac.createOscillator(), g = ac.createGain(); o.type = "sawtooth";
+      for (let k = 0; k < 2; k++) { o.frequency.setValueAtTime(650, t + k * 1.1); o.frequency.linearRampToValueAtTime(1350, t + k * 1.1 + 0.55); o.frequency.linearRampToValueAtTime(650, t + k * 1.1 + 1.1); }
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.07, t + 0.1); g.gain.setValueAtTime(0.07, t + 2.1); g.gain.exponentialRampToValueAtTime(0.0001, t + 2.25);
+      o.connect(g).connect(master); o.start(t); o.stop(t + 2.3); return 2.3;
+    },
+    knock(t) { for (let k = 0; k < 4; k++) { const s = t + k * 0.17; noise(s, 0.06, { peak: 0.9, f: 500 }); tone(s, 0.08, 140, { peak: 0.5, f2: 90 }); } return 0.9; },
+    dog(t) { for (let k = 0; k < 2; k++) { const s = t + k * 0.32; tone(s, 0.14, 520, { type: "sawtooth", peak: 0.2, f2: 300, a: 0.01 }); noise(s, 0.12, { peak: 0.25, type: "bandpass", f: 1100, q: 2 }); } return 0.8; },
+    baby(t) {
+      for (let k = 0; k < 2; k++) {
+        const s = t + k * 0.85, o = ac.createOscillator(), fl = ac.createBiquadFilter(), g = ac.createGain(), lfo = ac.createOscillator(), lg = ac.createGain();
+        o.type = "sawtooth"; o.frequency.setValueAtTime(430, s); o.frequency.linearRampToValueAtTime(560, s + 0.25); o.frequency.linearRampToValueAtTime(400, s + 0.7);
+        lfo.frequency.value = 7; lg.gain.value = 18; lfo.connect(lg).connect(o.frequency);
+        fl.type = "bandpass"; fl.frequency.value = 1300; fl.Q.value = 1.5; env(g, s, 0.06, 0.3, 0.64);
+        o.connect(fl).connect(g).connect(master); o.start(s); lfo.start(s); o.stop(s + 0.75); lfo.stop(s + 0.75);
+      }
+      return 1.7;
+    },
+    glass(t) { noise(t, 0.35, { peak: 0.7, type: "highpass", f: 2500 }); for (let k = 0; k < 9; k++) tone(t + 0.05 + Math.random() * 0.6, 0.25, 2500 + Math.random() * 4000, { peak: 0.08 }); return 1.0; },
+    beep(t) { for (let k = 0; k < 3; k++) tone(t + k * 0.28, 0.13, 2000, { peak: 0.15, a: 0.003 }); return 0.9; },
+    raj() { return say(0.75); },
+    someone() { return say(1.35); },
+  };
+  function say(pitch) {
+    try {
+      const u = new SpeechSynthesisUtterance("Aryan!"); u.pitch = pitch; u.rate = 0.9; u.lang = "en-IN";
+      speechSynthesis.cancel(); speechSynthesis.speak(u); return 1.1;
+    } catch (e) { return 0; }
+  }
+  function playSound(p) {
+    if (!soundOn || !audio()) return 0;
+    silence(); master = ac.createGain(); master.gain.value = 1; master.connect(ac.destination);
+    return SOUNDS[p.key](ac.currentTime + 0.05) + 0.15;
+  }
+  function startHum() {
+    if (!soundOn || !ac || !master) return;
+    const o = ac.createOscillator(), fl = ac.createBiquadFilter(), g = ac.createGain();
+    o.type = "square"; o.frequency.value = 165; fl.type = "lowpass"; fl.frequency.value = 450; g.gain.value = 0;
+    o.connect(fl).connect(g).connect(master); o.start(); hum = { o, g };
+  }
+  function setHum(level) { if (hum) hum.g.gain.setTargetAtTime(level * 0.12, ac.currentTime, 0.008); }
+  function stopHum() { if (hum) { try { hum.g.gain.setTargetAtTime(0, ac.currentTime, 0.01); hum.o.stop(ac.currentTime + 0.1); } catch (e) {} hum = null; } }
+
+  // Stage playback
+  let run = 0, raf = 0;
+  const tl = $("tl"), pod = $("pod"), led = $("led"), ring = $("motorRing");
+  function play(i, onDone) {
+    const p = P[i]; const my = ++run; cancelAnimationFrame(raf);
+    [...picker.children].forEach((c, j) => c.setAttribute("aria-pressed", j === i ? "true" : "false"));
+    stopHum();
+    const heard = playSound(p);
+    $("alert").hidden = true;
+    $("bandState").textContent = heard ? "phone is listening…" : "connected · idle";
+    lastI = i;
+    setTimeout(() => { if (my === run) show(p, my, onDone); }, heard * 1000);
+  }
+  function show(p, my, onDone) {
+    const inten = intensity(p);
+    $("bId").textContent = hex(p.id); $("bInt").textContent = hex(inten);
+    [...$("bytes").children].forEach(b => { b.classList.remove("on"); void b.offsetWidth; b.classList.add("on"); });
+    $("packetNote").textContent = p.safety
+      ? `Safety sound: always full strength (0xFF).`
+      : p.id === 0x20
+        ? `Name call (0x20). The caller's name stays on the phone; the band only gets the id. Example strength ${inten}.`
+        : `Strength = confidence × 255, at least 128. Example: ${Math.round(p.conf * 100)} % → ${inten}.`;
+    const al = $("alert"); al.hidden = false; al.classList.toggle("safety", !!p.safety);
+    $("alertK").textContent = p.kicker || (p.safety ? "Safety alert" : "Sound alert");
+    $("alertT").textContent = p.name; $("alertD").textContent = p.line;
+    const dot = $("dot"); dot.classList.remove("go"); void dot.offsetWidth; dot.classList.add("go");
+    $("tlName").textContent = p.name;
+    $("tlMeta").textContent = `· ${p.feel.toLowerCase()} · ${p.rep}× · ${(total(p) / 1000).toFixed(1)} s`;
+    const W = 1000, H = 96;
+    const dur = drawBars(tl, p, W, H - 6, total(p));
+    const head = document.createElementNS(NS, "line");
+    Object.entries({ x1: 0, x2: 0, y1: 0, y2: H, stroke: "var(--signal)", "stroke-width": 3 }).forEach(([k, v]) => head.setAttribute(k, v));
+    tl.appendChild(head);
+    const steps = timeline(p);
+    const delay = 450; // packet in flight (illustrative)
+    const start = performance.now() + delay;
+    $("bandState").textContent = "receiving…";
+    startHum();
+    const tick = now => {
+      if (my !== run) return;
+      const t = now - start;
+      let lvl = 0;
+      if (t >= 0) {
+        let acc = 0; for (const [l, ms] of steps) { if (t < acc + ms) { lvl = l; break; } acc += ms; }
+        const x = Math.min(W, (t / dur) * W); head.setAttribute("x1", x); head.setAttribute("x2", x);
+        $("bandState").textContent = t < dur ? `buzzing · ${lvl ? Math.round(lvl * inten / 255) : 0}/255` : "connected · idle";
+      }
+      const a = reduced ? 0 : (lvl / 255) * (inten / 255) * 4.5;
+      pod.setAttribute("transform", a ? `translate(${(Math.random() - 0.5) * 2 * a} ${(Math.random() - 0.5) * 2 * a})` : "");
+      led.setAttribute("fill", lvl ? "var(--led)" : "var(--line)");
+      ring.setAttribute("opacity", 0.15 + (lvl / 255) * 0.65);
+      setHum((lvl / 255) * (inten / 255));
+      if (t < dur) raf = requestAnimationFrame(tick);
+      else { stopHum(); pod.setAttribute("transform", ""); led.setAttribute("fill", "var(--line)"); ring.setAttribute("opacity", 0.15); onDone && setTimeout(() => my === run && onDone(), 900); }
+    };
+    raf = requestAnimationFrame(tick);
+  }
+  let lastI = 1;
+
+  // Tour: every sound in order, for presenting or screen recording.
+  let touring = false;
+  const tourBtn = $("tour");
+  function stopTour() { touring = false; tourBtn.textContent = "Play the tour"; }
+  tourBtn.addEventListener("click", () => {
+    if (touring) { stopTour(); run++; stopHum(); silence(); return; }
+    touring = true; tourBtn.textContent = "Stop the tour";
+    const next = i => { if (!touring) return; if (i >= P.length) { stopTour(); return; } play(i, () => next(i + 1)); };
+    next(0);
+  });
+
+  $("feel").addEventListener("click", () => {
+    const p = P[lastI]; const seq = [];
+    for (const [l, ms] of timeline(p)) {
+      const on = l > 0;
+      if (seq.length % 2 === 0 ? on : !on) seq.push(ms); else if (seq.length) seq[seq.length - 1] += ms; else seq.push(0, ms);
+    }
+    let ok = false;
+    try { ok = !!(navigator.vibrate && navigator.vibrate(seq)); } catch (e) { ok = false; }
+    $("feel").textContent = ok ? `Feeling: ${p.short || p.name}` : "This device can't vibrate here";
+    setTimeout(() => { $("feel").textContent = "Feel it on this phone"; }, 2500);
+  });
+
+  // Rest state: show the doorbell pattern on the timeline without playing it.
+  const p0 = P[1];
+  $("tlName").textContent = p0.name; $("tlMeta").textContent = `· ${p0.feel.toLowerCase()} · tap a sound to play`;
+  drawBars(tl, p0, 1000, 90, total(p0));
+})();
+</script>

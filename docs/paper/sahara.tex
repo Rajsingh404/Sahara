@@ -37,7 +37,7 @@
 \maketitle
 
 \begin{abstract}
-Deaf and hard-of-hearing (DHH) people miss safety-critical sounds such as smoke alarms and sirens, yet sound-recognition aids rarely report how often they alert falsely, often rely on the cloud, and are seldom tested outside Western homes. We present SAHARA, a fully on-device Android system that runs a frozen YAMNet encoder with a 296k-parameter head and drives a \INR 870 ESP32 haptic wristband. Each class's threshold and temporal rule are tuned jointly against an explicit false-alarm budget, with safety classes weighted three times. SAHARA also shows open-set notices from YAMNet's 521 classes and alerts users when their name is called, naming enrolled callers. On held-out public data it reaches 0.789 mAP at 3.5 false alarms per hour of background audio, and tuning cuts false alarms from 43.7 to 6.1 per hour. On 168 recordings from Indian homes, cross-validated mAP rises from 0.797 to 0.840 when they join training.
+Deaf and hard-of-hearing (DHH) people miss safety-critical sounds such as smoke alarms and sirens, yet sound-recognition aids rarely report how often they alert falsely, often rely on the cloud, and are seldom tested outside Western homes. We present SAHARA, a fully on-device Android system that runs a frozen YAMNet encoder with a 296k-parameter head and sends class-coded alerts to a proposed \INR 870 ESP32 haptic wristband. Each class's threshold and temporal rule are tuned jointly against an explicit false-alarm budget, with safety classes weighted three times. SAHARA also shows open-set notices from YAMNet's 521 classes and alerts users when their name is called, naming enrolled callers. On held-out public data it reaches 0.778 mAP at 3.5 false alarms per hour of background audio, and tuning cuts false alarms from 34.1 to 6.1 per hour. On 329 recordings from Indian homes and streets, cross-validated mAP rises from 0.621 to 0.822 when they join training.
 \keywords{assistive technology, deaf and hard of hearing, sound event detection, on-device machine learning, haptic feedback, keyword spotting}
 \end{abstract}
 
@@ -50,11 +50,11 @@ Deep audio embeddings trained on AudioSet \cite{gemmeke2017} have made sound rec
 
 This paper presents SAHARA (Sound-based Alert and Haptic Assistance for Real-time Awareness), an end-to-end system that addresses these gaps. Our contributions are:
 \begin{enumerate}
-\item \textbf{Alerting tuned to a false-alarm budget.} Each class's score threshold and the number of recent windows that must exceed it are chosen jointly on validation data to maximise a safety-weighted share of events alerted, subject to a total budget of 4 false alarms per hour. On the same model this cuts false alarms on test audio from 43.7 to 6.1 per hour (Sect.~\ref{sec:asym}).
+\item \textbf{Alerting tuned to a false-alarm budget.} Each class's score threshold and the number of recent windows that must exceed it are chosen jointly on validation data to maximise a safety-weighted share of events alerted, subject to a total budget of 4 false alarms per hour. On the same model this cuts false alarms on test audio from 34.1 to 6.1 per hour (Sect.~\ref{sec:asym}).
 \item \textbf{Privacy by construction.} All inference runs on the phone. Audio stays in a one-second ring buffer in RAM, the release build has no Internet permission, and the wristband receives only a class identifier and an intensity byte (Sect.~\ref{sec:system}).
 \item \textbf{Personal and open-set awareness.} A speech-embedding spotter alerts the user when their name is called by any voice, and a speaker encoder names enrolled callers or reports ``someone''. YAMNet's 521 AudioSet classes provide low-priority notices for sounds outside the trained set (Sect.~\ref{sec:personal}).
-\item \textbf{SAHARA-IN}, 168 clips recorded in Indian homes and streets plus 107 name-call clips, with results reported separately from public data (Sect.~\ref{sec:data}).
-\item \textbf{An open, low-cost wristband}: an ESP32 BLE peripheral with a coin vibration motor, a bill of materials of about \INR 870 and battery-aware firmware (Sect.~\ref{sec:band}).
+\item \textbf{SAHARA-IN}, 329 clips recorded in Indian homes and streets plus 107 name-call clips, with results reported separately from public data (Sect.~\ref{sec:data}).
+\item \textbf{A wristband design}: a Bluetooth protocol implemented in the app, ESP32 firmware with class-coded vibration, and a bill of materials of about \INR 870. The wristband is designed but not yet built (Sect.~\ref{sec:band}).
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -88,14 +88,14 @@ This paper presents SAHARA (Sound-based Alert and Haptic Assistance for Real-tim
 \node[box, below=of pool] (other) {Open-set notice\\521 classes, quiet};
 \node[box, left=of other] (name) {Name spotter\\(speech embeddings)};
 \node[box, left=of name] (who) {Speaker encoder\\caller or ``someone''};
-\node[box, below=of alert, fill=black!15] (band) {ESP32 wristband\\class-coded vibration};
+\node[box, below=of alert, fill=black!15, dashed] (band) {ESP32 wristband\\(proposed)};
 \draw[arr] (mic) -- (ring); \draw[arr] (ring) -- (vad); \draw[arr] (vad) -- (yam);
 \draw[arr] (yam) -- (pool); \draw[arr] (pool) -- (head); \draw[arr] (head) -- (pol); \draw[arr] (pol) -- (alert);
 \draw[arr] (yam.east) -- ++(3mm,0) |- (other.east);
 \draw[arr] (yam.east) -- ++(3mm,0) |- ($(other.south)+(0,-3mm)$) -| node[font=\sffamily\tiny, pos=0.25, below]{speech score $\ge 0.2$} (name.south);
 \draw[arr] (name) -- (who); \draw[arr] (who) -- (alert); \draw[arr] (alert) -- node[font=\sffamily\tiny, right]{4-byte BLE} (band);
 \end{tikzpicture}
-\caption{SAHARA pipeline. The \textit{white} blocks run on the phone inside an Android foreground service and the \textit{shaded} block is the wristband. Only a class identifier and an intensity byte cross the Bluetooth link; open-set notices never reach the wristband}
+\caption{SAHARA pipeline. The \textit{white} blocks run on the phone inside an Android foreground service and the \textit{shaded, dashed} block is the proposed wristband, designed but not yet built. Only a class identifier and an intensity byte cross the Bluetooth link; open-set notices never reach the wristband}
 \label{fig:arch}
 \end{figure}
 
@@ -142,7 +142,7 @@ A fixed threshold of 0.5 and a fixed $k$ ignore how each class actually behaves 
 \begin{equation}
 \max_{\{\theta_c,k_c\}}\ \sum_c w_c\,D_c(\theta_c,k_c)\quad\text{subject to}\quad\sum_c A_c(\theta_c,k_c)\le B\,,
 \end{equation}
-with a Lagrangian sweep. Figure~\ref{fig:budget} shows the trade-off; we chose $B=4$ per hour, past which extra alerts buy little detection. The tuned rules differ by class: knocking, doorbell, siren, dog bark and glass break fire on one window at high thresholds (0.86--0.98), smoke alarm and appliance beep need two windows, and baby cry, whose cries are long, needs three windows at a lower threshold (0.63).
+with a Lagrangian sweep. Figure~\ref{fig:budget} shows the trade-off; we chose $B=4$ per hour, past which extra alerts buy little detection. The tuned rules differ by class: doorbell, siren, knocking, dog bark and glass break fire on one window at high thresholds (0.91--0.995), smoke alarm and baby cry, both long sounds, need two windows, and appliance beep, the class most confused with other electronic sounds, needs all three.
 
 \begin{figure}[t]
 \centering
@@ -152,7 +152,14 @@ with a Lagrangian sweep. Figure~\ref{fig:budget} shows the trade-off; we chose $
 \end{figure}
 
 \subsection{Class-Coded Haptics}
-Each alert reaches the wristband as four bytes: protocol version, command, class identifier and intensity. Safety-critical classes always use full intensity (255); for the others the intensity is the confidence scaled to $[128,255]$. The firmware maps each class to a distinct rhythm, so the user can identify the event without looking: smoke alarm uses the ``temporal-three'' pattern of fire alarms \cite{iso8201}, a siren is a rising and falling swell, a doorbell is a strong then soft ``ding-dong'', knocking is four quick taps, and a name call is two medium and two short buzzes. A new alert interrupts the current one.
+Each alert reaches the wristband as four bytes: protocol version, command, class identifier and intensity. Safety-critical classes always use full intensity (255); for the others the intensity is the confidence scaled to $[128,255]$. The firmware maps each class to a distinct rhythm, so the user can identify the event without looking: smoke alarm uses the ``temporal-three'' pattern of fire alarms \cite{iso8201}, a siren is a rising and falling swell, a doorbell is a strong then soft ``ding-dong'', knocking is four quick taps, and a name call is two medium and two short buzzes (Fig.~\ref{fig:haptics}). The phone plays the same patterns with amplitude-controlled vibration, so a sound feels the same on either device, and a test fails the build if the two copies differ. A new alert interrupts the current one.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/haptics.pdf}
+\caption{Wristband vibration patterns, drawn from the firmware's timing tables on one time scale. The three safety-critical classes (top) use full strength and repeat three times or carry a distinctive onset}
+\label{fig:haptics}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Name Calls and Open-Set Notices}\label{sec:personal}
@@ -168,9 +175,9 @@ Each alert reaches the wristband as four bytes: protocol version, command, class
 \paragraph{Custom Sounds.} Users can also enrol a household sound from five to ten three-second recordings; its prototype is the mean of centred, normalised YAMNet window vectors, matched by cosine similarity. Our evaluation found that it separates distinctive household sounds from background but cannot distinguish names, because YAMNet describes kinds of sound rather than words, which motivated the separate name-call model.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Wristband Hardware}\label{sec:band}
+\section{Proposed Wristband}\label{sec:band}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The wristband is an ESP32-WROOM-32 Bluetooth Low Energy peripheral with a 10\,mm coin vibration motor driven through a logic-level MOSFET with PWM, a 500\,mAh LiPo cell, a protected TP4056 charger and a low-dropout 3.3\,V regulator. Its bill of materials totals about \INR 870 at 2026 Indian retail prices (Table~\ref{tab:bom}). To save power, the firmware clocks the CPU at 80\,MHz, transmits at $+3$\,dBm and requests a 30--50\,ms connection interval with slave latency 2, which targets an alert delivery delay below about 150\,ms. Below 20\,\% charge it lowers motor strength and transmit power, and at 3.4\,V it enters deep sleep. When the phone disconnects, two long buzzes tell the user that alerts have stopped, so a silent wristband never looks the same as a quiet room.
+The wristband is designed but has not yet been built or measured; everything in this section is the design. Its firmware compiles for the ESP32 and the phone app already implements the alert protocol, so building it requires no change to the software. The design is an ESP32-WROOM-32 Bluetooth Low Energy peripheral with a 10\,mm coin vibration motor driven through a logic-level MOSFET with PWM, a 500\,mAh LiPo cell, a protected TP4056 charger and a low-dropout 3.3\,V regulator. Its bill of materials totals about \INR 870 at 2026 Indian retail prices (Table~\ref{tab:bom}). To save power, the firmware clocks the CPU at 80\,MHz, transmits at $+3$\,dBm and requests a 30--50\,ms connection interval with slave latency 2, which targets an alert delivery delay below about 150\,ms. Below 20\,\% charge it lowers motor strength and transmit power, and at 3.4\,V it enters deep sleep. When the phone disconnects, two long buzzes tell the user that alerts have stopped, so a silent wristband never looks the same as a quiet room. From datasheet currents we estimate 30--50\,mA while connected on the development board, or about 10--15\,h on the 500\,mAh cell; this estimate, the alert delay and the users' ability to tell the nine patterns apart must be measured on the built device.
 
 \begin{table}[t]
 \caption{Wristband bill of materials (approximate Indian retail prices, 2026)}
@@ -203,10 +210,10 @@ Target clips come from FSD50K \cite{fonseca2022}, AudioSet \cite{gemmeke2017} an
 Splits are 70/15/15, grouped by upstream recording: AudioSet and DESED clips share YouTube identifiers, and FSD50K and ESC-50 share Freesound identifiers, so the same recording never sits in training in one dataset and in test in another.
 
 \subsection{Synthetic Mixtures}
-Each training target clip is mixed onto three random training-split background beds at an SNR drawn uniformly from $[-5, 10]$\,dB, giving 6,459 training mixtures. A separate set of 420 test mixtures uses only test clips and test beds. Synthetic results are always reported separately from real ones.
+Each training target clip is mixed onto three random training-split background beds at an SNR drawn uniformly from $[-5, 10]$\,dB, giving 6,834 training mixtures. A separate set of 564 test mixtures uses only test clips and test beds. Synthetic results are always reported separately from real ones.
 
 \subsection{SAHARA-IN Field Recordings}
-Four team members recorded 168 clips on their own phones in Mumbai homes and streets, in two uploads: 108 target clips (29 appliance beep, 27 doorbell, 27 knocking, 11 dog bark, 14 baby cry) and 60 background clips (street hawkers, a temple, a kitchen, television, monsoon rain, and hard negatives such as drawers, doors and a washing machine spinning without beeping). Because every recording was made under different conditions, we split by label rather than by recorder: about 40\,\% of each label, spread across its recording conditions, is held out for test, and each upload is split on its own so that adding clips never moves an earlier one. With so few clips, we also report five-fold cross-validation over all 168, in which every clip is scored by a model that never heard it. A further 107 clips (38 of the name ``Aryan'', 69 of similar names) serve the name-call model, which is evaluated leave-one-recorder-out. SAHARA-IN has no smoke-alarm, siren or glass-break recordings, which are hard to record safely.
+Four team members recorded 329 clips on their own phones in Mumbai homes and streets, in three uploads: 269 target clips (67 knocking, 59 appliance beep, 58 doorbell, 20 each of smoke alarm, siren and glass break, 14 baby cry, 11 dog bark) and 60 background clips (street hawkers, a temple, a kitchen, television, monsoon rain, and hard negatives such as drawers, doors and a washing machine spinning without beeping). Because every recording was made under different conditions, we split by label rather than by recorder: about 40\,\% of each label, spread across its recording conditions, is held out for test, and each upload is split on its own so that adding clips never moves an earlier one. With so few clips, we also report five-fold cross-validation over all 329, in which every clip is scored by a model that never heard it. A further 107 clips (38 of the name ``Aryan'', 69 of similar names) serve the name-call model, which is evaluated leave-one-recorder-out. The smoke alarms are real detectors sounded with their test button.
 
 \begin{table}[t]
 \caption{Real clips per class and source, from the committed manifests; $^\dagger$ marks the safety-critical classes. Background also includes 605 DESED clips}
@@ -216,14 +223,14 @@ Four team members recorded 168 clips on their own phones in Mumbai homes and str
 \toprule
 Class & AudioSet & ESC-50 & FSD50K & SAHARA-IN & Total (test) \\
 \midrule
-Smoke alarm$^\dagger$ & 183 & -- & -- & -- & 183 (27) \\
-Doorbell & 92 & -- & 144 & 27 & 263 (45) \\
-Siren$^\dagger$ & 34 & 40 & 132 & -- & 206 (34) \\
-Knocking & 97 & 40 & 373 & 27 & 537 (84) \\
+Smoke alarm$^\dagger$ & 183 & -- & -- & 20 & 203 (35) \\
+Doorbell & 92 & -- & 144 & 58 & 294 (57) \\
+Siren$^\dagger$ & 34 & 40 & 132 & 20 & 226 (42) \\
+Knocking & 97 & 40 & 373 & 67 & 577 (100) \\
 Dog bark & 10 & 40 & 536 & 11 & 597 (94) \\
 Baby cry & 106 & 40 & -- & 14 & 160 (30) \\
-Glass break$^\dagger$ & 97 & 40 & 510 & -- & 647 (97) \\
-Appliance beep & 261 & 40 & 206 & 29 & 536 (89) \\
+Glass break$^\dagger$ & 97 & 40 & 510 & 20 & 667 (105) \\
+Appliance beep & 261 & 40 & 206 & 59 & 566 (101) \\
 Background & -- & 1,760 & 10,000 & 60 & 12,425 (1,876) \\
 \bottomrule
 \end{tabular}
@@ -236,7 +243,7 @@ We report per-class average precision (AP) over 0.5\,s windows and its mean (mAP
 \section{Results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Detection on Held-Out Data}
-Table~\ref{tab:sets} summarises the selected model; Table~\ref{tab:perclass} and Fig.~\ref{fig:ap} give the public test set per class. The model reaches 0.789 mAP and, played as a stream through the deployed rule, raises 3.5 false alarms per hour on 3.4 hours of public test background (mostly siren). The safety classes transfer well: 23 of 27 smoke-alarm and 28 of 34 siren clips raise an alert. Glass break has high AP (0.843) but alerts on only 47 of 97 clips, because the budget forced a threshold of 0.98. Knocking (0.635) and appliance beep (0.576) are the weakest; their brief, varied sounds limit the model rather than the rule (Fig.~\ref{fig:budget}). On synthetic mixtures at $-5$ to 10\,dB, mAP falls to 0.724 and clip detection drops sharply for doorbell (to 9 of 41), knocking (2 of 79) and appliance beep (8 of 84), showing that loud background is the main remaining challenge.
+Table~\ref{tab:sets} summarises the selected model; Table~\ref{tab:perclass} and Fig.~\ref{fig:ap} give the public test set per class. The model reaches 0.778 mAP and, played as a stream through the deployed rule, raises 3.5 false alarms per hour on 3.4 hours of public test background (mostly siren). The safety classes transfer well: 22 of 27 smoke-alarm and 28 of 34 siren clips raise an alert. Glass break has high AP (0.827) but alerts on 56 of 97 clips, because the budget forced a threshold of 0.93. Knocking (0.604) and appliance beep (0.567) are the weakest; their brief, varied sounds limit the model rather than the rule (Fig.~\ref{fig:budget}). On synthetic mixtures at $-5$ to 10\,dB, mAP falls to 0.666 and clip detection drops sharply for doorbell (to 7 of 57), knocking (3 of 100) and appliance beep (9 of 101), showing that loud background is the main remaining challenge.
 
 \begin{table}[t]
 \caption{Selected model on each test set}
@@ -246,10 +253,10 @@ Table~\ref{tab:sets} summarises the selected model; Table~\ref{tab:perclass} and
 \toprule
 Test set & mAP & False alarms/h \\
 \midrule
-Public held-out split (8 classes) & 0.789 & 3.5 (3.4\,h) \\
-Synthetic mixtures, $-5$ to 10\,dB (8 classes) & 0.724 & -- \\
-SAHARA-IN held-out split (5 classes) & 0.879 & see text \\
-SAHARA-IN 5-fold CV, trained without / with it & 0.797 / 0.840 & -- \\
+Public held-out split (8 classes) & 0.778 & 3.5 (3.4\,h) \\
+Synthetic mixtures, $-5$ to 10\,dB (8 classes) & 0.666 & -- \\
+SAHARA-IN held-out split (8 classes) & 0.831 & see text \\
+SAHARA-IN 5-fold CV, trained without / with it & 0.621 / 0.822 & -- \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -262,16 +269,16 @@ SAHARA-IN 5-fold CV, trained without / with it & 0.797 / 0.840 & -- \\
 \toprule
 Class & $\theta_c$ & $k_c$ & AP & Clips alerted \\
 \midrule
-Smoke alarm$^\dagger$ & 0.87 & 2 & 0.920 & 23/27 \\
-Doorbell & 0.93 & 1 & 0.748 & 17/35 \\
-Siren$^\dagger$ & 0.86 & 1 & 0.872 & 28/34 \\
-Knocking & 0.89 & 1 & 0.635 & 19/73 \\
-Dog bark & 0.92 & 1 & 0.906 & 76/90 \\
-Baby cry & 0.63 & 3 & 0.813 & 19/25 \\
-Glass break$^\dagger$ & 0.98 & 1 & 0.843 & 47/97 \\
-Appliance beep & 0.87 & 2 & 0.576 & 20/78 \\
+Smoke alarm$^\dagger$ & 0.81 & 2 & 0.916 & 22/27 \\
+Doorbell & 0.995 & 1 & 0.711 & 13/35 \\
+Siren$^\dagger$ & 0.91 & 1 & 0.875 & 28/34 \\
+Knocking & 0.95 & 1 & 0.604 & 21/73 \\
+Dog bark & 0.98 & 1 & 0.908 & 67/90 \\
+Baby cry & 0.99 & 2 & 0.817 & 17/25 \\
+Glass break$^\dagger$ & 0.93 & 1 & 0.827 & 56/97 \\
+Appliance beep & 0.90 & 3 & 0.567 & 17/78 \\
 \midrule
-Mean & & & 0.789 & 0.60 \\
+Mean & & & 0.778 & 0.56 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -284,10 +291,12 @@ Mean & & & 0.789 & 0.60 \\
 \end{figure}
 
 \subsection{Indian Conditions}
-In five-fold cross-validation over SAHARA-IN, adding the recordings to training (weighted ten times) raises mAP from 0.797 to 0.840, with the largest gain for doorbell (AP 0.577 to 0.662), whose Indian melodic chimes differ most from public data; dog barks alerted rises from 8 to 10 of 11. The team's background recordings produced 4 false alarms in 5.9 minutes with and without the team data; on the held-out split, two of three were ``siren'', triggered by street and temple sounds. This is too little audio for a reliable hourly rate, but it marks Indian street sound as the main false-alarm risk. Knocking transfers poorly (3 of 27 clips alerted at the deployed threshold, although its AP is 0.784), so its threshold, tuned on public validation audio, sits above most Indian knocks. Moving a fifth of the field recordings into validation and giving them half the weight in tuning did not fix this: on the same test set it alerted on 1 of 11 Indian knocks instead of 2 and on 21 of 27 smoke alarms instead of 23, because six Indian knocks are too few to set a threshold. The deployed model was trained before the team's second upload (45 of the 168 clips); retraining with it matched public mAP (0.790) with more false alarms (4.1 per hour) and was not selected on validation.
+In five-fold cross-validation over all 329 SAHARA-IN clips, adding them to training (weighted ten times) raises mAP from 0.621 to 0.822 and the clips that raise an alert from 45 to 100 of 269. The gains are largest where Indian sources differ most from public data: smoke alarm AP rises from 0.385 to 0.801, knocking from 0.482 to 0.763, doorbell, whose Indian chimes are melodic, from 0.521 to 0.824, and glass break from 0.208 to 0.476. The team's background recordings produced 1 false alarm in 5.9 minutes without the team data and 3 with it; on the held-out split the one false alarm was ``siren'', triggered by street sound. This is too little audio for a reliable hourly rate, but it marks Indian street sound as the main false-alarm risk.
+
+On the held-out split the selected model reaches 0.831 mAP and alerts on 37 of 105 Indian clips. The previous model, trained before the third upload added 161 clips, reaches 0.698 on the same split and alerts on 31, with 2 rather than 6 of 27 knocks and 0 rather than 4 of 8 glass breaks, at the same 3.5 false alarms per hour on public background. Validation holds only public audio and cannot see this gain (the previous model scores 0.643 there against 0.634), so we select among runs trained on the current data. Knocking still transfers poorly (6 of 27 alerted although its AP is 0.812): its threshold, tuned on public validation audio, sits above most Indian knocks. Tuning thresholds on Indian validation clips, tried before the third upload, failed because six Indian knocks were too few to set a threshold; with 67 knocks now recorded, this is the next step.
 
 \subsection{What the Alert Tuning Buys}
-Table~\ref{tab:ablation} replays all 2,354 real test clips (4.4\,h) through three rules on the same model. False alarms here count alerts for a class on any audio without it, including other classes' clips, so they are higher than the background-only figure above. The fixed design of a 0.5 threshold with 2-of-3 smoothing (1 window for safety classes) produces 43.7 false alarms per hour, more than one every two minutes, which no user would tolerate. Tuning brings this to 6.1 per hour while still alerting on 59\,\% of clips and 72\,\% of safety-class clips. The tuning makes this trade-off explicit and puts it under the designer's control instead of hiding it inside a threshold-free metric.
+Table~\ref{tab:ablation} replays all 2,435 real test clips (4.6\,h) through three rules on the same model. False alarms here count alerts for a class on any audio without it, including other classes' clips, so they are higher than the background-only figure above. The fixed design of a 0.5 threshold with 2-of-3 smoothing (1 window for safety classes) produces 34.1 false alarms per hour, more than one every two minutes, which no user would tolerate. Tuning brings this to 6.1 per hour while still alerting on 54\,\% of clips and 69\,\% of safety-class clips. The tuning makes this trade-off explicit and puts it under the designer's control instead of hiding it inside a threshold-free metric.
 
 \begin{table}[t]
 \caption{Same model, three alert rules, on all real test audio}
@@ -297,9 +306,9 @@ Table~\ref{tab:ablation} replays all 2,354 real test clips (4.4\,h) through thre
 \toprule
 Alert rule & Clips alerted & Safety clips & False alarms/h \\
 \midrule
-$\theta=0.5$, 1 window & 0.748 & 0.844 & 57.7 \\
-$\theta=0.5$, 1 (safety) or 2 of 3 windows & 0.672 & 0.844 & 43.7 \\
-Tuned $(\theta_c,k_c)$, 4/h budget (SAHARA) & 0.588 & 0.720 & 6.1 \\
+$\theta=0.5$, 1 window & 0.766 & 0.838 & 49.1 \\
+$\theta=0.5$, 1 (safety) or 2 of 3 windows & 0.688 & 0.838 & 34.1 \\
+Tuned $(\theta_c,k_c)$, 4/h budget (SAHARA) & 0.538 & 0.692 & 6.1 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -323,7 +332,7 @@ Both & 0.821 & 24\,\% \\
 \end{table}
 
 \subsection{On-Device Cost}
-Table~\ref{tab:device} reports the deployment on a Samsung Galaxy S24 (Android 16). The app path was verified against the evaluation pipeline: 90 test clips replayed through the app's exact code raise the same alerts in 90 of 90 cases. Laptop-speaker playback triggered smoke alarm and siren alerts with the screen on and off, but small speakers barely reproduce knocks, barks and doorbells, so those classes still need real-source tests.
+Table~\ref{tab:device} reports the deployment on a Samsung Galaxy S24 (Android 16). The app path was verified against the evaluation pipeline: 54 test clips replayed through the app's exact code raise the same alerts in 54 of 54 cases. Laptop-speaker playback triggered smoke alarm and siren alerts with the screen on and off, but small speakers barely reproduce knocks, barks and doorbells, so those classes still need real-source tests.
 
 \begin{table}[t]
 \caption{On-device cost (Samsung Galaxy S24, Android 16)}
@@ -335,14 +344,11 @@ Measure & Value \\
 \midrule
 Head parameters & 296,328 \\
 Model files, YAMNet / head / name-call (MB) & 15.0 / 1.2 / 8.1 \\
-INT8 head size, test mAP change & 0.29\,MB, $-0.011$ \\
+INT8 head size, test mAP change & 0.29\,MB, $-0.015$ \\
 Release APK, arm64 (MB) & 45.8 \\
 Inference per window, screen on / off (ms) & 20--29 / 47--49 (hop 500) \\
 Memory, debug build (MB PSS) & 128.9 \\
 Phone battery drain while listening (\%/h) & \tbd \\
-Phone alert to wristband vibration (ms) & \tbd \\
-Wristband current, idle (mA) & \tbd \\
-Wristband battery life, 500\,mAh (h) & \tbd \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -350,18 +356,18 @@ Wristband battery life, 500\,mAh (h) & \tbd \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion and Limitations}\label{sec:limits}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Detection Versus False Alarms.} At 4 false alarms per hour the model alerts on about 60\,\% of events; Fig.~\ref{fig:budget} shows that relaxing the budget to 16 per hour raises this only to 69\,\%. Better detection of brief sounds such as knocks and beeps therefore needs a stronger model or more data, not a looser rule.
+\paragraph{Detection Versus False Alarms.} At 4 false alarms per hour the model alerts on about 58\,\% of validation events; Fig.~\ref{fig:budget} shows that relaxing the budget fourfold, to 16 per hour, raises this only to 71\,\%. Better detection of brief sounds such as knocks and beeps therefore needs a stronger model or more data, not a looser rule.
 
-\paragraph{Small Field Set.} SAHARA-IN covers five classes with a few clips each and has no smoke alarms, sirens or glass breaks. Its label-based split can place recordings from the same phone or room on both sides, which the cross-validation shares; results on it indicate transfer but are not precise estimates.
+\paragraph{Small Field Set.} SAHARA-IN has 329 clips, with only 20 per safety class and 8 of each in the test split. Its label-based split can place recordings from the same phone or room on both sides, which the cross-validation shares; results on it indicate transfer but are not precise estimates.
 
 \paragraph{Name Calls.} The spotter is trained for one name and confuses similar names about a third of the time. Adding 1,781 synthetic clips of the name and of near-miss names from 27 text-to-speech voices, including Indian English and Hindi, lowered the AUC against similar names from 0.719 to 0.615 on the first upload. Fifty real near-miss recordings from the second upload did help: false calls on similar names fell from 61\,\% to 36\,\% and calls caught rose from 68\,\% to 79\,\%, and on the 19 earlier near-miss clips, which share no session with the new ones, AUC rose from 0.719 to 0.755. Caller identification must be re-measured once a family enrols on the user's own phone. The speech-embedding models are licensed for non-commercial use only.
 
-\paragraph{No User Study Yet.} We have not yet evaluated SAHARA with DHH participants, measured battery drain over a day, or built the wristband in hardware. A field deployment with DHH users in Mumbai, measuring missed events, alert fatigue and recognition of the haptic patterns, is planned \cite{findlater2019,jain2020homesound}.
+\paragraph{No User Study Yet.} We have not yet evaluated SAHARA with DHH participants, measured battery drain over a day, or built the wristband; its alert delay, current draw and battery life are therefore not reported. A field deployment with DHH users in Mumbai, measuring missed events, alert fatigue and recognition of the haptic patterns, is planned \cite{findlater2019,jain2020homesound}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-SAHARA shows that an assistive sound-awareness system can run entirely on a phone and a \INR 870 wristband, retain no audio, and be tuned for the number that decides whether users keep it switched on: false alarms per hour. Tuning each class's threshold and temporal rule against an explicit budget cut false alarms seven-fold on the same model, and recordings from Indian homes improved transfer to Indian conditions. A separate speech path lets users know when they are called by name, and by whom. We release the code, the alert-tuning method, the Bluetooth protocol, the firmware and the SAHARA-IN protocol.
+SAHARA shows that an assistive sound-awareness system can run entirely on a phone, retain no audio, and be tuned for the number that decides whether users keep it switched on: false alarms per hour. Tuning each class's threshold and temporal rule against an explicit budget cut false alarms more than five-fold on the same model, and recordings from Indian homes improved transfer to Indian conditions. A separate speech path lets users know when they are called by name, and by whom. We release the code, the alert-tuning method, the Bluetooth protocol, the firmware and the wristband design (about \INR 870), whose construction and evaluation are our next step, and the SAHARA-IN protocol.
 
 \paragraph{Acknowledgements.} \TBD{thank the guide and department; mention any funding}
 

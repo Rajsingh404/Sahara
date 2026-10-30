@@ -49,14 +49,16 @@ def test_recorder_split_keeps_each_recorder_on_one_side(tmp_path):
 def test_label_split_covers_every_label_and_condition():
     rows = organise_recordings.load_label_map()
     splits = organise_recordings.label_splits(rows)
-    by_label, by_condition = {}, {}
+    by_label, by_condition, uploads = {}, {}, {}
     for r in rows:
         by_label.setdefault((r["dataset"], r["label"]), []).append(splits[r["filename"]])
+        uploads.setdefault((r["dataset"], r["label"]), set()).add(r.get("upload") or "1")
         by_condition.setdefault((r["label"], organise_recordings.condition(r)), []).append(splits[r["filename"]])
     for key, sides in by_label.items():
         n, n_test = len(sides), sides.count("test")
         assert set(sides) == {"train", "test"}, key
-        assert abs(n_test - 0.4 * n) <= 1, (key, n, n_test)  # ~40 % test per label
+        # ~40 % test per label; each upload is rounded on its own, so allow one clip per upload.
+        assert abs(n_test - 0.4 * n) <= len(uploads[key]), (key, n, n_test)
     # Every condition with at least 3 clips appears on both sides.
     for key, sides in by_condition.items():
         if len(sides) >= 3:

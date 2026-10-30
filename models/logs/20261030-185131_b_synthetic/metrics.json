@@ -1,0 +1,98 @@
+{
+  "run": "20261030-185131_b_synthetic",
+  "split": "val",
+  "best_epoch": 5,
+  "epochs_run": 13,
+  "val_mAP": 0.7504911761523134,
+  "macro_at_0.5": {
+    "precision": 0.6485743510655135,
+    "recall": 0.7475601401882493,
+    "f1": 0.6834821436456049,
+    "mAP": 0.7504911761523134
+  },
+  "per_class_at_0.5": {
+    "smoke_alarm": {
+      "precision": 0.7692307692307693,
+      "recall": 0.916030534351145,
+      "f1": 0.8362369337979094,
+      "ap": 0.898019499717175
+    },
+    "doorbell": {
+      "precision": 0.625,
+      "recall": 0.5392156862745098,
+      "f1": 0.5789473684210527,
+      "ap": 0.5643307688523326
+    },
+    "siren": {
+      "precision": 0.6160714285714286,
+      "recall": 0.9387755102040817,
+      "f1": 0.7439353099730458,
+      "ap": 0.9182722411206036
+    },
+    "knocking": {
+      "precision": 0.66,
+      "recall": 0.6346153846153846,
+      "f1": 0.6470588235294118,
+      "ap": 0.6927282046925638
+    },
+    "dog_bark": {
+      "precision": 0.9146341463414634,
+      "recall": 0.9036144578313253,
+      "f1": 0.9090909090909091,
+      "ap": 0.9276408415308994
+    },
+    "baby_cry": {
+      "precision": 0.5703125,
+      "recall": 0.8021978021978022,
+      "f1": 0.6666666666666666,
+      "ap": 0.7762984790559582
+    },
+    "glass_break": {
+      "precision": 0.4175824175824176,
+      "recall": 0.75,
+      "f1": 0.5364705882352941,
+      "ap": 0.668046551180924
+    },
+    "appliance_beep": {
+      "precision": 0.6157635467980296,
+      "recall": 0.49603174603174605,
+      "f1": 0.5494505494505495,
+      "ap": 0.5585928230680499
+    }
+  },
+  "safety_floor": {
+    "precision_floor": 0.7,
+    "smoke_alarm": {
+      "recall": 0.9236641221374046,
+      "precision": 0.7034883720930233,
+      "threshold": 0.4482,
+      "positives": 131
+    },
+    "siren": {
+      "recall": 0.9319727891156463,
+      "precision": 0.7025641025641025,
+      "threshold": 0.6959,
+      "positives": 147
+    },
+    "glass_break": {
+      "recall": 0.6118421052631579,
+      "precision": 0.7045454545454546,
+      "threshold": 0.8488,
+      "positives": 152
+    }
+  },
+  "safety_floor_met": true,
+  "train_windows": 111288,
+  "train_positives": {
+    "smoke_alarm": 2605,
+    "doorbell": 2824,
+    "siren": 3321,
+    "knocking": 4301,
+    "dog_bark": 5037,
+    "baby_cry": 1817,
+    "glass_break": 4171,
+    "appliance_beep": 6117
+  },
+  "val_windows": 18832,
+  "val_sha256": "d23a9547a65aad8d:a50c216d0e14b87b"
+}

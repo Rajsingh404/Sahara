@@ -1,7 +1,7 @@
 # Team recordings
 
 Audio recorded by the four team members (Advika, Mahi, Prachi, Raj) in September 2026, plus a second upload on
-2026-10-30 (95 new clips with no recorder given, filed as `team`, `upload` = 2). The final Drive folder
+2026-10-30 (95 new clips with no recorder given, filed as `team`, `upload` = 2) and a third the same day (161 clips, `upload` = 3). The final Drive folder
 (`Datasets/Indian_Ambient`, one sub-folder per class) is byte-identical to the earlier per-person upload; each clip's
 recorder comes from that upload and is kept in `original_path`. Audio never goes in git; this folder holds only the labels and generated metadata.
 
@@ -64,6 +64,10 @@ standalone training set.
   another new clip (microwave 12, 20, 28; baby cry 14) and were skipped, 95 were added. Who recorded them, and which
   name each "NotAryan" clip says, is not recorded. Several microwave, doorbell and baby cry files carry no recording
   metadata (24 kHz stereo); the team confirmed (2026-10-30) they recorded all of them.
+
+- **Third upload (2026-10-30)**: 278 files; 117 were byte-identical to clips already here (all 107 Aryan / not-Aryan
+  clips and 10 doorbells) and were skipped, 161 were added (`upload` 3): 40 knocking, 31 doorbell, 30 appliance beep,
+  20 each of smoke alarm, siren and glass break. All 48 kHz mono, recorded 2026-10-29/30; recorder not given (`team`).
 
 - **Aryan sort**: follows the team's final folder. Prachi's 15 clips are 12 positive / 3 negative; Mahi's "mahi 1–3"
   are positive (the team filed them under Aryan) and her "name 1–3" negative; Advika's "mahi" is negative.

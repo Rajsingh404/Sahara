@@ -167,3 +167,164 @@ doorbell__team__08.mp3,doorbell,false,apartment,unknown_mp3,,undated_team,"secon
 doorbell__team__09.m4a,doorbell,false,apartment,iPhone_VoiceMemos,,2026-10-29_team,"second upload (2026-10-29), recorder not given",team,test,10.05,doorbell/doorbell_16.m4a
 doorbell__team__10.m4a,doorbell,false,apartment,iPhone_VoiceMemos,,2026-10-29_team,"second upload (2026-10-29), recorder not given",team,train,5.12,doorbell/doorbell_17.m4a
 doorbell__team__11.mp3,doorbell,false,apartment,unknown_mp3,,undated_team,"second upload (2026-10-29), recorder not given; no recording metadata; confirmed recorded by the team (2026-10-30)",team,test,4.70,doorbell/doorbell_!4.mp3
+appliance_beep__team__14.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,4.67,Appliance Beep/Copy of New Recording 2.m4a
+appliance_beep__team__15.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,8.00,Appliance Beep/Copy of New Recording 3.m4a
+appliance_beep__team__16.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,4.59,Appliance Beep/Copy of New Recording 4.m4a
+appliance_beep__team__17.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,3.90,Appliance Beep/Copy of New Recording 5.m4a
+appliance_beep__team__18.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,7.23,Appliance Beep/Copy of New Recording 6.m4a
+appliance_beep__team__19.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,4.67,Appliance Beep/Copy of New Recording 7.m4a
+appliance_beep__team__20.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,5.70,Appliance Beep/Copy of New Recording 8.m4a
+appliance_beep__team__21.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,6.81,Appliance Beep/Copy of New Recording 9.m4a
+appliance_beep__team__22.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,7.83,Appliance Beep/Copy of New Recording 10.m4a
+appliance_beep__team__23.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,5.87,Appliance Beep/Copy of New Recording 11.m4a
+appliance_beep__team__24.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,9.02,Appliance Beep/Copy of New Recording 12.m4a
+appliance_beep__team__25.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,3.31,Appliance Beep/Copy of New Recording 13.m4a
+appliance_beep__team__26.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,5.61,Appliance Beep/Copy of New Recording 14.m4a
+appliance_beep__team__27.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,3.82,Appliance Beep/Copy of New Recording 15.m4a
+appliance_beep__team__28.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,6.72,Appliance Beep/Copy of New Recording 16.m4a
+appliance_beep__team__29.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,4.50,Appliance Beep/Copy of New Recording 17.m4a
+appliance_beep__team__30.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,2.88,Appliance Beep/Copy of New Recording 18.m4a
+appliance_beep__team__31.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,7.74,Appliance Beep/Copy of New Recording 19.m4a
+appliance_beep__team__32.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,5.53,Appliance Beep/Copy of New Recording 20.m4a
+appliance_beep__team__33.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,4.93,Appliance Beep/Copy of New Recording 21.m4a
+appliance_beep__team__34.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,3.82,Appliance Beep/Copy of New Recording 22.m4a
+appliance_beep__team__35.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,8.68,Appliance Beep/Copy of New Recording 23.m4a
+appliance_beep__team__36.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,5.01,Appliance Beep/Copy of New Recording 24.m4a
+appliance_beep__team__37.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,3.73,Appliance Beep/Copy of New Recording 25.m4a
+appliance_beep__team__38.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,4.84,Appliance Beep/Copy of New Recording 26.m4a
+appliance_beep__team__39.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,3.22,Appliance Beep/Copy of New Recording 27.m4a
+appliance_beep__team__40.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,4.50,Appliance Beep/Copy of New Recording 28.m4a
+appliance_beep__team__41.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,5.70,Appliance Beep/Copy of New Recording 29.m4a
+appliance_beep__team__42.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,5.27,Appliance Beep/Copy of New Recording 30.m4a
+appliance_beep__team__43.m4a,appliance_beep,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,6.89,Appliance Beep/Copy of New Recording.m4a
+knocking__team__14.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,8.26,Door Knock/Juhu Tara Road 61.m4a
+knocking__team__15.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,9.71,Door Knock/Juhu Tara Road 62.m4a
+knocking__team__16.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,9.54,Door Knock/Juhu Tara Road 63.m4a
+knocking__team__17.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,10.22,Door Knock/Juhu Tara Road 64.m4a
+knocking__team__18.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,6.63,Door Knock/Juhu Tara Road 65.m4a
+knocking__team__19.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,9.19,Door Knock/Juhu Tara Road 66.m4a
+knocking__team__20.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,13.12,Door Knock/Juhu Tara Road 67.m4a
+knocking__team__21.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,6.98,Door Knock/Juhu Tara Road 68.m4a
+knocking__team__22.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,8.94,Door Knock/Juhu Tara Road 69.m4a
+knocking__team__23.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,10.22,Door Knock/Juhu Tara Road 70.m4a
+knocking__team__24.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,6.89,Door Knock/Juhu Tara Road 71.m4a
+knocking__team__25.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,7.83,Door Knock/Juhu Tara Road 72.m4a
+knocking__team__26.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,9.11,Door Knock/Juhu Tara Road 73.m4a
+knocking__team__27.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,6.04,Door Knock/Juhu Tara Road 74.m4a
+knocking__team__28.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,4.16,Door Knock/Juhu Tara Road 75.m4a
+knocking__team__29.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,7.32,Door Knock/Juhu Tara Road 76.m4a
+knocking__team__30.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,4.93,Door Knock/Juhu Tara Road 77.m4a
+knocking__team__31.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,6.29,Door Knock/Juhu Tara Road 78.m4a
+knocking__team__32.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,5.87,Door Knock/Juhu Tara Road 79.m4a
+knocking__team__33.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,8.09,Door Knock/Juhu Tara Road 80.m4a
+knocking__team__34.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,7.23,Door Knock/Juhu Tara Road 81.m4a
+knocking__team__35.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,9.45,Door Knock/Juhu Tara Road 82.m4a
+knocking__team__36.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,8.00,Door Knock/Juhu Tara Road 83.m4a
+knocking__team__37.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,12.61,Door Knock/Juhu Tara Road 84.m4a
+knocking__team__38.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,11.67,Door Knock/Juhu Tara Road 85.m4a
+knocking__team__39.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,13.89,Door Knock/Juhu Tara Road 86.m4a
+knocking__team__40.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,8.85,Door Knock/Juhu Tara Road 87.m4a
+knocking__team__41.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,10.05,Door Knock/Juhu Tara Road 88.m4a
+knocking__team__42.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,8.34,Door Knock/Juhu Tara Road 89.m4a
+knocking__team__43.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,7.40,Door Knock/Juhu Tara Road 90.m4a
+knocking__team__44.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,10.56,Door Knock/Juhu Tara Road 91.m4a
+knocking__team__45.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,5.95,Door Knock/Juhu Tara Road 92.m4a
+knocking__team__46.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,9.88,Door Knock/Juhu Tara Road 93.m4a
+knocking__team__47.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,9.96,Door Knock/Juhu Tara Road 94.m4a
+knocking__team__48.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,7.23,Door Knock/Juhu Tara Road 95.m4a
+knocking__team__49.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,8.85,Door Knock/Juhu Tara Road 96.m4a
+knocking__team__50.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,8.77,Door Knock/Juhu Tara Road 97.m4a
+knocking__team__51.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,11.58,Door Knock/Juhu Tara Road 98.m4a
+knocking__team__52.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,9.71,Door Knock/Juhu Tara Road 99.m4a
+knocking__team__53.m4a,knocking,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,11.24,Door Knock/Juhu Tara Road 100.m4a
+doorbell__team__12.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,3.22,Doorbell/Copy of New Recording 2.m4a
+doorbell__team__13.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,4.76,Doorbell/Copy of New Recording 3.m4a
+doorbell__team__14.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,6.29,Doorbell/Copy of New Recording 4.m4a
+doorbell__team__15.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,6.72,Doorbell/Copy of New Recording 5.m4a
+doorbell__team__16.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,3.82,Doorbell/Copy of New Recording 6.m4a
+doorbell__team__17.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,3.82,Doorbell/Copy of New Recording 7.m4a
+doorbell__team__18.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,5.78,Doorbell/Copy of New Recording 8.m4a
+doorbell__team__19.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,3.05,Doorbell/Copy of New Recording 9.m4a
+doorbell__team__20.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,7.32,Doorbell/Copy of New Recording 10.m4a
+doorbell__team__21.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,6.89,Doorbell/Copy of New Recording 11.m4a
+doorbell__team__22.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,2.54,Doorbell/Copy of New Recording 12.m4a
+doorbell__team__23.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,2.28,Doorbell/Copy of New Recording 13.m4a
+doorbell__team__24.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,2.11,Doorbell/Copy of New Recording 14.m4a
+doorbell__team__25.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,9.02,Doorbell/Copy of New Recording 15.m4a
+doorbell__team__26.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,6.98,Doorbell/Copy of New Recording 16.m4a
+doorbell__team__27.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,4.50,Doorbell/Copy of New Recording 17.m4a
+doorbell__team__28.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,4.84,Doorbell/Copy of New Recording 18.m4a
+doorbell__team__29.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,6.04,Doorbell/Copy of New Recording 19.m4a
+doorbell__team__30.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,3.05,Doorbell/Copy of New Recording 20.m4a
+doorbell__team__31.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,4.93,Doorbell/Copy of New Recording 21.m4a
+doorbell__team__32.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,6.38,Doorbell/Copy of New Recording 22.m4a
+doorbell__team__33.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,3.31,Doorbell/Copy of New Recording 23.m4a
+doorbell__team__34.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,4.33,Doorbell/Copy of New Recording 24.m4a
+doorbell__team__35.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,5.61,Doorbell/Copy of New Recording 25.m4a
+doorbell__team__36.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,3.05,Doorbell/Copy of New Recording 26.m4a
+doorbell__team__37.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,4.59,Doorbell/Copy of New Recording 27.m4a
+doorbell__team__38.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,5.70,Doorbell/Copy of New Recording 28.m4a
+doorbell__team__39.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,4.16,Doorbell/Copy of New Recording 29.m4a
+doorbell__team__40.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,4.84,Doorbell/Copy of New Recording 30.m4a
+doorbell__team__41.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,test,6.04,Doorbell/Copy of New Recording 31.m4a
+doorbell__team__42.m4a,doorbell,false,apartment,phone_m4a,,2026-10-30_team,"third upload (2026-10-30), recorded by the team",team,train,5.70,Doorbell/Copy of New Recording.m4a
+glass_break__team__01.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,10.82,Glass Break/Juhu Tara Road 41.m4a
+glass_break__team__02.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,10.90,Glass Break/Juhu Tara Road 42.m4a
+glass_break__team__03.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,15.77,Glass Break/Juhu Tara Road 43.m4a
+glass_break__team__04.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,5.18,Glass Break/Juhu Tara Road 44.m4a
+glass_break__team__05.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,3.90,Glass Break/Juhu Tara Road 45.m4a
+glass_break__team__06.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,8.77,Glass Break/Juhu Tara Road 46.m4a
+glass_break__team__07.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,6.72,Glass Break/Juhu Tara Road 47.m4a
+glass_break__team__08.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,4.50,Glass Break/Juhu Tara Road 48.m4a
+glass_break__team__09.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,6.63,Glass Break/Juhu Tara Road 49.m4a
+glass_break__team__10.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,5.10,Glass Break/Juhu Tara Road 50.m4a
+glass_break__team__11.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,6.38,Glass Break/Juhu Tara Road 51.m4a
+glass_break__team__12.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,8.85,Glass Break/Juhu Tara Road 52.m4a
+glass_break__team__13.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,9.02,Glass Break/Juhu Tara Road 53.m4a
+glass_break__team__14.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,5.53,Glass Break/Juhu Tara Road 54.m4a
+glass_break__team__15.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,9.45,Glass Break/Juhu Tara Road 55.m4a
+glass_break__team__16.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,14.31,Glass Break/Juhu Tara Road 56.m4a
+glass_break__team__17.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,7.06,Glass Break/Juhu Tara Road 57.m4a
+glass_break__team__18.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,7.23,Glass Break/Juhu Tara Road 58.m4a
+glass_break__team__19.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,12.01,Glass Break/Juhu Tara Road 59.m4a
+glass_break__team__20.m4a,glass_break,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,8.43,Glass Break/Juhu Tara Road 60.m4a
+siren__team__01.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,12.10,Siren/Juhu Tara Road 21.m4a
+siren__team__02.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,11.24,Siren/Juhu Tara Road 22.m4a
+siren__team__03.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,9.28,Siren/Juhu Tara Road 23.m4a
+siren__team__04.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,6.98,Siren/Juhu Tara Road 24.m4a
+siren__team__05.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,9.28,Siren/Juhu Tara Road 25.m4a
+siren__team__06.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,9.02,Siren/Juhu Tara Road 26.m4a
+siren__team__07.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,10.56,Siren/Juhu Tara Road 27.m4a
+siren__team__08.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,10.47,Siren/Juhu Tara Road 28.m4a
+siren__team__09.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,11.33,Siren/Juhu Tara Road 29.m4a
+siren__team__10.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,10.82,Siren/Juhu Tara Road 30.m4a
+siren__team__11.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,10.39,Siren/Juhu Tara Road 31.m4a
+siren__team__12.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,8.85,Siren/Juhu Tara Road 32.m4a
+siren__team__13.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,10.73,Siren/Juhu Tara Road 33.m4a
+siren__team__14.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,8.60,Siren/Juhu Tara Road 34.m4a
+siren__team__15.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,7.15,Siren/Juhu Tara Road 35.m4a
+siren__team__16.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,5.61,Siren/Juhu Tara Road 36.m4a
+siren__team__17.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,8.17,Siren/Juhu Tara Road 37.m4a
+siren__team__18.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,6.04,Siren/Juhu Tara Road 38.m4a
+siren__team__19.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,11.84,Siren/Juhu Tara Road 39.m4a
+siren__team__20.m4a,siren,false,street,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,12.27,Siren/Juhu Tara Road 40.m4a
+smoke_alarm__team__01.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,11.58,Smoke Alarm/Copy of Juhu Tara Road 2.m4a
+smoke_alarm__team__02.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,6.55,Smoke Alarm/Copy of Juhu Tara Road 3.m4a
+smoke_alarm__team__03.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,11.58,Smoke Alarm/Copy of Juhu Tara Road 4.m4a
+smoke_alarm__team__04.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,11.67,Smoke Alarm/Copy of Juhu Tara Road 5.m4a
+smoke_alarm__team__05.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,18.50,Smoke Alarm/Copy of Juhu Tara Road 6.m4a
+smoke_alarm__team__06.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,7.40,Smoke Alarm/Copy of Juhu Tara Road 7.m4a
+smoke_alarm__team__07.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,10.39,Smoke Alarm/Copy of Juhu Tara Road 8.m4a
+smoke_alarm__team__08.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,4.33,Smoke Alarm/Copy of Juhu Tara Road 9.m4a
+smoke_alarm__team__09.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,6.04,Smoke Alarm/Copy of Juhu Tara Road 10.m4a
+smoke_alarm__team__10.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,6.21,Smoke Alarm/Copy of Juhu Tara Road 11.m4a
+smoke_alarm__team__11.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,11.16,Smoke Alarm/Copy of Juhu Tara Road 12.m4a
+smoke_alarm__team__12.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,9.45,Smoke Alarm/Copy of Juhu Tara Road 13.m4a
+smoke_alarm__team__13.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,6.63,Smoke Alarm/Copy of Juhu Tara Road 14.m4a
+smoke_alarm__team__14.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,7.15,Smoke Alarm/Copy of Juhu Tara Road 15.m4a
+smoke_alarm__team__15.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,3.39,Smoke Alarm/Copy of Juhu Tara Road 16.m4a
+smoke_alarm__team__16.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,8.51,Smoke Alarm/Copy of Juhu Tara Road 17.m4a
+smoke_alarm__team__17.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,6.72,Smoke Alarm/Copy of Juhu Tara Road 18.m4a
+smoke_alarm__team__18.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,8.68,Smoke Alarm/Copy of Juhu Tara Road 19.m4a
+smoke_alarm__team__19.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,test,8.17,Smoke Alarm/Copy of Juhu Tara Road 20.m4a
+smoke_alarm__team__20.m4a,smoke_alarm,false,apartment,phone_m4a,,2026-10-29_team,"third upload (2026-10-30), recorded by the team",team,train,7.49,Smoke Alarm/Juhu Tara Road.m4a

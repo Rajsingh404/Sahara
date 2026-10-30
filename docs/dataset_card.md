@@ -29,9 +29,9 @@ Targets from the build plan: ≥ 150 real clips per class and ≥ 20 real clips 
 (smoke_alarm and baby_cry were raised from 20 clips each with the Hugging Face AudioSet mirror; doorbell, knocking and
 appliance_beep from AudioSet's balanced/eval sets.)
 
-Manifest rows: 22,013 (train 17,332, val 2,305, test 2,376); 21,985 unique audio files (a few clips carry two labels).
+Manifest rows: 22,549 (train 17,804, val 2,305, test 2,440); 22,521 unique audio files (a few clips carry two labels).
 Real rows: FSD50K 11,901 (of which 10,000 background), ESC-50 2,000 (1,760 background), AudioSet 880, DESED 605,
-team recordings 168. Synthetic rows: 6,459 (built before the team's second upload, so its 45 clips are not in any mix).
+team recordings 329. Synthetic rows: 6,834 (train only).
 
 ---
 
@@ -131,7 +131,8 @@ real-world performance.
 
 ## Team recordings (Indian context)
 
-275 clips recorded on phones: 180 in September 2026 and 95 in a second upload on 2026-10-30 (recorder not given, filed as `team`). `data/recordings/label_map.csv` (Drive file ids) is the source of
+436 clips recorded on phones: 180 in September 2026, 95 in a second upload and 161 in a third upload on 2026-10-30
+(recorder not given, filed as `team`; the third upload added the first smoke alarms, sirens and glass breaks). `data/recordings/label_map.csv` (Drive file ids) is the source of
 truth; `scripts/organise_recordings.py --source <Drive Indian_Ambient folder> --dest data/raw` rebuilds the layout.
 
 Split **per label** (not per person; every recording has its own conditions): ~40 % of each label goes to test,
@@ -141,24 +142,26 @@ Details: `data/recordings/README.md`.
 
 | Label | Train | Test |
 |---|---|---|
-| appliance_beep | 18 | 11 |
+| appliance_beep | 36 | 23 |
 | baby_cry | 9 | 5 |
-| knocking | 16 | 11 |
+| knocking | 40 | 27 |
 | dog_bark | 7 | 4 |
-| doorbell | 17 | 10 |
+| doorbell | 36 | 22 |
+| smoke_alarm | 12 | 8 |
+| siren | 12 | 8 |
+| glass_break | 12 | 8 |
 | background | 36 | 24 |
-| smoke_alarm, siren, glass_break | 0 | 0 |
 | "Aryan" positive / negative (personalization) | 23 / 41 | 15 / 28 |
 
 Used as an Indian-context fine-tuning set (train side) and evaluation set (test side), not as the main training set.
-Every recorded class is now on both sides. smoke_alarm, siren and glass_break have no team recordings yet.
+Every class is now on both sides.
 
 ---
 
 ## Known gaps
 
 1. **iNoise is missing** everywhere (Mac, Drive, old zip). It needs a free IEEE DataPort login.
-2. **No team recordings of smoke_alarm, siren or glass_break**; the Indian-context results cover five classes.
-3. The team set is small (168 clips); Indian results use 5-fold cross-validation over all of it (see the report).
+2. **Few team recordings of smoke_alarm, siren and glass_break** (20 each, 8 in test).
+3. The team set is small (329 sound clips); Indian results use 5-fold cross-validation over all of it (see the report).
 4. FSD50K is streamed from Google Drive for Desktop; the first read of each file is slow (~2 s), and a network drop
    can stall a read (the pipeline skips reads that take over 2 minutes).
